@@ -1,65 +1,69 @@
 import { Resend } from 'resend';
+import type { APIRoute } from 'astro';
 
-export async function POST({ request }: { request: Request }) {
-  const RESEND_API_KEY = import.meta.env.RESEND_API_KEY;
-  
-  if (!RESEND_API_KEY) {
-    return new Response(
-      JSON.stringify({ error: 'API Key no configurada' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
+const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
-  const resend = new Resend(RESEND_API_KEY);
+export const post: APIRoute = async ({ request }) => {
+  console.log('Endpoint /api/contact POST llamado');
+  console.log('RESEND_API_KEY:', import.meta.env.RESEND_API_KEY ? 'Existe' : 'No existe');
 
   try {
-    const { name, email, message } = await request.json();
+    const body = await request.json();
+    console.log('Datos recibidos:', body);
 
+    const { name, email, message } = body;
+
+    // Validación
     if (!name || !email || !message) {
       return new Response(
-        JSON.stringify({ error: 'Datos incompletos' }),
-        { status: 400 }
+        JSON.stringify({ error: 'Todos los campos son obligatorios' }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        }
       );
     }
 
+    // Envío del email
     const { data, error } = await resend.emails.send({
-      from: 'ezequielsuarez-dev.com',
-      
-      to: ['ezequielsuarez.dev@gmail.com'],
-      subject: `Mensaje de ${name}`,
+      from: import.meta.env.RESEND_EMAIL_FROM,
+      to: import.meta.env.RESEND_EMAIL_TO,
+      subject: `Nuevo mensaje de ${name}`,
       html: `
-        <h2>Nuevo mensaje</h2>
         <p><strong>Nombre:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Mensaje:</strong> ${message}</p>
-      `
+        <p><strong>Mensaje:</strong><br/>${message}</p>
+      `,
     });
 
     if (error) {
-      throw new Error(JSON.stringify(error));
+      console.error('Error de Resend:', error);
+      return new Response(
+        JSON.stringify({ error: 'Error al enviar el correo' }),
+        {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
     }
 
+    console.log('Email enviado con éxito:', data);
     return new Response(
-      JSON.stringify({ success: true, data }),
-      { status: 200 }
+      JSON.stringify({ message: 'Mensaje enviado correctamente' }),
+      {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      }
     );
 
-  } catch (error) {
-    console.error('Error en API:', error);
+  } catch (err) {
+    console.error('Error en el endpoint:', err);
     return new Response(
-      JSON.stringify({ 
-        error: 'Error al procesar la solicitud',
-        details: error.message 
-      }),
-      { status: 500 }
+      JSON.stringify({ error: 'Error interno del servidor' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      }
     );
   }
-}
-
-// Endpoint GET para pruebas
-export async function GET() {
-  return new Response(
-    JSON.stringify({ status: 'API operativa' }),
-    { status: 200 }
-  );
-}
+};
