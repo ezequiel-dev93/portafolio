@@ -1,0 +1,52 @@
+---
+
+import BadgeStatus from "@/components/BadgeStatus.astro"
+import ItemsIcons from "@/components/ItemsIcons.astro"
+import LinkedInIcon from "@/icons/LinkedIn.astro"
+import GithubIcon from "@/icons/Github.astro"
+import EmailIcon from "@/icons/Email.astro"
+import ButtonCv from "@/components/ButtonCv.astro"
+import "@/styles/app.scss"
+---
+
+<section>
+  <picture class="card__logo">
+    <img src="/img/logo/LogoTipo.webp" alt="Logotipo De Ezequiel Suarez" class="cardPerfil__logo-img">
+  </picture>
+
+  <article class="card__article">
+    <h1 class="card__article-title">Hey, Soy Eze</h1>
+    <div class="card__article-badge">
+      <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">Disponible</BadgeStatus>
+    </div>
+  </article>
+  
+  <article>
+    <h2 class="card__descripcion">
+      <strong>Desarrollador Front-End</strong> con <strong>dos años de experiencia</strong>. Me gusta crear <strong>soluciones eficientes</strong> y <strong>asumir desafíos</strong> que me hagan crecer tanto <strong> personal</strong> y <strong>profesionalmente</strong>.
+  </article>
+
+  <ul class="card__links">
+    <li class="card__links-list">
+      <ItemsIcons href="https://www.linkedin.com/in/ezequiel-suarez-dev/">
+        <LinkedInIcon class="card__links-items"/>
+      </ItemsIcons>
+    </li>
+
+    <li class="card__links-list">
+      <ItemsIcons href="https://github.com/ezequiel-dev93" >
+        <GithubIcon class="card__links-items"/>
+      </ItemsIcons>
+    </li>
+
+    <li class="card__links-list">   
+      <ItemsIcons href="mailto:ezequielsuarez.dev.com">
+        <EmailIcon class="card__links-items"/>
+      </ItemsIcons>
+    </li>
+
+    <li>
+        <ButtonCv class="card__links--cv"/>
+    </li>
+  </ul>
+</section>

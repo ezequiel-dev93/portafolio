@@ -1,0 +1,74 @@
+@use "variables" as v;
+
+@mixin mq-max($medida: 768px) {
+    @media (max-width: $medida) {
+        @content;
+    }
+}
+
+@mixin mq-min($medida: 480px) {
+    @media (min-width: $medida) {
+        @content;
+    }
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == "tablet" {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == "mobile" {
+    @media (max-width: 480px) {
+      @content;
+    }
+  }
+}
+  
+/* Mixin | Flex y Grid */
+@mixin flex($dis, $jus, $center) {
+    display:		 $dis;
+    justify-content: $jus;
+    align-items: 	 $center;
+}
+
+@mixin center($dis, $center, $gap) {
+    display: 		$dis;
+    align-items: 	$center;
+    gap: $gap;
+}
+
+@mixin column($dis, $flex, $center) {
+    display: 		$dis;
+    flex-direction: $flex;
+    align-items: 	$center;
+}
+
+@mixin grid($dis ,$center) {
+  display: $dis;
+  place-items: $center;
+}
+
+@mixin grid-column($columnas, $espacio) {
+    display: 		       grid;
+    grid-template-columns: repeat($columnas, 1fr);
+    gap: 				   $espacio;
+}  
+ 
+@mixin title-style {
+    background: linear-gradient(135deg,  #663399, #d946ef);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: v.$font-size-large;
+    font-weight: 700;
+}
+
+@mixin title-style-dark {
+    background: linear-gradient(135deg,  #cfaaf4, #d946ef);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: v.$font-size-large;
+    font-weight: 700;
+    gap: 0.5rem;
+}

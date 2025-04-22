@@ -1,0 +1,25 @@
+{
+  "name": "portafolio---astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.2.3",
+    "@fontsource-variable/onest": "^5.1.0",
+    "astro": "^5.6.1",
+    "resend": "^4.2.0",
+    "sass": "^1.69.5",
+    "simple-parallax-js": "^6.0.1",
+    "toastify-js": "^1.12.0",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1"
+  }
+}

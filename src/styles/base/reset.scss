@@ -1,0 +1,96 @@
+/* Las adaptamos al modo oscuro */
+@media (prefers-color-scheme: dark) {
+    :root{
+        --negro: #ececec;
+    }
+}
+
+/* Configuramos si un usuario ha activado el modo alto contraste. (WD) */
+@media (prefers-contrast: high){
+    :root{
+        --blanco: #2c2c2c;
+    }
+}
+  
+/* Reseteamos los margin y paddings de todas las etiquetas */
+:where(*, *::before, *::after) {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    vertical-align: baseline;
+}
+
+:where(*::before, *::after) { display: block; }
+
+/* Evitamos problemas con las imagenes */
+:where(img, picture, video, iframe, figure) {
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    object-fit: cover;        
+    object-position: center center;
+}
+
+/* Reseteamos los enlaces para funcionar como cajas */
+:where(a) {
+    display: block;
+    text-decoration: none;
+    color:inherit;
+    font-size:inherit;
+}
+
+/* Excepto los que se encuentran en párrafos */
+:where(p a) { display: inline; }
+
+/* Quitamos los puntos de los <li> */
+:where(li) { list-style-type: none; }
+
+/* Desactivamos estilos por defecto de las principales etiquetas de texto */
+:where(h1, h2, h3, h4, h5, h6, p, span, a, strong, blockquote, i, b, u, em) {
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    text-decoration: none;
+    color:inherit;
+}
+
+/* Evitamos problemas con los pseudoelementos de quotes */
+:where(blockquote:before, blockquote:after, q:before, q:after) {
+    content: '';
+    content: none;
+}
+
+/* Configuramos el texto que seleccionamos */
+::selection {
+    background-color: #663399;
+    color: #fffbfb;
+}
+
+/* Nivelamos problemas de tipografías y colocación de formularios */
+:where(form, input, textarea, select, button, label) {
+    font-family: inherit;
+    font-size: inherit;
+    hyphens: auto;
+    background-color: transparent;
+    color:inherit;
+    display: block;
+    appearance: none;
+}
+
+/* Evitamos problemas con los SVG */
+:where(svg) {
+	display: block;
+}
+
+/* Desactivamos los animationes en el caso de que el usuario haya configurado el modo sin animationes */
+@media (prefers-reduced-motion: reduce) {
+    :where(*) {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    :where(html) {
+        scroll-behavior: auto;
+    }
+}

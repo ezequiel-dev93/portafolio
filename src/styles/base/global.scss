@@ -1,0 +1,71 @@
+@use "variables" as v;
+@use "mixins" as mx;
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #141C3A;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #6E07F3;
+}
+
+html {
+    font-family: 'Onest Variable', sans-serif;
+	scroll-behavior: smooth;
+    background: #090909;
+}
+
+/* Configuramos el body para toda la web */
+body {
+    background-image: v.$bg-white;
+    color: v.$text-black;
+    @include mx.column(flex, column, center);
+    min-height: 100%;
+    transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+/* Modo oscuro */
+body.dark-mode { 
+    background-image: v.$bg-dark;
+    color: v.$text-white;
+    transition: background-color 0.5s ease, color 0.3s ease;
+
+    :is(.header__nav-menu li:hover) {
+        color: v.$text-enfasis-dark;
+    }
+
+    :is(.card__article-title, .experience__title-h2, .projects__title-h2, .about__title-h2, .skill__title-h2, .sectionContact__article-title) { 
+        @include mx.title-style-dark;
+    }
+
+    :is(.card strong, .about__text strong, .projects__figure-title, .timeline__description strong) {
+        color: v.$text-enfasis-dark;
+    }
+
+    :is(.timeline__description--item, .timeline__extra, .projects__items, .projects__figure-description, .contact__label,
+    .timeline__sumary-p, .timeline__skills-h3, .timeline__title p,.skill__subtitle h3, #contact__message-main ) {
+        color: v.$text-white;
+    }
+
+    :is(.timeline__item, .skill__category, .projects__items, .skill__subtitle) {
+        background: v.$bg-cardproject-dark;
+        color: v.$text-white;
+    }
+
+    :is(.projects__items:hover) {
+        box-shadow: 0 0 20px #ffffff66;
+    }
+
+    :is(.contact__actions-buttom) {
+        border: 1px solid #e2cdf2;
+        color: #f3f2f4;
+    }
+
+    :is(.bar) {
+        background: v.$text-white;
+    }
+}

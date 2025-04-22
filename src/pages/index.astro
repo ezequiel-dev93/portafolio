@@ -1,0 +1,63 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import SectionContenedor from "@/components/SectionContenedor.astro"
+import CardPerfil from '@/components/CardPerfil.astro';
+import Briefcase from "@/icons/Briefcase.astro"
+import Coder from '@/icons/Coder.astro';
+import Experiencia from '@/components/Experience.astro';
+import CardProject from '@/components/CardProject.astro';
+import About from '@/components/About.astro';
+import Skills from '@/components/Skills.astro';
+import Contacto from '@/components/Contacto.astro';
+import WaveFooter from '@/icons/WaveFooter.astro';
+import SectionFooter from '@/components/SectionFooter.astro';
+import '@/styles/app.scss';
+---
+
+<Layout title='Ezequiel Suarez | Desarrollador Front-End y Programador' 
+description='Front-End Developer especializado en HTML, CSS, Sass, Tailwind, JavaScript y Astro. Apasionado por crear soluciones innovadoras en diseño y desarrollo web.'>
+	<main>
+		<SectionContenedor class="card" id="top">
+			<CardPerfil /> 
+		</SectionContenedor>
+
+		<SectionContenedor class="experience" id="experiencia">
+			<article class="experience__title">
+				<Briefcase />
+				<h2 class="experience__title-h2">Experiencia</h2>				
+			</article>
+			 
+			<Experiencia />
+		</SectionContenedor>
+		
+		<SectionContenedor class="projects" id="proyectos">
+			<article class="projects__title">
+				<Coder/>
+				<h2 class="projects__title-h2">Proyectos</h2>
+			</article>
+
+			<CardProject />
+		</SectionContenedor>
+
+		<SectionContenedor class="about" id="sobre-mi">
+			<About />
+		</SectionContenedor>
+
+		<SectionContenedor class="skills" id="tecnologias">
+			<Skills />
+		</SectionContenedor>
+		
+		<SectionContenedor class="contactos" id="contactos">
+			<Contacto />
+		</SectionContenedor>
+	</main>
+
+	<footer class="footer">
+		<article class="footer__wave">
+			<WaveFooter class="footer__wave-svg"/>
+		</article>
+		
+		<SectionFooter />
+	</footer>
+</Layout>
+ 

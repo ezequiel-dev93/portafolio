@@ -1,0 +1,53 @@
+---
+import "@/styles/app.scss";
+
+interface ExperienceProps {
+  time: string;
+  title: string;
+  description: string[];
+}
+
+const { time, title, description }: ExperienceProps = { 
+    time: "Marzo, 2025 - Presente",
+    title: "Desarrollador Front-End - Sitio Web para Músico",
+    description: [
+      "Estoy <strong>diseñando</strong> y <strong>desarrollando</strong> una <strong>experiencia digital</strong> que se centra en <strong>fortalecer su presencia</strong> en línea y en conectar de manera más <strong>efectiva con su audiencia</strong>.",
+      
+      "El diseño está enfocado en hacer que la <strong>accesibilidad</strong> y la <strong>experiencia del usuario</strong> sean mucho mejores, mostrando de manera intuitiva los <strong>eventos que se avecinan y contenido exclusivo</strong>.",
+      
+      "Además, estoy <strong>optimizando el rendimiento básico para SEO</strong>, aprovechando un <strong>diseño modular</strong> que facilitará <strong>futuras expansiones sin complicaciones</strong>."
+    ],
+};
+---
+<ol class="timeline">
+  <li class="timeline__item">
+    <div class="timeline__marker"></div>
+
+    <div class="timeline__sumary">
+      <p class="timeline__sumary-p">{time}</p>
+      <span class="timeline__sumary-span">Trabajo Actual</span>
+    </div>
+
+    <div class="timeline__title">
+      <h2>{title}</h2>
+      <p>Freelancer</p>
+    </div>
+
+    <div class="timeline__description">
+      {description.map((item) => (
+        <p class="timeline__description--item" set:html={item}></p>
+      ))}
+    </div>
+    
+    <div class="timeline__skills">
+      <h3 class="timeline__skills-h3">Tecnológias</h3>
+      <p class="timeline__list">
+        <span class="timeline__list--items">Astro</span>
+        <span class="timeline__list--items">Tailwind</span>
+        <span class="timeline__list--items">TypeScript</span>
+        <span class="timeline__list--items">ReactJs</span>
+        <span class="timeline__list--items">Web Responsive</span>
+      </p>
+    </div>
+  </li>
+</ol>

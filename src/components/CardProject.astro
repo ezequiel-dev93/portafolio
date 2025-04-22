@@ -1,0 +1,89 @@
+---
+import Python from '@/icons/Python.astro';
+import Streamlit from '@/icons/Streamlit.astro';
+import AstroIcon from '@/icons/AstroIcon.astro';
+import Tailwind from '@/icons/Tailwind.astro';
+import TypeScript from '@/icons/TypeScript.astro';
+import GitHubIcon from '@/icons/Github.astro';
+import '../styles/app.scss';
+
+const TAGS = {
+  PYTHON: { icon: Python },
+  STREAMLIT: { icon: Streamlit },
+  TAILWIND: { icon: Tailwind },
+  TYPESCRIPT: {  icon: TypeScript },
+  NAVE: { icon: AstroIcon },
+};
+
+const Projects = [
+{
+    title: " Sitio Web para Músico",
+    description: "Una propuesta visual que captura la esencia y la energía en cada uno de sus detalles. Es amigable y está lista para evolucionar al ritmo de nuevas ideas, adaptándose con facilidad a las necesidades del proyecto.",
+    tags: [TAGS.NAVE, TAGS.TYPESCRIPT, TAGS.TAILWIND],
+    image: "/img/cards/Img-Music.webp",
+  }, 
+
+  {
+    title: "Generador de Informes",
+    description: "Aplicación que te permite crear informes a medida, usar plantillas reutilizables y generar archivos de Excel de manera automatizada. También puedes subir tu archivo, hacer modificaciones y descargarlos fácilmente.",
+    link: "https://github.com/ezequiel-dev93/informes_automatizados",
+    tags: [TAGS.PYTHON, TAGS.STREAMLIT],
+    image: "/img/cards/Generador-informes.webp",
+  },
+];
+---
+<section class="projects__container">
+  {Projects.map(({ title, description, tags, image, link }) => (
+    <ul class="projects__items">   
+        {link ? (
+        <li class="projects__cards">
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              <figure class="projects__figure">
+                <picture class="projects__figure-picture">
+                  <img src={image} alt={`Imagen del Proyecto ${title}`} class="projects__figure-img" loading="lazy"/>
+                </picture>
+                
+                <figcaption class="projects__figure-caption">
+                  <h3 class="projects__figure-title">{title}</h3>
+                  <p class="projects__figure-description">
+                    {description}
+                  </p>
+                    
+                  <div class="projects__figure-icons">
+                    {tags && tags.map(tag => (
+                      <tag.icon class="projects__figure-icon" />
+                    ))}
+                  </div>
+                </figcaption>  
+              </figure>
+              </a>
+          </li>
+          
+        ) : (
+
+        <li class="projects__cards">
+            <a>
+              <figure class="projects__figure">
+                <picture class="projects__figure-picture">
+                  <img src={image} alt={`Imagen del Proyecto ${title}`} class="projects__figure-img" loading="lazy"/>
+                </picture>
+                
+                <figcaption class="projects__figure-caption">
+                  <h3 class="projects__figure-title">{title}</h3>
+                  <p class="projects__figure-description">{description}</p>
+                  <div class="projects__figure-icons">
+                    {tags && tags.map(tag => (
+                      <tag.icon class="projects__figure-icon" />
+                    ))}
+                  </div>
+                </figcaption>  
+              </figure>
+            </a>
+          </li> 
+        )}
+    </ul>
+  ))}
+</section>
+
+
+

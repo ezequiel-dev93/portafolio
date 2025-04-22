@@ -1,0 +1,52 @@
+---
+import Items from './Items.astro';
+import MenuMovil from '@/components/MenuMovil.astro'
+import DarkMode from '@/components/DarkMode.astro'
+import '@/styles/app.scss';
+---
+<header class="header">
+  <nav class="header__nav">    
+    <article class="header__nav-movil">
+      <MenuMovil />
+    </article>  
+
+    <ul class="header__nav-menu">
+      <Items href="#top">Inicio</Items>
+      <Items href="#experiencia">Experiencia</Items>
+      <Items href="#proyectos">Proyectos</Items>
+      <Items href="#sobre-mi">Sobre Mi</Items>
+      <Items href="#tecnologias">Tecnologías</Items>
+      <Items href="#contactos">Contacto</Items>
+      
+      <DarkMode />  
+    </ul>
+  </nav>
+</header>
+
+<script is="global">
+
+/* Menu Header | Toggle */
+document.addEventListener('DOMContentLoaded', () => {
+    const checkbox = document.querySelector('.check-icon');
+    const menu = document.querySelector('.header__nav-menu');
+
+    if (checkbox && menu) {
+      // Cambiar estado del menú según el checkbox
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          menu.classList.add('active');
+        } else {
+          menu.classList.remove('active');
+        }
+      });
+
+      // Cerrar el menú al hacer clic en un enlace
+      menu.addEventListener('click', (event) => {
+        if (event.target.tagName === 'A') {
+          checkbox.checked = false;
+          menu.classList.remove('active');
+        }
+      });
+    }
+});
+</script>

@@ -1,0 +1,79 @@
+---
+import '@/styles/app.scss';
+import EmailIcon from "@/icons/Email.astro"
+import CopyIcon from "@/icons/Copy.astro"
+---
+
+<section class="contact">
+  <section class="contact__container">
+    <h3 class="contact__container-title">Puedes contáctame en un clic</h3>
+    <article class="contact__actions">
+      <div>
+          <a
+            href="mailto:ezequielsuarez.dev@gmail.com"
+            class="contact__actions-buttom contact__button--email"
+            onmouseover="updateSecondaryMessage('Abre tu aplicación de correo')"
+            onmouseout="resetSecondaryMessage()"
+            >
+            <EmailIcon class="contact__icon" />
+          </a>       
+      </div>
+
+      <div>
+        <button
+          class="contact__actions-buttom contact__button--copy"
+          onmouseover="updateSecondaryMessage('Copia mi dirección de correo')"
+          onmouseout="resetSecondaryMessage()"
+          onclick="copyToClipboard('ezequielsuarez.dev@gmail.com')"
+            >
+
+          <CopyIcon class="contact__icon" />
+        </button>
+      </div>
+    </article>
+
+
+    <div class="contact__message">
+      <span id="contact__message-sub">
+        Envíame un correo
+      </span>
+
+      <span id="contact__message-main">
+        Estoy listo para escuchar tus ideas.
+      </span>
+    </div>
+  </section>  
+</section>
+<div id="copy-alert" class="contact__alert">¡Correo copiado!</div>
+
+<script is="global">
+    // Cambiar el mensaje secundario
+window.updateSecondaryMessage = function (message) {
+  const subTextElement = document.getElementById("contact__message-main");
+  if (subTextElement) {
+    subTextElement.textContent = message; 
+  }
+};
+
+window.resetSecondaryMessage = function () {
+  const subTextElement = document.getElementById("contact__message-sub");
+  if (subTextElement) {
+    subTextElement.textContent = "Envíame un correo";
+  }
+};
+
+// Copiar al portapapeles y mostrar mensaje flotante
+window.copyToClipboard = function (text) {
+  navigator.clipboard.writeText(text).then(() => {
+    updateSecondaryMessage("Correo copiado al portapapeles");
+    
+    const copyMessage = document.getElementById("copy-alert");
+    copyMessage.classList.add("show");
+
+    setTimeout(() => {
+      copyMessage.classList.remove("show");
+      resetSecondaryMessage();
+    }, 2000);
+  });
+};
+</script> 
