@@ -716,7 +716,7 @@
     }
   }
 
-  &__from-buttom {
+  &__button {
     margin-top: 3rem;
     width: 100%;
     border: .25rem solid v.$bg-form;
@@ -745,6 +745,34 @@
       0 0 0.5rem 3rem #b985e8c7,
       inset 0 0 .5rem .25rem  v.$bg-form;
     }
+  }
+}
+
+.floating-notification {
+  position: fixed;
+  top: 50px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 4px;
+  color: v.$text-white;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transform: translateX(120%);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  
+  &.success {
+    background-color: #4CAF50;
+  }
+  
+  &.error {
+    background-color: #F44336;
+  }
+  
+  &.show {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
@@ -780,7 +808,7 @@
   
     &:hover {
       background-color: v.$text-enfasis;
-      color: white;
+      color: v.$text-white;
       box-shadow: 0 0 8px rgba(102, 51, 153, 0.5);
     }
   }
@@ -808,12 +836,12 @@
   }
 }
 
-.contact__alert {
+.contact__alert{
   position: fixed;
-  top: 20px;
+  top: 50px;
   right: 5%;
   transform: translateX(-50%);
-  background-color: #663399;
+  background-color: #8d50ca;
   color: v.$text-white;
   padding: 10px 20px;
   border-radius: 8px;

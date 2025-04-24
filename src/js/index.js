@@ -56,3 +56,50 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('dark-mode', isActive);
   });
 });
+
+/*Formulario De Contacto
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById('button');
+    const form = document.getElementById('form');
+  
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+  
+      const honeypot = document.getElementById("honeypot").value;
+      if (honeypot) return; // Bot detected
+  
+      btn.value = 'Enviando...';
+  
+      const serviceID = 'default_service';
+      const templateID = 'template_mzf465a';
+  
+      emailjs.sendForm(serviceID, templateID, this)
+        .then(() => {
+          btn.value = 'Enviar mensaje';
+          Toastify({
+            text: "¡Mensaje enviado correctamente!",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#4caf50",
+          }).showToast();
+          form.reset();
+        }, (err) => {
+          btn.value = 'Enviar mensaje';
+          Toastify({
+            text: "Error al enviar el mensaje",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#f44336",
+          }).showToast();
+        });
+    });
+});
+  
+
+
+
+*/
+
+

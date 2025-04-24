@@ -1,20 +1,15 @@
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel';
+import { loadEnv } from 'vite';
 
-// Configuración diferente para desarrollo y producción
-const isDev = process.env.NODE_ENV === 'development';
-
-export default defineConfig({
-  output: 'server',
-  adapter: isDev ? undefined : vercel(), // Solo usa el adaptador en producción
-  vite: {
-    server: {
-      fs: {
-        strict: false
+export default defineConfig(({ mode }) => {
+  // Carga variables de entorno
+  const env = loadEnv(mode, process.cwd(), '');
+  
+  return {
+    vite: {
+      define: {
+        'process.env': env
       }
-    },
-    optimizeDeps: {
-      force: isDev // Forza la optimización en desarrollo
     }
-  }
+  };
 });

@@ -2,138 +2,111 @@
 import '@/styles/app.scss';
 ---
 <section class="contact">
-  <form class="contact__form" id="contact-form">
+   <form class="contact__form" id="form">
     <div class="contact__form-group">
-      <label for="username" class="contact__label">Nombre</label>
-      <input
-        id="username"
-        type="text"
-        name="username"
-        placeholder="Tu nombre..."
-        class="contact__input"
-      />
+      <label for="name"class="contact__label">Nombre</label>
+      <input type="text" name="name" id="name" placeholder="Tu nombre..." class="contact__input" required/>
       <p class="contact__message contact__message--error"></p>
     </div>
 
     <div class="contact__form-group">
-      <label for="email" class="contact__label">Correo Electrónico</label>
-      <input
-        id="email"
-        type="email"
-        name="email"
-        placeholder="Ejemplo@gmail.com"
-        class="contact__input"
-      />
+      <label for="email" class="contact__label">Email</label>
+      <input type="text" name="email" id="email" placeholder="Ejemplo@gmail.com" class="contact__input" required>
       <p class="contact__message contact__message--error"></p>
     </div>
 
     <div class="contact__form-group">
       <label for="message" class="contact__label">Mensaje</label>
-      <textarea
-        id="message"
-        name="message"
-        placeholder="Escribe tu mensaje aquí"
-        class="contact__textarea"
-      ></textarea>
-      <p class="contact__message contact__message--error"></p>
+      <input type="text" name="message" id="message" placeholder="Escribe tu mensaje aquí" class="contact__textarea" required/>
     </div>
 
-    <!-- honeypot para evitar spam bots -->
+    <!-- Honeypot Anti-spam -->
     <div class="contact__honeypot" style="display: none;">
       <label for="honeypot">No llenar este campo</label>
       <input type="text" id="honeypot" name="honeypot" />
     </div>
 
     <div class="contact__form-group">
-      <button type="submit" id="submit" class="contact__form-button contact__button--submit">Enviar</button>
+      <input type="submit" id="button" value="Enviar" class="contact__button">
     </div>
+    
+      <!-- Añadimos este elemento para mostrar notificaciones -->
+      <div id="floating-notification" class="floating-notification"></div>
+    </form>
   </form>
+
+
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    emailjs.init('miYrSPp0_92YF1RLW')
+  </script>
+
 </section>
 
-<script is:inline>
- document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("contact-form");
-    const submitBtn = document.getElementById("submit");
 
-    if (!form || !submitBtn) return;
+<script is="global">
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form");
+  const btn = document.getElementById("button");
+  const notification = document.getElementById("floating-notification");
 
-    const validateEmail = (email) => {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return re.test(email);
-    };
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    
+    const honeypot = document.getElementById("honeypot").value;
+    if (honeypot) return;
 
-    const showError = (message) => {
-      Toastify({
-        text: message,
-        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
-        duration: 3000
-      }).showToast();
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Enviar";
-    };
+    btn.value = "Enviando...";
+    btn.disabled = true;
 
-    const showSuccess = (message) => {
-      Toastify({
-        text: message,
-        duration: 3000,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-      }).showToast();
-    };
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Enviando...";
-
-      const honeypot = document.getElementById("honeypot")?.value;
-      if (honeypot) {
-        console.warn("Spam detectado.");
-        return;
-      }
-
-      const name = document.getElementById("username")?.value.trim();
-      const email = document.getElementById("email")?.value.trim();
-      const message = document.getElementById("message")?.value.trim();
-
-      if (!name || name.length < 2) {
-        showError("El nombre debe tener al menos 2 caracteres");
-        return;
-      }
-
-      if (!validateEmail(email)) {
-        showError("Por favor ingresa un email válido");
-        return;
-      }
-
-      if (!message || message.length < 10) {
-        showError("El mensaje debe tener al menos 10 caracteres");
-        return;
-      }
-
-      try {
-        const res = await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, message })
-        });
-
-        if (!res.ok) {
-          const errorData = await res.json();
-          throw new Error(errorData.error || "Error al enviar el mensaje");
-        }
-
-        showSuccess("¡Mensaje enviado con éxito!");
+    try {
+      const serviceID = "default_service";
+      const templateID = "template_mzf465a";
+      
+      // Envío del formulario
+      const response = await emailjs.sendForm(serviceID, templateID, this);
+      
+      // Solo mostrar éxito si el envío fue realmente exitoso
+      if (response.status === 200) {
+        showNotification("¡Mensaje enviado correctamente!", "success");
+        
+        // Resetear formulario y limpiar mensajes de validación
         form.reset();
-      } catch (err) {
-        console.error(err);
-        showError(err.message || "Error al enviar el mensaje");
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Enviar";
+        clearValidationMessages();
+      } else {
+        throw new Error("Error en el servidor");
       }
+    } catch (err) {
+      console.error("Error en el envío:", err);
+      showNotification("Error al enviar el mensaje", "error");
+    } finally {
+      btn.value = "Enviar";
+      btn.disabled = false;
+    }
+  });
+
+  // Función para mostrar notificaciones
+  function showNotification(message, type) {
+    notification.textContent = message;
+    notification.className = `floating-notification ${type} show`;
+    
+    setTimeout(() => {
+      notification.classList.remove("show");
+    }, 3000);
+  }
+
+  // Función para limpiar mensajes de validación
+  function clearValidationMessages() {
+    document.querySelectorAll('.contact__message').forEach(messageElement => {
+      messageElement.textContent = '';
+      messageElement.classList.remove('contact__message--success', 'contact__message--error');
     });
+    
+    document.querySelectorAll('.contact__input, .contact__textarea').forEach(field => {
+      field.classList.remove('contact__input--success', 'contact__input--error');
+    });
+  }
 });
 </script>
