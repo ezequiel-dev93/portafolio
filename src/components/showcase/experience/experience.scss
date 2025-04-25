@@ -3,7 +3,7 @@
 
 .experience {
     @include mx.column(flex, column, flex-start);
-    padding: 3rem 1.5rem;
+    padding: 3rem 2.2rem;
   
     &__title {
       @include mx.center(flex, center, 0.5rem);
@@ -42,8 +42,7 @@
     }
   
     &__sumary {
-      display: flex;
-      justify-content: space-between;
+      @include mx.flex(flex, space-between, center);
       padding: 0.5rem 0;
   
       &-p, &-span {
@@ -56,6 +55,12 @@
         margin-inline-end: 0.6rem;
         padding: 0.125rem 0.625rem;
         border-radius: 1rem;
+        text-align: center;
+
+        @include mx.mq-max(480px) {
+          width: 8rem;
+          line-height: 4;
+        }
       }
     }
   

@@ -54,10 +54,10 @@
 @include mx.mq-max(768px) {
   .header__nav-menu {
     display: none;
-    color: #aaa8a8;
+    color: v.$text-white;
 
     & li:hover {
-        color: v.$text-white;
+        color: v.$text-enfasis-dark;
     }
   }
   

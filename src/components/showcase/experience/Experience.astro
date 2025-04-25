@@ -2,12 +2,14 @@
 import '@components/showcase/experience/experience.scss'
 interface ExperienceProps {
   time: string;
+  timeStatus: string;
   title: string;
   description: string[];
 }
 
-const { time, title, description }: ExperienceProps = { 
-    time: "Marzo, 2025 - Presente",
+const { time, timeStatus,title, description }: ExperienceProps = { 
+    time: "Marzo, 2025",
+    timeStatus: "Actualidad",
     title: "Desarrollador Front-End - Sitio Web para Músico",
     description: [
       "Estoy <strong>diseñando</strong> y <strong>desarrollando</strong> una <strong>experiencia digital</strong> que se centra en <strong>fortalecer su presencia</strong> en línea y en conectar de manera más <strong>efectiva con su audiencia</strong>.",
@@ -23,7 +25,7 @@ const { time, title, description }: ExperienceProps = {
     <div class="timeline__marker"></div>
 
     <div class="timeline__sumary">
-      <p class="timeline__sumary-p">{time}</p>
+      <p class="timeline__sumary-p"><span>{time} - </span> <span>{timeStatus}</span></p>
       <span class="timeline__sumary-span">Trabajo Actual</span>
     </div>
 

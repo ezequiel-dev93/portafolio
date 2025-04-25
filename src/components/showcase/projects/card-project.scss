@@ -2,7 +2,7 @@
 @use "@/styles/base/_mixins" as mx;
 
 .projects {
-    padding: 3rem 1.5rem;
+    padding: 3rem 2.2rem;
   
     &__title {
       @include mx.center(flex, center, 0.5rem);
@@ -69,6 +69,9 @@
         color: v.$text-black;
         font-weight: 700;
         padding-top: 0.6rem;
+        @include mx.mq-max(600px) {
+          font-size: 1.2rem;
+        }
       }
   
       &-description {
@@ -80,7 +83,7 @@
         padding: 0.8rem 0.4rem 1rem 0;
   
         @include mx.mq-max(600px) {
-          font-size: 1rem;
+          font-size: 1.15rem;
         }
       }
   

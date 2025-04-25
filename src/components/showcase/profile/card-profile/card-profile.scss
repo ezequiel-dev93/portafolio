@@ -3,57 +3,57 @@
 
 /* Card Perfil */
 .card {
-@include mx.flex(flex, center, center);
-    padding: 6rem 1.5rem;
+    @include mx.flex(flex, center, center);
+        padding: 6rem 2.2rem;
     
-&__logo {
-    width: 10dvh;
-}
-
-&__article {
-    @include mx.center(flex, center, 1rem);
-    padding: 1rem 0;
-
-    &-title  {
-    @include mx.title-style();
-    } 
-}
-
-&__descripcion {
-    font-size: 1.2rem;
-    text-align: left;
-    line-height: 1.4;
-    text-wrap: wrap;
-    font-weight: 300;
-
-    strong {
-        color: v.$text-enfasis;
-        font-weight: 500;
+    &__logo {
+        width: 10dvh;
     }
-}
 
-&__links {
+    &__article {
+        @include mx.center(flex, center, 1rem);
+        padding: 1rem 0;
+
+        &-title  {
+        @include mx.title-style();
+        } 
+    }
+
+    &__descripcion {
+        font-size: 1.2rem;
+        text-align: left;
+        line-height: 1.4;
+        text-wrap: wrap;
+        font-weight: 300;
+
+        strong {
+            color: v.$text-enfasis;
+            font-weight: 500;
+        }
+    }
+
+    &__links {
         @include mx.center(flex, center, 1.5rem);
         flex-wrap: wrap;
         align-self: flex-start;
         padding-top: 1rem;
     
-    &-list {
-        background-color: v.$bg-timeline-cv-link;
-        color: v.$text-black;
-        border-radius: 50%;
-        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, 
-        box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-        cursor: pointer;
-        padding: 0.4rem;
-        box-shadow: 0 0 8px rgba(17, 17, 17, 0.5);
+        &-list {
+            background-color: v.$bg-timeline-cv-link;
+            color: v.$text-black;
+            border-radius: 50%;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, 
+            box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+            cursor: pointer;
+            padding: 0.4rem;
+            box-shadow: 0 0 8px rgba(17, 17, 17, 0.5);
 
-    &:hover {
-            background-color: #845ec2; 
-            box-shadow: 0 0 15px rgba(102, 51, 153, 0.7);
-            transform: scale(1.1);
+            &:hover {
+                background-color: #845ec2; 
+                box-shadow: 0 0 15px rgba(102, 51, 153, 0.7);
+                transform: scale(1.1);
+            }
         }
-    }
 
         &-items {
             color: v.$text-black;
@@ -68,11 +68,11 @@
 }
   
 @include mx.mq-max(768px) {
-    .cardPerfil {
-        padding: 4rem 1.5rem;
-        text-align: left; 
-        width: 100%;
-    
+    .card {
+        &__logo {
+            width: 12dvh;
+        }
+
         &__article {
             flex-wrap: wrap;
             margin: 0.5rem 0;
@@ -89,24 +89,7 @@
         }
     }
 }
-  
-@include mx.mq-max(480px) {
-.cardPerfil {
-        padding: 5rem 2rem 5rem 2rem;
 
-        &__article {
-            font-size: 1.3rem;
-        }
-
-        &__descripcion {
-            font-size: 1rem;
-        }
-
-        &__social {
-            gap: 0.8rem;
-        }
-    }
-}
 
 /* Badge */
 .status-badge {
