@@ -1,0 +1,53 @@
+@use "@/styles/base/_variables" as v;
+@use "@/styles/base/_mixins" as mx;
+
+.skill {
+    padding: 3rem 1.5rem;
+  
+    &__title {
+      @include mx.center(flex, center, 0.5rem);
+      padding-bottom: 1rem;
+  
+      &-h2 {
+        @include mx.title-style();
+      }
+    }
+  
+    :is(&__title-icon, &__list-icon) {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+  
+    &__categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+  
+    &__category {
+      background-color: v.$bg-skill;
+      display: flex;
+      flex-direction: column;
+      border-radius: 0.5rem;
+      padding: 1rem;
+    }
+  
+    &__subtitle {
+      text-align: center;
+      color: v.$text-black;
+      padding-bottom: 1.5rem;
+    }  
+  
+    &__list {
+      @include mx.flex(flex, center, center);
+      flex-wrap: wrap;
+      gap: 1rem;
+
+        li {
+          @include mx.column(flex, column, center);
+          font-size: 0.68rem;
+          gap: 1rem;
+        }
+    }
+}
+  

@@ -1,15 +1,25 @@
 import { defineConfig } from 'astro/config';
-import { loadEnv } from 'vite';
+import { fileURLToPath } from 'node:url';
+import path from 'path';
 
-export default defineConfig(({ mode }) => {
-  // Carga variables de entorno
-  const env = loadEnv(mode, process.cwd(), '');
-  
-  return {
-    vite: {
-      define: {
-        'process.env': env
-      }
-    }
-  };
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default defineConfig({
+  vite: {
+    resolve: {
+      alias: {
+        '@': path.join(__dirname, 'src'),
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+            @use "@styles/base/_variables.scss" as *;
+            @use "@styles/base/_mixins.scss" as *;
+          `,
+        },
+      },
+    },
+  },
 });

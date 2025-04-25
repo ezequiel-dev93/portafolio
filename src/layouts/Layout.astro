@@ -1,9 +1,7 @@
 ---
-import Header from '@/components/Header.astro';
-
 import '@fontsource-variable/onest';
-import '@/styles/base/reset.scss';
-import '@/styles/base/global.scss';
+import '@/styles/base/_reset.scss';
+import '@/styles/base/_global.scss';
 
 interface Props {
 	title: string
@@ -25,10 +23,10 @@ const { title, description } = Astro.props;
 	</head>
 	
 	<body>
-        <Header />
+        
 		<slot />
 	</body>
+	<script src="@/components/core/js/index.js" ></script>
+	<script src="@/components/core/js/validacion.js" ></script>
 </html>
 
-<script src="@/js/index"></script>
-<script src="@/js/validacion.js"></script>

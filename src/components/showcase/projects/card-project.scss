@@ -1,0 +1,99 @@
+@use "@/styles/base/_variables" as v;
+@use "@/styles/base/_mixins" as mx;
+
+.projects {
+    padding: 3rem 1.5rem;
+  
+    &__title {
+      @include mx.center(flex, center, 0.5rem);
+      padding-bottom: 1rem;
+  
+      h2 { 
+        @include mx.title-style();
+      }
+    }
+  
+    &__container {
+      @include mx.grid-column(2, 1fr);
+      gap: 1rem;
+  
+      @include mx.mq-max(600px) {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+    &__items {
+      background-color: v.$bg-cardproject;
+      border-radius: 0.6rem;
+      padding: 0.7rem;
+      overflow: hidden;
+    }
+  
+    &__items:hover {
+      box-shadow: 0 0 30px #00000066; 
+    }
+  
+    &__figure {
+      @include mx.column(flex, column, center);
+      gap: 0.5rem;
+  
+      &-picture {
+        width: 100%;
+        height: 12rem; 
+        border-radius: 0.5rem;
+        transition: transform 0.35s ease-in-out;
+        transform-origin: center; 
+      }
+  
+      &-img {
+        border-radius: 0.4rem;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        transition: transform 0.25s ease-in-out; 
+      }
+  
+      &:hover &-picture {
+        transform: scale(1.02);     
+      }
+  
+      &:hover &-img {
+        transform: scale(1.09);
+      }
+  
+      &-link {
+        cursor: text;
+      }
+  
+      &-title {
+        color: v.$text-black;
+        font-weight: 700;
+        padding-top: 0.6rem;
+      }
+  
+      &-description {
+        font-size: 0.89rem;
+        text-wrap: wrap;
+        color: v.$text-black;
+        opacity: 75%;
+        line-height: 1.34;
+        padding: 0.8rem 0.4rem 1rem 0;
+  
+        @include mx.mq-max(600px) {
+          font-size: 1rem;
+        }
+      }
+  
+      &-icons {
+        @include mx.flex(flex, flex-start, center);
+        gap: 1.5rem;
+        padding-top: 1rem;
+      }
+  
+      &-icon {
+        width: 1.3rem;
+        height: 1.3rem;     
+      }
+    }
+}
+  

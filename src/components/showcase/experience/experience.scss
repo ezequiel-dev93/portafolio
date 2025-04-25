@@ -1,0 +1,112 @@
+@use "@/styles/base/_variables" as v;
+@use "@/styles/base/_mixins" as mx;
+
+.experience {
+    @include mx.column(flex, column, flex-start);
+    padding: 3rem 1.5rem;
+  
+    &__title {
+      @include mx.center(flex, center, 0.5rem);
+      padding-bottom: 1rem;
+  
+      h2 {
+          @include mx.title-style();
+      } 
+    }
+  }
+  
+  .timeline {
+    position: relative;
+    border-left: 2px solid v.$bg-timeline-cv-link;
+  
+    &__item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 20px;
+      background-color: v.$text-white;
+      border: 0.1rem solid #d0b1f9;
+      border-radius:0.5rem;
+      margin-inline-start: 1rem;
+      padding: 1rem;
+    }
+  
+    &__marker {
+      position: absolute;
+      top: 12px;
+      left: -25px;
+      width: 13px;
+      height: 13px;
+      background-color: v.$bg-timeline-cv-link; 
+      border: 1px solid v.$text-white;
+      border-radius: 1rem;
+    }
+  
+    &__sumary {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+  
+      &-p, &-span {
+        color: v.$text-enfasis;
+      }
+  
+     &-span {
+        background-color: v.$bg-badge;
+        font-size: 0.75rem;
+        margin-inline-end: 0.6rem;
+        padding: 0.125rem 0.625rem;
+        border-radius: 1rem;
+      }
+    }
+  
+    &__title {
+      margin-bottom: 1rem;
+  
+      h2 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        padding-bottom: 0.3rem;
+      }
+  
+      p {
+        opacity: 75%;
+      }
+    }
+  
+    &__description {
+      line-height: 1.4;
+      font-weight: 300;
+      
+      &--item {
+        padding: 0.7rem 0;
+      }
+  
+      strong {
+        color: v.$text-enfasis;
+        font-weight: 600;
+      }
+    }
+  
+    &__skills {
+      h3 {
+        font-size: 0.89rem;
+        font-weight: 500;
+        color: v.$text-enfasis;
+        padding: 1rem 0 1rem 0;
+      }
+    }
+  
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+  
+      &--items {
+        background-color: v.$bg-badge;
+        font-size: 0.8rem;
+        color: v.$text-enfasis;
+        padding: 0.174rem 0.5rem;
+        border-radius: 1rem;
+      }
+    }
+}

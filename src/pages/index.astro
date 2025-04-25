@@ -1,24 +1,28 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import SectionContenedor from "@/components/SectionContenedor.astro"
-import CardPerfil from '@/components/CardPerfil.astro';
-import Briefcase from "@/icons/Briefcase.astro"
-import Coder from '@/icons/Coder.astro';
-import Experiencia from '@/components/Experience.astro';
-import CardProject from '@/components/CardProject.astro';
-import About from '@/components/About.astro';
-import Skills from '@/components/Skills.astro';
-import Contacto from '@/components/Contacto.astro';
-import WaveFooter from '@/icons/WaveFooter.astro';
-import SectionFooter from '@/components/SectionFooter.astro';
-import '@/styles/app.scss';
+import Layout from '@layouts/Layout.astro';
+import Header from '@components/core/layout/Header.astro';
+import SectionContenedor from "@components/core//ui/SectionContenedor.astro";
+import CardProfile from '@components/showcase/profile/card-profile/CardProfile.astro';
+import Experiencia from '@components/showcase/experience/Experience.astro';
+import Briefcase from "@components/core/icons/Briefcase.astro"
+import CardProject from '@components/showcase/projects/CardProject.astro';
+import Coder from '@components/core/icons/Coder.astro';
+import '@components/showcase/projects/card-project.scss';
+import About from '@components/showcase/profile//about/About.astro';
+import Skills from '@components/showcase/skills/Skills.astro';
+import Contacto from '@components/showcase/contact/Contacto.astro';
+import SectionFooter from '@components/core/layout/SectionFooter.astro';
+import WaveFooter from '@components/core/icons/WaveFooter.astro';
+
 ---
 
 <Layout title='Ezequiel Suarez | Desarrollador Front-End y Programador' 
-description='Front-End Developer especializado en HTML, CSS, Sass, Tailwind, JavaScript y Astro. Apasionado por crear soluciones innovadoras en diseño y desarrollo web.'>
+description='Front-End Developer con 2años de experiencia. Formación autodicacta continua. Enfoque en accesibilidad, desarrollo modular y escalable. Estudiante de Ingeniería en Sistemas de Información.'>
+	<Header />
+	
 	<main>
 		<SectionContenedor class="card" id="top">
-			<CardPerfil /> 
+			<CardProfile />  
 		</SectionContenedor>
 
 		<SectionContenedor class="experience" id="experiencia">

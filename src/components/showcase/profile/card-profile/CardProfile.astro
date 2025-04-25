@@ -1,0 +1,51 @@
+---
+import '@components/showcase/profile/card-profile/card-profile.scss';
+import BadgeStatus from '@components/showcase/profile/card-profile/BadgeStatus.astro';
+import ItemsIcons from "@components/core/ui/ItemsIcons.astro";
+import LinkedInIcon from "@components/core/icons/LinkedIn.astro";
+import GithubIcon from "@components/core/icons/Github.astro";
+import EmailIcon from "@components/core/icons/Email.astro";
+import ButtonCv from "@components/showcase/profile/card-profile/ButtonCv.astro";
+---
+
+<section>
+  <picture class="card__logo">
+    <img src="/img/logo/LogoTipo.webp" alt="Logotipo De Ezequiel Suarez" class="cardPerfil__logo-img">
+  </picture>
+
+  <article class="card__article">
+    <h1 class="card__article-title">Hey, Soy Eze</h1>
+    <div class="card__article-badge">
+      <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">Disponible</BadgeStatus>
+    </div>
+  </article>
+  
+  <article>
+    <h2 class="card__descripcion">
+      <strong>Desarrollador Front-End</strong> con <strong>2 años de experiencia</strong>. Formación autodicacta continua. Enfoque en <strong>accesibiliadad</strong>, desarrollo <strong>modular</strong> y <strong>escalable</strong>. Estudiante de <strong>Ingeniería en Sistemas de Información</strong>.
+  </article>
+
+  <ul class="card__links">
+    <li class="card__links-list">
+      <ItemsIcons href="https://www.linkedin.com/in/ezequiel-suarez-dev/">
+        <LinkedInIcon class="card__links-items"/>
+      </ItemsIcons>
+    </li>
+
+    <li class="card__links-list">
+      <ItemsIcons href="https://github.com/ezequiel-dev93" >
+        <GithubIcon class="card__links-items"/>
+      </ItemsIcons>
+    </li>
+
+    <li class="card__links-list">   
+      <ItemsIcons href="mailto:ezequielsuarez.dev.com">
+        <EmailIcon class="card__links-items"/>
+      </ItemsIcons>
+    </li>
+
+    <li>
+        <ButtonCv class="card__links--cv"/>
+    </li>
+  </ul>
+</section>

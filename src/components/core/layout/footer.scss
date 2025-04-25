@@ -1,0 +1,120 @@
+@use "@/styles/base/_variables" as v;
+@use "@/styles/base/_mixins" as mx;
+
+.footer {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    padding-bottom: 30rem;
+
+    &__wave {
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+
+        &-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: scaleY(3) scaleX(2.15);
+        transform-origin: bottom;
+        display: block;
+        pointer-events: none;
+        }
+    }
+}
+
+.section-footer__container { 
+    @include mx.flex(flex, space-around, center);
+    flex-wrap: wrap;
+  
+    @include mx.mq-max(600px) {
+      flex-direction: column;
+    }
+  }
+  
+.section-footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 20rem;
+
+    &__perfil {
+        @include mx.center(flex, center, 1rem);
+        padding: 1rem 0.7rem;
+
+        &--title {
+        display: flex;
+        gap: 0.7rem;
+        color: v.$text-white;
+        }
+
+        &--logo {
+        width: 3rem;
+        }
+    }
+
+    @include mx.mq-max(600px) {
+
+    & {
+        margin-top: 19rem;
+    }
+
+    &__perfil {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 1rem;
+    }
+    
+    &__perfil--title {
+            flex-direction: column;
+        }  
+    }
+
+    &__social-list {    
+        display: flex; ;
+        gap: 1.5rem; 
+    }
+
+    &__social-item {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: v.$bg-badge;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, 
+        box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+        cursor: pointer;
+        padding: 0.8rem;
+        box-shadow: 0 0 8px rgba(17, 17, 17, 0.5);
+        @include mx.flex(flex, center, center);
+
+    &:hover {
+        background-color: #8a66c4; 
+        box-shadow: 0 0 15px rgba(62, 62, 62, 0.7);
+        transform: scale(1.1);
+    }
+}
+
+    &__social-icon {
+        color: v.$text-black;
+        transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+        .section-footer__social-item:hover & {
+            color: v.$text-white;
+            transform: scale(1.2);
+        }
+    }
+
+    &__legal {
+        color: v.$text-white;
+        padding-top: 6rem;
+        text-align: center;
+
+        @include mx.mq-max(600px) {
+        @include mx.column(flex, column, center);
+        padding-top: 2rem;
+        } 
+    }
+}

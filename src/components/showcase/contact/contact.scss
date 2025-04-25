@@ -1,0 +1,28 @@
+@use "@/styles/base/_variables" as v;
+@use "@/styles/base/_mixins" as mx;
+
+.contactos {
+    padding: 1rem 1.5rem;
+}
+  
+.sectionContact {
+  
+   &__article {
+      @include mx.center(flex, center, 0.5rem);
+      padding: 2rem 0rem;
+  
+      &-title {
+        @include mx.title-style();
+      }
+    }
+  
+    &__container {
+      @include mx.flex(flex, space-between, flex-start);
+  
+      @include mx.mq-max(768px) {
+        @include mx.column(flex, column, center);
+        gap: 3rem;
+        margin-bottom: 2rem;
+      }
+    }
+}

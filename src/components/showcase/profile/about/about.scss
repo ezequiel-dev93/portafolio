@@ -1,0 +1,36 @@
+@use "@/styles/base/_variables" as v;
+@use "@/styles/base/_mixins" as mx;
+
+.about {
+    @include mx.column(flex, column, flex-start);
+    padding: 2rem 1.5rem;
+  
+    &__title {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0;
+  
+      h2 {
+        @include mx.title-style();
+      }
+  
+      span {
+        font-size: 1.5rem;
+      }
+    }
+  
+    &__description {
+      p {
+        font-size: v.$font-size-small;
+        font-weight: 300;
+        padding: 1rem 0;
+        line-height: 1.5;
+      }
+  
+      strong {
+        font-weight: 500;
+        color: v.$text-enfasis;
+      }
+    }
+}
+  

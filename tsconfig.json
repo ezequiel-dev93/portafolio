@@ -3,11 +3,15 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@/components": ["src/components/*"
-    ],
-    "@/icons/*": ["src/icons/*"
-    ],
-    }
+      "@components/*": ["src/components/*"],
+      "@core/*": ["src/core/*"],
+      "@icons/*": ["src/icons/*"],
+      "@showcase/*": ["src/showcase/*"],
+      "@styles/*": ["src/styles/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@pages/*": ["src/pages/*"],
+    },
   },
-  "extends": "astro/tsconfigs/base"
+  "include": ["src/**/*", "env.d.ts"],
+  "exclude": ["node_modules"]
 }
