@@ -21,11 +21,11 @@ html {
 
 /* Configuramos el body para toda la web */
 body {
+    @include mx.column(flex, column, center);
     background-image: v.$bg-white;
+    min-height: 100vh;
     color: v.$text-black;
     font-size: 1rem;
-    @include mx.column(flex, column, center);
-    min-height: 100%;
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 

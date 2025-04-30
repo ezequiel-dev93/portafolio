@@ -1,7 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Header from '@components/core/layout/Header.astro';
-import SectionContenedor from "@components/core//ui/SectionContenedor.astro";
+import SectionContenedor from "@components/core//ui/section-conteiner/SectionContenedor.astro";
 import CardProfile from '@components/showcase/profile/card-profile/CardProfile.astro';
 import Experiencia from '@components/showcase/experience/Experience.astro';
 import Briefcase from "@components/core/icons/Briefcase.astro"
@@ -10,7 +10,7 @@ import Coder from '@components/core/icons/Coder.astro';
 import '@components/showcase/projects/card-project.scss';
 import About from '@components/showcase/profile//about/About.astro';
 import Skills from '@components/showcase/skills/Skills.astro';
-import Contacto from '@components/showcase/contact/Contacto.astro';
+import Contact from '@components/showcase/contact/Contact.astro';
 import SectionFooter from '@components/core/layout/SectionFooter.astro';
 import WaveFooter from '@components/core/icons/WaveFooter.astro';
 ---
@@ -51,7 +51,7 @@ description='Front-End Developer con 2años de experiencia. Formación autodicac
 		</SectionContenedor>
 		
 		<SectionContenedor class="contactos" id="contactos">
-			<Contacto />
+			<Contact />
 		</SectionContenedor>
 	</main>
 
