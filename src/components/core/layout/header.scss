@@ -54,7 +54,6 @@
 @include mx.mq-max(768px) {
   .header__nav-menu {
     display: none;
-    color: v.$text-white;
 
     & li:hover {
         color: v.$text-enfasis-dark;
