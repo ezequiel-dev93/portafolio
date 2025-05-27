@@ -1,54 +1,63 @@
-# Astro Starter Kit: Basics
+# 👋 Hola, soy Ezequiel | Ingeniero en Sistemas en formación + Aspirante a IA
 
-```sh
-npm create astro@latest -- --template basics
-```
+**`Desarrollador Full Stack | Python Enthusiast | Maker Multidisciplinario`**
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Portafolio en constante evolución donde mezclo código, electrónica y mecánica. Actualmente enfocado en **Python para Inteligencia Artificial**, pero siempre construyendo proyectos transversales.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🛠️ Stack Tecnológico
 
-## 🚀 Project Structure
+### 🔝 Enfasis Principal
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 
-Inside of your Astro project, you'll see the following folders and files:
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+### 🚀 Complementario (Full Stack)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### 🌱 Aprendiendo Ahora
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)
+![Testing](https://img.shields.io/badge/Testing-25C2A0?logo=jest&logoColor=white)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+---
 
-Any static assets, like images, can be placed in the `public/` directory.
+## � Proyectos
 
-## 🧞 Commands
+### 💻 Full Stack (En progreso)
+- **`[Nombre Proyecto]`**: Descripción breve + qué problema resuelve (aunque esté en desarrollo).  
+  `Tech Stack`: React, Node.js, [otras].  
+  `Estado`: 🚧 En construcción (próximamente demo).
 
-All commands are run from the root of the project, from a terminal:
+### ⚙️ Maker (Mecánica/Electrónica/Sistemas)
+- **`[Proyecto Interdisciplinario]`**: Explica la arquitectura única y cómo integras varias ingenierías.  
+  `Tech Stack`: Python + [hardware específico].  
+  `Futuro`: 🔮 Planeo implementar [IA/Cloud/otro].
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+*(Todos los proyectos tienen cards detalladas en [el portafolio vivo](https://tu-url-portfolio.com/projects))*
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📈 Hacia IA/ML
+
+Actualmente estoy:
+- Tomando cursos de **matemáticas avanzadas** para IA.
+- Experimentando con modelos simples en Kaggle.
+- Diseñando una arquitectura escalable para futuros proyectos ML.
+
+---
+
+## 📫 Contacto
+
+¿Quieres charlar sobre IA, proyectos híbridos o colaborar?
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](tu-url-linkedin)
+[![Email](https://img.shields.io/badge/Email-EA4335?logo=gmail&logoColor=white)](mailto:tu-email@example.com)
+[![Slack](https://img.shields.io/badge/Slack-4A154B?logo=slack&logoColor=white)](tu-enlace-slack)
+
+---
+
+## 🎯 Filosofía
+
+> *"Construyo soluciones donde el software y el hardware convergen, con un ojo siempre en la escalabilidad y otro en la inteligencia artificial."*
