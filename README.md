@@ -1,6 +1,6 @@
 # 👋 Hola, soy Ezequiel | Ingeniero en Sistemas de Información en formación + Aspirante a IA
 
-**`Frontend Developer → Futuro Full Stack Node Js | Especialista Python |`**
+**`Frontend Developer → Futuro Full Stack Node Js | Especialista en Python |`**
 
 Portafolio donde convergen el desarrollo software, la inteligencia artificial y proyectos interdisciplinarios. Actualmente en **especialización intensiva en IA/ML/NLP con Python** (España), mientras evoluciono hacia el Full Stack con Node js
 
