@@ -1,8 +1,8 @@
-# 👋 Hola, soy Ezequiel | Ingeniero en Sistemas en formación + Aspirante a IA
+# 👋 Hola, soy Ezequiel | Ingeniero en Sistemas de Información en formación + Aspirante a IA
 
-**`Frontend Developer → Futuro Full Stack Python | Especialista IA/ML | Maker`**
+**`Frontend Developer → Futuro Full Stack Node Js | Especialista Python |`**
 
-Portafolio donde convergen el desarrollo software, la inteligencia artificial y proyectos interdisciplinarios. Actualmente en **especialización intensiva en IA/ML/NLP con Python** (España), mientras evoluciono hacia el Full Stack con Python | FastAPI.
+Portafolio donde convergen el desarrollo software, la inteligencia artificial y proyectos interdisciplinarios. Actualmente en **especialización intensiva en IA/ML/NLP con Python** (España), mientras evoluciono hacia el Full Stack con Node js
 
 ---
 
@@ -10,12 +10,13 @@ Portafolio donde convergen el desarrollo software, la inteligencia artificial y 
 
 ### 👨‍💻 Frontend 
 ![Astro](https://img.shields.io/badge/Astro-FF5D01?logo=astro&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwind-css&logoColor=white)
 ![Sass](https://img.shields.io/badge/Sass-CC6699?logo=sass&logoColor=white)
 
-### ⚙️ Backend (En progreso)
+### ⚙️ Backend 
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
@@ -43,7 +44,6 @@ Portafolio donde convergen el desarrollo software, la inteligencia artificial y 
 ![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white) 
 ![NLTK](https://img.shields.io/badge/NLTK-3776AB?logo=nltk&logoColor=white) 
 ---
-
 
 ## 💼 ¿Trabajamos juntos?
 
