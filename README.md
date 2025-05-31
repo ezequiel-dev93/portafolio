@@ -27,7 +27,7 @@ Portafolio donde convergen el desarrollo software, la inteligencia artificial y 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)
 ![Testing](https://img.shields.io/badge/Testing-25C2A0?logo=jest&logoColor=white)
 
-## 🤖 Especialización en IA 2025 (España)  
+## 🤖 Especialización en IA 2025
 
 **`Inteligencia Artificial · Machine Learning · Deep Learning · NLP con Python`**  
 
