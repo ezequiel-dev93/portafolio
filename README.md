@@ -1,4 +1,4 @@
-# 👋 Hola, soy Ezequiel | Ingeniero en Sistemas de Información en formación + Aspirante a IA
+ <h1>👋 Hola, soy Ezequiel <br> Ingeniero en Sistemas de Información en formación + Aspirante a IA<h1/>
 
 **`Frontend Developer → Futuro Full Stack Node Js | Especialista en Python |`**
 
