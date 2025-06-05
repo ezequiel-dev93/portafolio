@@ -1,14 +1,16 @@
- <h1>👋 Hola, soy Ezequiel <br> Ingeniero en Sistemas de Información en formación + Aspirante a IA<h1/>
+# 👋 Hola, soy Ezequiel
+
+## Ingeniero en Sistemas de Información en formación + Aspirante a IA
 
 **`Frontend Developer → Futuro Full Stack Node Js | Especialista en Python |`**
 
-Portafolio donde convergen el desarrollo software, la inteligencia artificial y proyectos interdisciplinarios. Actualmente en **especialización intensiva en IA/ML/NLP con Python** (España), mientras evoluciono hacia el Full Stack con Node js
+### Sobre mi Portfolio
 
----
+Portfolio donde convergen el desarrollo software, la inteligencia artificial y proyectos interdisciplinarios. Actualmente en **especialización intensiva en IA/ML/NLP con Python** (España), mientras evoluciono hacia el Full Stack con Node js
 
 ## 🛠️ Stack Tecnológico
 
-### 👨‍💻 Frontend 
+###  Frontend 
 ![Astro](https://img.shields.io/badge/Astro-FF5D01?logo=astro&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
@@ -16,18 +18,18 @@ Portafolio donde convergen el desarrollo software, la inteligencia artificial y 
 ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwind-css&logoColor=white)
 ![Sass](https://img.shields.io/badge/Sass-CC6699?logo=sass&logoColor=white)
 
-### ⚙️ Backend 
+###  Backend 
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
 
-### 🌱 Aprendiendo Ahora
+###  Aprendiendo Ahora
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)
 ![Testing](https://img.shields.io/badge/Testing-25C2A0?logo=jest&logoColor=white)
 
-## 🤖 Especialización en IA 2025
+##  Especialización en IA 2025
 
 **`Inteligencia Artificial · Machine Learning · Deep Learning · NLP con Python`**  
 
