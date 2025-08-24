@@ -1,5 +1,5 @@
-@use "@/styles/base/_variables" as v;
-@use "@/styles/base/_mixins" as mx;
+@use "@/styles/abstracts/_variables" as v;
+@use "@/styles/abstracts/_mixins" as mx;
 
 ::-webkit-scrollbar {
     width: 0.5rem;
@@ -39,7 +39,8 @@ body.dark-mode {
         color: v.$text-enfasis-dark;
     }
 
-    :is(.card__article-title, .experience__title-h2, .projects__title-h2, .about__title-h2, .skill__title-h2, .sectionContact__article-title) { 
+    :is(.card__article-title, .experience__title-h2, .projects__title-h2, .about__title-h2, 
+    .skill__title-h2, .sectionContact__article-title, .services__title) { 
         @include mx.title-style-dark;
     }
 
@@ -52,7 +53,7 @@ body.dark-mode {
         color: v.$text-white;
     }
 
-    :is(.timeline__item, .skill__category, .projects__items, .skill__subtitle) {
+    :is(.timeline__item, .skill__category, .projects__items, .skill__subtitle, .services__description p) {
         background: v.$bg-cardproject-dark;
         color: v.$text-white;
     }
@@ -68,5 +69,11 @@ body.dark-mode {
 
     :is(.bar) {
         background: v.$text-white;
+    }
+
+    :is(.services__item, .services__description h3) {
+        background-color: v.$bg-cardproject-dark;
+        color: v.$text-enfasis-dark;
+        
     }
 }

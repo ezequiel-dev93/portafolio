@@ -15,8 +15,8 @@ export default defineConfig({
       preprocessorOptions: {
         scss: {
           additionalData: `
-            @use "@styles/base/_variables.scss" as *;
-            @use "@styles/base/_mixins.scss" as *;
+            @use "@styles/abstracts/_variables.scss" as *;
+            @use "@styles/abstracts/_mixins.scss" as *;
           `,
         },
       },

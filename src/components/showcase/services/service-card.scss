@@ -1,0 +1,40 @@
+@use "@/styles/abstracts/_variables" as v;
+@use "@/styles/abstracts/_mixins" as mx;
+
+.services {
+    padding: 1.2rem 1rem;
+
+    &__title {
+        @include mx.title-style();
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding-top: 1rem;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        padding-top: 1rem;  
+    }
+
+    &__item {
+        background-color: v.$bg-cardproject;
+        border-radius: 0.6rem;
+        padding: 1rem;
+    }
+
+    &__description{
+        h3 {
+            padding-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 0.89rem;
+            font-weight: 200;
+        }
+    }
+}

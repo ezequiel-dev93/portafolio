@@ -10,6 +10,7 @@ import Coder from '@components/core/icons/Coder.astro';
 import '@components/showcase/projects/card-project.scss';
 import About from '@components/showcase/profile//about/About.astro';
 import Skills from '@components/showcase/skills/Skills.astro';
+import ServicesCard from '@components/showcase/services/ServicesCard.astro';
 import Contact from '@components/showcase/contact/Contact.astro';
 import SectionFooter from '@components/core/layout/SectionFooter.astro';
 import WaveFooter from '@components/core/icons/WaveFooter.astro';
@@ -38,7 +39,7 @@ description='Front-End Developer con 2años de experiencia. Formación autodicac
 				<Coder/>
 				<h2 class="projects__title-h2">Proyectos</h2>
 			</article>
-
+			
 			<CardProject />
 		</SectionContenedor>
 
@@ -50,6 +51,10 @@ description='Front-End Developer con 2años de experiencia. Formación autodicac
 			<Skills />
 		</SectionContenedor>
 		
+		<SectionContenedor class="services" id="services">
+			<ServicesCard />
+		</SectionContenedor>
+	
 		<SectionContenedor class="contactos" id="contactos">
 			<Contact />
 		</SectionContenedor>
