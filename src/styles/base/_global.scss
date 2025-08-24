@@ -19,7 +19,6 @@ html {
     background: #090909;
 }
 
-/* Configuramos el body para toda la web */
 body {
     @include mx.column(flex, column, center);
     background-image: v.$bg-white;
@@ -77,3 +76,4 @@ body.dark-mode {
         
     }
 }
+

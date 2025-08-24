@@ -1,7 +1,6 @@
 @use "@/styles/abstracts/_variables" as v;
 @use "@/styles/abstracts/_mixins" as mx;
 
-
 .sectionContenedor {
   width: 100%;
   margin-inline: auto;
@@ -161,5 +160,211 @@
   }
 }
 
+/* Header */
+.header {
+  max-width: 1120px;
+  width: 100%;
+  margin: 0.76rem auto;            
+  position: fixed;                          
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  
+  :is(&__nav, &__nav-menu) {
+    @include mx.flex(flex, center, center);
+  }
 
+  &__nav {    
+    flex: 1;
+    position: relative;
+  }
+  
+  &__nav-menu {
+    background-color: v.$bg-header; 
+    backdrop-filter: blur(10px);     
+    border-radius: 1rem;
+    box-shadow: 0 4px 9px rgba(0, 0, 0, 0.1); 
+    border-bottom: 1px solid rgba(255, 251, 251, 0.1);
+    padding: 0.37rem 2rem;
+    gap: 2rem;
 
+    li {
+      color: v.$text-white;
+      
+      &:hover {
+        color: v.$text-black;
+      }
+    }
+  }
+
+  &__nav-movil {
+    display: flex; 
+    align-items: center;
+    position: absolute; 
+    right: 0; 
+    display: none;
+  }
+
+  &__toggle {
+    margin: auto;
+  }
+}
+    
+@include mx.mq-max(768px) {
+  .header__nav-menu {
+    display: none;
+
+    & li:hover {
+        color: v.$text-enfasis-dark;
+    }
+  }
+  
+  .header__nav-menu.active {
+    display: flex; 
+    flex-direction: column;
+    justify-content: start; 
+    background: #303030;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 14rem;
+    height: 100%;
+    padding: 1.5rem;
+    z-index: 10;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0);
+    border-radius: 0rem;
+  }
+
+  .header__nav-movil {
+    display: flex; 
+    visibility: visible;
+    align-items: center;
+    margin: 2rem;
+    padding-top: 2rem;
+  }
+
+  .header__toggle {
+    margin-right: 1.5rem;
+  }
+}
+
+/* Footer */
+.footer {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    padding-bottom: 30rem;
+
+    &__wave {
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+
+        &-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: scaleY(3) scaleX(2.15);
+        transform-origin: bottom;
+        display: block;
+        pointer-events: none;
+        }
+    }
+}
+
+.section-footer__container { 
+    @include mx.flex(flex, space-around, center);
+    flex-wrap: wrap;
+  
+    @include mx.mq-max(600px) {
+      flex-direction: column;
+    }
+  }
+  
+.section-footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 20rem;
+
+    &__perfil {
+        @include mx.center(flex, center, 1rem);
+        padding: 1rem 0.7rem;
+
+        &--title {
+            display: flex;
+            gap: 0.7rem;
+            color: v.$text-white;
+        }
+
+        &--logo {
+            width: 3rem;
+        }
+    }
+
+    @include mx.mq-max(600px) {
+
+    & {
+        margin-top: 19rem;
+    }
+
+    &__perfil {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 1rem;
+    }
+    
+    &__perfil--title {
+            flex-direction: column;
+        }  
+    }
+
+    &__social-list {    
+        display: flex; ;
+        gap: 1.5rem; 
+    }
+
+    &__social-item {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: v.$bg-badge;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, 
+        box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+        cursor: pointer;
+        padding: 0.8rem;
+        box-shadow: 0 0 8px rgba(17, 17, 17, 0.5);
+        @include mx.flex(flex, center, center);
+
+    &:hover {
+        background-color: #8a66c4; 
+        box-shadow: 0 0 15px rgba(62, 62, 62, 0.7);
+        transform: scale(1.1);
+    }
+}
+
+    &__social-icon {
+        color: v.$text-black;
+        transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+        .section-footer__social-item:hover & {
+            color: v.$text-white;
+            transform: scale(1.2);
+        }
+    }
+
+    &__legal {
+        color: v.$text-white;
+        padding-top: 6rem;
+        text-align: center;
+
+        @include mx.mq-max(600px) {
+            @include mx.column(flex, column, center);
+            padding-top: 2rem;
+        } 
+    }
+}
