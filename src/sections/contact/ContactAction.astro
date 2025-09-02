@@ -4,47 +4,48 @@ import EmailIcon from "@/icons/Email.astro"
 import CopyIcon from "@/icons/Copy.astro"
 ---
 
-<section class="contact">
+<section class="contact" aria-labelledby="contact-action-title">
   <section class="contact__container">
-    <h3 class="contact__container-title">Puedes contáctarme con un click</h3>
+    <h3 class="contact__container-title">Puedes contactarme con un click</h3>
+    
     <article class="contact__actions">
       <div>
-          <a
-            href="mailto:ezequielsuarez.dev@gmail.com"
-            class="contact__actions-buttom contact__button--email"
-            onmouseover="updateSecondaryMessage('Abre tu aplicación de correo')"
-            onmouseout="resetSecondaryMessage()"
-            >
-            <EmailIcon class="contact__icon" />
-          </a>       
+        <a
+          href="mailto:ezequielsuarez.dev@gmail.com"
+          class="contact__actions-buttom contact__button--email"
+          aria-label="Abrir correo electrónico"
+          onmouseover="updateSecondaryMessage('Abre tu aplicación de correo')"
+          onmouseout="resetSecondaryMessage()"
+          onfocus="updateSecondaryMessage('Abre tu aplicación de correo')"
+          onblur="resetSecondaryMessage()"
+        >
+          <EmailIcon class="contact__icon" aria-hidden="true"/>
+        </a>
       </div>
 
       <div>
         <button
           class="contact__actions-buttom contact__button--copy"
+          aria-label="Copiar dirección de correo"
           onmouseover="updateSecondaryMessage('Copia mi dirección de correo')"
           onmouseout="resetSecondaryMessage()"
+          onfocus="updateSecondaryMessage('Copia mi dirección de correo')"
+          onblur="resetSecondaryMessage()"
           onclick="copyToClipboard('ezequielsuarez.dev@gmail.com')"
-            >
-
-          <CopyIcon class="contact__icon" />
+        >
+          <CopyIcon class="contact__icon" aria-hidden="true"/>
         </button>
       </div>
     </article>
 
-
-    <div class="contact__message">
-      <span id="contact__message-sub">
-        Envíame un correo
-      </span>
-
-      <span id="contact__message-main">
-        Estoy listo para escuchar tus ideas.
-      </span>
+    <div class="contact__message" aria-live="polite">
+      <span id="contact__message-sub">Envíame un correo</span>
+      <span id="contact__message-main">Estoy listo para escuchar tus ideas.</span>
     </div>
   </section>  
 </section>
-<div id="copy-alert" class="contact__alert">¡Correo copiado!</div>
+
+<div id="copy-alert" class="contact__alert" role="status" aria-live="polite">¡Correo copiado!</div>
 
 <script is="global">
     

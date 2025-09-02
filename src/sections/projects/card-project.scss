@@ -14,8 +14,8 @@
     }
   
     &__container {
-      @include mx.grid-column(2, 1fr);
-      gap: 1rem;
+       @include mx.grid-column(2, 1fr);
+        gap: 1rem;
   
       @include mx.mq-max(600px) {
         grid-template-columns: 1fr;
@@ -27,10 +27,10 @@
       border-radius: 0.6rem;
       padding: 0.7rem;
       overflow: hidden;
-    }
-  
-    &__items:hover {
-      box-shadow: 0 0 30px #00000066; 
+
+      &:hover {
+        box-shadow: 0 0 30px #00000066; 
+      }
     }
   
     &__figure {
@@ -99,4 +99,9 @@
       }
     }
 }
-  
+
+@media (320px <= width <= 768px) {
+  .projects {
+    padding: 4rem 3rem;
+  }
+}

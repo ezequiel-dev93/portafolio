@@ -2,14 +2,14 @@
 import Layout from '@layouts/Layout.astro';
 import Header from '@components/Header.astro';
 import SectionContenedor from "@components/SectionContenedor.astro";
-import CardProfile from '@/sections/profile/card-profile/CardProfile.astro';
+import Hero from '@/components/Hero.astro';
 import Experiencia from '@/sections/experience/Experience.astro';
 import Briefcase from "@/icons/Briefcase.astro"
 import CardProject from '@/sections/projects/CardProject.astro';
 import Coder from '@/icons/Coder.astro';
 import About from '@/sections/profile//about/About.astro';
 import Skills from '@/sections/skills/Skills.astro';
-//import ServicesCard from '@components/showcase/services/ServicesCard.astro';
+import ServicesCard from '@/sections/services/ServicesCard.astro';
 import Contact from '@/sections/contact/Contact.astro';
 import SectionFooter from '@components/SectionFooter.astro';
 import WaveFooter from '@/icons/WaveFooter.astro';
@@ -20,9 +20,8 @@ description='Front-End Developer con 2años de experiencia. Formación autodicac
 	<Header />
 	
 	<main>
-		<SectionContenedor class="card" id="top">
-			<CardProfile />  
-		</SectionContenedor>
+
+		<Hero />
 
 		<SectionContenedor class="experience" id="experiencia">
 			<article class="experience__title">
@@ -49,12 +48,10 @@ description='Front-End Developer con 2años de experiencia. Formación autodicac
 		<SectionContenedor class="skills" id="tecnologias">
 			<Skills />
 		</SectionContenedor>
-		
-		<!-- 
-			<SectionContenedor class="services" id="services">
-				<ServicesCard />
-			</SectionContenedor>
-		-->
+		 
+		<SectionContenedor class="services" id="services">
+			<ServicesCard />
+		</SectionContenedor>
 	
 		<SectionContenedor class="contactos" id="contactos">
 			<Contact />

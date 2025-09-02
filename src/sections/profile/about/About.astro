@@ -1,38 +1,23 @@
 ---
 import '@/sections/profile/about/about.scss';
+import aboutData from "@/core/data/aboutData";
 
-interface AboutProps {
-  title: string;
-  description: string[];
-}
-                                                             
-const { title, description }: AboutProps = {
-  title: "¡Hola! Un placer conocerte",
-  description: [
-    "👨‍💻 <strong>Desarrollador Front-End</strong> con 2 años de experiencia, creando soluciones centradas en el usuario, con foco en rendimiento, accesibilidad,  escalabilidad,el diseño responsive y código limpio.",
-
-    "📚 Estudiante de <strong>Ingeniería</strong> en <strong>Sistemas</strong> de <strong>Información</strong> en la <strong>Universidad Tecnológica Nacional </strong>(UTN, Argentina), una formación que me brinda una base sólida en <strong>estructuras</strong>, <strong>lógica computacional</strong>.",
-
-    "🚀Actualmente resido en España, donde estoy realizando una <strong>especialización</strong> en <strong>Inteligencia Artificial</strong>, <strong>Machine Learning</strong>, <strong>Deep Learning</strong> y <strong>Procesamiento de Lenguaje Natural</strong> (NLP) con <strong>Python</strong>.",
-
-    "🤝 Si estás <strong>buscando</strong> a una persona <strong>comprometida</strong>, <strong>dedicada</strong> y con buena <strong>comunicación</strong>, estoy listo y preparado para sumar valor con energía, conocimientos y entusiasmo a tu equipo.<br> <strong>¡Trabajemos juntos para crear algo increíble!</strong>"
-  ],
-};
+const { title, description } = aboutData;
 ---
 
-<article class="about__article">
-  <div class="about__title">
-    <span>👋</span>
-    <h2 class="about__title-h2">{title}</h2>
-  </div>
+<section class="about__article" aria-labelledby="about-title">
+  <header class="about__title">
+    <span role="img" aria-label="saludo">👋</span>
+    <h2 id="about-title" class="about__title-h2">{title}</h2>
+  </header>
   
-  <div class="about__description">
-    {description.map((text) => (
-      <p class="about__text" set:html={text}></p>
+  <article class="about__description">
+    {description.map((text, index) => (
+      <p 
+        class="about__text" 
+        set:html={text} 
+        aria-label={`párrafo ${index + 1} de la sección sobre mí`}>
+      </p>
     ))}
-  </div>
-</article>
-  
-  
-  
-  
+  </>
+</section>

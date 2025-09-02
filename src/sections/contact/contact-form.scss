@@ -72,7 +72,7 @@
       margin-top: 3rem;
       width: 100%;
       border: .25rem solid v.$bg-form;
-      padding: 1rem 3rem;
+      padding: 1rem 2rem;
       font-size: 1rem;
       font-weight: 500;
       background-color:  #643d88;
@@ -126,4 +126,17 @@
       transform: translateX(0);
       opacity: 1;
     }
+}
+
+@media (320px <= width <= 768px) {
+  .contact {
+    &__form {
+      padding: 0rem;
+    }
+  
+    &__input,
+    &__textarea {
+      width: 17.5rem;
+    }
+  }
 }

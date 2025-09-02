@@ -1,42 +1,45 @@
 @use "@/styles/abstracts/_variables" as v;
 @use "@/styles/abstracts/_mixins" as mx;
 
-/* Card Perfil */
 .card {
-    @include mx.flex(flex, center, center);
-        padding: 6rem 2.2rem;
     
     &__logo {
-        width: 10dvh;
+        @include mx.flex(flex, space-between, center);
+
+        img {
+            width: 10dvh;
+        }
     }
 
     &__article {
-        @include mx.center(flex, center, 1rem);
-        padding: 1rem 0;
+        @include mx.center(flex, center, 0rem);
+        padding: 0.5rem 0;
 
-        &-title  {
-        @include mx.title-style();
-        } 
+        span {
+          font-size: clamp(2rem, 12vw, 8rem);
+          font-weight: 700;
+        }
+                 
+        .title-highlight {
+          @include mx.text-animate;
+        }
     }
 
     &__descripcion {
-        font-size: 1.2rem;
-        text-align: left;
+        max-width: 32rem; 
+        width: 100%;      
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
         line-height: 1.4;
         text-wrap: wrap;
         font-weight: 300;
-
-        strong {
-            color: v.$text-enfasis;
-            font-weight: 500;
-        }
+        opacity: 0.8;
     }
 
     &__links {
         @include mx.center(flex, center, 1.5rem);
         flex-wrap: wrap;
         align-self: flex-start;
-        padding-top: 1rem;
+        padding-top: 0.5rem;
     
         &-list {
             background-color: v.$bg-timeline-cv-link;
@@ -67,29 +70,31 @@
     }
 }
   
-@include mx.mq-max(768px) {
-    .card {
-        &__logo {
-            width: 12dvh;
-        }
+@media (320px <= width <= 768px) {
+  .card {
+    padding: 2rem 1.8rem;
 
-        &__article {
-            flex-wrap: wrap;
-            margin: 0.5rem 0;
-        }
-
-        &__descripcion {
-            line-height: 1.5;
-        }
-
-        &__social {
-            a {
-            font-size: 0.8rem;
-            }
-        }
+    &__logo {
+      width: 12dvh;
+      gap: 4rem;
     }
-}
 
+    &__article {
+      flex-wrap: wrap;
+      margin: 0.5rem 0;
+    }
+
+    &__descripcion {
+      line-height: 1.5;
+    }
+
+    &__social {
+      a {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
 
 /* Badge */
 .status-badge {
@@ -100,6 +105,7 @@
     background-color: v.$bg-badge; 
     color: v.$text-enfasis; 
     border-color: rgba(168, 85, 247, 0.2);
+    margin-right: 12rem;
   
     &__dot {
       position: relative;

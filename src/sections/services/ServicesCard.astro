@@ -1,38 +1,33 @@
 ---
+import type { Service } from "@/core/types/Services";
+import services from "@/core/data/services";
 import "@/sections/services/service-card.scss";
+import Settings from "@/icons/Settings.astro";
+
+const typedServices: Service[] = services;
 ---
 
-<section class="services">
-    <h2 class="services__title"> Servicios</h2>
+<section class="services" aria-labelledby="services-title">
+   <article class="services__title">
+      <Settings aria-hidden="true" />
+      <h2 id="services-title">Servicios</h2>
+   </article>
 
-    <ul class="services__list">
-       <li class="services__item">
-         <article class="services__description">
-            <h3>Desarrollo Front-End</h3>
-            <p>Interfaces modernas, accesibles y responsivas. Enfoque en performance, UX y buenas prácticas.</p>
-         </article>
-       </li>
-
-       <li class="services__item">
-         <article class="services__description">
-            <h3>Arquitectura&Escalabilidad</h3>
-            <p>Diseño de arquitecturas limpias y escalables. Organización de proyectos orientados a crecimiento y mantenibilidad.</p>
-         </article>
-       </li>
-
-       <li class="services__item">
-         <article class="services__description">
-            <h3>Automatización con Python</h3>
-            <p>Automatización de tareas, procesamiento de datos y scripts personalizados para aumentar la eficiencia.</p>
-         </article>
-       </li>
-
-       <li class="services__item">
-         <article class="services__description">
-            <h3>IA Aplicada (En formación)</h3>
-            <p>Formación activa en ML, DL y NLP con Python. Aplico librerías como Scikit-Learn, TensorFlow y PyTorch en proyectos personales y de aprendizaje.</p>
-         </article>
-       </li>
-       
-    </ul>
+   <ul class="services__list">
+      {typedServices.map((service) => (
+         <li class="services__item">
+            <article class="service_card" aria-labelledby={`${service.slug}-title`}>
+               {service.icon && (
+                  <span aria-hidden="true">{service.icon}</span>
+               )}
+               <h3 id={`${service.slug}-title`} class="service__card-title">
+                  {service.title}
+               </h3>
+               <p class="service__card-description">
+                  {service.summary}
+               </p>              
+            </article>
+         </li>
+      ))}
+   </ul>
 </section>

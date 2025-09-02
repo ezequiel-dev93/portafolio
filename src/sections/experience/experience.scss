@@ -56,11 +56,6 @@
         padding: 0.125rem 0.625rem;
         border-radius: 1rem;
         text-align: center;
-
-        @include mx.mq-max(480px) {
-          width: 8rem;
-          line-height: 4;
-        }
       }
     }
   
@@ -88,7 +83,7 @@
   
       strong {
         color: v.$text-enfasis;
-        font-weight: 600;
+        font-weight: 500;
       }
     }
   
@@ -114,4 +109,11 @@
         border-radius: 1rem;
       }
     }
+}
+
+@media (320px <= width <= 768px) {
+  .experience {
+    padding: 0rem 3.2rem;
+  }
+  
 }

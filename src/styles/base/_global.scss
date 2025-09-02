@@ -34,16 +34,12 @@ body.dark-mode {
     color: v.$text-white;
     transition: background-color 0.5s ease, color 0.5s ease;
 
-    :is(.header__nav-menu li:hover) {
-        color: v.$text-enfasis-dark;
-    }
-
-    :is(.card__article-title, .experience__title-h2, .projects__title-h2, .about__title-h2, 
+    :is( .experience__title-h2, .projects__title-h2, .about__title-h2, 
     .skill__title-h2, .sectionContact__article-title, .services__title) { 
         @include mx.title-style-dark;
     }
 
-    :is(.card strong, .about__text strong, .projects__figure-title, .timeline__description strong) {
+    :is(.about__text strong, .projects__figure-title, .timeline__description strong) {
         color: v.$text-enfasis-dark;
     }
 

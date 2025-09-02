@@ -1,40 +1,63 @@
 ---
 import '@/sections/contact/contact-form.scss'
 ---
-<section class="contact">
-   <form class="contact__form" id="form">
+<section class="contact" aria-labelledby="contact-title">
+  <form class="contact__form" id="form" novalidate>
     <div class="contact__form-group">
-      <label for="name"class="contact__label">Nombre</label>
-      <input type="text" name="name" id="name" placeholder="Tu nombre..." class="contact__input" required/>
-      <p class="contact__message contact__message--error"></p>
+      <label for="name" class="contact__label">Nombre</label>
+      <input 
+        type="text" 
+        name="name" 
+        id="name" 
+        placeholder="Tu nombre..." 
+        class="contact__input" 
+        required
+        aria-describedby="name-error"
+        aria-invalid="false"
+      />
+      <p id="name-error" class="contact__message contact__message--error" role="alert"></p>
     </div>
 
     <div class="contact__form-group">
       <label for="email" class="contact__label">Email</label>
-      <input type="text" name="email" id="email" placeholder="Ejemplo@gmail.com" class="contact__input" required>
-      <p class="contact__message contact__message--error"></p>
+      <input 
+        type="email" 
+        name="email" 
+        id="email" 
+        placeholder="ejemplo@gmail.com" 
+        class="contact__input" 
+        required
+        aria-describedby="email-error"
+        aria-invalid="false"
+      />
+      <p id="email-error" class="contact__message contact__message--error" role="alert"></p>
     </div>
 
     <div class="contact__form-group">
       <label for="message" class="contact__label">Mensaje</label>
-      <input type="text" name="message" id="message" placeholder="Escribe tu mensaje aquí" class="contact__textarea" required/>
+      <textarea 
+        name="message" 
+        id="message" 
+        placeholder="Escribe tu mensaje aquí" 
+        class="contact__textarea" 
+        required
+        aria-describedby="message-error"
+        aria-invalid="false"
+      ></textarea>
+      <p id="message-error" class="contact__message contact__message--error" role="alert"></p>
     </div>
 
-    <!-- Honeypot Anti-spam -->
-    <div class="contact__honeypot" style="display: none;">
+    <div class="contact__honeypot" aria-hidden="true" tabindex="-1">
       <label for="honeypot">No llenar este campo</label>
       <input type="text" id="honeypot" name="honeypot" />
     </div>
 
     <div class="contact__form-group">
-      <input type="submit" id="button" value="Enviar" class="contact__button">
+      <button type="submit" id="button" class="contact__button">Enviar</button>
     </div>
-    
-      <!-- Añadimos este elemento para mostrar notificaciones -->
-      <div id="floating-notification" class="floating-notification"></div>
-    </form>
-  </form>
 
+    <div id="floating-notification" class="floating-notification" role="status" aria-live="polite"></div>
+  </form>
 
   <script type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
@@ -46,6 +69,16 @@ import '@/sections/contact/contact-form.scss'
 </section>
 
 
+<!--
+<script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    emailjs.init('miYrSPp0_92YF1RLW')
+  </script>
+
+
+-->
 <script is="global">
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");

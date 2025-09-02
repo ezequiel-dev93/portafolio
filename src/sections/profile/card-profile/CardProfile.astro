@@ -8,21 +8,27 @@ import EmailIcon from "@/icons/Email.astro";
 import ButtonCv from "@/sections/profile/card-profile/ButtonCv.astro";
 ---
 
-<section>
+<section class="card">
+
   <picture class="card__logo">
     <img src="/img/logo/LogoTipo.webp" alt="Logotipo De Ezequiel Suarez" class="cardPerfil__logo-img">
-  </picture>
-
-  <article class="card__article">
-    <h1 class="card__article-title">Hey, Soy Eze</h1>
     <div class="card__article-badge">
       <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">Disponible</BadgeStatus>
     </div>
+  </picture>
+
+  <article class="card__article" >
+    <h1 class="card__article-title" id="hero-title">
+      <h1 class="card__article-title" id="hero-title">
+        <span class="title-main">Desarrollador</span> 
+        <span class="title-highlight">Frontend</span>
+      </h1>
+    </h1>
   </article>
   
   <article>
     <h2 class="card__descripcion">
-      <strong>Desarrollador Front-End</strong> con 2 años de experencia. Enfoque en <strong>rendimiento</strong>, <strong>escalabilidad</strong> y <strong>experiencia</strong> de <strong>usuario</strong>. Diseño <strong>arquitecturas limpias</strong>, <strong>escalables</strong> y <strong>orientadas</strong> al <strong>negocio</strong>.
+      Enfoque en rendimiento, escalabilidad y experiencia de usuario. Diseño arquitecturas limpias, escalables y orientadas al negocio.
     </h2>
   </article> 
  
@@ -50,3 +56,13 @@ import ButtonCv from "@/sections/profile/card-profile/ButtonCv.astro";
     </li>
   </ul>
 </section>
+
+<script>
+  import { animateHeroTitle } from "@/core/data/lib/gsap";
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      animateHeroTitle();
+    });
+  }
+</script>

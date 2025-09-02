@@ -14,27 +14,35 @@
 
     &__list {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 0.5rem;
-        padding-top: 1rem;  
+        padding-top: 1rem;
     }
 
     &__item {
         background-color: v.$bg-cardproject;
         border-radius: 0.6rem;
         padding: 1rem;
-    }
 
-    &__description{
-        h3 {
-            padding-bottom: 1.5rem;
-            text-align: center;
-            font-weight: 500;
+         h3 {
+            text-align: left;
+            font-weight: 600;
+            padding: 0.7rem 0;
+            font-size: 0.90rem;
         }
 
         p {
             font-size: 0.89rem;
+            text-wrap: wrap;
             font-weight: 200;
+            color: v.$text-white;
+            padding-top: 0.5rem;
         }
+    }
+}
+
+@media (320px <= width <= 768px) {
+    .services {
+        padding: 2rem 1.5rem;
     }
 }

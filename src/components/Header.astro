@@ -2,15 +2,23 @@
 import '@styles/app.scss'
 import Items from '@/components/Items.astro';
 import MenuMobile from '@/components/MenuMobile.astro';
-import DarkMode from '@/components/DarkMode.astro'
+import DarkMode from '@/components/DarkMode.astro';
 ---
+
 <header class="header">
-  <nav class="header__nav">    
+  <nav class="header__nav" role="navigation" aria-label="Menú principal">    
+
     <article class="header__nav-movil">
       <MenuMobile />
     </article>  
 
-    <ul class="header__nav-menu">
+    <ul 
+      class="header__nav-menu"
+      id="menu"
+      role="menu"
+      aria-hidden="true"
+      tabindex="-1"
+    >
       <Items href="#top">Inicio</Items>
       <Items href="#experiencia">Experiencia</Items>
       <Items href="#proyectos">Proyectos</Items>
@@ -24,27 +32,4 @@ import DarkMode from '@/components/DarkMode.astro'
   </nav>
 </header>
 
-<script is="global">
-document.addEventListener('DOMContentLoaded', () => {
-    const checkbox = document.querySelector('.check-icon');
-    const menu = document.querySelector('.header__nav-menu');
-
-    if (checkbox && menu) {
-      
-      checkbox.addEventListener('change', () => {
-        if (checkbox.checked) {
-          menu.classList.add('active');
-        } else {
-          menu.classList.remove('active');
-        }
-      });
-
-      menu.addEventListener('click', (event) => {
-        if (event.target.tagName === 'A') {
-          checkbox.checked = false;
-          menu.classList.remove('active');
-        }
-      });
-    }
-});
-</script>
+<script type="module" src="/src/core/js/header.js"></script>
