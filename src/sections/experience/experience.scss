@@ -10,7 +10,12 @@
       padding-bottom: 1rem;
   
       h2 {
-          @include mx.title-style();
+          //@include mx.title-style();
+            background: linear-gradient(135deg, #58039d, #E84B3C);
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: v.$font-size-large;
+            font-weight: 700;
       } 
     }
   }

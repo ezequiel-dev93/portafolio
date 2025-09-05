@@ -1,21 +1,27 @@
 ---
 import '@/sections/projects/card-project.scss';
+import projects from '@/core/data/projects';  
 
 import Python from '@/icons/Python.astro';
 import Streamlit from '@/icons/Streamlit.astro';
 import AstroIcon from '@/icons/AstroIcon.astro';
 import Tailwind from '@/icons/Tailwind.astro';
+import React from '@/icons/React.astro';
 import TypeScript from '@/icons/TypeScript.astro';
+import Playwright from '@/icons/Playwright.astro';
+import Polars from '@/icons/Polars.astro';
 
 import type { TagKey } from '@/core/types/projects';
-import projects from '@/core/data/projects';
 
 const TAGS: Record<TagKey, { icon: any }> = {
-  PYTHON:   { icon: Python },
-  STREAMLIT:{ icon: Streamlit },
-  TAILWIND: { icon: Tailwind },
-  TYPESCRIPT:{ icon: TypeScript },
-  NAVE:     { icon: AstroIcon },
+  PYTHON:     { icon: Python },
+  STREAMLIT:  { icon: Streamlit },
+  TAILWIND:   { icon: Tailwind },
+  TYPESCRIPT: { icon: TypeScript },
+  NAVE:       { icon: AstroIcon },
+  REACT:      { icon: React },
+  PLAYWIRiGHT:{ icon: Playwright },
+  POLARS:     { icon: Polars},
 };
 --- 
 

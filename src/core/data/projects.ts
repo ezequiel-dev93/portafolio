@@ -16,6 +16,23 @@ const projects: Project[] = [
     tags: ['PYTHON', 'STREAMLIT'],
     image: '/img/cards/Generador-informes.webp',
   },
+  {
+    title: 'Scrapper Automatizado',
+    description: 'Extrae productos de MercadoLibre con Playwright y Polars, genera reportes en Excel con limpieza de datos y sistema de logging.',
+    link: 'https://github.com/ezequiel-dev93/scraping_python.git',
+    tags: ['PYTHON', 'POLARS', 'PLAYWIRiGHT'],
+    image: '/img/cards/scraping.webp',
+  },  
+    /* Queda Pendiente de Actualizar la Extension de Chrome. 
+    {
+    title: 'Gestor de Favoritos',
+    description: 'Aplicación web que organiza y gestiona carpetas de favoritos en Chrome con una interfaz moderna y responsive. Incluye búsqueda, arrastrar y soltar (drag & drop), y sistema de modales para mejorar la experiencia de usuario.',
+    link:'https://github.com/ezequiel-dev93/gestor-favoritos.git',
+    tags: ['REACT', 'TYPESCRIPT', 'TAILWIND' ],
+    image: '/img/cards/Gestor-favoritos.webp',
+
+  },
+   */
 ];
 
 export default projects;
