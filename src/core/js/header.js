@@ -15,11 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menu.classList.add("active");
 
     requestAnimationFrame(() => {
-      animate(
-        menu,
-        { opacity: [0, 1], x: ["100%", "0%"] },
-        { duration: 0.4 }
-      );
+      animate(menu, { opacity: [0, 1], x: ["100%", "0%"] }, { duration: 0.4 });
     });
   }
 
@@ -27,16 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
     label.setAttribute("aria-expanded", "false");
     menu.setAttribute("aria-hidden", "true");
 
-    animate(
-      menu,
-      { opacity: [1, 0], x: ["0%", "100%"] },
-      { duration: 0.3 }
-    ).finished.then(() => {
-      menu.classList.remove("active");
-      menu.style.opacity = "";
-      menu.style.transform = "";
-      menu.style.display = "";
-    });
+    animate(menu, { opacity: [1, 0], x: ["0%", "100%"] }, { duration: 0.3 })
+      .finished.then(() => {
+        menu.classList.remove("active");
+        menu.style.opacity = "";
+        menu.style.transform = "";
+        menu.style.display = "";
+      });
   }
 
   checkbox.addEventListener("change", () => {
