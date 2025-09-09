@@ -2,6 +2,8 @@
 @use "@/styles/abstracts/_mixins" as mx;
 
 .contact {
+    padding: 1rem 0rem;
+
     &__form {
       border-radius: 0.5rem;
       max-width: 600px;
@@ -72,7 +74,7 @@
       margin-top: 3rem;
       width: 100%;
       border: .25rem solid v.$bg-form;
-      padding: 1rem 2rem;
+      padding: 1rem;
       font-size: 1rem;
       font-weight: 500;
       background-color:  #643d88;
@@ -138,5 +140,42 @@
     &__textarea {
       width: 17.5rem;
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 0.5rem 0;
+    
+    &__form {
+      width: 100%;
+      padding: 0;
+    }
+    
+    &__form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    &__input,
+    &__textarea {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 0.7rem;
+    }
+    
+    &__button {
+      margin-top: 2rem;
+      padding: 0.9rem;
+      font-size: 0.95rem;
+    }
+  }
+  
+  .floating-notification {
+    right: 10px;
+    left: 10px;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 0.9rem;
   }
 }

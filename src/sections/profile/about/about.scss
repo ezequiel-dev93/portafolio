@@ -3,7 +3,7 @@
 
 .about {
   @include mx.column(flex, column, flex-start);
-  padding: 2rem 2.2rem;
+  padding: 2rem 1rem;
 
   &__title {
     display: flex;
@@ -36,7 +36,7 @@
 
 @media (320px <= width <= 768px) {
   .about {
-    padding: 4rem 3rem;
+    padding: 4rem 1rem;
   }
 }
   

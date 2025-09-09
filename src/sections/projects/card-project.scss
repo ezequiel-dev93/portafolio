@@ -2,7 +2,7 @@
 @use "@/styles/abstracts/_mixins" as mx;
 
 .projects {
-    padding: 3rem 2.2rem;
+    padding: 3rem 1rem;
   
     &__title {
       @include mx.center(flex, center, 0.5rem);
@@ -102,6 +102,6 @@
 
 @media (320px <= width <= 768px) {
   .projects {
-    padding: 4rem 3rem;
+    padding: 4rem 1rem;
   }
 }

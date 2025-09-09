@@ -68,18 +68,8 @@ import '@/sections/contact/contact-form.scss'
 
 </section>
 
-
-<!--
-<script type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-  </script>
-  <script type="text/javascript">
-    emailjs.init('miYrSPp0_92YF1RLW')
-  </script>
-
-
--->
 <script is="global">
+  
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
   const btn = document.getElementById("button");
@@ -98,14 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const serviceID = "default_service";
       const templateID = "template_mzf465a";
       
-      // Envío del formulario
       const response = await emailjs.sendForm(serviceID, templateID, this);
       
-      // Solo mostrar éxito si el envío fue realmente exitoso
       if (response.status === 200) {
         showNotification("¡Mensaje enviado correctamente!", "success");
         
-        // Resetear formulario y limpiar mensajes de validación
         form.reset();
         clearValidationMessages();
       } else {
@@ -120,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Función para mostrar notificaciones
   function showNotification(message, type) {
     notification.textContent = message;
     notification.className = `floating-notification ${type} show`;
@@ -130,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   }
 
-  // Función para limpiar mensajes de validación
   function clearValidationMessages() {
     document.querySelectorAll('.contact__message').forEach(messageElement => {
       messageElement.textContent = '';

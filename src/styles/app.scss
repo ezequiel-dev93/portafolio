@@ -385,12 +385,13 @@
     z-index: 1;
   }
 
+   
    &__content {
     max-width: 1200px;
-    width: 90%;
+    width: 85%;
     position: relative;
     z-index: 2;
-    padding: 6rem 1.2rem;
+    padding: 8rem 1rem;
   }
 }
 
@@ -418,17 +419,16 @@
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .hero {
-    padding: 1.5rem 0rem;
 
     .square {
-      width: 10px;
-      height: 10px;
+      width: 6px;
+      height: 6px;
     }
-    
+
     &__content {
-      padding: 0 1.2rem;
-    }
+      padding: 6rem 0.8rem;
+    } 
   }
 }

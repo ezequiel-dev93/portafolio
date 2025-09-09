@@ -1,6 +1,5 @@
 @use "@/styles/abstracts/_variables" as v;
 
-
 /* | Media Queries */
 @mixin mq-max($medida: 768px) {
     @media (max-width: $medida) {
@@ -58,8 +57,6 @@
     font-size: v.$font-size-large;
     font-weight: 700;
 }
-
-
 
 @mixin text-animate {
   background: linear-gradient(135deg, #663399, #E84B3C);

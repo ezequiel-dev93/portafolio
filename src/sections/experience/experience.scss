@@ -3,19 +3,16 @@
 
 .experience {
     @include mx.column(flex, column, flex-start);
-    padding: 3rem 2.2rem;
+    padding: 3rem 1.1rem;
   
     &__title {
       @include mx.center(flex, center, 0.5rem);
       padding-bottom: 1rem;
+      margin-right: 1rem;
+      margin-left: -0.3rem;
   
       h2 {
-          //@include mx.title-style();
-            background: linear-gradient(135deg, #58039d, #E84B3C);
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: v.$font-size-large;
-            font-weight: 700;
+          @include mx.title-style();
       } 
     }
   }
@@ -116,9 +113,8 @@
     }
 }
 
-@media (320px <= width <= 768px) {
+@media (320px <= width <= 480px) {
   .experience {
-    padding: 0rem 3.2rem;
+    padding: 7rem 1rem;
   }
-  
 }

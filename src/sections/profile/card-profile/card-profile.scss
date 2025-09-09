@@ -1,8 +1,8 @@
 @use "@/styles/abstracts/_variables" as v;
 @use "@/styles/abstracts/_mixins" as mx;
 
-.card {
-    
+.card {  
+
     &__logo {
         @include mx.flex(flex, space-between, center);
 
@@ -39,7 +39,7 @@
         @include mx.center(flex, center, 1.5rem);
         flex-wrap: wrap;
         align-self: flex-start;
-        padding-top: 0.5rem;
+        padding-top: 2rem;
     
         &-list {
             background-color: v.$bg-timeline-cv-link;
@@ -70,13 +70,12 @@
     }
 }
   
-@media (320px <= width <= 768px) {
+@media (320px <= width <= 480px) {
   .card {
-    padding: 2rem 1.8rem;
 
     &__logo {
-      width: 12dvh;
-      gap: 4rem;
+      width: 8dvh;
+      gap: 5rem;
     }
 
     &__article {
@@ -91,6 +90,26 @@
     &__social {
       a {
         font-size: 0.8rem;
+      }
+    } 
+  }
+}
+
+@media (768px <= width <= 1024px) {
+  .card {
+    padding-top: 8rem;
+
+    &__logo {
+      width: 12dvh;
+      gap: 22rem;
+
+    }
+
+    &__links {
+      gap: 1rem;
+
+      &-list-items {
+        font-size: 2rem;
       }
     }
   }
