@@ -35,11 +35,11 @@ body.dark-mode {
     transition: background-color 0.5s ease, color 0.5s ease;
 
     :is( .experience__title-h2, .projects__title-h2, .about__title-h2, 
-    .skill__title-h2, .sectionContact__article-title, .services__title) { 
+    .skill__title-h2, .sectionContact__article-title, .services__title h2) { 
         @include mx.title-style-dark;
     }
 
-    :is(.about__text strong, .projects__figure-title, .timeline__description strong) {
+    :is(.about__text span, .projects__figure-title, .timeline__description span) {
         color: v.$text-enfasis-dark;
     }
 
@@ -48,7 +48,7 @@ body.dark-mode {
         color: v.$text-white;
     }
 
-    :is(.timeline__item, .skill__category, .projects__items, .skill__subtitle, .services__description p) {
+    :is(.timeline__item, .skill__category, .projects__items, .skill__subtitle, .service__card-description) {
         background: v.$bg-cardproject-dark;
         color: v.$text-white;
     }

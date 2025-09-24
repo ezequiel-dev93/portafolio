@@ -2,7 +2,7 @@
 @use "@/styles/abstracts/_mixins" as mx;
 
 .skill {
-    padding: 3.5rem 1rem;
+    padding: 4rem 1rem;
   
     &__title {
       @include mx.center(flex, center, 0.5rem);

@@ -3,7 +3,7 @@
 
 .experience {
     @include mx.column(flex, column, flex-start);
-    padding: 3rem 1.1rem;
+    padding: 4rem 1.1rem;
   
     &__title {
       @include mx.center(flex, center, 0.5rem);
@@ -83,7 +83,7 @@
         padding: 0.7rem 0;
       }
   
-      strong {
+      span {
         color: v.$text-enfasis;
         font-weight: 500;
       }
@@ -115,6 +115,6 @@
 
 @media (320px <= width <= 480px) {
   .experience {
-    padding: 7rem 1rem;
+    padding: 2rem 1rem;
   }
 }

@@ -5,6 +5,7 @@
 
     &__logo {
         @include mx.flex(flex, space-between, center);
+        gap: 2rem;
 
         img {
             width: 10dvh;
@@ -75,7 +76,7 @@
 
     &__logo {
       width: 8dvh;
-      gap: 5rem;
+      gap: 7rem;
     }
 
     &__article {
@@ -92,6 +93,13 @@
         font-size: 0.8rem;
       }
     } 
+  }
+}
+
+
+@media (481px <= width <= 767px) {
+  .card__logo {
+    gap: 8rem;
   }
 }
 

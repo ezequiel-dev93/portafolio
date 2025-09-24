@@ -384,14 +384,13 @@
     overflow: hidden;
     z-index: 1;
   }
-
    
    &__content {
     max-width: 1200px;
     width: 85%;
     position: relative;
     z-index: 2;
-    padding: 8rem 1rem;
+    padding: 9rem 1rem;
   }
 }
 
@@ -428,7 +427,7 @@
     }
 
     &__content {
-      padding: 6rem 0.8rem;
+      padding-top: 12rem 0 0 0.8rem;
     } 
   }
 }

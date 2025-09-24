@@ -2,14 +2,17 @@
 @use "@/styles/abstracts/_mixins" as mx;
 
 .services {
-    padding: 1.2rem 1rem;
+    padding: 2rem 0.5rem;
 
     &__title {
-        @include mx.title-style();
         display: flex;
         align-items: center;
         gap: 0.5rem;
         padding-top: 1rem;
+
+        h2 {
+            @include mx.title-style();
+        }
     }
 
     &__list {
@@ -26,7 +29,7 @@
 
          h3 {
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             padding: 0.7rem 0;
             font-size: 0.90rem;
         }
@@ -34,8 +37,8 @@
         p {
             font-size: 0.89rem;
             text-wrap: wrap;
-            font-weight: 200;
-            color: v.$text-white;
+            font-weight: 300;
+            color: v.$text-black;
             padding-top: 0.5rem;
         }
     }

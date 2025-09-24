@@ -21,24 +21,20 @@
 
   &__container {
     @include mx.flex(flex, space-between, flex-start);
+    padding: 0 1rem;
 
     @include mx.mq-max(768px) {
-      @include mx.column(flex, column, center);
+      @include mx.column(flex, column, flex-start);
       gap: 3rem;
       margin-bottom: 2rem;
+      
     }
   }
 }
 
-@media (320px <= width <= 768px) {
-    .sectionContact {
-        padding: 2rem 0rem;
-    }
-}
-
-@media (max-width: 480px) {
-  .sectionContact {
-    padding: 1rem 0.2rem;
+@media (320px <= width <= 480px) {
+ .sectionContact {
+    padding: 1rem 0.5rem;
     
     &__article {
       padding: 1.5rem 0.5rem;
@@ -58,6 +54,17 @@
     &__container {
       gap: 2rem;
       margin-bottom: 1.5rem;
+    }
+  }
+}
+
+@media (481px <= width <= 768px) {
+  .sectionContact {
+    
+    &__article {
+      @include mx.center(flex, center, 0.5rem);
+      padding: 2rem 1rem;
+
     }
   }
 }
