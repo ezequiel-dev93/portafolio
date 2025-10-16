@@ -1,0 +1,36 @@
+---
+import '@/shared/styles/app.scss'
+import Items from '@/shared/components/Items.astro';
+import MenuMobile from '@/shared/components/MenuMobile.astro';
+import DarkMode from '@/shared/components/DarkMode.astro';
+---
+
+<header class="header">
+  <nav class="header__nav" role="navigation" aria-label="Menú principal">    
+
+    <article class="header__nav-movil">
+      <MenuMobile />
+    </article>  
+
+    <ul 
+      class="header__nav-menu" id="menu" role="menu"
+      aria-hidden="true"
+      tabindex="-1"
+    >
+      <Items href="#top">Inicio</Items>
+      <Items href="#experiencia">Experiencia</Items>
+      <Items href="#proyectos">Proyectos</Items>
+      <Items href="#sobre-mi">Sobre Mi</Items>
+      <Items href="#tecnologias">Tecnologías</Items>
+      <Items href="#services">Servicios</Items>
+      <Items href="#contactos">Contacto</Items>
+      
+      <DarkMode />  
+    </ul>
+  </nav>
+</header>
+
+
+<script>
+  import '@/core/js/header.js';
+</script>

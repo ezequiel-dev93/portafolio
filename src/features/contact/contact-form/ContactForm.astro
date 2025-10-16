@@ -1,0 +1,130 @@
+---
+import '@/features/contact/contact-form/contact-form.scss';
+---
+<section class="contact" aria-labelledby="contact-title">
+  <form class="contact__form" id="form" novalidate>
+    <div class="contact__form-group">
+      <label for="name" class="contact__label">Nombre</label>
+      <input 
+        type="text" 
+        name="name" 
+        id="name" 
+        placeholder="Tu nombre..." 
+        class="contact__input" 
+        required
+        aria-describedby="name-error"
+        aria-invalid="false"
+      />
+      <p id="name-error" class="contact__message contact__message--error" role="alert"></p>
+    </div>
+
+    <div class="contact__form-group">
+      <label for="email" class="contact__label">Email</label>
+      <input 
+        type="email" 
+        name="email" 
+        id="email" 
+        placeholder="ejemplo@gmail.com" 
+        class="contact__input" 
+        required
+        aria-describedby="email-error"
+        aria-invalid="false"
+      />
+      <p id="email-error" class="contact__message contact__message--error" role="alert"></p>
+    </div>
+
+    <div class="contact__form-group">
+      <label for="message" class="contact__label">Mensaje</label>
+      <textarea 
+        name="message" 
+        id="message" 
+        placeholder="Escribe tu mensaje aquí" 
+        class="contact__textarea" 
+        required
+        aria-describedby="message-error"
+        aria-invalid="false"
+      ></textarea>
+      <p id="message-error" class="contact__message contact__message--error" role="alert"></p>
+    </div>
+
+    <div class="contact__honeypot" aria-hidden="true" tabindex="-1">
+      <label for="honeypot">No llenar este campo</label>
+      <input type="text" id="honeypot" name="honeypot" />
+    </div>
+
+    <div class="contact__form-group">
+      <button type="submit" id="button" class="contact__button">Enviar</button>
+    </div>
+
+    <div id="floating-notification" class="floating-notification" role="status" aria-live="polite"></div>
+  </form>
+
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    emailjs.init('miYrSPp0_92YF1RLW')
+  </script>
+
+</section>
+
+<script is="global">
+  
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form");
+  const btn = document.getElementById("button");
+  const notification = document.getElementById("floating-notification");
+
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    
+    const honeypot = document.getElementById("honeypot").value;
+    if (honeypot) return;
+
+    btn.value = "Enviando...";
+    btn.disabled = true;
+
+    try {
+      const serviceID = "default_service";
+      const templateID = "template_mzf465a";
+      
+      const response = await emailjs.sendForm(serviceID, templateID, this);
+      
+      if (response.status === 200) {
+        showNotification("¡Mensaje enviado correctamente!", "success");
+        
+        form.reset();
+        clearValidationMessages();
+      } else {
+        throw new Error("Error en el servidor");
+      }
+    } catch (err) {
+      console.error("Error en el envío:", err);
+      showNotification("Error al enviar el mensaje", "error");
+    } finally {
+      btn.value = "Enviar";
+      btn.disabled = false;
+    }
+  });
+
+  function showNotification(message, type) {
+    notification.textContent = message;
+    notification.className = `floating-notification ${type} show`;
+    
+    setTimeout(() => {
+      notification.classList.remove("show");
+    }, 3000);
+  }
+
+  function clearValidationMessages() {
+    document.querySelectorAll('.contact__message').forEach(messageElement => {
+      messageElement.textContent = '';
+      messageElement.classList.remove('contact__message--success', 'contact__message--error');
+    });
+    
+    document.querySelectorAll('.contact__input, .contact__textarea').forEach(field => {
+      field.classList.remove('contact__input--success', 'contact__input--error');
+    });
+  }
+});
+</script>

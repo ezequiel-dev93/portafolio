@@ -3,7 +3,7 @@ export type TagKey = 'PYTHON' | 'STREAMLIT' | 'TAILWIND' | 'TYPESCRIPT' | 'NAVE'
 export interface Project {
   title: string;
   description: string;
-  image: string;     
+  image: any;     
   tags: TagKey[];    
   link?: string;     
 }

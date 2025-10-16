@@ -1,0 +1,20 @@
+---
+import '@/features/contact/contact.scss';
+import ContactAction from '@/features/contact/contact-action/ContactAction.astro';
+import ContactForm from '@/features/contact/contact-form/ContactForm.astro';
+import RocketIcon from '@/shared/icons/Rocket.astro';
+---
+
+<section class="sectionContact">    
+   <article class=" sectionContact__article">
+       <RocketIcon class="sectionContact__article-icon"/>
+        <h2 class="sectionContact__article-title">
+            ¡Te ayudo a crear algo increíble!
+        </h2>
+   </article>
+
+    <section class="sectionContact__container">
+        <ContactForm />
+        <ContactAction />
+    </section>
+</section>

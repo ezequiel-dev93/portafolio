@@ -10,7 +10,6 @@ window.addEventListener("focus", () => {
 });
 
 /* Dark Mode */
-
 document.addEventListener('DOMContentLoaded', () => {
   const darkModeToggle = document.getElementById('mode-dark-toggle');
   const body = document.body;

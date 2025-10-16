@@ -1,0 +1,68 @@
+---
+import '@/features/profile/card-profile/card-profile.scss';
+import logocard from '@/shared/assets/cards/logocard.webp';
+import BadgeStatus from '@/shared/components/BadgeStatus.astro';
+import ItemsIcons from "@/shared/components/ItemsIcons.astro";
+import LinkedInIcon from "@/shared/icons/LinkedIn.astro";
+import GithubIcon from "@/shared/icons/Github.astro";
+import EmailIcon from "@/shared/icons/Email.astro";
+import ButtonCv from "@/shared/components/ButtonCv.astro";
+---
+
+<section class="card">
+    
+  <picture class="card__logo">
+    <img src={logocard.src} alt="Logotipo De Ezequiel Suarez" class="cardPerfil__logo-img">
+    
+    <div class="card__article-badge">
+      <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">Disponible</BadgeStatus>
+    </div>
+  </picture>
+
+  <article class="card__article" >
+      <h1 class="card__article-title" id="hero-title">
+        <span class="title-main">Desarrollador</span>
+        <span class="title-highlight">Frontend</span>
+      </h1>
+  </article>
+  
+  <article>
+    <p class="card__descripcion">
+      Hola, Soy Ezequiel Suárez. Diseño soluciones digitales con arquitecturas limpias, escalables orientadas al negocio.
+    </p>
+  </article> 
+ 
+  <ul class="card__links">
+    <li class="card__links-list">       
+      <ItemsIcons href="https://www.linkedin.com/in/ezequiel-suarez-dev/">
+        <LinkedInIcon class="card__links-items"/>
+      </ItemsIcons>
+    </li>
+
+    <li class="card__links-list">
+      <ItemsIcons href="https://github.com/ezequiel-dev93" >
+        <GithubIcon class="card__links-items"/>
+      </ItemsIcons>
+    </li>
+
+    <li class="card__links-list">   
+      <ItemsIcons href="mailto:ezequielsuarez.dev.com">
+        <EmailIcon class="card__links-items"/>
+      </ItemsIcons>
+    </li>
+
+    <li>
+        <ButtonCv class="card__links--cv"/>
+    </li>
+  </ul>
+</section>
+
+<script>
+  import { animateHeroTitle } from "@/shared/lib/gsap";
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      animateHeroTitle();
+    });
+  }
+</script>

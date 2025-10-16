@@ -15,12 +15,10 @@ const createSquares = (container, count = 40) => {
     square.style.top = `${top}%`;
     square.style.left = `${left}%`;
 
-    // Tamaño
-    const size = 8 + Math.random() * 12;
+    const size = 6 + Math.random() * 8;
     square.style.width = `${size}px`;
     square.style.height = `${size}px`;
 
-    // Color fijo
     square.style.backgroundColor =
       COLORS[Math.floor(Math.random() * COLORS.length)];
     square.style.opacity = 0.4 + Math.random() * 0.5;
@@ -28,7 +26,7 @@ const createSquares = (container, count = 40) => {
     container.appendChild(square);
     squares.push(square);
 
-    // Animación base INFINITA con CSS para mejor rendimiento
+    // Animación base INFINITA CSS
     const amplitudeX = (Math.random() - 0.5) * 40;
     const amplitudeY = (Math.random() - 0.5) * 40;
     const duration = 10 + Math.random() * 15;
@@ -68,8 +66,8 @@ const addMouseInteraction = (squares) => {
         const targetY = Math.sin(angle) * force;
         
         // Aplicar transformación adicional SOBRE la animación CSS
-        square.style.transform = `translate(${targetX}px, ${targetY}px) scale(1.3)`;
-        square.style.opacity = '0.8';
+        square.style.transform = `translate(${targetX}px, ${targetY}px) scale(1.9)`;
+        square.style.opacity = '0.9';
       } else {
         // Remover solo la transformación adicional
         square.style.transform = '';

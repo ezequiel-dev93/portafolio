@@ -1,0 +1,109 @@
+@use "@/shared/styles/abstracts/_variables" as v;
+@use "@/shared/styles/abstracts/_mixins" as mx;
+
+.projects {
+  padding: 4rem 1rem;
+
+  &__title {
+    @include mx.center(flex, center, 0.5rem);
+    padding-bottom: 1rem;
+
+    h2 { 
+      @include mx.title-style();
+    }
+  }
+
+  &__container {
+      @include mx.grid-column(2, 1fr);
+      gap: 1rem;
+
+    @include mx.mq-max(600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__items {
+    background-color: v.$bg-cardproject;
+    border-radius: 0.6rem;
+    padding: 0.7rem;
+    overflow: hidden;
+
+    &:hover {
+      box-shadow: 0 0 30px #00000066; 
+    }
+  }
+  
+  &__figure {
+
+    &-picture {
+      width: 100%;
+      border-radius: 0.5rem;
+      transition: transform 0.35s ease-in-out;
+      transform-origin: center; 
+      padding-bottom: 2rem;
+    }
+
+    &-img {
+      border-radius: 0.4rem;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+      transition: transform 0.25s ease-in-out; 
+      aspect-ratio: 16/9;
+    }
+    
+    &:hover &-picture {
+      transform: scale(1.02);     
+    }
+
+    &:hover &-img {
+      transform: scale(1.09);
+    }
+
+    &-link {
+      cursor: text;
+    }
+  }
+
+  &__figure-caption {
+    @include mx.column(flex, column, flex-start);
+    gap: 1rem;
+
+      &-title {
+      font-weight: 700;
+      padding-top: 1rem;
+      
+      @include mx.mq-max(600px) {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  &__figure-description {
+    font-size: 1rem;
+    text-wrap: wrap;
+    font-weight: 200;
+    line-height: 1.5;
+    padding-bottom: 1rem;
+    max-height: 300px; 
+  }
+
+  &__figure-icons {
+    @include mx.flex(flex, flex-start, center);
+    gap: 1.5rem;
+    padding-top: 1rem;
+    margin-top: auto;
+    width: 100%;
+  }
+
+  &__figure-icon {
+    width: 1.5rem;
+    height: 1.5rem;     
+  }
+}
+
+@media (320px <= width <= 768px) {
+  .projects {
+    padding: 4rem 1rem;
+  }
+}

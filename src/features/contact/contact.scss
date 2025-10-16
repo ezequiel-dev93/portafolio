@@ -1,0 +1,69 @@
+@use "@/shared/styles/abstracts/_variables" as v;
+@use "@/shared/styles/abstracts/_mixins" as mx;
+
+.contactos {
+    padding: 1rem 0rem;    
+}
+  
+.sectionContact {
+  padding: 1rem 0rem;
+  
+
+  &__article {
+    @include mx.center(flex, center, 0.5rem);
+    padding: 2rem 0.5rem;
+
+    &-title {
+      @include mx.title-style();
+    }
+  }
+
+  &__container {
+    @include mx.flex(flex, space-between, flex-start);
+    padding: 0 1rem;
+
+    @include mx.mq-max(768px) {
+      @include mx.column(flex, column, flex-start);
+      gap: 3rem;
+      margin-bottom: 2rem;
+      
+    }
+  }
+}
+
+@media (320px <= width <= 480px) {
+ .sectionContact {
+    padding: 1rem 0.5rem;
+    
+    &__article {
+      padding: 1.5rem 0.5rem;
+      gap: 0.8rem;
+      
+      &-title {
+        font-size: 1.3rem;
+        line-height: 1.4;
+      }
+      
+      &-icon {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+    
+    &__container {
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+@media (481px <= width <= 768px) {
+  .sectionContact {
+    
+    &__article {
+      @include mx.center(flex, center, 0.5rem);
+      padding: 2rem 1rem;
+
+    }
+  }
+}

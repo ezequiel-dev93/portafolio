@@ -5,6 +5,7 @@ import path from 'path';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+
   vite: {
     resolve: {
       alias: {
@@ -15,8 +16,8 @@ export default defineConfig({
       preprocessorOptions: {
         scss: {
           additionalData: `
-            @use "@styles/abstracts/_variables.scss" as *;
-            @use "@styles/abstracts/_mixins.scss" as *;
+            @use "@/shared/styles/abstracts/_variables.scss" as *;
+            @use "@/shared/styles/abstracts/_mixins.scss" as *;
           `,
         },
       },

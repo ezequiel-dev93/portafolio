@@ -1,0 +1,16 @@
+---
+import "@/shared/styles/app.scss";
+import CardProfile from "@/features/profile/card-profile/components/CardProfile.astro";
+---
+
+<section class="hero" id="top">
+  <div class="hero__background" id="hero-background"></div>
+
+  <section class="hero__content">
+    <CardProfile />
+  </section>
+</section>
+
+<script>
+  import '@/core/js/hero.js';
+</script>

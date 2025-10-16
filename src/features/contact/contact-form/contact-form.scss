@@ -1,0 +1,181 @@
+@use "@/shared/styles/abstracts/_variables" as v;
+@use "@/shared/styles/abstracts/_mixins" as mx;
+
+.contact {
+    padding: 1rem 0rem;
+
+    &__form {
+      border-radius: 0.5rem;
+      max-width: 600px;
+    }
+  
+    &__form-group {
+      margin-bottom: 2rem;
+    }
+  
+    &__label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: v.$text-black;
+    }
+  
+    &__honeypot {
+      display: none;
+    }
+  
+    &__input,
+    &__textarea {
+      caret-color: v.$text-enfasis;
+      width: 20rem;
+      padding: 0.76rem;
+      font-size: 0.875rem;
+      border-radius: 0.275rem;
+      border: 1px solid v.$text-enfasis;
+      transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      background-color: #fff;
+      color: v.$text-black;
+  
+      &:focus {
+        outline: none;
+        border-color: #8d64bb;
+        box-shadow: 0 0 0 2px #a56fed80;
+      }
+  
+      &--error {
+        border-color: red;
+      }
+  
+      &--success {
+        border-color: green;
+      }
+    }
+  
+    &__textarea {
+      min-height: 6rem;
+      resize: vertical;
+    }
+  
+    &__message {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      
+      &--error {
+        color: red;
+      }
+  
+      &--success {
+        color: green;
+      }
+    }
+  
+    &__button {
+      margin-top: 3rem;
+      width: 100%;
+      border: .25rem solid v.$bg-form;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      background-color:  #643d88;
+      color:  v.$text-white;
+      border-radius: 1rem;
+      outline: none;
+      box-shadow: 0 0 1rem 0.1rem  v.$bg-form,
+      0 0 1.6rem 0.1rem  #bf7bffc7,
+      inset 0 0 0.1rem .1rem  v.$bg-form;
+      text-shadow: 0 0 .1rem  v.$bg-form;
+      position: relative;
+      transition: all 0.3s;
+      cursor: pointer;
+  
+      &:hover {
+        color: v.$text-white;
+        background-color:  #6a10be;  
+      }
+  
+      &:active {
+        box-shadow: 0 0 0.6rem .25rem  v.$bg-form,
+        0 0 0.5rem 3rem #b985e8c7,
+        inset 0 0 .5rem .25rem  v.$bg-form;
+      }
+    }
+}
+  
+.floating-notification {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 4px;
+    color: v.$text-white;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transform: translateX(120%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    
+    &.success {
+      background-color: #4CAF50;
+    }
+    
+    &.error {
+      background-color: #F44336;
+    }
+    
+    &.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+
+@media (320px <= width <= 768px) {
+  .contact {
+    &__form {
+      padding: 0rem;
+    }
+  
+    &__input,
+    &__textarea {
+      width: 17.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 0.5rem 0;
+    
+    &__form {
+      width: 100%;
+      padding: 0;
+    }
+    
+    &__form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    &__input,
+    &__textarea {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 0.7rem;
+    }
+    
+    &__button {
+      margin-top: 2rem;
+      padding: 0.9rem;
+      font-size: 0.95rem;
+    }
+  }
+  
+  .floating-notification {
+    right: 10px;
+    left: 10px;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}

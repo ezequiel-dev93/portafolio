@@ -1,32 +1,32 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Header from '@/components/Header.astro';
-import SectionContenedor from "@components/SectionContenedor.astro";
-import Hero from '@/components/Hero.astro';
-import Experiencia from '@/sections/experience/Experience.astro';
-import Briefcase from "@/icons/Briefcase.astro"
-import CardProject from '@/sections/projects/CardProject.astro';
-import Coder from '@/icons/Coder.astro';
-import About from '@/sections/profile//about/About.astro';
-import Skills from '@/sections/skills/Skills.astro';
-import ServicesCard from '@/sections/services/ServicesCard.astro';
-import Contact from '@/sections/contact/Contact.astro';
-import SectionFooter from '@/components/SectionFooter.astro';
-import WaveFooter from '@/icons/WaveFooter.astro';
+import Header from '@/shared/components/Header.astro';
+import SectionContenedor from "@/shared/components/SectionContenedor.astro";
+import Hero from '@/shared/components/Hero.astro';
+import Experiencia from '@/features/experience/components/Experience.astro';
+import Briefcase from "@/shared//icons/Briefcase.astro"
+import CardProject from '@/features/projects/components/CardProject.astro';
+import Coder from '@/shared/icons/Coder.astro';
+import About from '@/features/profile/about/components/About.astro';
+import Skills from '@/features/skills/components/Skills.astro';
+import ServicesCard from '@/features/services/components/ServicesCard.astro';
+import Contact from '@/features/contact/components/Contact.astro';
+import SectionFooter from '@/shared/components/SectionFooter.astro';
+import WaveFooter from '@/shared//icons/WaveFooter.astro';
 ---
 
-<Layout title='Ezequiel Suarez | Desarrollador Software' 
+<Layout title='Ezequiel Suarez | Desarrollador De Software'
 description='Diseño soluciones digitales con arquitecturas limpias, escalables orientadas al negocio. Estudiante de Ingeniería en Sistemas de Información (UTN).'>
 
 	<Header />
-	
+
 	<main>
 		<Hero id="top"/>
 
 		<SectionContenedor class="experience" id="experiencia">
 			<article class="experience__title">
 				<Briefcase />
-				<h2 class="experience__title-h2">Experiencia</h2>				
+				<h2 class="experience__title-h2">Experiencia</h2>	
 			</article>
 			 
 			<Experiencia />
