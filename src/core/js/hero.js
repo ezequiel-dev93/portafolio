@@ -66,7 +66,7 @@ const addMouseInteraction = (squares) => {
         const targetY = Math.sin(angle) * force;
         
         // Aplicar transformación adicional SOBRE la animación CSS
-        square.style.transform = `translate(${targetX}px, ${targetY}px) scale(1.9)`;
+        square.style.transform = `translate(${targetX}px, ${targetY}px) scale(1.2)`;
         square.style.opacity = '0.9';
       } else {
         // Remover solo la transformación adicional

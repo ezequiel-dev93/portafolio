@@ -21,7 +21,7 @@ const { title, description } = Astro.props;
 
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta name="keywords" content="Front-End, Desarrollo Web, Astro, React, Sass, TypeScript, Python, FastAPI,  MySQL, Accesibilidad, Analisis de Datos, Programador, Ezequiel Suarez">
+		<meta name="keywords" content="Front-End, Desarrollo Web, Astro, React, Sass, TypeScript, Python, FastAPI,  MySQL, Analisis de Datos, Programador, Ezequiel Suarez">
 		
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
@@ -30,10 +30,10 @@ const { title, description } = Astro.props;
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://www.ezequielsuarez-dev.com/" />
-		<meta property="og:image" content="/img/logo/logotipo.ico" />
 
+		<link rel="icon" type="image/x-icon" href="./img/logo/logotipo.ico" />
+		<meta property="og:image" content="/img/logo/logotipo.ico" />
 		<link rel="canonical" href="https://www.ezequielsuarez-dev.com/" />
-		<link rel="icon" type="image/ico" href="/img/logo/logotipo.ico"/>
 	</head>
 	
 	<body>        
@@ -41,6 +41,4 @@ const { title, description } = Astro.props;
 	</body>
 
 	<script src="@/core/js/index.js" ></script>
-	
 </html>
-
