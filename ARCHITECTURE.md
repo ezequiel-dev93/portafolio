@@ -8,7 +8,9 @@ public
 src/
 ├── core/ # Componentes base y estructurales 
 │ │ ├── config/ 
-│ │ ├── js/ 
+│ │ ├── js/ # index.js
+| | ├── lib/ # gsap
+| | ├── utils/ # validación
 | | ├──types/
 │ │
 │ └── features/ # Componentes específicos
@@ -24,8 +26,6 @@ src/
 | |  ├── assets/ # img cards  
 | |  ├── componentens / # componentes reutilizables
 | |  ├── icons/
-| |  ├── lib/ # gsap
-| |  ├── utils/ # validación
 | |  ├── styles/
 │ |  |   └── adstracts/
 | |  |       └── _mixins.scss # Funciones SCSS
