@@ -1,0 +1,38 @@
+@use "@/shared/styles/abstracts/_variables" as v;
+@use "@/shared/styles/abstracts/_mixins" as mx;
+
+.hero {
+  position: relative; 
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent; 
+
+  &__particles {
+    position: absolute;
+    inset: 0;
+    z-index: 0; 
+  }
+
+  &__content {
+    max-width: 1200px;
+    width: 85%;
+    position: relative;
+    z-index: 1; 
+    padding: 9rem 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+
+    .square {
+      width: 6px;
+      height: 6px;
+    }
+
+    &__content {
+      padding-top: 12rem 0 0 0.8rem;
+    } 
+  }
+}
