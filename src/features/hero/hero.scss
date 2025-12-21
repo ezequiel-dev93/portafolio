@@ -6,13 +6,6 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: transparent; 
-
-  &__particles {
-    position: absolute;
-    inset: 0;
-    z-index: 0; 
-  }
 
   &__content {
     max-width: 1200px;
@@ -25,11 +18,6 @@
 
 @media (max-width: 767px) {
   .hero {
-
-    .square {
-      width: 6px;
-      height: 6px;
-    }
 
     &__content {
       padding-top: 12rem 0 0 0.8rem;
