@@ -1,8 +1,7 @@
 export interface Experience {
   time: string;
-  timeStatus: string;
-  title: string;
+  role: string;
   company: string;
-  description: string[];
-  skills: string[];
+  primaryInfo: string[];
+  secundaryInfo: string[];
 }

@@ -4,12 +4,9 @@ import Header from '@/shared/components/Header.astro';
 import SectionContenedor from "@/shared/components/SectionContenedor.astro";
 import Hero from '@/features/hero/components/Hero.astro';
 import Experiencia from '@/features/experience/components/Experience.astro';
-import Briefcase from "@/shared//icons/Briefcase.astro"
 import CardProject from '@/features/projects/components/CardProject.astro';
-import Coder from '@/shared/icons/Coder.astro';
 import About from '@/features/profile/about/components/About.astro';
 import Skills from '@/features/skills/components/Skills.astro';
-//import ServicesCard from '@/features/services/components/ServicesCard.astro';
 import Contact from '@/features/contact/components/Contact.astro';
 import SectionFooter from '@/shared/components/SectionFooter.astro';
 import WaveFooter from '@/shared/icons/WaveFooter.astro';
@@ -20,27 +17,24 @@ description='Diseño soluciones digitales con arquitecturas limpias, escalables 
 
 	<Header />
 
-	<main>
+	<main class="main">
 		<Hero id="top"/>
-
+		
 		<SectionContenedor class="experience" id="experiencia">
 			<article class="experience__title">
-				<Briefcase />
 				<h2 class="experience__title-h2">Experiencia</h2>	
-			</article>
-			 
+			</article>			 
 			<Experiencia />
 		</SectionContenedor>
 
 		<SectionContenedor class="projects" id="proyectos">
 			<article class="projects__title">
-				<Coder/>
 				<h2 class="projects__title-h2">Proyectos</h2>
 			</article>
-			
+				
 			<CardProject />
 		</SectionContenedor>
-		
+				
 		<SectionContenedor class="about" id="sobre-mi">
 			<About />
 		</SectionContenedor>
@@ -48,12 +42,6 @@ description='Diseño soluciones digitales con arquitecturas limpias, escalables 
 		<SectionContenedor class="skills" id="tecnologias">
 			<Skills />
 		</SectionContenedor>
-		
-		<!--
-		<SectionContenedor class="services" id="services">
-			<ServicesCard />
-		</SectionContenedor>
-		-->	
 		
 		<SectionContenedor class="contactos" id="contactos">
 			<Contact />

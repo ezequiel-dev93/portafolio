@@ -2,7 +2,7 @@
 @use "@/shared/styles/abstracts/_mixins" as mx;
 
 .skill {
-    padding: 4rem 1rem;
+    padding-top: 12rem;
   
     &__title {
       @include mx.center(flex, center, 0.5rem);
@@ -25,7 +25,7 @@
     }
   
     &__category {
-      background-color: v.$bg-skill;
+      background-color: v.$bg-cardproject;
       display: flex;
       flex-direction: column;
       border-radius: 0.5rem;
@@ -59,7 +59,7 @@
 
 @media (320px <= width <= 768px) {
   .skill {
-    padding: 4rem 1rem;
+    padding-top: 4rem;
 
     &__title {
       padding: 1rem 0rem;

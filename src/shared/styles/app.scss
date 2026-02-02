@@ -2,14 +2,9 @@
 @use "@/shared/styles/abstracts/_mixins" as mx;
 
 .sectionContenedor {
-  width: 100%;
-  margin-inline: auto;
-}
-
-@include mx.mq-min(1024px) {
-  .sectionContenedor {
-      width: 800px;
-  }
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Dark Mode*/
@@ -185,8 +180,7 @@
       background-color: v.$bg-header;
       backdrop-filter: blur(10px);
       border-radius: 1rem;
-      box-shadow: 0 4px 9px rgba(0, 0, 0, 0.1);
-      border-bottom: 1px solid rgba(255, 251, 251, 0.1);
+      box-shadow: 0 4px 9px rgba(162, 162, 162, 0.1);
       padding: 0rem 2rem;
       display: flex;
       gap: 2rem;

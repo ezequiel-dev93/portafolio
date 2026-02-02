@@ -5,7 +5,7 @@ const services: Service[] = [
     slug: "frontend",
     title: "Desarrollo Front-End",
     summary: "Interfaces modernas, accesibles y responsivas. Enfoque en performance, UX y buenas prácticas.",
-    features: ["Accesibilidad AA", "Performance > 90", "Diseño modular"],
+    features: ["Accesibilidad AA", "Performance", "Diseño modular"],
     icon: "💻",
   },
   {

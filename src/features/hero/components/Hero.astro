@@ -4,8 +4,15 @@ import CardProfile from "@/features/profile/card-profile/components/CardProfile.
 ---
 
 <section class="hero" id="top">
-   <section class="hero__content">
+  
+  <section class="hero__content">
     <CardProfile />
   </section>
 </section>
+
+<script type="module">
+  import { initHero } from "@/core/js/hero.js";
+
+  initHero();
+</script>
 

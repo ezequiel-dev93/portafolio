@@ -2,10 +2,9 @@
 @use "@/shared/styles/abstracts/_mixins" as mx;
 
 .projects {
-  padding: 4rem 1rem;
+  padding-top: 10rem;
 
   &__title {
-    @include mx.center(flex, center, 0.5rem);
     padding-bottom: 1rem;
 
     h2 { 
@@ -13,68 +12,78 @@
     }
   }
 
-  &__container {
-      @include mx.grid-column(2, 1fr);
-      gap: 1rem;
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
 
-    @include mx.mq-max(600px) {
+    @include mx.mq-max(1024px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @include mx.mq-max(768px) {
       grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @include mx.mq-max(480px) {
+      grid-template-columns: 1fr;
+      gap: 1rem;
     }
   }
 
-  &__items {
-    background-color: v.$bg-cardproject;
+  &__cards {
+    background: $bg-cardproject;
+    border: 0.1rem solid rgba(114, 114, 114, 0.2);
     border-radius: 0.6rem;
-    padding: 0.7rem;
     overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    
+    a {
+      padding: 2rem;
+    }
 
     &:hover {
-      box-shadow: 0 0 30px #00000066; 
+      box-shadow: 0 0 30px #00000066;
+      transform: translateY(-4px);
     }
   }
   
   &__figure {
-
-    &-picture {
-      width: 100%;
-      border-radius: 0.5rem;
-      transition: transform 0.35s ease-in-out;
-      transform-origin: center; 
-      padding-bottom: 2rem;
-    }
-
-    &-img {
-      border-radius: 0.4rem;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; 
-      transition: transform 0.25s ease-in-out; 
-      aspect-ratio: 16/9;
-    }
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     
     &:hover &-picture {
       transform: scale(1.02);     
     }
 
-    &:hover &-img {
-      transform: scale(1.09);
-    }
-
     &-link {
-      cursor: text;
+      cursor: pointer;
+      text-decoration: none;
     }
   }
 
   &__figure-caption {
     @include mx.column(flex, column, flex-start);
     gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 
-      &-title {
+    &-title {
       font-weight: 700;
-      padding-top: 1rem;
+      font-size: 1.23rem;
       
-      @include mx.mq-max(600px) {
+      @include mx.mq-max(768px) {
         font-size: 1.2rem;
+      }
+
+      @include mx.mq-max(480px) {
+        font-size: 1.1rem;
       }
     }
   }
@@ -84,8 +93,20 @@
     text-wrap: wrap;
     font-weight: 200;
     line-height: 1.5;
-    padding-bottom: 1rem;
-    max-height: 300px; 
+    padding-bottom: 0;
+    max-height: 300px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    @include mx.mq-max(768px) {
+      font-size: 0.95rem;
+    }
+
+    @include mx.mq-max(480px) {
+      font-size: 0.9rem;
+      -webkit-line-clamp: 2;
+    }
   }
 
   &__figure-icons {
@@ -94,16 +115,36 @@
     padding-top: 1rem;
     margin-top: auto;
     width: 100%;
+    flex-wrap: wrap;
   }
 
   &__figure-icon {
     width: 1.5rem;
-    height: 1.5rem;     
+    height: 1.5rem;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    @include mx.mq-max(768px) {
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+
+    @include mx.mq-max(480px) {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
   }
 }
 
 @media (320px <= width <= 768px) {
   .projects {
-    padding: 4rem 1rem;
+    padding-top: 4rem;
+
+    &__items {
+      gap: 1.2rem;
+    }
   }
 }

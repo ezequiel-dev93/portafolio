@@ -2,7 +2,6 @@
 import '@/features/projects/card-project.scss';
 import projects from '@/features/projects/data/projects';  
 import type { TagKey } from '@/core/types/projects';
-import { Image } from 'astro:assets';
 import Vite from '@/shared/icons/Vite.astro';
 import AstroIcon from '@/shared/icons/AstroIcon.astro';
 import Tailwind from '@/shared/icons/Tailwind.astro';
@@ -12,77 +11,47 @@ import Python from '@/shared/icons/Python.astro';
 import Streamlit from '@/shared/icons/Streamlit.astro';
 import Playwright from '@/shared/icons/Playwright.astro';
 import Polars from '@/shared/icons/Polars.astro';
+import Supabase from '@/shared/icons/Supabase.astro';
+import AWS from '@/shared/icons/AmazonWebServices.astro';
 
 const TAGS: Record<TagKey, { icon: any }> = {
   PYTHON:     { icon: Python },
   STREAMLIT:  { icon: Streamlit },
-  PLAYWIRiGHT:{ icon: Playwright },
+  PLAYWRIGHT: { icon: Playwright },
   POLARS:     { icon: Polars},
   VITE:       { icon: Vite },
   TAILWIND:   { icon: Tailwind },
   TYPESCRIPT: { icon: TypeScript },
   REACT:      { icon: React },
   NAVE:       { icon: AstroIcon },
+  SUPABASE:   { icon: Supabase },
+  AWS:        { icon: AWS },
 };
 --- 
-
+ 
 <section class="projects__container" aria-labelledby="projects-title">
-  {projects.map(({ title, description, tags, image, link }) => (
-    <ul class="projects__items">
+  <ul class="projects__items">
+    {projects.map(({ title, description, tags, link }) => (
       <li class="projects__cards">
         {link ? (
-            <a href={link} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${title} en nueva pestaña`}>
-              <figure class="projects__figure">
-                <picture class="projects__figure-picture">
-                  <Image
-                    src={image}
-                    alt={`Imagen del proyecto: ${title}`}
-                    class="projects__figure-img"
-                    loading="lazy"
-                  />
-                </picture>
+          <a href={link} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${title} en nueva pestaña`}>
+            <figure class="projects__figure">
+              <figcaption class="projects__figure-caption">
+                <h3 class="projects__figure-title">{title}</h3>
+                
+                <p class="projects__figure-description">{description}</p>
 
-                <figcaption class="projects__figure-caption">
-                  <h3 class="projects__figure-title">{title}</h3>
-                  
-                  <p class="projects__figure-description">{description}</p>
-
-                  <div class="projects__figure-icons" role="list" aria-label="Tecnologías usadas">
-                    {tags.map((tag) => {
-                      const Icon = TAGS[tag].icon;
-                      return <Icon class="projects__figure-icon" role="img" aria-label={tag} />;
-                    })}
-                  </div>
-                </figcaption>
-              </figure>
-            </a>
-          ) : (
-            <div>
-              <figure class="projects__figure">
-                <picture class="projects__figure-picture">
-                  <Image
-                    src={image}
-                    alt={`Imagen del proyecto: ${title}`}
-                    class="projects__figure-img"
-                    loading="lazy"
-                  />
-                </picture>
-
-                <figcaption class="projects__figure-caption">
-                  <h3 class="projects__figure-title">{title}</h3>
-                  <p class="projects__figure-description">{description}</p>
-
-                  <div class="projects__figure-icons" role="list" aria-label="Tecnologías usadas">
-                    {tags.map((tag) => {
-                      const Icon = TAGS[tag].icon;
-                      return <Icon class="projects__figure-icon" role="img" aria-label={tag} />;
-                    })}
-                  </div>
-                </figcaption>
-              </figure>
-            </div>
-          )}
-        </li>
-    </ul>
-  ))}
+                <div class="projects__figure-icons" role="list" aria-label="Tecnologías usadas">
+                  {tags.map((tag) => {
+                    const Icon = TAGS[tag].icon;
+                    return <Icon class="projects__figure-icon" role="img" aria-label={tag} />;
+                  })}
+                </div>
+              </figcaption>
+            </figure>
+          </a>
+        ) : null}
+      </li>
+    ))}
+  </ul>
 </section>

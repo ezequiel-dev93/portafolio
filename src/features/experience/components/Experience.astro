@@ -2,38 +2,32 @@
 import '@/features/experience/experience.scss';
 import { experience } from "@/features/experience/data/experience";
 ---
- 
-<ol class="timeline">
+
+<ul class="experience-card">
   {experience.map((exp) => (
-    <li class="timeline__item">
-      <div class="timeline__marker"></div>
+    <li class="experience-card__item">
+      <a href="https://www.ezequielsuarez-dev.com/" class="experience-card__link">
+        <article class="experience-card__content">
+          <div class="experience-card__section experience-card__section--primary">
+            <h3 class="experience-card__company">{exp.company}</h3>
+            {exp.primaryInfo.map((item) => (
+              <p class="experience-card__info" set:html={item}></p>
+            ))}
+          </div>
 
-      <div class="timeline__sumary">
-        <p class="timeline__sumary-p">
-          <span>{exp.time} - </span>
-          <span>{exp.timeStatus}</span>
-        </p>
-      </div>
-
-      <div class="timeline__title">
-        <h2>{exp.title}</h2>
-        <p>{exp.company}</p>
-      </div>
-
-      <div class="timeline__description">
-        {exp.description.map((item) => (
-          <p class="timeline__description--item" set:html={item}></p>
-        ))}
-      </div>
-
-      <div class="timeline__skills">
-        <h3 class="timeline__skills-h3">Tecnologías</h3>
-        <p class="timeline__list">
-          {exp.skills.map((skill) => (
-            <span class="timeline__list--items">{skill}</span>
-          ))}
-        </p>
-      </div>
-    </li>
+          <div class="experience-card__section experience-card__section--secondary">
+            <article class="experience-card__details">
+              <div class="experience-card__header">
+                <span class="experience-card__role">{exp.role}</span>
+                <span class="experience-card__time">{exp.time}</span>
+              </div>
+              {exp.secundaryInfo.map((item) => (
+                <p class="experience-card__description" set:html={item}></p>
+              ))}
+            </article>
+          </div>
+        </article>
+      </a>
+  </li>
   ))}
-</ol>
+</ul>

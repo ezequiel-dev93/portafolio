@@ -2,17 +2,17 @@
 @use "@/shared/styles/abstracts/_mixins" as mx;
 
 .hero {
-  position: relative; 
+  position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 
   &__content {
+    width: 90%;
     max-width: 1200px;
-    width: 85%;
+    margin: 0 auto;
     position: relative;
     z-index: 1; 
-    padding: 9rem 1rem;
   }
 }
 

@@ -2,7 +2,6 @@
 @use "@/shared/styles/abstracts/_mixins" as mx;
 
 .contact {
-    padding: 1rem 0rem;
 
     &__container {
       @include mx.column(flex, column, center);
@@ -48,11 +47,10 @@
     }
   
     #contact__message-sub {
-      font-size: 1.3rem;   
+      font-size: 1.2rem;   
     }
   
     #contact__message-main {
-      display: block;
       margin-top: 0.5rem;
       font-size: 1rem;  
       min-width:20rem;
@@ -61,7 +59,7 @@
     }
 }
   
-.contact__alert{
+.contact__alert {
     position: fixed;
     top: 50px;
     right: 5%;
@@ -109,8 +107,6 @@
       
       &-title {
         font-size: 1.1rem;
-        text-align: center;
-        padding: 0 0.5rem;
       }
     }
     

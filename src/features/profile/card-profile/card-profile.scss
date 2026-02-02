@@ -1,9 +1,11 @@
 @use "@/shared/styles/abstracts/_variables" as v;
 @use "@/shared/styles/abstracts/_mixins" as mx;
 
-.card {  
+.card {
+    padding: 6rem 0;
 
     &__logo {
+      width: 70%;
         @include mx.flex(flex, space-between, center);
         gap: 2rem;
 
@@ -14,7 +16,6 @@
 
     &__article {
         @include mx.center(flex, center, 0rem);
-        padding: 0.5rem 0;
 
         span {
           font-size: clamp(2rem, 12vw, 8rem);
@@ -28,19 +29,17 @@
 
     &__descripcion {
         max-width: 32rem; 
-        width: 100%;      
         font-size: clamp(1rem, 2.5vw, 1.5rem);
-        line-height: 1.4;
         text-wrap: wrap;
         font-weight: 300;
-        opacity: 0.8;
+        opacity: 0.7;
     }
 
     &__links {
         @include mx.center(flex, center, 1.5rem);
         flex-wrap: wrap;
         align-self: flex-start;
-        padding-top: 2rem;
+        padding-top: 1rem;
     
         &-list {
             background-color: v.$bg-timeline-cv-link;
@@ -73,6 +72,7 @@
   
 @media (320px <= width <= 480px) {
   .card {
+    padding-top: 12rem;
 
     &__logo {
       width: 8dvh;
@@ -96,16 +96,15 @@
   }
 }
 
-
 @media (481px <= width <= 767px) {
-  .card__logo {
-    gap: 8rem;
+  .card {
+    margin-top: 12rem;
   }
 }
 
 @media (768px <= width <= 1024px) {
   .card {
-    padding-top: 8rem;
+    margin-top: 12rem;
 
     &__logo {
       width: 12dvh;
@@ -132,7 +131,6 @@
     background-color: v.$bg-badge; 
     color: v.$text-enfasis; 
     border-color: rgba(168, 85, 247, 0.2);
-    margin-right: 12rem;
   
     &__dot {
       position: relative;
@@ -170,7 +168,7 @@
   }
 }
   
-  /* Button Cv*/
+/* Button Cv*/
 .button {
     display: inline-flex;
     align-items: center;
