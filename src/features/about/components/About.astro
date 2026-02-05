@@ -1,6 +1,7 @@
 ---
-import '@/features/profile/about/about.scss';
-import aboutData from "@/features/profile/about/data/aboutData";
+import '@/features/about/about.scss';
+import aboutData from "@/features/about/data/aboutData";
+import ButtonCv from '@/shared/components/ButtonCv.astro';
 
 const { title, description } = aboutData;
 ---
@@ -18,5 +19,9 @@ const { title, description } = aboutData;
         aria-label={`párrafo ${index + 1} de la sección sobre mí`}>
       </p>
     ))}
+
+    <article class="about__cv">
+      <ButtonCv />
+    </article>
   </footer>
 </section>

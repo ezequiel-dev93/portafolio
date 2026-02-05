@@ -159,30 +159,53 @@
 
 /* Header */
 .header {
-  max-width: 1120px;
-  width: 100%;
-  margin: 0.76rem auto;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
+  border-radius: 0.5rem;
+  padding: 1rem 0;
+  background: transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity .3s ease;
 
-  :is(&__nav, &__nav-menu) {
-    @include mx.flex(flex, center, center);
+  
+  &__container {
+    @include mx.flex(flex, space-between, center);
+    padding: 0 1rem;
+    width: 100%;
+
+    @media (max-width: 768px) {
+    padding: 0 1rem;
+    }
+  }
+
+  &__nav-logo {
+
+    img {
+      width: 9dvh;
+
+      @media (max-width: 768px) {
+        width: 6dvh;
+        
+      }
+    }
   }
 
   &__nav {
-    flex: 1;
-    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     &-menu {
-      background-color: v.$bg-header;
-      backdrop-filter: blur(10px);
-      border-radius: 1rem;
-      box-shadow: 0 4px 9px rgba(162, 162, 162, 0.1);
       padding: 0rem 2rem;
       display: flex;
+      align-items: center;
       gap: 2rem;
 
       li {
@@ -196,7 +219,7 @@
           bottom: 0;
           left: 0;
           width: 0;
-          height: 2px;
+          height: 1px;
           background: linear-gradient(135deg, #663399, #d946ef);
           transition: width 0.3s ease;
           border-radius: 2px;
@@ -206,12 +229,13 @@
           @include mx.text-animate;
         }
 
-         &:hover::after {
+        &:hover::after {
           width: 100%;          
         }
       }
 
-      @media (max-width: 840px) {
+      @media (max-width: 1024px) {
+        
         border-radius: 1rem 0 0 1rem;
         flex-direction: column;
         position: fixed;
@@ -219,7 +243,6 @@
         right: 0;
         height: 100dvh;
         width: 70%;
-        padding: 2rem;
         z-index: 999;
         background: var(--color-bg, #303030);
         color: v.$text-white;
@@ -227,6 +250,7 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s ease, transform 0.3s ease;
+        padding: 2rem;
       }
 
       &.active {
@@ -240,15 +264,37 @@
 
     &-movil {
       display: none;
-      position: absolute;
-      right: 0;
+      position: relative;
 
-      @media (max-width: 840px) {
+      @media (max-width: 1024px) {
         display: block;
-        margin: 2rem;
-        padding-top: 2rem;
       }
     }
+  }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+
+  &__content {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1; 
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+
+    &__content {
+      padding-top: 12rem 0 0 0.8rem;
+    } 
   }
 }
 
@@ -366,3 +412,84 @@
   }
 }
 
+/* Button Cv*/
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: v.$bg-timeline-cv-link;
+    color: v.$text-black;
+    border-radius: 3rem;
+    padding: 0.3rem 1.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s;
+
+    &__icon-wrapper {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        background-color: v.$text-white;
+        border-radius: 50%;
+        @include mx.flex(flex,center, center);
+        overflow: hidden;
+    }
+
+    &:hover {
+        background-color: v.$text-enfasis;
+        color: v.$text-white;
+    }
+
+    &:hover .button__icon-wrapper {
+        color: v.$text-black;
+    }
+}
+
+/* Badge Status */
+.status-badge {
+    @include mx.center(flex, center, 0.5rem);
+    border-radius: 1rem; 
+    border: 0.09rem solid;
+    padding: 0.2rem 1rem; 
+    background-color: v.$bg-badge; 
+    color: v.$text-enfasis; 
+    border-color: rgba(168, 85, 247, 0.2);
+
+    &__dot {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 0.5rem; 
+      width: 0.5rem;
+  
+      &-ping {
+      position: absolute;
+      top: -0.03rem;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 1rem;
+      background-color: v.$bg-badge-ping; 
+      opacity: 0.75;
+      animation: ping 1.5s infinite; 
+  
+      @keyframes ping {
+        0% {
+          transform: scale(0.8);
+          opacity: 0.75;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(0.8);
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+}
+  

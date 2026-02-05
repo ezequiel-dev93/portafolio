@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
   
-  // Manejar el click del usuario
+    // Manejar el click del usuario
   darkModeToggle.addEventListener('click', () => {
       const isActive = body.classList.toggle('dark-mode');
       darkModeToggle.querySelector('.mode-dark__toggle').classList.toggle('active');
@@ -56,4 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// smoothScroll para enlaces internos
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href').substring(1);
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
 
