@@ -1,17 +1,17 @@
 $bg-white: 
-radial-gradient(circle at 90% 8%, rgba(143, 0, 159, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%), 
-radial-gradient(circle at 12% 20%, rgba(255, 0, 182, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%),
-radial-gradient(circle at 78% 90%, rgba(255, 0, 182, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%),
-radial-gradient(circle at 70% 37%, rgba(255, 0, 182, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%),
-radial-gradient(circle at 14% 67%, rgba(255, 0, 182, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%),
+radial-gradient(circle at 90% 5%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 4vw, transparent 20vw), 
+radial-gradient(circle at 10% 14%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 4vw, transparent 20vw),
+radial-gradient(circle at 70% 45%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 2vw, transparent 20vw),
+radial-gradient(circle at 14% 67%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 8vw, transparent 20vw),
+radial-gradient(circle at 78% 90%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 8vw, transparent 20vw),
 linear-gradient(90deg, rgb(234, 230, 230), rgb(234, 230, 230));
 
 $bg-dark: 
-radial-gradient(circle at 90% 8%, rgba(255, 0, 182, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%), 
-radial-gradient(circle at 12% 20%, rgba(255, 0, 182, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%),
-radial-gradient(circle at 70% 45%, rgba(255, 0, 182, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%),
-radial-gradient(circle at 14% 67%, rgba(255, 0, 182, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%),
-radial-gradient(circle at 78% 90%, rgba(255, 0, 182, 0.15) 0%, rgba(255, 0, 182, 0.05) 10%, transparent 20%),
+radial-gradient(circle at 90% 5%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 4vw, transparent 20vw), 
+radial-gradient(circle at 10% 14%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 4vw, transparent 20vw),
+radial-gradient(circle at 70% 45%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 2vw, transparent 20vw),
+radial-gradient(circle at 14% 67%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 8vw, transparent 20vw),
+radial-gradient(circle at 78% 90%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 8vw, transparent 20vw),
 linear-gradient(90deg, rgb(0, 0, 0), rgb(0, 0, 0));
 
 $bg-header: #35353599;
@@ -35,5 +35,3 @@ $font-size-medium: clamp(0.89rem, 1.2vw + 0.4rem, 1.5rem);
 $font-size-ml: clamp(1.5rem, 5vw, 3.5rem);
 $font-size-xmedium: clamp(2.5rem, 8vw, 5rem);
 $font-size-xlarge: clamp(3rem, 12vw, 8rem);
-
-        

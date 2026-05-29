@@ -26,6 +26,7 @@ html {
 body { 
     min-height: 100vh;
     transition: background-color 0.5s ease, color 0.5s ease;
+    font-family: 'Onest Variable', sans-serif;
 }
 
 .main {
@@ -76,11 +77,5 @@ body.dark-mode {
     :is(.bar) {
         background: v.$text-white;
     }
-
-    /*:is(.services__item, .services__description h3) {
-        background-color: v.$bg-cardproject-dark;
-        color: v.$text-enfasis-dark;
-        
-    }*/
 }
 

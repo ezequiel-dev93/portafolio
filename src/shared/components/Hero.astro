@@ -1,18 +1,17 @@
 ---
 import "@/shared/styles/app.scss";
+import '@/layouts/Layout.astro';
 import CardProfile from "@/features/profile/card-profile/components/CardProfile.astro";
 ---
 
 <section class="hero" id="top">
-  
+  <canvas id="hero-scene" aria-hidden="true"></canvas>
+
   <section class="hero__content">
     <CardProfile />
   </section>
 </section>
 
-<script type="module">
-  import { initHero } from "@/core/js/hero.js";
-
-  initHero();
+<script>
+  import { initHero } from "@/core/lib/hero-animation.js"; initHero();
 </script>
-

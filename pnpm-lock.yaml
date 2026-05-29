@@ -29,6 +29,9 @@ importers:
       thpace:
         specifier: ^2.0.3
         version: 2.0.3
+      three:
+        specifier: ^0.184.0
+        version: 0.184.0
       toastify-js:
         specifier: 1.12.0
         version: 1.12.0
@@ -2078,6 +2081,9 @@ packages:
 
   thpace@2.0.3:
     resolution: {integrity: sha512-fwHGBpYuDVv4PjRchHmWzqzmubc0/Ah+vwFOlZ8bwDbYQuXfTyvCS9T8e8l2+zyDB0k2jiSv7vl7mrAzDfEqBw==}
+
+  three@0.184.0:
+    resolution: {integrity: sha512-wtTRjG92pM5eUg/KuUnHsqSAlPM296brTOcLgMRqEeylYTh/CdtvKUvCyyCQTzFuStieWxvZb8mVTMvdPyUpxg==}
 
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
@@ -4860,6 +4866,8 @@ snapshots:
       delaunator: 4.0.1
       stats.js: 0.17.0
       tslib: 2.8.1
+
+  three@0.184.0: {}
 
   tiny-inflate@1.0.3: {}
 
