@@ -2,7 +2,7 @@
 
 ## Ingeniero en Sistemas de Información en formación + Aspirante a IA
 
-**`Frontend Developer → Futuro Full Stack Node Js | Especialista en Python |`**
+**`Frontend Developer → Futuro Full Stack Next Js | Especialista en Python |`**
 
 ### Sobre mi Portfolio
 
