@@ -6,7 +6,7 @@
 
 ### Sobre mi Portfolio
 
-Portfolio donde convergen el desarrollo software, la inteligencia artificial y proyectos interdisciplinarios. Actualmente en **especialización intensiva en IA/ML/NLP con Python** (España), mientras evoluciono hacia el Full Stack con Node js
+Portfolio donde convergen el desarrollo software, la inteligencia artificial y proyectos interdisciplinarios. Actualmente en **especialización intensiva en IA/ML/NLP con Python** (España), mientras evoluciono hacia el Full Stack con Next js
 
 ## 🛠️ Stack Tecnológico
 
