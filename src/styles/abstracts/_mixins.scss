@@ -1,4 +1,4 @@
-@use "@/shared/styles/abstracts/_variables" as v;
+@use "styles/abstracts/_variables" as v;
 
 /* | Media Queries */
 @mixin mq-max($medida: 768px) {

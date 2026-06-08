@@ -1,116 +1,80 @@
-# Arquitectura del Proyecto Portafolio
-
 ## 🏗️ 1. Estructura de Carpetas
 
-public
+public/
 ├── img/
-|  ├── logo
+│   ├── logo/
+
 src/
-├── core/ # Componentes base y estructurales 
-│ │ ├── config/ 
-│ │ ├── js/ # index.js
-| | ├── lib/ # gsap
-| | ├── utils/ # validación
-| | ├──types/
-│ │
-│ └── features/ # Componentes específicos
-│ ├── contact/ # Con estilos dedicados
-│ │ ├── Contact.astro
-│ │ └── contact.scss
-│ ├── projects/ # Con estilos dedicados + data
-│ |  └── components/ CardProject.astro
-| |  └── data/
-│ └── card-project.scss
+├── core/ # Componentes base y estructurales
+│   ├── config/
+│   ├── js/ # index.js y scripts generales
+│   ├── types/
+│   └── features/ # Funcionalidades del portafolio agrupadas por dominio
 │
-| ├── shared/
-| |  ├── assets/ # img cards  
-| |  ├── componentens / # componentes reutilizables
-| |  ├── icons/
-| |  ├── styles/
-│ |  |   └── adstracts/
-| |  |       └── _mixins.scss # Funciones SCSS
-│ |  |       ├── _variables.scss # Variables de diseño 
-| |  |   └── base/ 
-| |  |       └── _global.scss
-│ |  |       ├── _reset.scss
-│ |  |   ├── app.scss # Estilos principales (incluye UI básica)
-|
-└── layouts/ #
-|
+├── lib/ # Código compartido de librerías internas (por ejemplo `gsap`)
+│
+├── utils/ # Helpers reutilizables, validación y utilidades generales
+│
+├── styles/ # Estilos globales, reset, variables y abstracciones SCSS
+│
+├── shared/ # Componentes UI reutilizables, iconos y recursos compartidos
+│   ├── assets/
+│   ├── components/
+│   └── icons/
+│
+├── layouts/ # Plantillas y estructuras de página
 └── pages/ # Rutas principales
-├── index.astro
-└── 404.astro
+    ├── index.astro
+    └── 404.astro
 
 
 ## 🎨 2. Sistema de Estilos
 
 ### 📌 Reglas Clave:
 
-1. **Componentes UI Básicos**:
-   - Los componentes en `/ui/` usan estilos globales en `app.scss`
-   - Razón: Son elementos genéricos con estilos mínimos
+1. **Estilos globales y recursos comunes**:
+   - `src/styles/app.scss` es el punto de entrada principal para los estilos globales.
+   - `src/styles/abstracts/_variables.scss` y `src/styles/abstracts/_mixins.scss` contienen variables y mixins compartidos.
+   - Estos recursos se cargan con `loadPaths` desde `astro.config.mjs` para simplificar los imports.
+
+2. **Estilos de componentes específicos**:
+   - Cada feature dentro de `src/features/` mantiene su propio archivo SCSS junto al componente.
    - Ejemplo:
-     ```scss
-     /* En app.scss */
-     .dark-mode { /* estilos */ }
-     .menu-mobile { /* estilos */ }
-     ```
+     \`\`\`text
+     src/features/projects/
+     ├── components/
+     │   └── CardProject.astro
+     ├── data/
+     └── card-project.scss
+     \`\`\`
 
-2. **Componentes Específicos**:
-   - Los componentes en `//` tienen sus propios archivos SCSS más data
-   - Razón: Requieren estilos más complejos y específicos
-   - Estructura:
-     ```
-     features/projects/
-     ├── components/  CardProject.astro
-     └── data/ 
-     └── card-project.scss  # Estilos dedicados
-     ```
+3. **Imports SCSS limpios**:
+   - Los archivos SCSS usan rutas como:
+     \`\`\`scss
+     @use "styles/abstracts/_variables" as v;
+     @use "styles/abstracts/_mixins" as mx;
+     \`\`\`
+   - Esto evita alias inconsistentes y mantiene la importación de estilos clara.
 
-3. **Jerarquía de Importación**:
-   ```scss
-   /* app.scss */
-   @import 'reset';
-   @import 'variables';
-   @import 'globals';
-   @import 'mixins';
-   
-   /* Estilos de componentes UI básicos */
-   @import '@components/ui/dark-mode/dark-mode';
-   @import '@components/ui/menu-mobile/menu-mobile';
+## 🔧 3. Razón del cambio
 
-🔍 4. ### Sistema de Estilos
-| Categoría          | Shared Components              | Featueres Components        |
-|--------------------|----------------------------|----------------------------|
-| **Ubicación**      | `shared/components/`          | `features/`    |
-| **Estilos**        | En `app.scss`              | Co-ubicados con componente |
-| **Complejidad**    | Baja (estilos genéricos)   | Alta (estilos específicos) |
+- **Screaming Architecture**: la estructura del repositorio ahora muestra de inmediato qué partes son código fuente.
+- **Claridad**: `src/` contiene la lógica, estilos y utilidades del proyecto, mientras que `public/` queda para assets estáticos.
+- **Mantenibilidad**: facilita encontrar librerías internas (`src/lib/`), utilidades (`src/utils/`) y estilos globales (`src/styles/`).
 
+## 🧩 4. Convenciones actuales
 
-4. **Decisiones Arquitectónicas**
-1. Organización de estilos
-- UI básico en app.scss para evitar fragmentación
-- Features con estilos dedicados para mayor mantenibilidad
+- `src/core/`: configuración de la app, scripts base y componentes estructurales.
+- `src/lib/`: librerías y helpers compartidos de dominio amplio.
+- `src/utils/`: funciones de utilidad y validación reutilizables.
+- `src/styles/`: estilos globales, resets, variables y mixins.
+- `src/features/`: dominios funcionales con componentes, datos y estilos asociados.
+- `src/shared/`: UI común, componentes reutilizables e iconos.
 
-2. Estructura de componentes:
-- Co-locación estricta para componentes complejos
+## 🚀 5. Recomendaciones de Evolución
 
-- Agrupación por dominio en features/
-
-
-
-🚀 5. **Recomendaciones de Evolución**
-1. Cuando mover estilos de app.scss a co-ubicados:
-
-- Si un componente UI crece (>30 líneas de CSS)
-
-- Si requiere mantenimiento independiente
-
-2. Ejemplo de migración
-De:
-ui/DarkMode.astro (estilos en app.scss)
-
-A:
-ui/dark-mode/
-├── DarkMode.astro
-└── dark-mode.scss
+1. Mantener `src/` como la raíz del código fuente.
+2. Reservar `public/` para recursos estáticos que no requieren procesamiento.
+3. Co-localizar estilos al crecer la complejidad de una feature.
+4. Usar `src/lib/` sólo para lógica compartida, no para UI específica.
+'@

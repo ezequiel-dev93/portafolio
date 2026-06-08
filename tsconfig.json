@@ -9,7 +9,7 @@
       "@layouts/*": ["src/layouts/*"],
       "@shared/*": ["src/shared/*"],
       "@pages/*": ["src/pages/*"],
-      "@styles/*": ["src/shared/styles/*"]
+      "@styles/*": ["src/styles/*"]
     }
   },
   "include": [".astro/types.d.ts", "src/**/*", "src/core/config/env.d.ts"],
