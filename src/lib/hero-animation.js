@@ -119,9 +119,30 @@ export function initHero() {
   const dots = new THREE.Points(customGeom, material);
   scene.add(dots);
 
-  // ── Color según modo (modo oscuro/claro) Agregar Funcionalidad de cambio de color según modo oscuro/claro
+// Color según modo (modo oscuro/claro)
+const COLORS = {
+  dark:  new THREE.Color(0xffffff), 
+  light: new THREE.Color(0x000000), 
+};
 
+function applyColorFromMode() {
+  const isDark = document.body.classList.contains("dark-mode");
+  material.uniforms.color.value.set(isDark ? COLORS.dark : COLORS.light);
+}
 
+// Aplicar el color inicial
+applyColorFromMode();
+
+// Observar cambios en el class del body
+const modeObserver = new MutationObserver(applyColorFromMode);
+modeObserver.observe(document.body, {
+  attributeFilter: ["class"],
+});
+
+// Limpiar el observer en navegación (Astro View Transitions)
+document.addEventListener("astro:before-swap", () => {
+  modeObserver.disconnect();
+}, { once: true });
 
 
   
