@@ -12,6 +12,6 @@
       "@styles/*": ["src/styles/*"]
     }
   },
-  "include": [".astro/types.d.ts", "src/**/*", "src/core/config/env.d.ts"],
+  "include": [".astro/types.d.ts", "src/**/*", "src/config/env.d.ts"],
   "exclude": ["node_modules"]
 }

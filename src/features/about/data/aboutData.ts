@@ -1,4 +1,4 @@
-import type { About } from "@/core/types/about";
+import type { About } from "@/features/about/types/about";
 
 const aboutData: About = {
   title: "¡Hola! Un placer conocerte",

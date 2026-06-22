@@ -1,4 +1,4 @@
-import type { Project } from '@/core/types/projects';
+import type { Project } from '@/features/projects/types/projects';
 
 const projects: Project[] = [
   {
@@ -39,5 +39,5 @@ const projects: Project[] = [
     tags: ['NAVE', 'TYPESCRIPT', 'TAILWIND'],
   },
 ];
-
+ 
 export default projects;

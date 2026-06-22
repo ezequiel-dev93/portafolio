@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Determinar el modo inicial
   let isDarkMode;
-  
+
   if (userPrefersDark === null) {
       // Si no hay preferencia guardada, usar la del sistema
       isDarkMode = systemPrefersDark;
