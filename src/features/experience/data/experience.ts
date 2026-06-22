@@ -11,7 +11,7 @@ export const experience: Experience[] = [
     secundaryInfo: [
       "Diseño e implementación de un flujo end-to-end asíncrono para generación de guiones, voz, imágenes y renderizado de video.",
 
-      "Arquitectura basada en Screaming Architecture y Arquitectura Hexagonal (Ports & Adapters), priorizando dominio, casos de uso y desacoplamiento.",
+      "Arquitectura basada en Screaming Architecture, priorizando dominio, casos de uso y desacoplamiento.",
       
       "Sistema multi-tenant y escalable con procesamiento de jobs, consumo de créditos y base preparada para facturación."
     ]
