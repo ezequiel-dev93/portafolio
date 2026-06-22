@@ -2,7 +2,7 @@
 @use "styles/abstracts/_mixins" as mx;
 
 .card {
-    padding: 12rem 0;
+    padding: 10rem 0;
 
     &__article {
         @include mx.center(flex, center, 0rem);
