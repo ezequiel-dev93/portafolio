@@ -4,16 +4,16 @@ export const experience: Experience[] = [
     {
     time: "ene 2026 – Presente",
     role: "Desarrollador de Software",
-    company: "Plataforma SaaS (Producto propio)",
+    company: "Reelify - SaaS en Desarrollo",
     primaryInfo: [
-      "Desarrollo de una plataforma SaaS para la creación automatizada de videos para redes sociales, reduciendo tiempo, costo y complejidad del proceso de producción de contenido."
+      "Diseño y desarrollo end-to-end de una plataforma SaaS orientada a la automatización de video para redes sociales, con el objetivo de reducir drásticamente costos y tiempos en la producción de contenido."
     ],
     secundaryInfo: [
-      "Diseño e implementación de un flujo end-to-end asíncrono para generación de guiones, voz, imágenes y renderizado de video.",
+      "Construyendo un flujo asíncrono y distribuido para orquestar la generación de guiones, síntesis de voz, recursos visuales y el renderizado final de video.",
 
-      "Arquitectura basada en Screaming Architecture, priorizando dominio, casos de uso y desacoplamiento.",
+      "Estructurando el sistema bajo los principios de Screaming Architecture, priorizando un dominio desacoplado, casos de uso limpios y flexibilidad ante cambios tecnológicos.",
       
-      "Sistema multi-tenant y escalable con procesamiento de jobs, consumo de créditos y base preparada para facturación."
+      "Implementando una arquitectura multi-tenant escalable con procesamiento de trabajos (jobs) en segundo plano y un sistema de control de consumo de créditos."
     ]
   },
 

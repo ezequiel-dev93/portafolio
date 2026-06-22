@@ -3,7 +3,7 @@ import type { Project } from '@/features/projects/types/projects';
 const projects: Project[] = [
   {
     title: 'SaaS de Video Automatizado',
-    description: 'Producto orientado a la generación automatica de videos para redes sociales. Implmentación un flujo end-to-end y una arquitectura centrada en el dominio, diseñada para escalar y evolucionar como producto.',
+    description: 'Plataforma SaaS en fase de desarrollo dedicada a la producción automatizada de video para redes sociales. Implementa un flujo asíncrono y una arquitectura limpia centrada en el dominio, diseñada desde las bases para escalar de forma sostenible.',
     link: 'https://www.ezequielsuarez-dev.com/',
     tags: ['NAVE','REACT','TYPESCRIPT','TAILWIND','SUPABASE'],
   },
@@ -11,7 +11,7 @@ const projects: Project[] = [
     title: 'Star Wars Holocron',
     description: 'API REST orientada a dominio basada en Star Wars, diseñada con Screaming Architecture y foco en mantenibilidad y escalabilidad.',
     link: 'https://github.com/ezequiel-dev93/star-wars-holocron.git',
-    tags: ['NAVE', 'TYPESCRIPT', 'SUPABASE', 'AWS'],
+    tags: ['NAVE', 'TYPESCRIPT', 'SUPABASE'],
   },
   {
     title: 'Gestor de Favoritos',
