@@ -3,16 +3,199 @@ import "@/shared/styles/app.scss";
 import CardProfile from "@/features/profile/card-profile/components/CardProfile.astro";
 ---
 
+<!-- Three.js (debe cargar primero) -->
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r86/three.min.js"
+></script>
+
+<!-- TweenMax (GSAP 1.x) -->
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"
+></script>
+
 <section class="hero" id="top">
+  <canvas id="hero-scene" aria-hidden="true"></canvas>
   
   <section class="hero__content">
     <CardProfile />
   </section>
 </section>
 
-<script type="module">
-  import { initHero } from "@/core/js/hero.js";
+<!-- Hero Animation Inline Script -->
+<script is:inline>
+/**
+ * Hero Animation — Esfera de puntos Three.js con TweenMax
+ * Reacción al mouse y animación fluida
+ */
+(function () {
+  const canvas = document.querySelector('#hero-scene');
+  if (!canvas) return;
 
-  initHero();
+  let width  = canvas.offsetWidth;
+  let height = canvas.offsetHeight;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
+  renderer.setSize(width, height);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 2000);
+  camera.position.set(0, 0, 80);
+
+  // Textura de punto
+  const dotTexture = (() => {
+    const size = 64;
+    const c    = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    const grad = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    grad.addColorStop(0,    'rgba(255,255,255,1)');
+    grad.addColorStop(0.4,  'rgba(255,255,255,0.8)');
+    grad.addColorStop(1,    'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, size, size);
+    const tex = new THREE.Texture(c);
+    tex.needsUpdate = true;
+    return tex;
+  })();
+
+  // Geometría
+  const radius     = 50;
+  const sphereGeom = new THREE.IcosahedronGeometry(radius, 5);
+  const bufferGeom = new THREE.BufferGeometry();
+  const positions  = new Float32Array(sphereGeom.vertices.length * 3);
+
+  function animateDot(index, vector) {
+    TweenMax.to(vector, 4, {
+      x: 0,
+      z: 0,
+      ease:      Back.easeOut,
+      delay:     Math.abs(vector.y / radius) * 2,
+      repeat:    -1,
+      yoyo:      true,
+      yoyoEase:  Back.easeOut,
+      onUpdate() {
+        positions[index * 3]     = vector.x;
+        positions[index * 3 + 2] = vector.z;
+      },
+    });
+  }
+
+  for (let i = 0; i < sphereGeom.vertices.length; i++) {
+    const v = sphereGeom.vertices[i];
+    animateDot(i, v);
+    v.toArray(positions, i * 3);
+  }
+
+  const attrPositions = new THREE.BufferAttribute(positions, 3);
+  bufferGeom.addAttribute('position', attrPositions);
+
+  // Shaders
+  const vertexShader = `
+    uniform float size;
+    void main() {
+      vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+      gl_PointSize = size * (200.0 / -mvPosition.z);
+      gl_Position  = projectionMatrix * mvPosition;
+    }
+  `;
+
+  const fragmentShader = `
+    uniform sampler2D texture;
+    uniform vec3      color;
+    void main() {
+      vec4 texColor = texture2D(texture, gl_PointCoord);
+      gl_FragColor  = vec4(color, 1.0) * texColor;
+    }
+  `;
+
+  const shaderMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      texture: { value: dotTexture },
+      color:   { value: new THREE.Color(0xffffff) },
+      size:    { value: 3.5 },
+    },
+    vertexShader,
+    fragmentShader,
+    transparent: true,
+    depthWrite:  false,
+  });
+
+  const dots = new THREE.Points(bufferGeom, shaderMaterial);
+  scene.add(dots);
+
+  // Render loop
+  function render() {
+    dots.geometry.attributes.position.needsUpdate = true;
+    renderer.render(scene, camera);
+  }
+  TweenMax.ticker.addEventListener('tick', render);
+
+  // Mouse interaction
+  const mouse = new THREE.Vector2(0.8, 0.5);
+
+  function onMouseMove(e) {
+    mouse.x = (e.clientX / window.innerWidth)  - 0.5;
+    mouse.y = (e.clientY / window.innerHeight) - 0.5;
+    TweenMax.to(dots.rotation, 4, {
+      x:    mouse.y * Math.PI * 0.5,
+      z:    mouse.x * Math.PI * 0.2,
+      ease: Power1.easeOut,
+    });
+  }
+  window.addEventListener('mousemove', onMouseMove);
+
+  // Resize handler
+  let resizeTm;
+  function onResize() {
+    canvas.style.width  = '';
+    canvas.style.height = '';
+    width  = canvas.offsetWidth;
+    height = canvas.offsetHeight;
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+  }
+  window.addEventListener('resize', () => {
+    resizeTm = clearTimeout(resizeTm);
+    resizeTm = setTimeout(onResize, 200);
+  });
+
+  // Cleanup
+  document.addEventListener('astro:before-swap', () => {
+    TweenMax.ticker.removeEventListener('tick', render);
+    window.removeEventListener('mousemove', onMouseMove);
+    renderer.dispose();
+  }, { once: true });
+})();
 </script>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #hero-scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+  }
+</style>
 
