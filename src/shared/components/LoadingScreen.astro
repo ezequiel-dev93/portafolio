@@ -1,0 +1,262 @@
+---
+/**
+ * LoadingScreen.astro
+ * Full-screen loader with an animated orb (canvas 2D, no deps).
+ * Fades out and self-removes once the page 'load' event fires.
+ */
+---
+
+<div id="loader" aria-live="polite" aria-label="Cargando portfolio" role="status">
+  <div class="loader__pill">
+    <canvas id="loader-orb" width="40" height="40" aria-hidden="true"></canvas>
+    <span class="loader__text">Iniciando<span class="loader__dots"></span></span>
+  </div>
+</div>
+
+<style>
+  /* ─── Full-screen overlay ──────────────────────────────── */
+  #loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #08080c;
+    transition: opacity 0.6s ease;
+  }
+
+  #loader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ─── Pill container ───────────────────────────────────── */
+  .loader__pill {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1.4rem 0.6rem 0.7rem;
+    background: #111116;
+    border: 1px solid rgba(153, 65, 252, 0.2);
+    border-radius: 999px;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.6),
+      0 0 24px rgba(153, 65, 252, 0.08);
+    animation: pill-appear 0.4s ease both;
+  }
+
+  @keyframes pill-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.92) translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* ─── Text ─────────────────────────────────────────────── */
+  .loader__text {
+    font-family: 'Onest Variable', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #d4d4d8;
+    white-space: nowrap;
+  }
+
+  /* ─── Animated dots ────────────────────────────────────── */
+  .loader__dots::after {
+    content: '';
+    display: inline-block;
+    animation: dots 1.6s steps(4, end) infinite;
+    width: 1.8em;
+    text-align: left;
+  }
+
+  @keyframes dots {
+    0%   { content: ''; }
+    25%  { content: '.'; }
+    50%  { content: '..'; }
+    75%  { content: '...'; }
+    100% { content: '....'; }
+  }
+
+  /* ─── Canvas orb ───────────────────────────────────────── */
+  #loader-orb {
+    display: block;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  /* ─── Reduced motion ───────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .loader__pill {
+      animation: none;
+    }
+    .loader__dots::after {
+      animation: none;
+      content: '....';
+    }
+    #loader {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+// ─── Body lock & Focus Trap (prevent interaction while loader is visible) ──
+  document.body.style.overflow = 'hidden';
+  
+  function trapFocus(e: KeyboardEvent) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+    }
+  }
+  document.addEventListener('keydown', trapFocus);
+
+  // ─── Canvas Orb ──────────────────────────────────────────
+  const canvas  = document.getElementById('loader-orb') as HTMLCanvasElement;
+  const ctx     = canvas.getContext('2d')!;
+
+  const DPR     = Math.min(window.devicePixelRatio || 1, 2);
+  const SIZE    = 40;
+  canvas.width  = SIZE * DPR;
+  canvas.height = SIZE * DPR;
+  ctx.scale(DPR, DPR);
+
+  const CX = SIZE / 2;
+  const CY = SIZE / 2;
+
+  // Palette — portfolio colors
+  const COLORS = [
+    '#9941fc',  // primary purple
+    '#bc97d2',  // soft lavender
+    '#E84B3C',  // red accent
+    '#c078f2',  // mid purple
+    '#7c3aed',  // deep violet
+  ];
+
+  // ─── Particle definition ────────────────────────────────
+  interface Particle {
+    angle:   number;
+    radius:  number;
+    speed:   number;
+    size:    number;
+    color:   string;
+    opacity: number;
+    opacityDir: number;
+    opacitySpeed: number;
+  }
+
+  const PARTICLE_COUNT = 26;
+  const particles: Particle[] = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
+    angle:        (i / PARTICLE_COUNT) * Math.PI * 2 + Math.random() * 0.4,
+    radius:       4 + Math.random() * 10,
+    speed:        (0.012 + Math.random() * 0.018) * (Math.random() < 0.5 ? 1 : -1),
+    size:         0.6 + Math.random() * 1.8,
+    color:        COLORS[Math.floor(Math.random() * COLORS.length)],
+    opacity:      0.4 + Math.random() * 0.6,
+    opacityDir:   Math.random() < 0.5 ? 1 : -1,
+    opacitySpeed: 0.008 + Math.random() * 0.012,
+  }));
+
+  let rafId: number;
+  let running = true;
+
+  function drawOrb(): void {
+    ctx.clearRect(0, 0, SIZE, SIZE);
+
+    // Subtle center glow
+    const glow = ctx.createRadialGradient(CX, CY, 0, CX, CY, 9);
+    glow.addColorStop(0,   'rgba(153, 65, 252, 0.18)');
+    glow.addColorStop(1,   'rgba(153, 65, 252, 0)');
+    ctx.beginPath();
+    ctx.arc(CX, CY, 9, 0, Math.PI * 2);
+    ctx.fillStyle = glow;
+    ctx.fill();
+
+    for (const p of particles) {
+      // Advance angle
+      p.angle += p.speed;
+
+      // Pulse opacity
+      p.opacity += p.opacityDir * p.opacitySpeed;
+      if (p.opacity > 1) { p.opacity = 1; p.opacityDir = -1; }
+      if (p.opacity < 0.2) { p.opacity = 0.2; p.opacityDir = 1; }
+
+      const x = CX + Math.cos(p.angle) * p.radius;
+      const y = CY + Math.sin(p.angle) * p.radius;
+
+      // Particle dot with micro glow
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, p.size * 2);
+      grad.addColorStop(0,   p.color + Math.round(p.opacity * 255).toString(16).padStart(2, '0'));
+      grad.addColorStop(1,   p.color + '00');
+
+      ctx.beginPath();
+      ctx.arc(x, y, p.size * 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Crisp center dot
+      ctx.beginPath();
+      ctx.arc(x, y, p.size * 0.6, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.opacity;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    if (running) rafId = requestAnimationFrame(drawOrb);
+  }
+
+  // Respect reduced motion
+  const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!noMotion) {
+    drawOrb();
+  } else {
+    // Static snapshot — just dots at rest
+    for (const p of particles) {
+      const x = CX + Math.cos(p.angle) * p.radius;
+      const y = CY + Math.sin(p.angle) * p.radius;
+      ctx.beginPath();
+      ctx.arc(x, y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.opacity;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // ─── Dismiss loader ──────────────────────────────────────
+  function dismiss(): void {
+    const loader = document.getElementById('loader');
+    if (!loader) return;
+
+    running = false;
+    cancelAnimationFrame(rafId);
+
+    // Unlock body scroll & focus
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', trapFocus);
+
+    if (noMotion) {
+      loader.remove();
+      return;
+    }
+
+    loader.classList.add('fade-out');
+    loader.addEventListener('transitionend', () => loader.remove(), { once: true });
+  }
+
+  // Fire on 'load' (all resources ready) + small buffer
+  if (document.readyState === 'complete') {
+    setTimeout(dismiss, 200);
+  } else {
+    window.addEventListener('load', () => setTimeout(dismiss, 200), { once: true });
+  }
+</script>

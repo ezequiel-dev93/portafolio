@@ -3,9 +3,29 @@ import '@/styles/app.scss';
 import Moon from '@/shared/icons/Moon.astro'
 import Sun from '@/shared/icons/Sun.astro'
 ---
-<article class="mode-dark" id="mode-dark-toggle">
-  <span class="mode-dark__toggle">
+
+<button
+  id="mode-dark-toggle"
+  class="mode-dark"
+  aria-label="Activar modo oscuro"
+  aria-pressed="false"
+  type="button"
+>
+  <span class="mode-dark__toggle" aria-hidden="true">
     <i class="mode-dark__icon mode-dark__icon--sun"><Sun /></i>
     <i class="mode-dark__icon mode-dark__icon--moon"><Moon /></i>
   </span>
-</article>
+</button>
+
+<style>
+  /* Reset button styles, preserve visual toggle */
+  .mode-dark {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 1rem;
+  }
+</style>

@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (isDarkMode) {
       body.classList.add('dark-mode');
       darkModeToggle.querySelector('.mode-dark__toggle').classList.add('active');
+      darkModeToggle.setAttribute('aria-pressed', 'true');
+      darkModeToggle.setAttribute('aria-label', 'Activar modo claro');
   }
   
   // Escuchar cambios en la preferencia del sistema (solo si no hay selección de usuario)
@@ -52,6 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
   darkModeToggle.addEventListener('click', () => {
       const isActive = body.classList.toggle('dark-mode');
       darkModeToggle.querySelector('.mode-dark__toggle').classList.toggle('active');
+      darkModeToggle.setAttribute('aria-pressed', String(isActive));
+      darkModeToggle.setAttribute('aria-label', isActive ? 'Activar modo claro' : 'Activar modo oscuro');
       localStorage.setItem('dark-mode', isActive);
   });
 });

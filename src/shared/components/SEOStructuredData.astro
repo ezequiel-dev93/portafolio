@@ -1,0 +1,51 @@
+---
+/*
+ - SEOStructuredData.astro
+ - Structured data (JSON-LD) for Person and WebSite schema types.
+ - Include in Layout.astro <head> for rich results in Google Search.
+*/
+---
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://www.ezequielsuarez-dev.com/#person",
+        "name": "Ezequiel Suarez",
+        "url": "https://www.ezequielsuarez-dev.com/",
+        "jobTitle": "Desarrollador de Software",
+        "description": "Desarrollador de Software,Python, React, TypeScript y Astro. Diseño soluciones digitales con arquitecturas limpias, escalables orientadas al negocio.",
+        "image": "https://www.ezequielsuarez-dev.com/img/og-image.png",
+        "email": "ezequielsuarez.dev@gmail.com",
+        "sameAs": [
+          "https://www.linkedin.com/in/ezequiel-suarez-dev/",
+          "https://github.com/ezequiel-dev93"
+        ],
+        "knowsAbout": [
+          "Python",
+          "FastAPI",
+          "React",
+          "TypeScript",
+          "Astro",
+          "Sass",
+          "MySQL",
+          "Desarrollo Web",
+          "Ingeniería en Sistemas de Información"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.ezequielsuarez-dev.com/#website",
+        "url": "https://www.ezequielsuarez-dev.com/",
+        "name": "Ezequiel Suarez | Desarrollador De Software",
+        "description": "Portfolio profesional de Ezequiel Suarez, Desarrollador de Software, Python, React y Astro.",
+        "inLanguage": "es-AR",
+        "author": {
+          "@id": "https://www.ezequielsuarez-dev.com/#person"
+        }
+      }
+    ]
+  }
+</script>

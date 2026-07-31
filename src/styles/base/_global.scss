@@ -79,3 +79,46 @@ body.dark-mode {
     }
 }
 
+/* ─── Accessibility utilities ──────────────────────────── */
+
+/* Visually hidden — visible only to screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Global focus ring using portfolio palette */
+:focus-visible {
+    outline: 2px solid #9941fc;
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+/* Compensate for fixed header on anchor targets */
+:target,
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+/* Skip link pattern */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #9941fc;
+    color: #fff;
+    padding: 8px;
+    z-index: 10000;
+    transition: top 0.2s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
