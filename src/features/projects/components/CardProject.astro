@@ -41,7 +41,7 @@ const TAGS: Record<TagKey, { icon: any }> = {
                 
                 <p class="projects__figure-description">{description}</p>
 
-                <div class="projects__figure-icons" role="list" aria-label="Tecnologías usadas">
+                <div class="projects__figure-icons" role="group" aria-label="Tecnologías usadas">
                   {tags.map((tag) => {
                     const Icon = TAGS[tag].icon;
                     return <Icon class="projects__figure-icon" role="img" aria-label={tag} />;
