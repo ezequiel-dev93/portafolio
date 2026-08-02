@@ -27,8 +27,6 @@ import DarkMode from "@/shared/components/DarkMode.astro";
       <ul
         class="header__nav-menu"
         id="main-menu"
-        role="menu"
-        tabindex="-1"
       >
         <Items href="#top">Inicio</Items>
         <Items href="#experiencia">Experiencia</Items>
@@ -37,7 +35,9 @@ import DarkMode from "@/shared/components/DarkMode.astro";
         <Items href="#tecnologias">Tecnologías</Items>
         <Items href="#contactos">Contacto</Items>
 
-        <DarkMode />
+        <li>
+          <DarkMode />
+        </li>
       </ul>
     </nav>
   </section>

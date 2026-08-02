@@ -34,7 +34,7 @@ const TAGS: Record<TagKey, { icon: any }> = {
     {projects.map(({ title, description, tags, link }) => (
       <li class="projects__cards">
         {link ? (
-          <a href={link} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${title} en nueva pestaña`}>
+          <a href={link} target="_blank" rel="noopener noreferrer">
             <figure class="projects__figure">
               <figcaption class="projects__figure-caption">
                 <h3 class="projects__figure-title">{title}</h3>

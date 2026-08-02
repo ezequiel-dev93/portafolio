@@ -12,7 +12,7 @@ import ItemsIcons from '@/shared/components/ItemsIcons.astro';
     <section class="section-footer__container">
         <article class="section-footer__perfil">
             <div class="section-footer__perfil--logo">
-                <a href="#top"><img src={logocard.src} alt="Logo de Ezequiel Suarez" loading="lazy" /></a>
+                <a href="#top" aria-label="Ir al inicio"><img src={logocard.src} alt="Logo de Ezequiel Suarez" loading="lazy" width="40" height="40" /></a>
             </div>
 
             <div class="section-footer__perfil--title">
@@ -24,25 +24,25 @@ import ItemsIcons from '@/shared/components/ItemsIcons.astro';
         <article class="section-footer__social">
             <ul class="section-footer__social-list">
                <li class="section-footer__social-item">
-                    <ItemsIcons href="mailto:ezequielsuarez.dev@gmail.com">
+                    <ItemsIcons href="mailto:ezequielsuarez.dev@gmail.com" aria-label="Enviar email a Ezequiel Suarez">
                         <EmailIcon class="section-footer__social-icon" />
                     </ItemsIcons>
                </li>
                 
                <li class="section-footer__social-item">
-                    <ItemsIcons href="https://app.slack.com/huddle/T03UTHFCGLF/C03V55LJ7HT">
+                    <ItemsIcons href="https://app.slack.com/huddle/T03UTHFCGLF/C03V55LJ7HT" aria-label="Contactar en Slack">
                         <SlackIcon class="section-footer__social-icon"/>
                     </ItemsIcons>
                </li>
                 
                <li class="section-footer__social-item">
-                    <ItemsIcons href="https://www.linkedin.com/in/ezequiel-suarez-dev">
+                    <ItemsIcons href="https://www.linkedin.com/in/ezequiel-suarez-dev" aria-label="Ver perfil de LinkedIn de Ezequiel Suarez">
                         <LinkedInIcon class="section-footer__social-icon" />
                     </ItemsIcons>
                </li>
                
                 <li class="section-footer__social-item">
-                    <ItemsIcons href="https://github.com/ezequiel-dev93">
+                    <ItemsIcons href="https://github.com/ezequiel-dev93" aria-label="Ver perfil de GitHub de Ezequiel Suarez">
                         <GithubIcon class="section-footer__social-icon" />
                     </ItemsIcons>
                 </li>

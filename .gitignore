@@ -29,3 +29,6 @@ src/**/*.css.map
 
 # Cache
 .cache/
+
+# Unlighthouse reports
+.unlighthouse/
