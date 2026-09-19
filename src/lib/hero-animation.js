@@ -5,7 +5,7 @@ export function initHero() {
   const canvas = document.querySelector("#hero-scene");
   if (!canvas) return;
 
-  let width  = canvas.offsetWidth;
+  let width = canvas.offsetWidth;
   let height = canvas.offsetHeight;
 
   if (width === 0 || height === 0) {
@@ -13,27 +13,27 @@ export function initHero() {
     return;
   }
 
-  // ── Renderer ──────────────────────────────────────────────────────────────
+  // Renderer
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000, 0); // transparente — el fondo lo pone .hero en CSS
 
-  // ── Escena & cámara ───────────────────────────────────────────────────────
-  const scene  = new THREE.Scene();
+  // Escena & cámara
+  const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 2000);
   camera.position.set(0, 0, 80);
 
-  // ── Textura del punto (canvas 2D, sin archivos externos) ──────────────────
+  // Textura del punto (canvas 2D, sin archivos externos) 
   const dotTexture = (() => {
     const size = 64;
-    const c    = document.createElement("canvas");
+    const c = document.createElement("canvas");
     c.width = c.height = size;
-    const ctx  = c.getContext("2d");
-    const grad = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-    grad.addColorStop(0,   "rgba(241, 241, 241, 0.8)");
+    const ctx = c.getContext("2d");
+    const grad = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    grad.addColorStop(0, "rgba(241, 241, 241, 0.8)");
     grad.addColorStop(0.4, "rgba(241, 241, 241, 0.8)");
-    grad.addColorStop(1,   "rgba(255,255,255,0)");
+    grad.addColorStop(1, "rgba(255,255,255,0)");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, size, size);
     const tex = new THREE.Texture(c);
@@ -41,14 +41,12 @@ export function initHero() {
     return tex;
   })();
 
-  // ── Geometría ─────────────────────────────────────────────────────────────
-  const radius     = 64;
+  // Geometría
+  const radius = 64;
   const sphereGeom = new THREE.IcosahedronGeometry(radius, 13);
-  const bufferGeom = new THREE.BufferGeometry();
-  const verts      = sphereGeom.getAttribute
-  
-  const posAttr  = sphereGeom.getAttribute("position");
-  const count    = posAttr.count;
+
+  const posAttr = sphereGeom.getAttribute("position");
+  const count = posAttr.count;
   const positions = new Float32Array(count * 3);
 
   // Copiamos posiciones originales y animamos cada vértice
@@ -70,22 +68,22 @@ export function initHero() {
   // Animamos cada punto con GSAP (equivalente a TweenMax.to)
   vectors.forEach((v, i) => {
     gsap.to(v, {
-      x:        0,
-      z:        0,
+      x: 0,
+      z: 0,
       duration: 4,
-      ease:     "back.out(1.7)",
-      delay:    Math.abs(v.y / radius) * 2,
-      repeat:   -1,
-      yoyo:     true,
+      ease: "back.out(1.7)",
+      delay: Math.abs(v.y / radius) * 2,
+      repeat: -1,
+      yoyo: true,
       yoyoEase: "back.out(1.7)",
       onUpdate() {
-        positions[i * 3]     = v.x;
+        positions[i * 3] = v.x;
         positions[i * 3 + 2] = v.z;
       },
     });
   });
 
-  // ── Shaders ───────────────────────────────────────────────────────────────
+  // Shaders 
   const vertexShader = /* glsl */`
     uniform float size;
     void main() {
@@ -107,72 +105,72 @@ export function initHero() {
   const material = new THREE.ShaderMaterial({
     uniforms: {
       dotTexture: { value: dotTexture },
-      color:      { value: new THREE.Color(0xffffff) },
-      size:       { value: 0.2 },
+      color: { value: new THREE.Color(0xffffff) },
+      size: { value: 0.2 },
     },
     vertexShader,
     fragmentShader,
     transparent: true,
-    depthWrite:  false,
+    depthWrite: false,
   });
 
   const dots = new THREE.Points(customGeom, material);
   scene.add(dots);
 
-// Color según modo (modo oscuro/claro)
-const COLORS = {
-  dark:  new THREE.Color(0xffffff), 
-  light: new THREE.Color(0x000000), 
-};
+  // Color según modo (modo oscuro/claro)
+  const COLORS = {
+    dark: new THREE.Color(0xffffff),
+    light: new THREE.Color(0x000000),
+  };
 
-function applyColorFromMode() {
-  const isDark = document.body.classList.contains("dark-mode");
-  material.uniforms.color.value.set(isDark ? COLORS.dark : COLORS.light);
-}
+  function applyColorFromMode() {
+    const isDark = document.body.classList.contains("dark-mode");
+    material.uniforms.color.value.set(isDark ? COLORS.dark : COLORS.light);
+  }
 
-// Aplicar el color inicial
-applyColorFromMode();
+  // Aplicar el color inicial
+  applyColorFromMode();
 
-// Observar cambios en el class del body
-const modeObserver = new MutationObserver(applyColorFromMode);
-modeObserver.observe(document.body, {
-  attributeFilter: ["class"],
-});
+  // Observar cambios en el class del body
+  const modeObserver = new MutationObserver(applyColorFromMode);
+  modeObserver.observe(document.body, {
+    attributeFilter: ["class"],
+  });
 
-// Limpiar el observer en navegación (Astro View Transitions)
-document.addEventListener("astro:before-swap", () => {
-  modeObserver.disconnect();
-}, { once: true });
+  // Limpiar el observer en navegación (Astro View Transitions)
+  document.addEventListener("astro:before-swap", () => {
+    modeObserver.disconnect();
+  }, { once: true });
 
 
-  
 
-  // ── Render loop (GSAP ticker) ─────────────────────────────────────────────
+
+  // Render loop (GSAP ticker)
   function render() {
     positionBuf.needsUpdate = true;
     renderer.render(scene, camera);
   }
   gsap.ticker.add(render);
 
-  // ── Mouse ─────────────────────────────────────────────────────────────────
+  // Mouse
   function onMouseMove(e) {
-    const mx = (e.clientX / window.innerWidth)  - 0.5;
+    const mx = (e.clientX / window.innerWidth) - 0.5;
     const my = (e.clientY / window.innerHeight) - 0.5;
     gsap.to(dots.rotation, {
-      x:        my * Math.PI * 0.7,
-      z:        mx * Math.PI * 0.4,
+      x: my * Math.PI * 0.7,
+      z: mx * Math.PI * 0.4,
       duration: 4,
-      ease:     "power1.out",
+      ease: "power1.out",
     });
   }
   window.addEventListener("mousemove", onMouseMove);
 
-  // ── Resize ────────────────────────────────────────────────────────────────
+  // Resize
   let resizeTm;
   function onResize() {
-    canvas.style.width  = "";
+    canvas.style.width = "";
     canvas.style.height = "";
-    width  = canvas.offsetWidth;
+    width = canvas.offsetWidth;
     height = canvas.offsetHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
@@ -183,7 +181,7 @@ document.addEventListener("astro:before-swap", () => {
     resizeTm = setTimeout(onResize, 200);
   });
 
-  // ── Cleanup (Astro View Transitions) ──────────────────────────────────────
+  // Cleanup (Astro View Transitions) 
   document.addEventListener("astro:before-swap", () => {
     gsap.ticker.remove(render);
     window.removeEventListener("mousemove", onMouseMove);

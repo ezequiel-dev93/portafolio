@@ -3,13 +3,13 @@ import type { About } from "@/features/about/types/about";
 const aboutData: About = {
   title: "¡Hola! Un placer conocerte",
   description: [
-    "<span>Desarrollador Front-End</span> con <span>2 años de experiencia</span>, creando <span>soluciones</span> centradas en el <span>usuario</span>, con foco en rendimiento, accesibilidad,  escalabilidad, el diseño responsive y <span>arquitectura</span> limpia.",
+    "Soy <strong>Ezequiel Suárez</strong>, Desarrollador de Software con más de 3 años de experiencia. Mi foco principal está en el <strong>Frontend moderno</strong> (Astro, Next.js, React, TypeScript), complementado con una sólida expansión hacia arquitecturas <strong>Backend y Cloud con Python, FastAPI y AWS</strong>.",
 
-    "Estudiante de <span>Ingeniería</span> en <span>Sistemas</span> de <span>Información</span> en la <span>Universidad Tecnológica Nacional</span> (UTN, Argentina), una formación que me brinda una base sólida en <span>estructuras</span>, <span>lógica computacional</span>.",
+    "Combino mis bases teóricas en Ingeniería en Sistemas de Información con una fuerte mentalidad orientada a producto y negocio. No solo construyo interfaces interactivas y accesibles, sino que diseño sistemas escalables aplicando principios de <em>Clean Architecture</em>, <em>Screaming Architecture</em> y desacoplamiento de servicios.",
 
-    "Realizando una <span>especialización</span> en <span>Inteligencia Artificial</span>, <span>Machine Learning</span>, <span>Deep Learning</span> y <span>Procesamiento de Lenguaje Natural</span> (NLP) con <span>Python</span>.",
+    "Actualmente lidero el desarrollo de un SaaS multi-tenant para la automatización de video y creé <strong>FastAPI SaaS Boilerplate (Enterprise Edition)</strong>, un producto digital distribuido en Lemon Squeezy pensado para acelerar el lanzamiento de arquitecturas B2B en producción.",
 
-    "Si estás <span>buscando</span> a una persona <span>comprometida</span>, <span>dedicada</span> y con buena <span>comunicación</span>, estoy listo y preparado para sumar valor con energía, conocimientos y entusiasmo a tu equipo."
+    "Me apasionan los entornos donde la ingeniería, el diseño y los objetivos de negocio se alinean para resolver problemas reales. Si buscas un perfil proactivo y con visión integral de producto, ¡hablemos!"
   ],
 };
 

@@ -5,7 +5,7 @@ const projects: Project[] = [
     title: 'SaaS de Video Automatizado',
     description: 'Plataforma SaaS en fase de desarrollo dedicada a la producción automatizada de video para redes sociales. Implementa un flujo asíncrono y una arquitectura limpia centrada en el dominio, diseñada desde las bases para escalar de forma sostenible.',
     link: 'https://www.ezequielsuarez-dev.com/',
-    tags: ['NAVE','REACT','TYPESCRIPT','TAILWIND','SUPABASE'],
+    tags: ['NAVE', 'REACT', 'TYPESCRIPT', 'TAILWIND', 'SUPABASE'],
   },
   {
     title: 'Star Wars Holocron',
@@ -15,9 +15,9 @@ const projects: Project[] = [
   },
   {
     title: 'Gestor de Favoritos',
-    description:'Aplicación web para la gestión avanzada de favoritos en Chrome. Implementa un sistema CRUD completo utilizando la API de Chrome, con búsqueda, drag & drop y arquitectura modular enfocada en mantenibilidad y escalabilidad.',
-    link:'https://github.com/ezequiel-dev93/gestor-favoritos.git',
-    tags: ['VITE', 'REACT', 'TYPESCRIPT', 'TAILWIND' ],
+    description: 'Aplicación web para la gestión avanzada de favoritos en Chrome. Implementa un sistema CRUD completo utilizando la API de Chrome, con búsqueda, drag & drop y arquitectura modular enfocada en mantenibilidad y escalabilidad.',
+    link: 'https://github.com/ezequiel-dev93/gestor-favoritos.git',
+    tags: ['VITE', 'REACT', 'TYPESCRIPT', 'TAILWIND'],
   },
   {
     title: 'Scrapper Automatizado',
@@ -28,7 +28,7 @@ const projects: Project[] = [
   {
     title: 'Generador de Informes',
     description:
-    'Permite crear informes a medida, usar plantillas reutilizables y generar archivos de Excel de manera automatizada. También puedes subir tu archivo, hacer modificaciones y descargarlos.',
+      'Permite crear informes a medida, usar plantillas reutilizables y generar archivos de Excel de manera automatizada. También puedes subir tu archivo, hacer modificaciones y descargarlos.',
     link: 'https://github.com/ezequiel-dev93/informes_automatizados.git',
     tags: ['PYTHON', 'STREAMLIT'],
   },
@@ -39,5 +39,5 @@ const projects: Project[] = [
     tags: ['NAVE', 'TYPESCRIPT', 'TAILWIND'],
   },
 ];
- 
+
 export default projects;

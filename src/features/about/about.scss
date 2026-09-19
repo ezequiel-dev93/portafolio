@@ -18,19 +18,19 @@
       padding: 1rem 0;
     }
 
-    span {
+    strong,
+    em {
       color: v.$text-enfasis;
     }
   }
 
-  &__cv{
+  &__cv {
     margin-top: 2rem;
   }
 }
 
-@media (320px <= width <= 768px) {
+@media (320px <=width <=768px) {
   .about {
     padding-top: 5rem;
   }
 }
-  
