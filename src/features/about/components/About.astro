@@ -1,7 +1,6 @@
 ---
 import "@/features/about/about.scss";
 import aboutData from "@/features/about/data/aboutData";
-import ButtonCv from "@/shared/components/ButtonCv.astro";
 
 const { title, description } = aboutData;
 ---
@@ -18,7 +17,7 @@ const { title, description } = aboutData;
           class="about__text"
           set:html={text}
           aria-label={`párrafo ${index + 1} de la sección sobre mí`}
-        ></p>
+        />
       ))
     }
   </footer>
