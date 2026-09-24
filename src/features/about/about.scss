@@ -21,6 +21,7 @@
     strong,
     em {
       color: v.$text-enfasis;
+      transition: color 0.4s ease;
     }
   }
 }

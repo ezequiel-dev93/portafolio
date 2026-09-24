@@ -5,15 +5,14 @@ import Sun from '@/shared/icons/Sun.astro'
 ---
 
 <button
-  id="mode-dark-toggle"
-  class="mode-dark"
-  aria-label="Activar modo oscuro"
+  class="mode-dark mode-dark-btn"
+  aria-label="Alternar modo de color"
   aria-pressed="false"
   type="button"
 >
-  <span class="mode-dark__toggle" aria-hidden="true">
-    <i class="mode-dark__icon mode-dark__icon--sun"><Sun /></i>
-    <i class="mode-dark__icon mode-dark__icon--moon"><Moon /></i>
+  <span class="mode-dark__icon-wrap" aria-hidden="true">
+    <span class="mode-dark__icon mode-dark__icon--sun"><Sun /></span>
+    <span class="mode-dark__icon mode-dark__icon--moon"><Moon /></span>
   </span>
 </button>
 

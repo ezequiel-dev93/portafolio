@@ -2,65 +2,93 @@
 @use "styles/abstracts/_mixins" as mx;
 
 .card {
-    padding: 10rem 0;
+  padding: 10rem 0;
 
-    &__article {
-        @include mx.center(flex, center, 0rem);
+  &__article {
+    @include mx.center(flex, center, 0rem);
 
-        span {
-          font-size: clamp(2rem, 12vw, 8rem);
-          font-weight: 700;
-        }
-
-        .title-highlight {
-          @include mx.text-animate;
-        }
+    span {
+      font-size: clamp(2rem, 12vw, 8rem);
+      font-weight: 700;
     }
 
-    &__descripcion {
-        max-width: 32rem; 
-        font-size: clamp(1rem, 2.5vw, 1.5rem);
-        text-wrap: wrap;
-        font-weight: 300;
-        opacity: 0.7;
+    .title-highlight {
+      @include mx.title-style;
+    }
+  }
+
+  &__descripcion {
+    max-width: 32rem;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    text-wrap: wrap;
+    font-weight: 300;
+    opacity: 0.7;
+  }
+
+  &__links {
+    @include mx.center(flex, center, 1.5rem);
+    flex-wrap: wrap;
+    align-self: flex-start;
+    padding-top: 1rem;
+
+    &-list {
+      background-color: v.$bg-timeline-cv-link;
+      color: v.$text-black;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      transition: background-color 0.4s ease, color 0.4s ease,
+        border-color 0.4s ease, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+      cursor: pointer;
+      padding: 0.4rem;
+      box-shadow: 0 0 8px rgba(17, 17, 17, 0.5);
+
+      &:hover {
+        background-color: #845ec2;
+        box-shadow: 0 0 15px rgba(102, 51, 153, 0.7);
+        transform: scale(1.1);
+      }
+    }
+
+    &-items {
+      color: v.$text-black;
+      transition: color 0.4s ease, transform 0.3s ease-in-out;
+
+      .card__links-list:hover & {
+        color: v.$text-white;
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+/* Dark mode */
+body.dark-mode {
+  .card {
+    .title-highlight {
+      @include mx.title-style-dark;
     }
 
     &__links {
-        @include mx.center(flex, center, 1.5rem);
-        flex-wrap: wrap;
-        align-self: flex-start;
-        padding-top: 1rem;
-    
-        &-list {
-            background-color: v.$bg-timeline-cv-link;
-            color: v.$text-black;
-            border-radius: 50%;
-            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, 
-            box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-            cursor: pointer;
-            padding: 0.4rem;
-            box-shadow: 0 0 8px rgba(17, 17, 17, 0.5);
+      &-list {
+        background-color: rgba(30, 30, 30, 0.75);
+        border-color: rgba(232, 75, 60, 0.35);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 
-            &:hover {
-                background-color: #845ec2; 
-                box-shadow: 0 0 15px rgba(102, 51, 153, 0.7);
-                transform: scale(1.1);
-            }
+        &:hover {
+          background: v.$accent-dark-gradient;
+          border-color: transparent;
+          box-shadow: 0 0 16px rgba(232, 75, 60, 0.5);
         }
+      }
 
-        &-items {
-            color: v.$text-black;
-            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
-
-            .card__links-list:hover & {
-                color: v.$text-white;
-                transform: scale(1.2);
-            }
-        }
+      &-items {
+        color: v.$text-white;
+      }
     }
+  }
 }
-  
-@media (320px <= width <= 480px) {
+
+@media (320px <=width <=480px) {
   .card {
     padding-top: 12rem;
 
@@ -77,17 +105,17 @@
       a {
         font-size: 0.8rem;
       }
-    } 
+    }
   }
 }
 
-@media (481px <= width <= 767px) {
+@media (481px <=width <=767px) {
   .card {
     margin-top: 12rem;
   }
 }
 
-@media (768px <= width <= 1024px) {
+@media (768px <=width <=1024px) {
   .card {
     margin-top: 12rem;
 
@@ -100,4 +128,3 @@
     }
   }
 }
-

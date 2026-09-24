@@ -1,33 +1,26 @@
 ---
-import '@/features/experience/experience.scss';
+import "@/features/experience/experience.scss";
 import { experience } from "@/features/experience/data/experience";
+import ShowMore from "@/shared/components/ShowMore.astro";
+import ExperienceItem from "@/features/experience/components/ExperienceItem.astro";
+
+const VISIBLE_COUNT = 2;
+const visibleItems = experience.slice(0, VISIBLE_COUNT);
+const hiddenItems = experience.slice(VISIBLE_COUNT);
 ---
 
-<ul class="experience-card">
-  {experience.map((exp) => (
-    <li class="experience-card__item">
-      <a href="https://www.ezequielsuarez-dev.com/" class="experience-card__link">
-        <article class="experience-card__content">
-          <div class="experience-card__section experience-card__section--primary">
-            <h3 class="experience-card__company">{exp.company}</h3>
-            {exp.primaryInfo.map((item) => (
-              <p class="experience-card__info" set:html={item}></p>
-            ))}
-          </div>
+<ShowMore id="experience" limit={VISIBLE_COUNT}>
+  <ul class="experience-card">
+    {visibleItems.map((exp) => <ExperienceItem exp={exp} />)}
 
-          <div class="experience-card__section experience-card__section--secondary">
-            <article class="experience-card__details">
-              <div class="experience-card__header">
-                <span class="experience-card__role">{exp.role}</span>
-                <span class="experience-card__time">{exp.time}</span>
-              </div>
-              {exp.secundaryInfo.map((item) => (
-                <p class="experience-card__description" set:html={item}></p>
-              ))}
-            </article>
-          </div>
-        </article>
-      </a>
-  </li>
-  ))}
-</ul>
+    {
+      hiddenItems.length > 0 && (
+        <div class="show-more__hidden" id="show-more-experience">
+          {hiddenItems.map((exp) => (
+            <ExperienceItem exp={exp} />
+          ))}
+        </div>
+      )
+    }
+  </ul>
+</ShowMore>

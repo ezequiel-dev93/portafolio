@@ -1,0 +1,85 @@
+@use "styles/abstracts/_variables" as v;
+@use "styles/abstracts/_mixins" as mx;
+
+.show-more {
+  width: 100%;
+
+  &__content {
+    position: relative;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem auto 0;
+    padding: 0.75rem 2rem;
+    border: 0.1rem solid rgba(153, 153, 153, 0.3);
+    border-radius: 50px;
+    background: transparent;
+    color: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.35s ease;
+
+    &:hover {
+      border-color: v.$text-enfasis;
+      color: v.$text-enfasis;
+      background: rgba(154, 84, 224, 0.06);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(154, 84, 224, 0.15);
+    }
+
+    &:focus-visible {
+      outline: 2px solid v.$text-enfasis;
+      outline-offset: 2px;
+    }
+
+    &-icon {
+      transition: transform 0.35s ease;
+    }
+
+    &[aria-expanded="true"] &-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+/* ── Dark mode ─────────────────────────────────── */
+body.dark-mode {
+  .show-more__btn {
+    &:hover {
+      border-color: v.$accent-dark;
+      color: v.$accent-dark;
+      background: rgba(232, 75, 60, 0.08);
+      box-shadow: 0 4px 16px rgba(232, 75, 60, 0.2);
+    }
+
+    &:focus-visible {
+      outline-color: v.$accent-dark;
+    }
+  }
+}
+
+/* ── Hidden items animation ─────────────────────── */
+.show-more__hidden {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+
+  &.is-visible {
+    max-height: 2000px;
+    opacity: 1;
+  }
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (width <= 480px) {
+  .show-more__btn {
+    font-size: 0.9rem;
+    padding: 0.65rem 1.5rem;
+  }
+}

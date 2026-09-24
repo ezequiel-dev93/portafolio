@@ -1,16 +1,19 @@
 ---
-import '@/features/contact/contact.scss';
-import ContactAction from '@/features/contact/contact-action/ContactAction.astro';
-import ContactForm from '@/features/contact/contact-form/ContactForm.astro';
+import "@/features/contact/contact.scss";
 ---
 
-<section class="sectionContact">    
-        <h2 class="sectionContact__title">
-            ¡Te ayudo a crear algo increíble!
-        </h2>
+<section class="contactCta" aria-labelledby="contact-cta-title">
+  <div class="contactCta__inner">
+    <h2 id="contact-cta-title" class="contactCta__title">
+      Contame qué estás cronstruyendo y vemos cómo llevarla al sigiuente nivel
+    </h2>
 
-    <section class="sectionContact__container">
-        <ContactForm />
-        <ContactAction />
-    </section>
+    <a
+      href="/contact"
+      class="contactCta__btn"
+      aria-label="Ir a la página de contacto"
+    >
+      Contame Tu Proyecto →
+    </a>
+  </div>
 </section>

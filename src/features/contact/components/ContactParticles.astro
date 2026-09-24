@@ -1,0 +1,17 @@
+<canvas id="contact-particles" aria-hidden="true"></canvas>
+
+<style>
+  #contact-particles {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+</style>
+
+<script>
+  import { initContactParticles } from "@/lib/contact-particles.js";
+  initContactParticles();
+</script>

@@ -20,41 +20,82 @@
   
     &__categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 0.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
     }
   
     &__category {
       background-color: v.$bg-cardproject;
       display: flex;
       flex-direction: column;
-      border-radius: 0.5rem;
-      padding: 1rem; 
+      border-radius: 0.6rem;
+      border: 1px solid rgba(114, 114, 114, 0.15);
+      padding: 1.5rem;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
     }
   
     &__subtitle {
       text-align: center;
       color: v.$text-black;
+      font-size: 1.15rem;
+      font-weight: 700;
       padding-bottom: 1.5rem;
+      transition: color 0.4s ease;
     }  
   
     &__list {
       @include mx.flex(flex, flex-start, center);
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.2rem;
 
         li {
           @include mx.column(flex, column, center);
-          font-size: 0.68rem;
-          gap: 1rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          gap: 0.6rem;
+          transition: transform 0.2s ease;
+
+          &:hover {
+            transform: scale(1.08);
+          }
         }
 
         &-icon {
           width: 2rem;
-          height: 1.5rem;
+          height: 2rem;
           object-fit: contain;
         }
     }
+}
+
+/* Modo oscuro para Skills (Unificado con gama Coral / title-style-dark) */
+body.dark-mode {
+  .skill {
+    &__category {
+      background: v.$bg-cardproject-dark;
+      border-color: rgba(255, 255, 255, 0.08);
+
+      &:hover {
+        border-color: rgba(232, 75, 60, 0.4);
+        box-shadow: 0 8px 28px rgba(232, 75, 60, 0.2);
+      }
+    }
+
+    &__subtitle {
+      background: v.$accent-dark-gradient;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    &__list li {
+      color: v.$text-white;
+    }
+  }
 }
 
 @media (320px <= width <= 768px) {

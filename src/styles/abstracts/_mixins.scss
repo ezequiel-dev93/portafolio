@@ -17,31 +17,31 @@
 @mixin flex($dis, $jus, $center) {
     display: $dis;
     justify-content: $jus;
-    align-items: 	 $center;
+    align-items: $center;
 }
 
 @mixin center($dis, $center, $gap) {
     display: $dis;
-    align-items: 	$center;
+    align-items: $center;
     gap: $gap;
 }
 
 @mixin column($dis, $flex, $center) {
-  display: $dis;
-  flex-direction: $flex;
-  align-items: 	$center;
+    display: $dis;
+    flex-direction: $flex;
+    align-items: $center;
 }
 
-@mixin grid($dis ,$center) {
-  display: $dis;
-  place-items: $center;
+@mixin grid($dis , $center) {
+    display: $dis;
+    place-items: $center;
 }
 
 @mixin grid-column($columnas, $espacio) {
-    display: 		       grid;
+    display: grid;
     grid-template-columns: repeat($columnas, 1fr);
-}  
- 
+}
+
 @mixin title-style {
     background: linear-gradient(135deg, #58039d, #E84B3C);
     -webkit-text-fill-color: transparent;
@@ -49,14 +49,26 @@
 }
 
 @mixin title-style-dark {
-    background: linear-gradient(135deg, #bc97d2, #E84B3C);
+    background: linear-gradient(135deg, #CF3F4D, #E84B3C);
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-@mixin text-animate {
-  background: linear-gradient(135deg, #663399, #E84B3C);
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+@mixin card-interactive {
+    border: 0.1rem solid rgba(153, 153, 153, 0.2);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
 
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-8px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    &:focus-within,
+    &:focus {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
+    }
+}

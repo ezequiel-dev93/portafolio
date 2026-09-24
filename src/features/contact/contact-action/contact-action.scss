@@ -142,3 +142,33 @@
     font-size: 0.9rem;
   }
 }
+
+/* Dark Mode (Opción 1: Gama Coral / title-style-dark) */
+body.dark-mode {
+  .contact {
+    &__actions-buttom {
+      border: 1px solid rgba(232, 75, 60, 0.4);
+      color: v.$text-white;
+
+      &:hover {
+        background: v.$accent-dark-gradient;
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 0 14px rgba(232, 75, 60, 0.45);
+      }
+    }
+
+    #contact__message-sub {
+      color: v.$text-white;
+    }
+
+    #contact__message-main {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .contact__alert {
+    background: v.$accent-dark-gradient;
+    box-shadow: 0 4px 16px rgba(232, 75, 60, 0.35);
+  }
+}

@@ -2,45 +2,89 @@
 @use "styles/abstracts/_mixins" as mx;
 
 .sectionContenedor {
-  width: 90%;
-  max-width: 1200px;
+  width: 96%;
+  max-width: 1450px;
   margin: 0 auto;
 }
 
-/* Dark Mode*/
-.mode-dark__toggle {
-  width: 3rem;
-  height: 1.1rem;
-  padding: 0 0.14rem;
-  @include mx.flex(flex, space-between, center);
-  position: relative;
-  border-radius: 1rem;
-  background-color: #0d1226;
+/* Dark Mode Button (Single icon modern toggle) */
+.mode-dark-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid rgba(153, 65, 252, 0.25);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  color: v.$text-black;
   cursor: pointer;
-  transition: background-color 0.4s, border-color 0.4s;
+  transition: all 0.3s ease;
 
-  &::before {
-    content: '';
+  &:hover {
+    border-color: v.$text-enfasis;
+    box-shadow: 0 0 12px rgba(153, 65, 252, 0.35);
+    transform: scale(1.08);
+  }
+
+  .mode-dark__icon-wrap {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mode-dark__icon {
     position: absolute;
-    width: 1.13rem;
-    height: 1.13rem;
-    border-radius: 1rem;
-    background: v.$text-white;
-    left: 0;
-    transition: 0.4s;
-  }
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease, opacity 0.3s ease;
 
-  &.active::before {
-    left: unset;
-    right: 0;
-  }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
 
-  .mode-dark__icon--sun {
-    color: #ffad3b;
-  }
+    &--sun {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+      color: #ff9800;
+    }
 
-  .mode-dark__icon--moon {
+    &--moon {
+      opacity: 0;
+      transform: rotate(90deg) scale(0);
+      color: v.$accent-dark;
+    }
+  }
+}
+
+/* Modo oscuro para el botón */
+body.dark-mode {
+  .mode-dark-btn {
+    background: rgba(30, 30, 30, 0.6);
+    border-color: rgba(232, 75, 60, 0.35);
     color: v.$text-white;
+
+    &:hover {
+      border-color: v.$accent-dark;
+      box-shadow: 0 0 14px rgba(232, 75, 60, 0.4);
+    }
+
+    .mode-dark__icon--sun {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0);
+    }
+
+    .mode-dark__icon--moon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
   }
 }
 
@@ -133,16 +177,24 @@
   transition: opacity 0.3s ease;
 
   &__container {
-    @include mx.flex(flex, space-between, center);
-    width: 90%;
-    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 96%;
+    max-width: 1450px;
     margin: 0 auto;
-    padding: 0.8rem 1rem;
+    padding: 0.8rem 0;
   }
 
   &__nav-logo {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
+
+    a {
+      display: flex;
+      align-items: center;
+    }
 
     img {
       height: 2.8rem;
@@ -159,14 +211,14 @@
 
   &__nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     &-menu {
-      padding: 0rem 2rem;
+      padding: 0rem 1rem;
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.8rem;
 
       li {
         position: relative;
@@ -185,49 +237,161 @@
           border-radius: 2px;
         }
 
-        &:hover {
-          @include mx.text-animate;
-        }
+        &:not(.header__item-contact):not(.header__menu-badge-mobile):not(.header__menu-dark-mobile) {
+          &:hover {
+            @include mx.title-style;
+          }
 
-        &:hover::after {
-          width: 100%;
+          &:hover::after {
+            width: 100%;
+          }
         }
       }
 
+      /* Mobile drawer */
       @media (max-width: 1024px) {
-
         border-radius: 1rem 0 0 1rem;
         flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
         position: fixed;
         top: 0;
         right: 0;
         height: 100dvh;
-        width: 70%;
+        width: 75%;
+        max-width: 320px;
         z-index: 999;
-        background: var(--color-bg, #303030);
+        background: var(--color-bg, #1a1a1a);
         color: v.$text-white;
         transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s ease, transform 0.3s ease;
-        padding: 2rem;
+        padding: 4rem 2rem 2rem;
+        gap: 1.5rem;
       }
 
       &.active {
-        @media (max-width: 840px) {
+        @media (max-width: 1024px) {
           transform: translateX(0);
           opacity: 1;
           pointer-events: auto;
         }
       }
     }
+  }
 
-    &-movil {
+  /* Acciones derecha: Badge + DarkMode en desktop */
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  &__badge-desktop {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 1024px) {
       display: none;
-      position: relative;
+    }
+  }
 
-      @media (max-width: 1024px) {
-        display: block;
+  &__dark-desktop {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
+  /* Control de visibilidad en menú móvil */
+  &__menu-badge-mobile {
+    display: none;
+
+    @media (max-width: 1024px) {
+      display: block;
+      margin-bottom: 1rem;
+      padding: 0 !important;
+
+      &::after {
+        display: none !important;
+      }
+    }
+  }
+
+  &__menu-dark-mobile {
+    display: none;
+
+    @media (max-width: 1024px) {
+      display: block;
+      margin-top: auto;
+      padding: 1rem 0 0 !important;
+
+      &::after {
+        display: none !important;
+      }
+    }
+  }
+
+  &__nav-movil {
+    display: none;
+    position: relative;
+
+    @media (max-width: 1024px) {
+      display: block;
+    }
+  }
+
+  /* Énfasis en Contacto (Opción 1: Botón Píldora) */
+  &__item-contact {
+    &::after {
+      display: none !important;
+    }
+  }
+
+  &__btn-contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 1.1rem;
+    border-radius: 2rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid v.$text-enfasis;
+    color: v.$text-enfasis;
+    background: rgba(154, 84, 224, 0.08);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: v.$text-enfasis;
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      background-clip: initial !important;
+      box-shadow: 0 0 14px rgba(154, 84, 224, 0.45);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+/* Modo oscuro para botón de contacto en header */
+body.dark-mode {
+  .header {
+    &__btn-contact {
+      border-color: rgba(232, 75, 60, 0.5);
+      color: v.$text-white;
+      background: rgba(232, 75, 60, 0.12);
+
+      &:hover {
+        background: v.$accent-dark-gradient;
+        border-color: transparent;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+        background-clip: initial !important;
+        box-shadow: 0 0 16px rgba(232, 75, 60, 0.5);
       }
     }
   }
@@ -241,8 +405,8 @@
   overflow: hidden;
 
   &__content {
-    width: 90%;
-    max-width: 1200px;
+    width: 96%;
+    max-width: 1450px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
@@ -295,10 +459,12 @@
       left: 0;
       width: 100%;
       height: 100%;
+      color: #663399;
       transform: scaleY(3) scaleX(2.15);
       transform-origin: bottom;
       display: block;
       pointer-events: none;
+      transition: color 0.5s ease;
     }
   }
 }
@@ -329,6 +495,26 @@
 
     &--logo {
       width: 3rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      &-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
     }
   }
 
@@ -354,8 +540,9 @@
     height: 3rem;
     border-radius: 50%;
     background-color: v.$bg-badge;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
-      box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    border: 1px solid transparent;
+    transition: background-color 0.4s ease, color 0.4s ease,
+      border-color 0.4s ease, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
     cursor: pointer;
     padding: 0.8rem;
     box-shadow: 0 0 8px rgba(17, 17, 17, 0.5);
@@ -370,11 +557,30 @@
 
   &__social-icon {
     color: v.$text-black;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: color 0.4s ease, transform 0.3s ease-in-out;
 
     .section-footer__social-item:hover & {
       color: v.$text-white;
       transform: scale(1.2);
+    }
+  }
+
+  /* Dark mode */
+  body.dark-mode & {
+    &__social-item {
+      background-color: rgba(30, 30, 30, 0.75);
+      border-color: rgba(232, 75, 60, 0.35);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+      &:hover {
+        background: v.$accent-dark-gradient;
+        border-color: transparent;
+        box-shadow: 0 0 16px rgba(232, 75, 60, 0.5);
+      }
+    }
+
+    &__social-icon {
+      color: v.$text-white;
     }
   }
 
@@ -390,50 +596,23 @@
   }
 }
 
-/* Button Cv*/
-.button {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  background-color: v.$bg-timeline-cv-link;
-  color: v.$text-black;
-  border-radius: 3rem;
-  padding: 0.3rem 1.3rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: background-color 0.3s;
-
-  &__icon-wrapper {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    position: relative;
-    background-color: v.$text-white;
-    border-radius: 50%;
-    @include mx.flex(flex, center, center);
-    overflow: hidden;
-  }
-
-  &:hover {
-    background-color: v.$text-enfasis;
-    color: v.$text-white;
-  }
-
-  &:hover .button__icon-wrapper {
-    color: v.$text-black;
-  }
-}
-
 /* Badge Status */
 .status-badge {
-  @include mx.center(flex, center, 0.5rem);
-  border-radius: 1rem;
-  border: 0.09rem solid;
-  padding: 0.2rem 1rem;
+  @include mx.center(flex, center, 0.45rem);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  padding: 0.3rem 0.85rem;
   background-color: v.$bg-badge;
   color: v.$text-enfasis;
-  border-color: rgba(168, 85, 247, 0.2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 
   &__dot {
     position: relative;
@@ -452,6 +631,7 @@
       background-color: v.$bg-badge-ping;
       opacity: 0.75;
       animation: ping 1.5s infinite;
+      transition: background-color 0.4s ease;
 
       @keyframes ping {
         0% {
@@ -469,6 +649,18 @@
           opacity: 0.75;
         }
       }
+    }
+  }
+}
+
+body.dark-mode {
+  .status-badge {
+    background-color: rgba(232, 75, 60, 0.12);
+    color: v.$accent-dark;
+    border-color: rgba(232, 75, 60, 0.35);
+
+    &__dot-ping {
+      background-color: v.$accent-dark;
     }
   }
 }

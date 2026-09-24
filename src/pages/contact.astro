@@ -1,0 +1,383 @@
+---
+import { ClientRouter } from "astro:transitions";
+import Layout from "@/layouts/Layout.astro";
+import ContactForm from "@/features/contact/contact-form/ContactForm.astro";
+import ContactAction from "@/features/contact/contact-action/ContactAction.astro";
+import ContactParticles from "@/features/contact/components/ContactParticles.astro";
+import Copyright from "@/shared/components/Copyright.astro";
+---
+
+<Layout
+  title="Contacto | Ezequiel Suarez"
+  description="Hablemos de tu proyecto. Completá el formulario o escribime directo por mail."
+>
+  <ClientRouter />
+
+  <ContactParticles />
+
+  <main class="contact-page" id="main-content">
+    <div class="contact-page__top-nav">
+      <a
+        href="/"
+        class="contact-page__back-btn"
+        aria-label="Volver a la página principal"
+      >
+        <span class="contact-page__back-arrow" aria-hidden="true">←</span>
+        <span>Volver al inicio</span>
+      </a>
+    </div>
+
+    <div class="contact-page__container">
+      <!-- Fila 1: Textos explicativos lado a lado con space-between -->
+      <section
+        class="contact-page__row contact-page__row--header"
+        aria-label="Información del servicio"
+      >
+        <header class="contact-page__intro">
+          <h1 id="contact-page-title" class="contact-page__title">
+            Consulta de proyecto
+          </h1>
+          <p class="contact-page__sub">
+            Completá el formulario y analizaré tu sitio antes de responder. Te
+            enviaré observaciones concretas sobre UX, rendimiento, estructura y
+            experiencia, trabajemos juntos o no.
+          </p>
+        </header>
+
+        <!-- Apartado: ¿Qué pasa después? al lado -->
+        <article class="next-steps" aria-labelledby="next-steps-title">
+          <h2 id="next-steps-title" class="next-steps__title">
+            ¿Qué pasa después?
+          </h2>
+          <ul class="next-steps__list" role="list">
+            <li class="next-steps__item">
+              <span class="next-steps__num" aria-hidden="true">01</span>
+              <div class="next-steps__content">
+                <strong class="next-steps__item-title"
+                  >Reviso tu proyecto</strong
+                >
+                <p class="next-steps__item-desc">
+                  Analizo detalladamente tu sitio actual o la idea que me
+                  compartas.
+                </p>
+              </div>
+            </li>
+            <li class="next-steps__item">
+              <span class="next-steps__num" aria-hidden="true">02</span>
+              <div class="next-steps__content">
+                <strong class="next-steps__item-title"
+                  >Te envío respuesta o preguntas</strong
+                >
+                <p class="next-steps__item-desc">
+                  Recibirás feedback con observaciones puntuales y propuestas
+                  claras.
+                </p>
+              </div>
+            </li>
+            <li class="next-steps__item">
+              <span class="next-steps__num" aria-hidden="true">03</span>
+              <div class="next-steps__content">
+                <strong class="next-steps__item-title"
+                  >Llamada rápida si es necesario</strong
+                >
+                <p class="next-steps__item-desc">
+                  Coordinamos una videollamada corta para resolver dudas y
+                  alinear expectativas.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Fila 2: Formulario y Acciones Rápidas lado a lado con space-between -->
+      <section
+        class="contact-page__row contact-page__row--forms"
+        aria-label="Formas de contacto"
+      >
+        <div class="contact-page__form-wrapper">
+          <ContactForm />
+        </div>
+        <div class="contact-page__action-wrapper">
+          <ContactAction />
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer minimalista enfocado con Copyright reutilizable -->
+    <footer class="contact-page__footer">
+      <Copyright />
+    </footer>
+  </main>
+</Layout>
+
+<style lang="scss">
+  @use "styles/abstracts/_variables" as v;
+  @use "styles/abstracts/_mixins" as mx;
+
+  .contact-page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 96%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 3rem 0 2rem;
+    box-sizing: border-box;
+
+    &__top-nav {
+      margin-bottom: 2.5rem;
+    }
+
+    &__back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(153, 65, 252, 0.25);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      color: v.$text-black;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: v.$text-enfasis;
+        background: v.$text-enfasis;
+        color: v.$text-white;
+        transform: translateX(-3px);
+      }
+    }
+
+    &__back-arrow {
+      font-size: 1.1rem;
+      transition: transform 0.2s ease;
+    }
+
+    /* Contenedor vertical de las dos filas */
+    &__container {
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    /* Filas Flex con space-between puro (sin gap forzado) */
+    &__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+
+      &--header {
+        align-items: stretch;
+      }
+
+      &--forms {
+        align-items: flex-start;
+      }
+    }
+
+    /* Bloque Intro (Título + Subtítulo) */
+    &__intro {
+      width: 48%;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    &__title {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      @include mx.title-style();
+    }
+
+    &__sub {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+
+    /* Wrappers de la segunda fila */
+    &__form-wrapper {
+      width: 48%;
+      max-width: 580px;
+    }
+
+    &__action-wrapper {
+      width: 42%;
+      max-width: 460px;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    &__footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(150, 150, 150, 0.15);
+    }
+  }
+
+  /* Sección ¿Qué pasa después? */
+  .next-steps {
+    width: 42%;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.8rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(153, 65, 252, 0.18);
+    backdrop-filter: blur(10px);
+
+    &__title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: v.$text-enfasis;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    &__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+    }
+
+    &__num {
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: v.$text-enfasis;
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.5rem;
+      background: rgba(153, 65, 252, 0.12);
+      border: 1px solid rgba(153, 65, 252, 0.25);
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    &__item-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    &__item-desc {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      opacity: 0.75;
+      margin: 0;
+    }
+  }
+
+  /* Dark Mode Adaptation (Opción 1: Gama Coral / title-style-dark) */
+  body.dark-mode {
+    .contact-page {
+      &__back-btn {
+        background: rgba(30, 30, 30, 0.6);
+        border-color: rgba(232, 75, 60, 0.35);
+        color: v.$text-white;
+
+        &:hover {
+          background: v.$accent-dark-gradient;
+          color: #fff;
+          border-color: transparent;
+          box-shadow: 0 0 16px rgba(232, 75, 60, 0.4);
+        }
+      }
+
+      &__title {
+        @include mx.title-style-dark();
+      }
+    }
+
+    .next-steps {
+      background: rgba(24, 24, 27, 0.65);
+      border-color: rgba(232, 75, 60, 0.2);
+
+      &__title {
+        background: v.$accent-dark-gradient;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      &__num {
+        color: #fff;
+        background: rgba(232, 75, 60, 0.18);
+        border-color: rgba(232, 75, 60, 0.4);
+      }
+    }
+  }
+
+  /* Responsive Breakpoints */
+  @media (max-width: 992px) {
+    .contact-page {
+      &__container {
+        gap: 3.5rem;
+      }
+
+      &__row {
+        flex-direction: column;
+        gap: 2.5rem;
+
+        &--forms {
+          align-items: stretch;
+        }
+      }
+
+      &__intro,
+      &__form-wrapper,
+      &__action-wrapper,
+      .next-steps {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      &__action-wrapper {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-page {
+      padding: 1.5rem 1rem 1.5rem;
+
+      &__top-nav {
+        margin-bottom: 1.8rem;
+      }
+
+      &__title {
+        font-size: 1.85rem;
+      }
+
+      &__sub {
+        font-size: 0.95rem;
+      }
+
+      .next-steps {
+        padding: 1.2rem;
+      }
+    }
+  }
+</style>

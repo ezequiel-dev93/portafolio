@@ -2,40 +2,74 @@
 @use "styles/abstracts/_mixins" as mx;
 
 .contactos {
-    padding-top: 14rem;    
+  padding-top: 12rem;
 }
-  
-.sectionContact {
-  
+
+.contactCta {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 4rem 0;
+  text-align: left;
+
+  &__inner {
+    @include mx.column(flex, column, flex-start);
+    align-items: flex-start;
+    gap: 1.5rem;
+    max-width: 700px;
+  }
+
   &__title {
     @include mx.title-style();
+    line-height: 1.15;
+    text-align: left;
   }
 
-  &__container {
-    @include mx.flex(flex, flex-start, flex-start);
-    gap: 10rem;
+  &__btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border: 2px solid v.$text-enfasis;
+    border-radius: 0.5rem;
+    color: v.$text-enfasis;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    align-self: flex-start;
 
-    @include mx.mq-max(768px) {
-      @include mx.column(flex, column, flex-start);
-      gap: 2rem;
-      margin-bottom: 2rem;
-      
+    &:hover {
+      background-color: v.$text-enfasis;
+      color: v.$text-white;
+      box-shadow: 0 0 12px rgba(102, 51, 153, 0.4);
     }
   }
 }
 
-@media (320px <= width <= 480px) {
-.sectionContact {
-    padding: 1rem 0;
-    
-    &__title {
-      font-size: 1.3rem;
-      
+/* Dark mode */
+body.dark-mode {
+  .contactCta__btn {
+    border-color: rgba(232, 75, 60, 0.45);
+    color: v.$text-white;
+
+    &:hover {
+      background: v.$accent-dark-gradient;
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 0 16px rgba(232, 75, 60, 0.4);
     }
-    
-    &__container {
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactos {
+    padding-top: 6rem;
+  }
+
+  .contactCta {
+    padding: 3rem 0;
+
+    &__title {
+      font-size: 1.4rem;
     }
   }
 }

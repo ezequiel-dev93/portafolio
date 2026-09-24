@@ -1,58 +1,78 @@
 ---
-import '@/styles/app.scss';
-import logocard from '@/shared/assets/cards/logocard.webp';
-import SlackIcon from '@/shared/icons/Slack.astro';
-import LinkedInIcon from '@/shared/icons/LinkedIn.astro';
-import GithubIcon from '@/shared/icons/Github.astro';
-import EmailIcon from '@/shared/icons/Email.astro';
-import ItemsIcons from '@/shared/components/ItemsIcons.astro';
+import "@/styles/app.scss";
+import logocard from "@/shared/assets/cards/logocard.webp";
+import SlackIcon from "@/shared/icons/Slack.astro";
+import LinkedInIcon from "@/shared/icons/LinkedIn.astro";
+import GithubIcon from "@/shared/icons/Github.astro";
+import EmailIcon from "@/shared/icons/Email.astro";
+import Copyright from "@/shared/components/Copyright.astro";
+import ItemsIcons from "@/shared/components/ItemsIcons.astro";
 ---
 
 <section class="section-footer">
     <section class="section-footer__container">
         <article class="section-footer__perfil">
             <div class="section-footer__perfil--logo">
-                <a href="#top" aria-label="Ir al inicio"><img src={logocard.src} alt="Logo de Ezequiel Suarez" loading="lazy" width="40" height="40" /></a>
+                <a href="#top" aria-label="Ir al inicio" class="section-footer__perfil--logo-link">
+                    <img
+                        src={logocard.src}
+                        alt="Logo de Ezequiel Suarez"
+                        loading="lazy"
+                        width="48"
+                        height="48"
+                    />
+                </a>
             </div>
 
             <div class="section-footer__perfil--title">
-                <p class="section-footer__name"><strong>Ezequiel Suarez</strong></p>
+                <p class="section-footer__name">
+                    <strong>Ezequiel Suarez</strong>
+                </p>
                 <p>Desarrollador de Software</p>
             </div>
         </article>
-            
+
         <article class="section-footer__social">
             <ul class="section-footer__social-list">
-               <li class="section-footer__social-item">
-                    <ItemsIcons href="mailto:ezequielsuarez.dev@gmail.com" aria-label="Enviar email a Ezequiel Suarez">
+                <li class="section-footer__social-item">
+                    <ItemsIcons
+                        href="mailto:ezequielsuarez.dev@gmail.com"
+                        aria-label="Enviar email a Ezequiel Suarez"
+                    >
                         <EmailIcon class="section-footer__social-icon" />
                     </ItemsIcons>
-               </li>
-                
-               <li class="section-footer__social-item">
-                    <ItemsIcons href="https://app.slack.com/huddle/T03UTHFCGLF/C03V55LJ7HT" aria-label="Contactar en Slack">
-                        <SlackIcon class="section-footer__social-icon"/>
+                </li>
+
+                <li class="section-footer__social-item">
+                    <ItemsIcons
+                        href="https://app.slack.com/huddle/T03UTHFCGLF/C03V55LJ7HT"
+                        aria-label="Contactar en Slack"
+                    >
+                        <SlackIcon class="section-footer__social-icon" />
                     </ItemsIcons>
-               </li>
-                
-               <li class="section-footer__social-item">
-                    <ItemsIcons href="https://www.linkedin.com/in/ezequiel-suarez-dev" aria-label="Ver perfil de LinkedIn de Ezequiel Suarez">
+                </li>
+
+                <li class="section-footer__social-item">
+                    <ItemsIcons
+                        href="https://www.linkedin.com/in/ezequiel-suarez-dev"
+                        aria-label="Ver perfil de LinkedIn de Ezequiel Suarez"
+                    >
                         <LinkedInIcon class="section-footer__social-icon" />
                     </ItemsIcons>
-               </li>
-               
+                </li>
+
                 <li class="section-footer__social-item">
-                    <ItemsIcons href="https://github.com/ezequiel-dev93" aria-label="Ver perfil de GitHub de Ezequiel Suarez">
+                    <ItemsIcons
+                        href="https://github.com/ezequiel-dev93"
+                        aria-label="Ver perfil de GitHub de Ezequiel Suarez"
+                    >
                         <GithubIcon class="section-footer__social-icon" />
                     </ItemsIcons>
                 </li>
-            </ul>  
+            </ul>
         </article>
     </section>
-    <p class="section-footer__legal"> 
-        <span>© 2025 Todos los derechos reservados</span> <span> | Ezequiel Suarez</span>
-    </p>
+    <div class="section-footer__legal">
+        <Copyright />
+    </div>
 </section>
-
-
-

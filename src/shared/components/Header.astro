@@ -3,43 +3,64 @@ import "@/styles/app.scss";
 import logocard from "@/shared/assets/cards/logocard.webp";
 import Items from "@/shared/components/Items.astro";
 import MenuMobile from "@/shared/components/MenuMobile.astro";
+import BadgeStatus from "@/shared/components/BadgeStatus.astro";
 import DarkMode from "@/shared/components/DarkMode.astro";
 ---
 
 <header class="header">
   <section class="header__container">
+    <!-- Izquierda: Logo -->
     <div class="header__nav-logo">
-      <img
-        src={logocard.src}
-        alt="Logotipo de Ezequiel Suarez"
-        class="cardPerfil__logo-img"
-        width="40"
-        height="40"
-        loading="eager"
-      />
+      <a href="#top" aria-label="Ir al inicio">
+        <img
+          src={logocard.src}
+          alt="Logotipo de Ezequiel Suarez"
+          class="cardPerfil__logo-img"
+          width="40"
+          height="40"
+          loading="eager"
+        />
+      </a>
     </div>
 
+    <!-- Centro: Navegación -->
     <nav class="header__nav" role="navigation" aria-label="Menú principal">
-      <div class="header__nav-movil">
-        <MenuMobile />
-      </div>
+      <ul class="header__nav-menu" id="main-menu">
+        <!-- En Mobile aparece primero el badge -->
+        <li class="header__menu-badge-mobile">
+          <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">Disponible</BadgeStatus>
+        </li>
 
-      <ul
-        class="header__nav-menu"
-        id="main-menu"
-      >
         <Items href="#top">Inicio</Items>
         <Items href="#experiencia">Experiencia</Items>
         <Items href="#proyectos">Proyectos</Items>
         <Items href="#sobre-mi">Sobre Mi</Items>
         <Items href="#tecnologias">Tecnologías</Items>
-        <Items href="#contactos">Contacto</Items>
+        <li class="header__item-contact">
+          <a href="#contactos" class="header__btn-contact">Contacto</a>
+        </li>
 
-        <li>
+        <!-- En Mobile aparece al final el dark mode -->
+        <li class="header__menu-dark-mobile">
           <DarkMode />
         </li>
       </ul>
     </nav>
+
+    <!-- Derecha: Badge de disponibilidad + DarkMode (Desktop) y Botón hamburguesa (Mobile) -->
+    <div class="header__actions">
+      <div class="header__badge-desktop">
+        <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">Disponible</BadgeStatus>
+      </div>
+
+      <div class="header__dark-desktop">
+        <DarkMode />
+      </div>
+
+      <div class="header__nav-movil">
+        <MenuMobile />
+      </div>
+    </div>
   </section>
 </header>
 

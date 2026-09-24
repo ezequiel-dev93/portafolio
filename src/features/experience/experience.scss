@@ -43,25 +43,26 @@
   }
 
   &__link {
+    position: relative;
     display: block;
     color: inherit;
-    border: 0.1rem solid rgba(153, 153, 153, 0.2);
-    border-radius: 0.5rem;
     padding: clamp(1.5rem, 4vw, 3rem);
     margin-bottom: 2rem;
-    transition: all 0.3s ease-in-out;
+    @include mx.card-interactive;
 
-    &:hover {
-      border-color: rgba(255, 255, 255, 0.4);
-      background: rgba(255, 255, 255, 0.05);
-      animation: cardHover 0.3s ease-in-out forwards;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    &:hover .experience-card__icon-link {
+      transform: translate(3px, -3px);
+      color: v.$text-enfasis;
     }
+  }
 
-    &:focus {
-      outline: 2px solid rgba(255, 255, 255, 0.5);
-      outline-offset: 2px;
-    }
+  &__icon-link {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: inherit;
+    opacity: 0.5;
+    transition: transform 0.3s ease, color 0.3s ease;
   }
 
   &__content {
@@ -273,5 +274,11 @@
       @include mx.grid-column(2, 1);
       gap: 4rem;
     }
+  }
+}
+
+body.dark-mode {
+  .experience-card__link:hover .experience-card__icon-link {
+    color: v.$accent-dark;
   }
 }

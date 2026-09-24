@@ -7,14 +7,14 @@
   &__title {
     padding-bottom: 1rem;
 
-    h2 { 
+    h2 {
       @include mx.title-style();
     }
   }
 
   &__items {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
 
     @include mx.mq-max(1024px) {
@@ -34,31 +34,41 @@
   }
 
   &__cards {
-    background: $bg-cardproject;
-    border: 0.1rem solid rgba(114, 114, 114, 0.2);
-    border-radius: 0.6rem;
     overflow: hidden;
-    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    
-    a {
-      padding: 2rem;
-    }
+    @include mx.card-interactive;
 
-    &:hover {
-      box-shadow: 0 0 30px #00000066;
-      transform: translateY(-4px);
+    a {
+      position: relative;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      &:hover .projects__icon-link {
+        transform: translate(3px, -3px);
+        color: v.$text-enfasis;
+      }
     }
   }
-  
+
+  &__icon-link {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: inherit;
+    opacity: 0.5;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
   &__figure {
     display: flex;
     flex-direction: column;
     height: 100%;
-    
+
     &:hover &-picture {
-      transform: scale(1.02);     
+      transform: scale(1.02);
     }
 
     &-link {
@@ -77,7 +87,8 @@
     &-title {
       font-weight: 700;
       font-size: 1.23rem;
-      
+      transition: color 0.4s ease;
+
       @include mx.mq-max(768px) {
         font-size: 1.2rem;
       }
@@ -137,14 +148,45 @@
       height: 1.2rem;
     }
   }
+  &__hidden-wrap {
+    grid-column: 1 / -1;
+    list-style: none;
+  }
+
+  &__items--hidden {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+
+    @include mx.mq-max(1024px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @include mx.mq-max(768px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @include mx.mq-max(480px) {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
 }
 
-@media (320px <= width <= 768px) {
+@media (320px <=width <=768px) {
   .projects {
     padding-top: 4rem;
 
     &__items {
       gap: 1.2rem;
     }
+  }
+}
+
+body.dark-mode {
+  .projects__cards a:hover .projects__icon-link {
+    color: v.$accent-dark;
   }
 }

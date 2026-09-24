@@ -1,57 +1,26 @@
 ---
 import '@/features/projects/card-project.scss';
 import projects from '@/features/projects/data/projects';  
-import type { TagKey } from '@/features/projects/types/projects';
-import Vite from '@/shared/icons/Vite.astro';
-import AstroIcon from '@/shared/icons/AstroIcon.astro';
-import Tailwind from '@/shared/icons/Tailwind.astro';
-import React from '@/shared/icons/React.astro';
-import TypeScript from '@/shared/icons/TypeScript.astro';
-import Python from '@/shared/icons/Python.astro';
-import Streamlit from '@/shared/icons/Streamlit.astro';
-import Playwright from '@/shared/icons/Playwright.astro';
-import Polars from '@/shared/icons/Polars.astro';
-import Supabase from '@/shared/icons/Supabase.astro';
-import AWS from '@/shared/icons/AmazonWebServices.astro';
+import ShowMore from '@/shared/components/ShowMore.astro';
+import ProjectItem from './ProjectItem.astro';
 
-const TAGS: Record<TagKey, { icon: any }> = {
-  PYTHON:     { icon: Python },
-  STREAMLIT:  { icon: Streamlit },
-  PLAYWRIGHT: { icon: Playwright },
-  POLARS:     { icon: Polars},
-  VITE:       { icon: Vite },
-  TAILWIND:   { icon: Tailwind },
-  TYPESCRIPT: { icon: TypeScript },
-  REACT:      { icon: React },
-  NAVE:       { icon: AstroIcon },
-  SUPABASE:   { icon: Supabase },
-  AWS:        { icon: AWS },
-};
+const VISIBLE_COUNT = 3;
+const visibleProjects = projects.slice(0, VISIBLE_COUNT);
+const hiddenProjects = projects.slice(VISIBLE_COUNT);
 --- 
  
 <section class="projects__container" aria-labelledby="projects-title">
-  <ul class="projects__items">
-    {projects.map(({ title, description, tags, link }) => (
-      <li class="projects__cards">
-        {link ? (
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            <figure class="projects__figure">
-              <figcaption class="projects__figure-caption">
-                <h3 class="projects__figure-title">{title}</h3>
-                
-                <p class="projects__figure-description">{description}</p>
+  <ShowMore id="projects" limit={VISIBLE_COUNT}>
+    <ul class="projects__items">
+      {visibleProjects.map((project) => <ProjectItem project={project} />)}
 
-                <div class="projects__figure-icons" role="group" aria-label="Tecnologías usadas">
-                  {tags.map((tag) => {
-                    const Icon = TAGS[tag].icon;
-                    return <Icon class="projects__figure-icon" role="img" aria-label={tag} />;
-                  })}
-                </div>
-              </figcaption>
-            </figure>
-          </a>
-        ) : null}
-      </li>
-    ))}
-  </ul>
+      {hiddenProjects.length > 0 && (
+        <li class="show-more__hidden projects__hidden-wrap" id="show-more-projects">
+          <ul class="projects__items projects__items--hidden">
+            {hiddenProjects.map((project) => <ProjectItem project={project} />)}
+          </ul>
+        </li>
+      )}
+    </ul>
+  </ShowMore>
 </section>
