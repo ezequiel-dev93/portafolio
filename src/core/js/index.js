@@ -14,12 +14,13 @@ function initDarkMode() {
   const toggles = document.querySelectorAll('.mode-dark-btn, #mode-dark-toggle');
   const body = document.body;
 
-  if (!toggles.length) return;
-
   const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const userPrefersDark = localStorage.getItem('dark-mode');
 
   let isDarkMode = userPrefersDark === null ? systemPrefersDark : userPrefersDark === 'true';
+
+  // Aplicar estado inicial siempre (con o sin botones)
+  body.classList.toggle('dark-mode', isDarkMode);
 
   function updateButtons(active) {
     toggles.forEach(btn => {
@@ -28,19 +29,19 @@ function initDarkMode() {
     });
   }
 
-  // Aplicar estado inicial
-  body.classList.toggle('dark-mode', isDarkMode);
-  updateButtons(isDarkMode);
+  // Si hay botones, configurar toggle
+  if (toggles.length) {
+    updateButtons(isDarkMode);
 
-  // Escuchar clicks en cada botón (desktop y mobile)
-  toggles.forEach(btn => {
-    btn.onclick = (e) => {
-      e.stopPropagation();
-      const active = body.classList.toggle('dark-mode');
-      updateButtons(active);
-      localStorage.setItem('dark-mode', active);
-    };
-  });
+    toggles.forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const active = body.classList.toggle('dark-mode');
+        updateButtons(active);
+        localStorage.setItem('dark-mode', active);
+      };
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', initDarkMode);

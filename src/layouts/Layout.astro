@@ -65,6 +65,16 @@ const ogImage = "https://www.ezequielsuarez-dev.com/img/og-image.png";
 		<link rel="icon" type="image/x-icon" href="/img/logo/logotipo.ico" />
 
 		<SEOStructuredData />
+
+		<!-- Anti-FOUC: aplica dark-mode antes del primer paint -->
+		<script is:inline>
+			(function () {
+				const stored = localStorage.getItem('dark-mode');
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				const isDark = stored === null ? prefersDark : stored === 'true';
+				if (isDark) document.documentElement.classList.add('dark-mode');
+			})();
+		</script>
 	</head>
 
 	<body>
