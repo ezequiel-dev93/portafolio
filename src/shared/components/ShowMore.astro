@@ -1,5 +1,5 @@
 ---
-import '@/shared/components/show-more.scss';
+import "@/styles/show-more.scss";
 
 interface Props {
   /** Unique ID for this show-more group */
@@ -12,12 +12,7 @@ interface Props {
   hideText?: string;
 }
 
-const {
-  id,
-  limit,
-  showText = 'Ver más',
-  hideText = 'Ver menos',
-} = Astro.props;
+const { id, limit, showText = "Ver más", hideText = "Ver menos" } = Astro.props;
 ---
 
 <div

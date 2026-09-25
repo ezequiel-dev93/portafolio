@@ -33,7 +33,7 @@ const ogImage = "https://www.ezequielsuarez-dev.com/img/og-image.png";
 		<meta name="author" content="Ezequiel Suarez" />
 		<meta
 			name="keywords"
-			content="Front-End, Desarrollador de Software, Astro, React, Sass, TypeScript, Python, FastAPI, MySQL, Programador, Ezequiel Suarez, Argentina"
+			content="Front-End, Desarrollador de Software, Astro, React, Next.js, Sass, TypeScript, Python, FastAPI, MySQL, AWS, Docker, Programador, Ezequiel Suarez, Argentina"
 		/>
 		<meta name="robots" content="index, follow" />
 
@@ -66,19 +66,24 @@ const ogImage = "https://www.ezequielsuarez-dev.com/img/og-image.png";
 
 		<SEOStructuredData />
 
-		<!-- Anti-FOUC: aplica dark-mode antes del primer paint -->
+		<!-- Anti-FOUC: aplica dark-mode antes del primer paint - pages/Contact -->
 		<script is:inline>
 			(function () {
-				const stored = localStorage.getItem('dark-mode');
-				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				const isDark = stored === null ? prefersDark : stored === 'true';
-				if (isDark) document.documentElement.classList.add('dark-mode');
+				const stored = localStorage.getItem("dark-mode");
+				const prefersDark = window.matchMedia(
+					"(prefers-color-scheme: dark)",
+				).matches;
+				const isDark =
+					stored === null ? prefersDark : stored === "true";
+				if (isDark) document.documentElement.classList.add("dark-mode");
 			})();
 		</script>
 	</head>
 
 	<body>
-		<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+		<a href="#main-content" class="skip-link"
+			>Saltar al contenido principal</a
+		>
 		<LoadingScreen />
 
 		<slot />
