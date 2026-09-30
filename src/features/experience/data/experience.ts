@@ -18,13 +18,13 @@ export const experience: Experience[] = [
     ]
   },
   {
-    time: "Agos 2026 - Sep 2026",
+    time: "Ago 2026 - Sep 2026",
     role: "Desarrollador de Software",
-    company: "SaaS Boilerplate (Producto Digital / Lemos Squeezy)",
+    company: "SaaS Boilerplate (Producto Digital / Lemon Squeezy)",
     primaryInfo: [
-      "Diseñado como base reutilizable para para construir productos SaaS, con una arquitectura preparada para evolucionar y escalar.",
+      "Diseñado como base reutilizable para construir productos SaaS, con una arquitectura preparada para evolucionar y escalar.",
       "Backend modular para SaaS B2B construido con FastAPI, Screaming Architecture y principios SOLID, con separación clara entre dominios, casos de uso e infraestructura.",
-      "Implementa multi-tenacy con RBAC, autentificación dual mediante AWS Cognito + APIO Keys y billing recurrente con Stripe."],
+      "Implementa multi-tenacy con RBAC, autentificación dual mediante AWS Cognito + API Keys y billing recurrente con Stripe."],
     secundaryInfo: [
       "Diseñé el sistema de billing con Stripe incorporando idempotencia y un ledger de deduplicación para evitar el procesamiento duplicado de webhooks y mantener sincronizado el estado de facturación.",
       "Automaticé el pipeline de CI con GitHub Actions y Docker, incorporando una configuración multi-stage orientada a despliegues reproducibles.",
