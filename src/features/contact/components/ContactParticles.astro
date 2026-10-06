@@ -12,6 +12,5 @@
 </style>
 
 <script>
-  import { initContactParticles } from "@/lib/contact-particles.js";
-  initContactParticles();
+  import("@/lib/contact-particles.js").then(({ initContactParticles }) => initContactParticles());
 </script>

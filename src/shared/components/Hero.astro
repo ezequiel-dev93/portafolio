@@ -13,6 +13,5 @@ import CardProfile from "@/features/profile/card-profile/components/CardProfile.
 </section>
 
 <script>
-  import { initHero } from "@/lib/hero-animation.js";
-  initHero();
+  import("@/lib/hero-animation.js").then(({ initHero }) => initHero());
 </script>

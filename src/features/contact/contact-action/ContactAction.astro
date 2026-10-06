@@ -47,7 +47,7 @@ import CopyIcon from "@/shared/icons/Copy.astro";
 
 <div id="copy-alert" class="contact__alert" role="status" aria-live="polite">¡Correo copiado!</div>
 
-<script is="global">
+<script is:inline>
     
 window.updateSecondaryMessage = function (message) {
   const subTextElement = document.getElementById("contact__message-main");
