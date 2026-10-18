@@ -2,12 +2,6 @@ import type { Project } from '@/features/projects/types/projects';
 
 const projects: Project[] = [
   {
-    title: 'SaaS de Video Automatizado',
-    description: 'Plataforma SaaS en fase de desarrollo dedicada a la producción automatizada de video para redes sociales. Implementa un flujo asíncrono y una arquitectura limpia centrada en el dominio, diseñada desde las bases para escalar de forma sostenible.',
-    link: 'https://www.ezequielsuarez-dev.com/',
-    tags: ['NAVE', 'REACT', 'TYPESCRIPT', 'TAILWIND', 'SUPABASE'],
-  },
-  {
     title: 'Star Wars Holocron',
     description: 'API REST orientada a dominio basada en Star Wars, diseñada con Screaming Architecture y foco en mantenibilidad y escalabilidad.',
     link: 'https://github.com/ezequiel-dev93/star-wars-holocron.git',
@@ -31,12 +25,6 @@ const projects: Project[] = [
       'Permite crear informes a medida, usar plantillas reutilizables y generar archivos de Excel de manera automatizada. También puedes subir tu archivo, hacer modificaciones y descargarlos.',
     link: 'https://github.com/ezequiel-dev93/informes_automatizados.git',
     tags: ['PYTHON', 'STREAMLIT'],
-  },
-  {
-    title: 'Sitio Web para Músico',
-    description: 'Una propuesta visual que captura la esencia y la energía en cada uno de sus detalles. Está lista para evolucionar al ritmo de nuevas ideas, adaptándose con facilidad a las necesidades del proyecto.',
-    link: 'https://www.ezequielsuarez-dev.com/',
-    tags: ['NAVE', 'TYPESCRIPT', 'TAILWIND'],
   },
 ];
 

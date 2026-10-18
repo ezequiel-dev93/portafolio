@@ -50,9 +50,26 @@
     margin-bottom: 2rem;
     @include mx.card-interactive;
 
-    &:hover .experience-card__icon-link {
-      transform: translate(3px, -3px);
-      color: v.$text-enfasis;
+    &--interactive {
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+        .experience-card__icon-link {
+          opacity: 1;
+          transform: translate(0, 0) scale(1);
+          color: v.$text-enfasis;
+        }
+      }
+    }
+
+    &--static {
+      cursor: default;
+      user-select: text;
+
+      &:hover {
+        transform: none;
+      }
     }
   }
 
@@ -61,8 +78,17 @@
     top: 1.5rem;
     right: 1.5rem;
     color: inherit;
-    opacity: 0.5;
-    transition: transform 0.3s ease, color 0.3s ease;
+    opacity: 0;
+    transform: translate(-6px, 6px) scale(0.85);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.3s ease,
+      opacity 0.3s ease;
+    pointer-events: none;
+
+    @media (hover: none) {
+      opacity: 0.65;
+      transform: translate(0, 0) scale(1);
+    }
   }
 
   &__content {

@@ -1,5 +1,8 @@
 import * as THREE from "three";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function initHero() {
   const canvas = document.querySelector("#hero-scene");
@@ -96,9 +99,10 @@ export function initHero() {
   const fragmentShader = /* glsl */`
     uniform sampler2D dotTexture;
     uniform vec3 color;
+    uniform float alpha;
     void main() {
       vec4 texColor = texture2D(dotTexture, gl_PointCoord);
-      gl_FragColor  = vec4(color, 1.0) * texColor;
+      gl_FragColor  = vec4(color, alpha) * texColor;
     }
   `;
 
@@ -107,6 +111,7 @@ export function initHero() {
       dotTexture: { value: dotTexture },
       color: { value: new THREE.Color(0xffffff) },
       size: { value: 0.2 },
+      alpha: { value: 1.0 },
     },
     vertexShader,
     fragmentShader,
@@ -142,10 +147,7 @@ export function initHero() {
     modeObserver.disconnect();
   }, { once: true });
 
-
-
-
-  // Render loop (GSAP ticker)
+  // Render loop continuo (GSAP ticker) — mantiene la esfera viva y orgánica en toda la página
   function render() {
     positionBuf.needsUpdate = true;
     renderer.render(scene, camera);
@@ -170,8 +172,8 @@ export function initHero() {
   function onResize() {
     canvas.style.width = "";
     canvas.style.height = "";
-    width = canvas.offsetWidth;
-    height = canvas.offsetHeight;
+    width = window.innerWidth;
+    height = window.innerHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
@@ -181,8 +183,47 @@ export function initHero() {
     resizeTm = setTimeout(onResize, 200);
   });
 
+  // ScrollTrigger: recorrido de la esfera desde el Hero, pasando por las secciones y recuperando protagonismo al llegar al Footer
+  let pageScrollTl = null;
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    pageScrollTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1.2,
+      },
+    });
+
+    pageScrollTl
+      // Tramo 1: Al bajar del Hero hacia las secciones intermedias
+      .to(
+        dots.rotation,
+        { y: Math.PI * 0.75, duration: 0.7, ease: "none" },
+        0
+      )
+      .to(camera.position, { z: 58, duration: 0.7, ease: "none" }, 0)
+      .to(
+        material.uniforms.alpha,
+        { value: 0.42, duration: 0.45, ease: "none" },
+        0
+      )
+      // Tramo 2: Al llegar al Footer, la esfera cede el protagonismo al Cursor Ring Field del Footer
+      .to(
+        dots.rotation,
+        { y: Math.PI * 1.25, duration: 0.3, ease: "none" },
+        0.7
+      )
+      .to(
+        material.uniforms.alpha,
+        { value: 0.06, duration: 0.28, ease: "none" },
+        0.72
+      );
+  }
+
   // Cleanup (Astro View Transitions) 
   document.addEventListener("astro:before-swap", () => {
+    if (pageScrollTl) pageScrollTl.kill();
     gsap.ticker.remove(render);
     window.removeEventListener("mousemove", onMouseMove);
     renderer.dispose();

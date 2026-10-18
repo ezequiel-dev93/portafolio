@@ -10,29 +10,60 @@ const { exp } = Astro.props;
 ---
 
 <li class="experience-card__item">
-  <a href="https://www.ezequielsuarez-dev.com/" class="experience-card__link">
-    <div class="experience-card__icon-link">
-      <ExternalLink size={24} />
-    </div>
-    <article class="experience-card__content">
-      <div class="experience-card__section experience-card__section--primary">
-        <h3 class="experience-card__company">{exp.company}</h3>
-        {exp.primaryInfo.map((item) => (
-          <p class="experience-card__info" set:html={item} />
-        ))}
+  {exp.link ? (
+    <a
+      href={exp.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="experience-card__link experience-card__link--interactive"
+      aria-label={`Ver más sobre ${exp.company} (abre en nueva pestaña)`}
+    >
+      <div class="experience-card__icon-link" aria-hidden="true">
+        <ExternalLink size={24} />
       </div>
-
-      <div class="experience-card__section experience-card__section--secondary">
-        <article class="experience-card__details">
-          <div class="experience-card__header">
-            <span class="experience-card__role">{exp.role}</span>
-            <span class="experience-card__time">{exp.time}</span>
-          </div>
-          {exp.secundaryInfo.map((item) => (
-            <p class="experience-card__description" set:html={item} />
+      <article class="experience-card__content">
+        <div class="experience-card__section experience-card__section--primary">
+          <h3 class="experience-card__company">{exp.company}</h3>
+          {exp.primaryInfo.map((item) => (
+            <p class="experience-card__info" set:html={item} />
           ))}
-        </article>
-      </div>
-    </article>
-  </a>
+        </div>
+
+        <div class="experience-card__section experience-card__section--secondary">
+          <article class="experience-card__details">
+            <div class="experience-card__header">
+              <span class="experience-card__role">{exp.role}</span>
+              <span class="experience-card__time">{exp.time}</span>
+            </div>
+            {exp.secundaryInfo.map((item) => (
+              <p class="experience-card__description" set:html={item} />
+            ))}
+          </article>
+        </div>
+      </article>
+    </a>
+  ) : (
+    <div class="experience-card__link experience-card__link--static">
+      <article class="experience-card__content">
+        <div class="experience-card__section experience-card__section--primary">
+          <h3 class="experience-card__company">{exp.company}</h3>
+          {exp.primaryInfo.map((item) => (
+            <p class="experience-card__info" set:html={item} />
+          ))}
+        </div>
+
+        <div class="experience-card__section experience-card__section--secondary">
+          <article class="experience-card__details">
+            <div class="experience-card__header">
+              <span class="experience-card__role">{exp.role}</span>
+              <span class="experience-card__time">{exp.time}</span>
+            </div>
+            {exp.secundaryInfo.map((item) => (
+              <p class="experience-card__description" set:html={item} />
+            ))}
+          </article>
+        </div>
+      </article>
+    </div>
+  )}
 </li>

@@ -7,72 +7,208 @@ import GithubIcon from "@/shared/icons/Github.astro";
 import EmailIcon from "@/shared/icons/Email.astro";
 import Copyright from "@/shared/components/Copyright.astro";
 import ItemsIcons from "@/shared/components/ItemsIcons.astro";
+import BadgeStatus from "@/shared/components/BadgeStatus.astro";
+
+const EMAIL = "ezequielsuarez.dev@gmail.com";
 ---
 
-<section class="section-footer">
-    <section class="section-footer__container">
-        <article class="section-footer__perfil">
-            <div class="section-footer__perfil--logo">
-                <a href="#top" aria-label="Ir al inicio" class="section-footer__perfil--logo-link">
-                    <img
-                        src={logocard.src}
-                        alt="Logo de Ezequiel Suarez"
-                        loading="lazy"
-                        width="48"
-                        height="48"
-                    />
-                </a>
-            </div>
+<section class="section-footer" aria-label="Pie de página">
+  <!-- Fondo interactivo: Cursor Ring Field + Grilla arquitectónica + Halo + Marca de agua -->
+  <div class="section-footer__backdrop" aria-hidden="true">
+    <div class="section-footer__grid-bg"></div>
+    <canvas id="footer-ring-field" class="section-footer__ring-canvas"></canvas>
+    <div class="section-footer__glow"></div>
+    <span class="section-footer__watermark">EZEQUIEL SUAREZ</span>
+  </div>
 
-            <div class="section-footer__perfil--title">
-                <p class="section-footer__name">
-                    <strong>Ezequiel Suarez</strong>
-                </p>
-                <p>Desarrollador de Software</p>
-            </div>
-        </article>
+  <div class="section-footer__wrapper">
+    <!-- SECCIÓN 1: Identidad (Protagonista / Grande) -->
+    <section class="section-footer__identity" aria-label="Identidad">
+      <div class="section-footer__identity-top">
+        <div class="section-footer__perfil">
+          <div class="section-footer__perfil--logo">
+            <a
+              href="#top"
+              aria-label="Ir al inicio"
+              class="section-footer__perfil--logo-link"
+            >
+              <img
+                src={logocard.src}
+                alt="Logo de Ezequiel Suarez"
+                loading="lazy"
+                width="64"
+                height="64"
+              />
+            </a>
+          </div>
 
-        <article class="section-footer__social">
-            <ul class="section-footer__social-list">
-                <li class="section-footer__social-item">
-                    <ItemsIcons
-                        href="mailto:ezequielsuarez.dev@gmail.com"
-                        aria-label="Enviar email a Ezequiel Suarez"
-                    >
-                        <EmailIcon class="section-footer__social-icon" />
-                    </ItemsIcons>
-                </li>
+          <div class="section-footer__perfil--title">
+            <h2 class="section-footer__name">Ezequiel Suarez</h2>
+            <p class="section-footer__role">Desarrollador de Software</p>
+          </div>
+        </div>
 
-                <li class="section-footer__social-item">
-                    <ItemsIcons
-                        href="https://app.slack.com/huddle/T03UTHFCGLF/C03V55LJ7HT"
-                        aria-label="Contactar en Slack"
-                    >
-                        <SlackIcon class="section-footer__social-icon" />
-                    </ItemsIcons>
-                </li>
+        <div class="section-footer__status">
+          <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">
+            Disponible para proyectos
+          </BadgeStatus>
+        </div>
+      </div>
 
-                <li class="section-footer__social-item">
-                    <ItemsIcons
-                        href="https://www.linkedin.com/in/ezequiel-suarez-dev"
-                        aria-label="Ver perfil de LinkedIn de Ezequiel Suarez"
-                    >
-                        <LinkedInIcon class="section-footer__social-icon" />
-                    </ItemsIcons>
-                </li>
-
-                <li class="section-footer__social-item">
-                    <ItemsIcons
-                        href="https://github.com/ezequiel-dev93"
-                        aria-label="Ver perfil de GitHub de Ezequiel Suarez"
-                    >
-                        <GithubIcon class="section-footer__social-icon" />
-                    </ItemsIcons>
-                </li>
-            </ul>
-        </article>
+      <p class="section-footer__bio">
+        Diseño soluciones digitales con arquitecturas limpias, escalables y
+        orientadas al negocio.
+      </p>
     </section>
-    <div class="section-footer__legal">
-        <Copyright />
+
+    <!-- SECCIÓN 2: Explorar y Contactos (En sección aparte abajo) -->
+    <div class="section-footer__middle">
+      <!-- Bloque Explorar -->
+      <nav class="section-footer__nav" aria-label="Navegación del pie de página">
+        <h3 class="section-footer__heading">Explorar</h3>
+        <ul class="section-footer__nav-list" role="list">
+          <li><a href="#top" class="section-footer__nav-link">Inicio</a></li>
+          <li>
+            <a href="#experiencia" class="section-footer__nav-link"
+              >Experiencia</a
+            >
+          </li>
+          <li>
+            <a href="#proyectos" class="section-footer__nav-link">Proyectos</a>
+          </li>
+          <li>
+            <a href="#sobre-mi" class="section-footer__nav-link">Sobre mí</a>
+          </li>
+          <li>
+            <a href="#tecnologias" class="section-footer__nav-link"
+              >Tecnologías</a
+            >
+          </li>
+          <li>
+            <a href="/contact" class="section-footer__nav-link"
+              >Contacto <span aria-hidden="true">↗</span></a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Bloque Contacto Directo & Redes -->
+      <article class="section-footer__connect">
+        <h3 class="section-footer__heading">Conectemos</h3>
+        <p class="section-footer__connect-sub">
+          ¿Tenés una idea o propuesta? Escribime directo o copiá mi correo:
+        </p>
+
+        <div class="section-footer__connect-actions">
+          <button
+            type="button"
+            class="section-footer__copy-btn"
+            data-copy-email={EMAIL}
+            aria-label="Copiar dirección de correo electrónico"
+          >
+            <span class="section-footer__copy-email">{EMAIL}</span>
+            <span class="section-footer__copy-badge" data-copy-feedback>
+              Copiar
+            </span>
+          </button>
+
+          <ul class="section-footer__social-list" role="list">
+            <li class="section-footer__social-item">
+              <ItemsIcons
+                href={`mailto:${EMAIL}`}
+                aria-label="Enviar email a Ezequiel Suarez"
+              >
+                <EmailIcon class="section-footer__social-icon" />
+              </ItemsIcons>
+            </li>
+
+            <li class="section-footer__social-item">
+              <ItemsIcons
+                href="https://app.slack.com/huddle/T03UTHFCGLF/C03V55LJ7HT"
+                aria-label="Contactar en Slack"
+              >
+                <SlackIcon class="section-footer__social-icon" />
+              </ItemsIcons>
+            </li>
+
+            <li class="section-footer__social-item">
+              <ItemsIcons
+                href="https://www.linkedin.com/in/ezequiel-suarez-dev"
+                aria-label="Ver perfil de LinkedIn de Ezequiel Suarez"
+              >
+                <LinkedInIcon class="section-footer__social-icon" />
+              </ItemsIcons>
+            </li>
+
+            <li class="section-footer__social-item">
+              <ItemsIcons
+                href="https://github.com/ezequiel-dev93"
+                aria-label="Ver perfil de GitHub de Ezequiel Suarez"
+              >
+                <GithubIcon class="section-footer__social-icon" />
+              </ItemsIcons>
+            </li>
+          </ul>
+        </div>
+      </article>
     </div>
+
+    <!-- SECCIÓN 3: Copyright y los demás -->
+    <div class="section-footer__bottom">
+      <div class="section-footer__legal">
+        <Copyright />
+      </div>
+
+      <div class="section-footer__meta">
+        <span class="section-footer__location">Argentina • GMT-3</span>
+        <a
+          href="#top"
+          class="section-footer__back-top"
+          aria-label="Volver arriba"
+        >
+          <span>Subir</span>
+          <span class="section-footer__back-arrow" aria-hidden="true">↑</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
+
+<script>
+  import { initFooterRingField } from "@/lib/footer-ring-field.js";
+
+  function initFooter() {
+    initFooterRingField();
+
+    const copyBtns = document.querySelectorAll("[data-copy-email]");
+    copyBtns.forEach((btn) => {
+      if (btn.dataset.copyBound === "true") return;
+      btn.dataset.copyBound = "true";
+
+      btn.addEventListener("click", async () => {
+        const email = btn.getAttribute("data-copy-email");
+        const feedback = btn.querySelector("[data-copy-feedback]");
+        if (!email || !feedback) return;
+
+        try {
+          await navigator.clipboard.writeText(email);
+          btn.classList.add("is-copied");
+          feedback.textContent = "¡Copiado! ✓";
+          setTimeout(() => {
+            btn.classList.remove("is-copied");
+            feedback.textContent = "Copiar";
+          }, 2200);
+        } catch {
+          window.location.href = `mailto:${email}`;
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFooter, { once: true });
+  } else {
+    initFooter();
+  }
+  document.addEventListener("astro:page-load", initFooter);
+</script>

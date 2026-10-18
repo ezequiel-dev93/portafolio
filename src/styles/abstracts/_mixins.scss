@@ -57,7 +57,7 @@
 @mixin card-interactive {
     border: 0.1rem solid rgba(153, 153, 153, 0.2);
     border-radius: 0.5rem;
-    transition: all 0.3s ease-in-out;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
     &:hover {
         border-color: rgba(255, 255, 255, 0.4);

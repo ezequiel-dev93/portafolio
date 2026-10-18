@@ -78,10 +78,6 @@ body.dark-mode {
     :is(.bar) {
         background: v.$text-white;
     }
-
-    .footer__wave-svg {
-        color: #1e0d10;
-    }
 }
 
 /* Accessibility utilities */
@@ -126,4 +122,19 @@ section[id] {
 
 .skip-link:focus {
     top: 0;
+}
+
+/* View Transitions — Circular Ripple para cambio de tema (Dark/Light Mode) */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 99999;
 }
