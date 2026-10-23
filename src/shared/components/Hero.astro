@@ -13,5 +13,15 @@ import CardProfile from "@/features/profile/card-profile/components/CardProfile.
 </section>
 
 <script>
-  import("@/lib/hero-animation.js").then(({ initHero }) => initHero());
+  function initHeroScene() {
+    import("@/lib/hero-animation.js").then(({ initHero }) => initHero());
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHeroScene, { once: true });
+  } else {
+    initHeroScene();
+  }
+
+  document.addEventListener("astro:page-load", initHeroScene);
 </script>

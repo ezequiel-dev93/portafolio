@@ -1,6 +1,6 @@
 ---
 import "@/styles/app.scss";
-import logocard from "@/shared/assets/cards/logocard.webp";
+import logocard from "@/shared/assets/cards/logotipo.svg";
 import SlackIcon from "@/shared/icons/Slack.astro";
 import LinkedInIcon from "@/shared/icons/LinkedIn.astro";
 import GithubIcon from "@/shared/icons/Github.astro";
@@ -49,7 +49,7 @@ const EMAIL = "ezequielsuarez.dev@gmail.com";
         </div>
 
         <div class="section-footer__status">
-          <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">
+          <BadgeStatus href="/contact">
             Disponible para proyectos
           </BadgeStatus>
         </div>
@@ -180,7 +180,9 @@ const EMAIL = "ezequielsuarez.dev@gmail.com";
   function initFooter() {
     initFooterRingField();
 
-    const copyBtns = document.querySelectorAll("[data-copy-email]");
+    const copyBtns = document.querySelectorAll<HTMLButtonElement>(
+      "[data-copy-email]",
+    );
     copyBtns.forEach((btn) => {
       if (btn.dataset.copyBound === "true") return;
       btn.dataset.copyBound = "true";

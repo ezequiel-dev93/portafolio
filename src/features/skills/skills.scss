@@ -29,13 +29,14 @@
       display: flex;
       flex-direction: column;
       border-radius: 0.6rem;
-      border: 1px solid rgba(114, 114, 114, 0.15);
+      border: 1px solid rgba(2, 132, 199, 0.18);
       padding: 1.5rem;
-      transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease;
 
       &:hover {
         transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        border-color: rgba(2, 132, 199, 0.35);
+        box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12);
       }
     }
   
@@ -73,21 +74,21 @@
     }
 }
 
-/* Modo oscuro para Skills (Unificado con gama Coral / title-style-dark) */
+/* Modo oscuro para Skills */
 body.dark-mode {
   .skill {
     &__category {
-      background: v.$bg-cardproject-dark;
-      border-color: rgba(255, 255, 255, 0.08);
+      background: #0B1220;
+      border-color: rgba(0, 229, 255, 0.2);
 
       &:hover {
-        border-color: rgba(232, 75, 60, 0.4);
-        box-shadow: 0 8px 28px rgba(232, 75, 60, 0.2);
+        border-color: rgba(0, 229, 255, 0.45);
+        box-shadow: 0 8px 28px rgba(0, 229, 255, 0.22);
       }
     }
 
     &__subtitle {
-      background: v.$accent-dark-gradient;
+      background: linear-gradient(135deg, #00E5FF, #E5E7EB);
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }

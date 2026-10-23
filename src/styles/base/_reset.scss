@@ -63,8 +63,13 @@
 
 /* Configuramos el texto que seleccionamos */
 ::selection {
-    background-color: #663399;
-    color: #fffbfb;
+    background-color: #0284C7;
+    color: #FFFFFF;
+}
+
+body.dark-mode ::selection {
+    background-color: #00E5FF;
+    color: #0B1220;
 }
 
 /* Nivelamos problemas de tipografías y colocación de formularios */

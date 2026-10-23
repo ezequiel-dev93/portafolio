@@ -1,6 +1,6 @@
 ---
 import "@/styles/app.scss";
-import logocard from "@/shared/assets/cards/logocard.webp";
+import logocard from "@/shared/assets/cards/logotipo.svg";
 import Items from "@/shared/components/Items.astro";
 import MenuMobile from "@/shared/components/MenuMobile.astro";
 import BadgeStatus from "@/shared/components/BadgeStatus.astro";
@@ -28,7 +28,7 @@ import DarkMode from "@/shared/components/DarkMode.astro";
       <ul class="header__nav-menu" id="main-menu">
         <!-- En Mobile aparece primero el badge -->
         <li class="header__menu-badge-mobile">
-          <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">Disponible</BadgeStatus>
+          <BadgeStatus href="/contact">Disponible</BadgeStatus>
         </li>
 
         <Items href="#top">Inicio</Items>
@@ -50,7 +50,7 @@ import DarkMode from "@/shared/components/DarkMode.astro";
     <!-- Derecha: Badge de disponibilidad + DarkMode (Desktop) y Botón hamburguesa (Mobile) -->
     <div class="header__actions">
       <div class="header__badge-desktop">
-        <BadgeStatus href="https://www.linkedin.com/in/ezequiel-suarez-dev/">Disponible</BadgeStatus>
+        <BadgeStatus href="/contact">Disponible</BadgeStatus>
       </div>
 
       <div class="header__dark-desktop">

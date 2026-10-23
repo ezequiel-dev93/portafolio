@@ -28,19 +28,21 @@
   &__btn {
     display: inline-block;
     padding: 0.75rem 2rem;
-    border: 2px solid v.$text-enfasis;
+    border: 2px solid #0284C7;
     border-radius: 0.5rem;
-    color: v.$text-enfasis;
+    background-color: transparent;
+    color: #0284C7;
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     align-self: flex-start;
 
     &:hover {
-      background-color: v.$text-enfasis;
-      color: v.$text-white;
-      box-shadow: 0 0 12px rgba(102, 51, 153, 0.4);
+      background-color: #0284C7;
+      color: #FFFFFF;
+      box-shadow: 0 0 14px rgba(2, 132, 199, 0.4);
+      transform: translateY(-2px);
     }
   }
 }
@@ -48,14 +50,16 @@
 /* Dark mode */
 body.dark-mode {
   .contactCta__btn {
-    border-color: rgba(232, 75, 60, 0.45);
-    color: v.$text-white;
+    border-color: #00E5FF;
+    background-color: #FFFFFF;
+    color: #0B1220;
+    font-weight: 600;
 
     &:hover {
-      background: v.$accent-dark-gradient;
-      border-color: transparent;
-      color: #fff;
-      box-shadow: 0 0 16px rgba(232, 75, 60, 0.4);
+      background: #00E5FF;
+      border-color: #00E5FF;
+      color: #0B1220;
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.5);
     }
   }
 }

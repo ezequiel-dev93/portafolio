@@ -18,29 +18,29 @@
 
   &__input,
   &__textarea {
-    caret-color: v.$text-enfasis;
+    caret-color: #0284C7;
     width: 100%;
     box-sizing: border-box;
     padding: 0.76rem;
     font-size: 0.875rem;
-    border-radius: 0.275rem;
-    border: 1px solid v.$text-enfasis;
+    border-radius: 0.35rem;
+    border: 1px solid rgba(2, 132, 199, 0.45);
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     background-color: #fff;
     color: v.$text-black;
 
     &:focus {
       outline: none;
-      border-color: #8d64bb;
-      box-shadow: 0 0 0 2px #a56fed80;
+      border-color: #0284C7;
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.3);
     }
 
     &--error {
-      border-color: red;
+      border-color: #ef4444;
     }
 
     &--success {
-      border-color: green;
+      border-color: #10b981;
     }
   }
 
@@ -54,42 +54,41 @@
     font-size: 0.875rem;
 
     &--error {
-      color: red;
+      color: #ef4444;
     }
 
     &--success {
-      color: green;
+      color: #10b981;
     }
   }
 
+  /* Modo Claro: Botón Azul Marino con texto Blanco Plata y acento Cian */
   &__button {
     margin-top: 3rem;
     width: 100%;
-    border: .25rem solid v.$bg-form;
+    border: 2px solid #0284C7;
     padding: 1rem;
     font-size: 1rem;
-    font-weight: 500;
-    background-color: #643d88;
-    color: v.$text-white;
-    border-radius: 1rem;
+    font-weight: 600;
+    background-color: #0B1220;
+    color: #E5E7EB;
+    border-radius: 0.75rem;
     outline: none;
-    box-shadow: 0 0 1rem 0.1rem v.$bg-form,
-      0 0 1.6rem 0.1rem #bf7bffc7,
-      inset 0 0 0.1rem .1rem v.$bg-form;
-    text-shadow: 0 0 .1rem v.$bg-form;
+    box-shadow: 0 0 1rem rgba(2, 132, 199, 0.25);
     position: relative;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     cursor: pointer;
 
     &:hover {
-      color: v.$text-white;
-      background-color: #6a10be;
+      color: #ffffff;
+      background-color: #0284C7;
+      border-color: #0284C7;
+      box-shadow: 0 0 1.5rem rgba(2, 132, 199, 0.5);
     }
 
     &:active {
-      box-shadow: 0 0 0.6rem .25rem v.$bg-form,
-        0 0 0.5rem 3rem #b985e8c7,
-        inset 0 0 .5rem .25rem v.$bg-form;
+      transform: scale(0.99);
+      box-shadow: 0 0 0.6rem rgba(2, 132, 199, 0.4);
     }
   }
 }
@@ -109,11 +108,11 @@
   opacity: 0;
 
   &.success {
-    background-color: #4CAF50;
+    background-color: #10b981;
   }
 
   &.error {
-    background-color: #F44336;
+    background-color: #ef4444;
   }
 
   &.show {
@@ -168,35 +167,38 @@
   }
 }
 
-/* Dark Mode (Opción 1: Gama Coral / title-style-dark) */
+/* Dark Mode: Botón Blanco con texto Azul Marino */
 body.dark-mode {
   .contact {
     &__input,
     &__textarea {
-      background-color: rgba(30, 30, 30, 0.85);
-      border-color: rgba(232, 75, 60, 0.35);
+      background-color: rgba(11, 18, 32, 0.85);
+      border-color: rgba(0, 229, 255, 0.35);
       color: v.$text-white;
-      caret-color: v.$accent-dark;
+      caret-color: #00E5FF;
 
       &:focus {
-        border-color: v.$accent-dark;
-        box-shadow: 0 0 0 2px rgba(232, 75, 60, 0.35);
+        border-color: #00E5FF;
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.35);
       }
     }
 
     &__button {
-      background: v.$accent-dark-gradient;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 0 1.2rem rgba(232, 75, 60, 0.35);
-      text-shadow: none;
+      background: #FFFFFF;
+      color: #0B1220;
+      border: 2px solid #00E5FF;
+      font-weight: 600;
+      box-shadow: 0 0 1.2rem rgba(0, 229, 255, 0.35);
 
       &:hover {
-        background: linear-gradient(135deg, #e04452, #f55b4d);
-        box-shadow: 0 0 1.8rem rgba(232, 75, 60, 0.55);
+        background: #00E5FF;
+        color: #0B1220;
+        border-color: #00E5FF;
+        box-shadow: 0 0 1.8rem rgba(0, 229, 255, 0.6);
       }
 
       &:active {
-        box-shadow: 0 0 0.8rem rgba(232, 75, 60, 0.4);
+        box-shadow: 0 0 0.8rem rgba(0, 229, 255, 0.4);
       }
     }
   }

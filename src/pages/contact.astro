@@ -137,8 +137,8 @@ import Copyright from "@/shared/components/Copyright.astro";
       gap: 0.5rem;
       padding: 0.5rem 1rem;
       border-radius: 2rem;
-      border: 1px solid rgba(153, 65, 252, 0.25);
-      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(2, 132, 199, 0.3);
+      background: rgba(255, 255, 255, 0.65);
       backdrop-filter: blur(8px);
       color: v.$text-black;
       font-size: 0.9rem;
@@ -147,9 +147,9 @@ import Copyright from "@/shared/components/Copyright.astro";
       transition: all 0.3s ease;
 
       &:hover {
-        border-color: v.$text-enfasis;
-        background: v.$text-enfasis;
-        color: v.$text-white;
+        border-color: #0284C7;
+        background: #0284C7;
+        color: #ffffff;
         transform: translateX(-3px);
       }
     }
@@ -235,14 +235,14 @@ import Copyright from "@/shared/components/Copyright.astro";
     gap: 1.5rem;
     padding: 1.8rem;
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(153, 65, 252, 0.18);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(2, 132, 199, 0.22);
     backdrop-filter: blur(10px);
 
     &__title {
       font-size: 1.35rem;
       font-weight: 600;
-      color: v.$text-enfasis;
+      color: #0284C7;
     }
 
     &__list {
@@ -264,11 +264,11 @@ import Copyright from "@/shared/components/Copyright.astro";
       flex-shrink: 0;
       font-size: 0.85rem;
       font-weight: 700;
-      color: v.$text-enfasis;
+      color: #0284C7;
       padding: 0.3rem 0.6rem;
       border-radius: 0.5rem;
-      background: rgba(153, 65, 252, 0.12);
-      border: 1px solid rgba(153, 65, 252, 0.25);
+      background: rgba(2, 132, 199, 0.12);
+      border: 1px solid rgba(2, 132, 199, 0.3);
     }
 
     &__content {
@@ -290,19 +290,20 @@ import Copyright from "@/shared/components/Copyright.astro";
     }
   }
 
-  /* Dark Mode Adaptation (Opción 1: Gama Coral / title-style-dark) */
+  /* Dark Mode */
   body.dark-mode {
     .contact-page {
       &__back-btn {
-        background: rgba(30, 30, 30, 0.6);
-        border-color: rgba(232, 75, 60, 0.35);
-        color: v.$text-white;
+        background: #FFFFFF;
+        border-color: #00E5FF;
+        color: #0B1220;
+        font-weight: 600;
 
         &:hover {
-          background: v.$accent-dark-gradient;
-          color: #fff;
-          border-color: transparent;
-          box-shadow: 0 0 16px rgba(232, 75, 60, 0.4);
+          background: #00E5FF;
+          color: #0B1220;
+          border-color: #00E5FF;
+          box-shadow: 0 0 16px rgba(0, 229, 255, 0.5);
         }
       }
 
@@ -312,19 +313,17 @@ import Copyright from "@/shared/components/Copyright.astro";
     }
 
     .next-steps {
-      background: rgba(24, 24, 27, 0.65);
-      border-color: rgba(232, 75, 60, 0.2);
+      background: rgba(11, 18, 32, 0.75);
+      border-color: rgba(0, 229, 255, 0.25);
 
       &__title {
-        background: v.$accent-dark-gradient;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        @include mx.title-style-dark();
       }
 
       &__num {
-        color: #fff;
-        background: rgba(232, 75, 60, 0.18);
-        border-color: rgba(232, 75, 60, 0.4);
+        color: #0B1220;
+        background: #00E5FF;
+        border-color: #00E5FF;
       }
     }
   }

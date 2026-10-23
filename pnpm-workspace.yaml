@@ -1,0 +1,8 @@
+packages:
+  - '.'
+
+allowBuilds:
+  '@opencode/cli': false
+  '@parcel/watcher': true
+  esbuild: true
+  sharp: true

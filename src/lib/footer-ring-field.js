@@ -1,15 +1,14 @@
-/**
- * Cursor Ring Field (Gradient Dots Edition) — Animación interactiva para el Footer
- * Inspirada en Originkit (cursor-ring-field) y Google Antigravity, adaptada con
- * PUNTITOS CON GRADIENTE ("Gradient Dots"):
- * - Campo de puntos esféricos con gradiente propio distribuidos orgánicamente.
- * - Un anillo magnético sigue al cursor con suavizado (o navega solo cuando el puntero no está).
- * - Los puntitos cercanos al borde del anillo son empujados radialmente con ~86% de retención
- *   de velocidad y regresan flotando mediante física de resorte.
- * - Al pasar el anillo, cada puntito crece en escala, enciende su halo y transiciona
- *   hacia un gradiente vibrante según el tema (Violeta/Magenta/Índigo en Light Mode,
- *   Coral/Naranja/Ámbar en Dark Mode).
- */
+/*
+ - Inspirada en Google Antigravity, adaptada con
+  PUNTITOS CON GRADIENTE ("Gradient Dots"):
+   - Campo de puntos esféricos con gradiente propio distribuidos orgánicamente.
+   - Un anillo magnético sigue al cursor con suavizado (o navega solo cuando el puntero no está).
+   - Los puntitos cercanos al borde del anillo son empujados radialmente con ~86% de retención
+     de velocidad y regresan flotando mediante física de resorte.
+   - Al pasar el anillo, cada puntito crece en escala, enciende su halo y transiciona
+     hacia un gradiente vibrante según el tema (Violeta/Magenta/Índigo en Light Mode,
+     Coral/Naranja/Ámbar en Dark Mode).
+*/
 
 let cleanupRingField = null;
 
@@ -17,10 +16,10 @@ function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
-/**
- * Pre-renderiza sprites de puntitos con gradiente rico (núcleo + gradiente diagonal + halo suave)
- * para mantener 60fps constantes sin recalcular gradientes por cada partícula en cada frame.
- */
+/*
+  - Pre-renderiza sprites de puntitos con gradiente rico (núcleo + gradiente diagonal + halo suave)
+  - para mantener 60fps constantes sin recalcular gradientes por cada partícula en cada frame.
+*/
 function createGradientDotSprites(isDark) {
   const size = 32;
   const half = size / 2;
@@ -76,52 +75,52 @@ function createGradientDotSprites(isDark) {
 
   if (isDark) {
     return {
-      // Modo Oscuro: Coral / Naranja / Ámbar
+      // Modo Oscuro: Cian Eléctrico / Celeste / Azul Marino
       idle: makeOrb(
-        "rgba(255, 170, 145, 0.85)",
-        "rgba(232, 75, 60, 0.7)",
-        "rgba(207, 63, 77, 0.3)",
-        0.06
+        "rgba(103, 232, 249, 0.85)",
+        "rgba(0, 229, 255, 0.7)",
+        "rgba(2, 132, 199, 0.3)",
+        0.08
       ),
       activeA: makeOrb(
         "#ffffff",
-        "#ff7b54",
-        "#e84b3c",
-        0.4
+        "#67E8F9",
+        "#00E5FF",
+        0.45
       ),
       activeB: makeOrb(
-        "#fff8e7",
-        "#ffb26b",
-        "#cf3f4d",
-        0.4
+        "#E0F2FE",
+        "#38BDF8",
+        "#0284C7",
+        0.45
       ),
-      ringGlowInner: "rgba(232, 75, 60, 0.09)",
-      ringGlowMid: "rgba(255, 123, 84, 0.04)",
+      ringGlowInner: "rgba(0, 229, 255, 0.12)",
+      ringGlowMid: "rgba(2, 132, 199, 0.05)",
     };
   }
 
-  // Modo Claro: Violeta / Magenta / Índigo
+  // Modo Claro: Azul Marino / Cian Profundo / Cian Eléctrico
   return {
     idle: makeOrb(
-      "rgba(217, 70, 239, 0.85)",
-      "rgba(154, 84, 224, 0.7)",
-      "rgba(99, 102, 241, 0.3)",
+      "rgba(2, 132, 199, 0.85)",
+      "rgba(11, 18, 32, 0.7)",
+      "rgba(0, 229, 255, 0.3)",
       0.06
     ),
     activeA: makeOrb(
       "#ffffff",
-      "#d946ef",
-      "#9a54e0",
+      "#00E5FF",
+      "#0284C7",
       0.38
     ),
     activeB: makeOrb(
-      "#fdf4ff",
-      "#9a54e0",
-      "#6366f1",
+      "#F0F9FF",
+      "#0284C7",
+      "#0B1220",
       0.38
     ),
-    ringGlowInner: "rgba(154, 84, 224, 0.08)",
-    ringGlowMid: "rgba(217, 70, 239, 0.035)",
+    ringGlowInner: "rgba(2, 132, 199, 0.09)",
+    ringGlowMid: "rgba(0, 229, 255, 0.04)",
   };
 }
 
@@ -334,9 +333,9 @@ export function initFooterRingField() {
       const targetEnergy = Math.min(
         1,
         ringWave * 1.2 +
-          (dist < ringRadius ? 0.2 : 0) +
-          Math.min(speedMag * 0.09, 0.35) +
-          pulse
+        (dist < ringRadius ? 0.2 : 0) +
+        Math.min(speedMag * 0.09, 0.35) +
+        pulse
       );
       dot.energy = lerp(dot.energy, targetEnergy, 0.18);
 

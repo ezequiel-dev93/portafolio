@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function initHero() {
   const canvas = document.querySelector("#hero-scene");
-  if (!canvas) return;
+  if (!canvas || canvas.dataset.heroInitialized === "true") return;
 
   let width = canvas.offsetWidth;
   let height = canvas.offsetHeight;
@@ -15,6 +15,8 @@ export function initHero() {
     setTimeout(initHero, 100);
     return;
   }
+
+  canvas.dataset.heroInitialized = "true";
 
   // Renderer
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -178,10 +180,11 @@ export function initHero() {
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
   }
-  window.addEventListener("resize", () => {
+  function onWindowResize() {
     clearTimeout(resizeTm);
     resizeTm = setTimeout(onResize, 200);
-  });
+  }
+  window.addEventListener("resize", onWindowResize);
 
   // ScrollTrigger: recorrido de la esfera desde el Hero, pasando por las secciones y recuperando protagonismo al llegar al Footer
   let pageScrollTl = null;
@@ -224,8 +227,18 @@ export function initHero() {
   // Cleanup (Astro View Transitions) 
   document.addEventListener("astro:before-swap", () => {
     if (pageScrollTl) pageScrollTl.kill();
+    gsap.killTweensOf(vectors);
+    gsap.killTweensOf(dots.rotation);
     gsap.ticker.remove(render);
+    modeObserver.disconnect();
     window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("resize", onWindowResize);
+    clearTimeout(resizeTm);
+    canvas.dataset.heroInitialized = "false";
     renderer.dispose();
+    customGeom.dispose();
+    sphereGeom.dispose();
+    material.dispose();
+    dotTexture.dispose();
   }, { once: true });
 }

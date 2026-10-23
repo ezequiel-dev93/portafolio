@@ -1,70 +1,87 @@
-# 👋 Hola, soy Ezequiel
+# Ezequiel Suárez — Desarrollador de Software & IA Aplicada
 
-## Ingeniero en Sistemas de Información en formación + Aspirante a IA
+> **"Desarrollo de software e inteligencia artificial aplicada para construir productos digitales escalables."**
 
-**`Frontend Developer → Futuro Full Stack Next Js | Especialista en Python |`**
+---
 
-### Sobre mi Portfolio
+## 👨‍💻 Perfil Profesional
 
-Portfolio donde convergen el desarrollo software, la inteligencia artificial y proyectos interdisciplinarios. Actualmente en **especialización intensiva en IA/ML/NLP con Python** (España), mientras evoluciono hacia el Full Stack con Next js
+Soy **Desarrollador de Software & IA Aplicada** con formación en **Ingeniería en Sistemas de Información (UTN)** y más de **3 años de experiencia** construyendo aplicaciones web y productos digitales de punta a punta: desde interfaces modernas y rápidas con **Next.js, Astro, React y TypeScript**, hasta backends escalables y servicios en la nube con **Python, FastAPI, PostgreSQL, Redis, AWS y Docker**.
+
+Mi trabajo se apoya en buenas prácticas de ingeniería de software (**Diseño de Sistemas, Principios SOLID, Clean Architecture y Screaming Architecture**), sumando formación y práctica en **Inteligencia Artificial Aplicada (Machine Learning, Deep Learning y NLP)** para integrar modelos de IA, automatizar procesos y analizar datos dentro de aplicaciones reales de negocio.
+
+
+---
+
+## ⚡ Propuesta de Valor & Servicios
+
+Desarrollo de software con criterio técnico, código mantenible y foco en producto:
+
+1. **Desarrollo Web Full Stack & Productos SaaS:**  
+   Construcción de aplicaciones listas para producción con autenticación segura (AWS Cognito / OAuth2 / RS256), pasarelas de pago e idempotencia con Stripe, y paneles modernos de administración.
+
+2. **Desarrollo Backend & Servicios Asíncronos:**  
+   Diseño de APIs REST rápidas y modulares con Python y FastAPI, bases de datos relacionales optimizadas (PostgreSQL / MySQL) y procesamiento de tareas en segundo plano con Redis y workers (ARQ).
+
+3. **Integración de IA Aplicada & Automatización:**  
+   Conexión e implementación práctica de modelos de lenguaje (LLMs), APIs de IA y pipelines de procesamiento de lenguaje natural (NLP) y datos en Python para automatizar flujos de trabajo reales.
+
+4. **Frontend Moderno & Rendimiento Web:**  
+   Interfaces fluidas, responsivas y accesibles desarrolladas con Next.js, Astro, React, TypeScript y Tailwind CSS y velocidad de carga (Core Web Vitals).
+
+---
+
+## 🚀 Proyectos Destacados
+
+### 1. [FastAPI SaaS Boilerplate (Enterprise Edition)](https://fastapi-saas-landing.pages.dev/)
+*Comercializado en Lemon Squeezy | Backend Empresarial para Plataformas SaaS B2B*
+* **Objetivo:** Acelerar el lanzamiento de productos SaaS B2B mediante una base backend probada, segura y lista para producción.
+* **Diseño de Software:** Estructurado bajo principios *SOLID*, *Screaming Architecture* y *Clean Code*.
+* **Características técnicas:**
+  - Autenticación dual y autorización RBAC con AWS Cognito (validación criptográfica RS256).
+  - Suscripciones, webhooks idempotentes y facturación automatizada con Stripe.
+  - Streaming de respuestas de IA, colas asíncronas y caché con Redis y ARQ workers.
+  - 183 tests automatizados que validan los flujos críticos del sistema.
+* **Stack:** Python, FastAPI, SQLAlchemy, PostgreSQL, Redis, Docker, AWS (Cognito, SES).
+
+### 2. Plataforma SaaS Multi-Tenant de Automatización de Video con IA (Reelify)
+*Aplicación Distribuida para Generación y Orquestación de Contenido Audiovisual*
+* **Objetivo:** Automatizar el flujo de creación de guiones, segmentación y renderizado de video multi-formato.
+* **Diseño de Software:** Arquitectura multi-inquilino (*multi-tenant*) con aislamiento de datos, patrones *DDD Light* y ejecución de jobs asíncronos.
+* **IA Aplicada:** Integración de pipelines de NLP para generación dinámica de guiones y análisis semántico.
+* **Stack:** Python, FastAPI, Modelos NLP, Redis, AWS S3, Next.js, TypeScript, Tailwind CSS.
+
+---
 
 ## 🛠️ Stack Tecnológico
 
-###  Frontend 
-![Astro](https://img.shields.io/badge/Astro-FF5D01?logo=astro&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwind-css&logoColor=white)
-![Sass](https://img.shields.io/badge/Sass-CC6699?logo=sass&logoColor=white)
-
-###  Backend 
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
-
-###  Aprendiendo Ahora
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)
-![Testing](https://img.shields.io/badge/Testing-25C2A0?logo=jest&logoColor=white)
-
-##  Especialización en IA 2025
-
-**`Inteligencia Artificial · Machine Learning · Deep Learning · NLP con Python`**  
-
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) 
-![AI](https://img.shields.io/badge/Inteligencia_Artificial-FF6F00?logo=ai&logoColor=white) 
-![ML](https://img.shields.io/badge/Machine_Learning-8A2BE2?logo=machine-learning&logoColor=white)  
-![DL](https://img.shields.io/badge/Deep_Learning-FF6F00?logo=deep-learning&logoColor=white) 
-![NLP](https://img.shields.io/badge/NLP-8A2BE2?logo=natural-language-processing&logoColor=white)  
-
-### Librerías/Frameworks:  
-![Scikit-Learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikit-learn&logoColor=white) 
-![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?logo=tensorflow&logoColor=white) 
-![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)  
-![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white) 
-![NLTK](https://img.shields.io/badge/NLTK-3776AB?logo=nltk&logoColor=white) 
----
-
-## 💼 ¿Trabajamos juntos?
-
-**🚀 Disponible para proyectos freelance/remotos**  
-*"Si necesitas un desarrollador que piense fuera del código, ¡hablemos! 🌟"*
-
-![Open to Work](https://img.shields.io/badge/Open_to_Work-Freelance/Remoto-2ECC71)  
-![Availability](https://img.shields.io/badge/Disponibilidad-UTC%2B1_(España)-blueviolet)
-
-### 📫 Contáctame
-[![Website Contact](https://img.shields.io/badge/📩_Formulario_de_Contacto-FF7139?logo=google-forms)](https://www.ezequielsuarez-dev.com/#contactos)
-[![LinkedIn](https://img.shields.io/badge/Contacto_LinkedIn-0A66C2?logo=linkedin&logoColor=white)](tu-url-linkedin)  
-[![Email](https://img.shields.io/badge/Email_Profesional-EA4335?logo=gmail&logoColor=white)](mailto:tu-email@example.com)  
-[![Slack](https://img.shields.io/badge/Chat_por_Slack-4A154B?logo=slack&logoColor=white)](tu-enlace-slack)
-
-**📅 Horario flexible**: Trabajo remoto con disponibilidad para clientes internacionales.
+```
+Frontend & UI               Backend & Cloud              IA Aplicada & Ingeniería
+─────────────               ───────────────              ────────────────────────
+• Next.js / React           • Python / FastAPI           • Integración de LLMs & APIs IA
+• Astro                     • PostgreSQL / MySQL         • Machine Learning & NLP
+• TypeScript / JavaScript   • Redis (ARQ Workers)        • PyTorch / Scikit-Learn / Pandas
+• Tailwind CSS / Sass       • AWS / Docker / CI-CD       • SOLID & Clean Architecture
+```
 
 ---
 
-## 🎯 Filosofía
+## 🎓 Formación Académica & Especialización
 
-> *"Construyo soluciones donde el software y el hardware convergen, con un ojo siempre en la escalabilidad y otro en la inteligencia artificial."*
+* **Ingeniería en Sistemas de Información** — Universidad Tecnológica Nacional (UTN)
+  * *Fundamentos:* Algoritmos y estructuras de datos, diseño y arquitectura de sistemas, bases de datos, ingeniería de software y análisis de sistemas.
+* **Formación Intensiva en Inteligencia Artificial** (España)
+  * *Enfoque práctico:* Fundamentos de Machine Learning, Deep Learning, Procesamiento de Lenguaje Natural (NLP) y análisis de datos con Python (Pandas, Scikit-Learn, PyTorch) aplicados al desarrollo de software.
+
+---
+
+## 💼 Contacto & Enlaces
+
+Disponible para colaborar en proyectos de desarrollo de software, integración de IA y equipos técnicos remotos.
+
+* **Modalidad:** Remoto (España, Latinoamérica y Global)
+* **Website / Portfolio:** [ezequielsuarez-dev.com](https://www.ezequielsuarez-dev.com/)
+* **Email Directo:** [ezequielsuarez.dev@gmail.com](mailto:ezequielsuarez.dev@gmail.com)
+* **LinkedIn:** [linkedin.com/in/ezequiel-suarez-dev](https://www.linkedin.com/in/ezequiel-suarez-dev/)
+* **GitHub:** [github.com/ezequiel-dev93](https://github.com/ezequiel-dev93)
+* **Slack de Trabajo:** [Canal de Comunicación Directa](https://ezequiel-dev.slack.com/archives/C076K9VH1M0)

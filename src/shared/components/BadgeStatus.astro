@@ -3,10 +3,17 @@ interface Props {
     href?: string
 }
 
-const { href } = Astro.props
+const { href, ...rest } = Astro.props
+const isExternal = /^https?:\/\//.test(href ?? "")
 ---
 
-<a target="_blank" class="status-badge" rel="noopener noreferrer" href={ href } {...Astro.props}>
+<a
+  class="status-badge"
+  href={ href }
+  target={ isExternal ? "_blank" : undefined }
+  rel={ isExternal ? "noopener noreferrer" : undefined }
+  {...rest}
+>
   <span class="status-badge__dot" aria-hidden="true">
     <span class="status-badge__dot-ping"></span>
     <span class="status-badge__dot-inner"></span>

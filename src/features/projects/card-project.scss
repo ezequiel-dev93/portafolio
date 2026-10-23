@@ -97,6 +97,7 @@
     &-title {
       font-weight: 700;
       font-size: 1.23rem;
+      color: #0B1220; /* Modo claro: Azul Marino */
       transition: color 0.4s ease;
 
       @include mx.mq-max(768px) {
@@ -196,7 +197,13 @@
 }
 
 body.dark-mode {
-  .projects__cards a:hover .projects__icon-link {
-    color: v.$accent-dark;
+  .projects {
+    &__figure-caption-title {
+      color: #00E5FF; /* Modo oscuro: Cian */
+    }
+
+    &__cards a:hover .projects__icon-link {
+      color: #00E5FF;
+    }
   }
 }

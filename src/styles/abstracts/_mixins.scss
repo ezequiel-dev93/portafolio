@@ -42,14 +42,16 @@
     grid-template-columns: repeat($columnas, 1fr);
 }
 
+/* | Gradientes de Títulos — Modo Claro: Azul Marino -> Cian Profundo */
 @mixin title-style {
-    background: linear-gradient(135deg, #58039d, #E84B3C);
+    background: linear-gradient(135deg, #0B1220 0%, #0284C7 100%);
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
+/* | Gradientes de Títulos — Modo Oscuro: Cian Eléctrico -> Blanco Plata */
 @mixin title-style-dark {
-    background: linear-gradient(135deg, #CF3F4D, #E84B3C);
+    background: linear-gradient(135deg, #00E5FF 0%, #E5E7EB 100%);
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
@@ -57,18 +59,18 @@
 @mixin card-interactive {
     border: 0.1rem solid rgba(153, 153, 153, 0.2);
     border-radius: 0.5rem;
-    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 
     &:hover {
-        border-color: rgba(255, 255, 255, 0.4);
+        border-color: rgba(0, 229, 255, 0.45);
         background: rgba(255, 255, 255, 0.05);
         transform: translateY(-8px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 229, 255, 0.15);
     }
 
     &:focus-within,
     &:focus {
-        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline: 2px solid rgba(0, 229, 255, 0.5);
         outline-offset: 2px;
     }
 }

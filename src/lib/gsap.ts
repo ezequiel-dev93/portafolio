@@ -18,6 +18,16 @@ const splitText = (selector: string) => {
 };
 
 export const animateHeroTitle = () => {
+  const title = document.querySelector<HTMLElement>("#hero-title");
+  if (
+    !title ||
+    title.dataset.animationInitialized === "true" ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return;
+  }
+
+  title.dataset.animationInitialized = "true";
   const letters = splitText("#hero-title .title-main");
 
   const tl = gsap.timeline();

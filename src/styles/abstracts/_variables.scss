@@ -1,35 +1,43 @@
-$bg-white: radial-gradient(circle at 90% 5%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 4vw, transparent 20vw),
-    radial-gradient(circle at 10% 14%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 4vw, transparent 20vw),
-    radial-gradient(circle at 70% 45%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 2vw, transparent 20vw),
-    radial-gradient(circle at 14% 67%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 8vw, transparent 20vw),
-    radial-gradient(circle at 78% 90%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 8vw, transparent 20vw),
+/* Base Background Gradients (with subtle Cyan ambient accents) */
+$bg-white: radial-gradient(circle at 90% 5%, rgba(2, 132, 199, 0.12) 0%, rgba(0, 229, 255, 0.04) 4vw, transparent 20vw),
+    radial-gradient(circle at 10% 14%, rgba(2, 132, 199, 0.12) 0%, rgba(0, 229, 255, 0.04) 4vw, transparent 20vw),
+    radial-gradient(circle at 70% 45%, rgba(2, 132, 199, 0.10) 0%, rgba(0, 229, 255, 0.03) 2vw, transparent 20vw),
+    radial-gradient(circle at 14% 67%, rgba(2, 132, 199, 0.12) 0%, rgba(0, 229, 255, 0.04) 8vw, transparent 20vw),
+    radial-gradient(circle at 78% 90%, rgba(2, 132, 199, 0.12) 0%, rgba(0, 229, 255, 0.04) 8vw, transparent 20vw),
     linear-gradient(90deg, rgb(234, 230, 230), rgb(234, 230, 230));
 
-$bg-dark: radial-gradient(circle at 90% 5%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 4vw, transparent 20vw),
-    radial-gradient(circle at 10% 14%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 4vw, transparent 20vw),
-    radial-gradient(circle at 70% 45%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 2vw, transparent 20vw),
-    radial-gradient(circle at 14% 67%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 8vw, transparent 20vw),
-    radial-gradient(circle at 78% 90%, oklab(66.455% 0.27318 -0.06674 / 0.15) 0%, rgba(255, 0, 182, 0.05) 8vw, transparent 20vw),
+$bg-dark: radial-gradient(circle at 90% 5%, rgba(0, 229, 255, 0.14) 0%, rgba(2, 132, 199, 0.05) 4vw, transparent 20vw),
+    radial-gradient(circle at 10% 14%, rgba(0, 229, 255, 0.14) 0%, rgba(2, 132, 199, 0.05) 4vw, transparent 20vw),
+    radial-gradient(circle at 70% 45%, rgba(0, 229, 255, 0.12) 0%, rgba(2, 132, 199, 0.04) 2vw, transparent 20vw),
+    radial-gradient(circle at 14% 67%, rgba(0, 229, 255, 0.14) 0%, rgba(2, 132, 199, 0.05) 8vw, transparent 20vw),
+    radial-gradient(circle at 78% 90%, rgba(0, 229, 255, 0.14) 0%, rgba(2, 132, 199, 0.05) 8vw, transparent 20vw),
     linear-gradient(90deg, rgb(0, 0, 0), rgb(0, 0, 0));
 
-$bg-header: #35353599;
-$bg-header-movil: #0F172A;
-$bg-skill: #d4a3ca;
-$bg-badge: #eddcfb;
-$bg-badge-ping: #8800ff;
-$bg-timeline-cv-link: #d8b7fa;
+/* Brand Palette - Cyan, Plata y Azul Marino */
+$color-navy: #0B1220;
+$color-navy-deep: #070C17;
+$color-cyan: #00E5FF;
+$color-cyan-light: #67E8F9;
+$color-cyan-deep: #0284C7;
+$color-silver: #CBD5E1;
+$color-silver-light: #E5E7EB;
+
+/* State & Elements */
+$bg-badge: rgba(2, 132, 199, 0.14);
+$bg-badge-ping: #10B981;
+$bg-timeline-cv-link: rgba(2, 132, 199, 0.14);
 $bg-cardproject: #CFCCE6;
-$bg-cardproject-dark: #1e1e1e;
-$bg-icon: #D999B6;
-$bg-form: #d9b0ff;
+$bg-cardproject-dark: #0B1220;
+$bg-form: rgba(2, 132, 199, 0.35);
 
-$text-enfasis: #9a54e0;
-$text-enfasis-dark: #3BE477;
-$accent-dark: #E84B3C;
-$accent-dark-gradient: linear-gradient(135deg, #CF3F4D, #E84B3C);
-$text-white: #ececec;
-$text-black: #1a1a1a;
+/* Typography & Accent Colors */
+$text-enfasis: #0284C7;
+$accent-dark: #00E5FF;
+$accent-dark-gradient: linear-gradient(135deg, #00E5FF, #38BDF8);
+$text-white: #E5E7EB;
+$text-black: #0B1220;
 
+/* Responsive Typographic Scale */
 $font-size-small: 1.1rem;
 $font-size-medium: clamp(0.89rem, 1.2vw + 0.4rem, 1.5rem);
 $font-size-ml: clamp(1.5rem, 5vw, 3.5rem);

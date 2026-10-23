@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap');
+
+      .font-sans { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+      .font-display { font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; }
+      .font-mono { font-family: 'Fira Code', monospace; }
+
+      .brand-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 52px; fill: #F8FAFC; letter-spacing: 6px; }
+      .brand-role { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 18.5px; fill: #00E5FF; letter-spacing: 2.5px; }
+      .brand-sub { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 19px; fill: #94A3B8; letter-spacing: 0.5px; }
+      .brand-cred { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 15px; fill: #64748B; letter-spacing: 0.5px; }
+      .brand-domain { font-family: 'Fira Code', monospace; font-weight: 500; font-size: 16px; fill: #94A3B8; letter-spacing: 1.5px; }
+
+      .tech-pill-bg { fill: #080E1F; stroke: #1E293B; stroke-width: 1.5; rx: 10px; }
+      .tech-pill-text { font-family: 'Fira Code', monospace; font-size: 14px; fill: #CBD5E1; font-weight: 500; }
+    </style>
+
+    <!-- Gradiente de Fondo Canvas (1200x630 Open Graph Standard) -->
+    <linearGradient id="og-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#050811"/>
+      <stop offset="50%" stop-color="#080E1F"/>
+      <stop offset="100%" stop-color="#040711"/>
+    </linearGradient>
+
+    <!-- Gradiente Acento Cian Eléctrico -->
+    <linearGradient id="cyan-glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+
+    <!-- Gradiente Plata / Acero para Monograma E -->
+    <linearGradient id="e-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="55%" stop-color="#E2E8F0"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+
+    <!-- Gradiente Barra Media E (Fade desde el poste hacia Cian Neón) -->
+    <linearGradient id="e-mid-cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.05"/>
+      <stop offset="30%" stop-color="#0284C7" stop-opacity="0.75"/>
+      <stop offset="70%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+
+    <!-- Gradiente Cian Neón para Monograma S -->
+    <linearGradient id="s-cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#67E8F9"/>
+      <stop offset="45%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+
+    <!-- Glow Suave de Fondo -->
+    <radialGradient id="radial-glow" cx="75%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.14"/>
+      <stop offset="50%" stop-color="#6366F1" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Separador Vertical -->
+    <linearGradient id="divider-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#00E5FF" stop-opacity="0.85"/>
+      <stop offset="75%" stop-color="#00E5FF" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo Principal -->
+  <rect width="1200" height="630" fill="url(#og-bg)"/>
+  <rect width="1200" height="630" fill="url(#radial-glow)"/>
+
+  <!-- Cuadrícula sutil de fondo tipo blueprint técnico -->
+  <g stroke="#1E293B" stroke-width="0.8" opacity="0.25">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- COMPOSICIÓN DINÁMICA DERECHA: Vector Polígonos de Marca  -->
+  <!-- ======================================================== -->
+  <g opacity="0.85">
+    <!-- Línea angular punteada -->
+    <path d="M 920 0 L 1110 630" stroke="#1E293B" stroke-width="1.5" stroke-dasharray="6 6"/>
+
+    <!-- Polígono facetado tecnológico -->
+    <path d="M 860 0 L 1200 180 L 1200 630 L 980 630 Z" fill="#0A1329" fill-opacity="0.45" stroke="#1E293B" stroke-width="1.2"/>
+
+    <!-- Línea neón angular de impacto -->
+    <path d="M 810 630 L 1040 135 L 1200 28" stroke="url(#cyan-glow)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="1040" cy="135" r="5.5" fill="#00E5FF"/>
+
+    <path d="M 950 630 L 1115 250 L 1200 190" stroke="#38BDF8" stroke-width="1.2" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- BLOQUE CENTRAL DE IDENTIDAD (Centrado para 1200x630)     -->
+  <!-- ======================================================== -->
+  <g transform="translate(115, 175)">
+    <!-- Monograma "ES" Geométrico fiel al manual de marca -->
+    <g transform="translate(0, 12) scale(1.75)">
+      <!-- Letra 'E' Marco Exterior Platino / Acero -->
+      <path d="M 0 0 L 90 0 L 79 15 L 15 15 L 15 72 Q 15 79 22 79 L 37 79 L 48 94 L 20 94 Q 0 94 0 74 Z" fill="url(#e-metal)"/>
+
+      <!-- Barra Central de la 'E' en Cian con desvanecimiento lateral y bisel -->
+      <path d="M 15 36 L 90 36 L 101 51 L 99 52.5 L 77 52.5 L 75 51 L 15 51 Z" fill="url(#e-mid-cyan)"/>
+
+      <!-- Letra 'S' Cian Eléctrico -->
+      <path d="M 45 53 Q 46 66 56 66 L 82 66 C 99 66 110 77 110 95 C 110 113 99 124 82 124 L 48 124 L 37 108 L 81 108 C 89 108 94 103 94 95 C 94 87 89 82 81 82 L 50 82 C 40 82 35 76 35 68 C 35 61 39 56 45 53 Z" fill="url(#s-cyan)"/>
+    </g>
+
+    <!-- Separador vertical elegante -->
+    <line x1="232" y1="0" x2="232" y2="255" stroke="url(#divider-grad)" stroke-width="2.5"/>
+
+    <!-- Textos de Identidad + Píldoras -->
+    <g transform="translate(272, 6)">
+      <!-- Nombre Completo -->
+      <text class="brand-title" y="44">EZEQUIEL SUÁREZ</text>
+
+      <!-- Rol Profesional -->
+      <text class="brand-role" y="92">DESARROLLADOR DE SOFTWARE &amp; IA APLICADA</text>
+
+      <!-- Propuesta de Valor / Ejes -->
+      <text class="brand-sub" y="138">
+        Next.js &amp; Astro <tspan fill="#00E5FF">·</tspan> Python &amp; FastAPI <tspan fill="#00E5FF">·</tspan> AWS &amp; Docker
+      </text>
+
+      <!-- Credencial Académica & Experiencia -->
+      <text class="brand-cred" y="172">
+        Ingeniería en Sistemas de Información (UTN) · Desarrollo Full Stack &amp; Cloud
+      </text>
+
+      <!-- Píldoras de Tecnologías de Alto Nivel -->
+      <g transform="translate(0, 204)">
+        <!-- Pill 1: FastAPI -->
+        <g transform="translate(0, 0)">
+          <rect width="102" height="36" class="tech-pill-bg"/>
+          <text x="51" y="23" text-anchor="middle" class="tech-pill-text">FastAPI</text>
+        </g>
+        <!-- Pill 2: Next.js -->
+        <g transform="translate(114, 0)">
+          <rect width="102" height="36" class="tech-pill-bg"/>
+          <text x="51" y="23" text-anchor="middle" class="tech-pill-text">Next.js</text>
+        </g>
+        <!-- Pill 3: AWS Cloud -->
+        <g transform="translate(228, 0)">
+          <rect width="116" height="36" class="tech-pill-bg"/>
+          <text x="58" y="23" text-anchor="middle" class="tech-pill-text">AWS Cloud</text>
+        </g>
+        <!-- Pill 4: AI / NLP -->
+        <g transform="translate(356, 0)">
+          <rect width="116" height="36" class="tech-pill-bg" stroke="#00E5FF" stroke-opacity="0.6"/>
+          <text x="58" y="23" text-anchor="middle" class="tech-pill-text" fill="#00E5FF">AI / NLP</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Dominio inferior centrado -->
+  <g transform="translate(600, 582)">
+    <text text-anchor="middle" class="brand-domain">
+      ezequielsuarez-dev<tspan fill="#00E5FF">.com</tspan>
+    </text>
+  </g>
+</svg>

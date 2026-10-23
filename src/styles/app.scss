@@ -17,8 +17,8 @@
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 50%;
-  border: 1px solid rgba(153, 65, 252, 0.25);
-  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(2, 132, 199, 0.28);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(8px);
   color: v.$text-black;
   cursor: pointer;
@@ -26,7 +26,7 @@
 
   &:hover {
     border-color: v.$text-enfasis;
-    box-shadow: 0 0 12px rgba(153, 65, 252, 0.35);
+    box-shadow: 0 0 12px rgba(2, 132, 199, 0.35);
     transform: scale(1.08);
   }
 
@@ -55,7 +55,7 @@
     &--sun {
       opacity: 1;
       transform: rotate(0deg) scale(1);
-      color: #ff9800;
+      color: #f59e0b;
     }
 
     &--moon {
@@ -69,13 +69,13 @@
 /* Modo oscuro para el botón */
 body.dark-mode {
   .mode-dark-btn {
-    background: rgba(30, 30, 30, 0.6);
-    border-color: rgba(232, 75, 60, 0.35);
+    background: rgba(11, 18, 32, 0.75);
+    border-color: rgba(0, 229, 255, 0.35);
     color: v.$text-white;
 
     &:hover {
       border-color: v.$accent-dark;
-      box-shadow: 0 0 14px rgba(232, 75, 60, 0.4);
+      box-shadow: 0 0 14px rgba(0, 229, 255, 0.45);
     }
 
     .mode-dark__icon--sun {
@@ -98,11 +98,25 @@ body.dark-mode {
   gap: 0.4rem;
   padding: 0.4rem 0.5rem;
   border-radius: 1rem;
-  background: #753076;
+  background: #0B1220;
   color: v.$text-white;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 200;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background: #0284C7;
+  }
+}
+
+body.dark-mode .social {
+  background: #FFFFFF;
+  color: #0B1220;
+
+  &:hover {
+    background: #00E5FF;
+  }
 }
 
 /* Menu Movil*/
@@ -128,7 +142,7 @@ body.dark-mode {
   height: var(--height-bar);
   width: 100%;
   border-radius: .5rem;
-  background-color: #9941fc;
+  background-color: #0284C7;
   transition: all 0.3s ease;
 }
 
@@ -233,8 +247,8 @@ body.dark-mode {
           bottom: 0;
           left: 0;
           width: 0;
-          height: 1px;
-          background: linear-gradient(135deg, #663399, #d946ef);
+          height: 2px;
+          background: linear-gradient(135deg, #0B1220, #0284C7);
           transition: width 0.3s ease;
           border-radius: 2px;
         }
@@ -250,7 +264,7 @@ body.dark-mode {
         }
       }
 
-      /* Mobile drawer (Opción 1: Spatial Slide + Staggered Cascade) */
+      /* Mobile drawer */
       @media (max-width: 1024px) {
         border-radius: 1.25rem 0 0 1.25rem;
         flex-direction: column;
@@ -264,10 +278,10 @@ body.dark-mode {
         width: 78%;
         max-width: 320px;
         z-index: 999;
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.96);
         color: v.$text-black;
-        border-left: 1px solid rgba(154, 84, 224, 0.22);
-        box-shadow: -14px 0 38px rgba(154, 84, 224, 0.16);
+        border-left: 1px solid rgba(2, 132, 199, 0.25);
+        box-shadow: -14px 0 38px rgba(2, 132, 199, 0.14);
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
         transform: translateX(100%);
@@ -399,7 +413,7 @@ body.dark-mode {
     }
   }
 
-  /* Énfasis en Contacto (Opción 1: Botón Píldora) */
+  /* Énfasis en Contacto (Botón Píldora) */
   &__item-contact {
     &::after {
       display: none !important;
@@ -417,7 +431,7 @@ body.dark-mode {
     text-decoration: none;
     border: 1px solid v.$text-enfasis;
     color: v.$text-enfasis;
-    background: rgba(154, 84, 224, 0.08);
+    background: rgba(2, 132, 199, 0.08);
     transition: all 0.3s ease;
 
     &:hover {
@@ -425,44 +439,49 @@ body.dark-mode {
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
       background-clip: initial !important;
-      box-shadow: 0 0 14px rgba(154, 84, 224, 0.45);
+      box-shadow: 0 0 14px rgba(2, 132, 199, 0.45);
       transform: translateY(-1px);
     }
   }
 }
 
-/* Modo oscuro para botón de contacto en header */
+/* Modo oscuro para header */
 body.dark-mode {
   .header {
     &__nav-menu {
+      li::after {
+        background: linear-gradient(135deg, #00E5FF, #E5E7EB);
+      }
+
       @media (max-width: 1024px) {
-        background: rgba(16, 16, 22, 0.96);
-        border-left: 1px solid rgba(232, 75, 60, 0.28);
-        box-shadow: -14px 0 40px rgba(0, 0, 0, 0.7);
+        background: rgba(11, 18, 32, 0.96);
+        border-left: 1px solid rgba(0, 229, 255, 0.3);
+        box-shadow: -14px 0 40px rgba(0, 0, 0, 0.8);
         color: v.$text-white;
 
         li a {
           color: v.$text-white;
 
           &:hover {
-            color: #ff8a75;
+            color: #00E5FF;
           }
         }
       }
     }
 
     &__btn-contact {
-      border-color: rgba(232, 75, 60, 0.5);
-      color: v.$text-white;
-      background: rgba(232, 75, 60, 0.12);
+      border: 1px solid #FFFFFF;
+      color: #0B1220;
+      background: #FFFFFF;
+      font-weight: 600;
 
       &:hover {
-        background: v.$accent-dark-gradient;
-        border-color: transparent;
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
+        background: #00E5FF;
+        border-color: #00E5FF;
+        color: #0B1220 !important;
+        -webkit-text-fill-color: #0B1220 !important;
         background-clip: initial !important;
-        box-shadow: 0 0 16px rgba(232, 75, 60, 0.5);
+        box-shadow: 0 0 16px rgba(0, 229, 255, 0.6);
       }
     }
   }
@@ -516,11 +535,11 @@ body.dark-mode {
   position: relative;
   z-index: 1;
   padding: 4.5rem 0 2.5rem;
-  border-top: 1px solid rgba(154, 84, 224, 0.22);
+  border-top: 1px solid rgba(2, 132, 199, 0.22);
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.12) 0%,
-    rgba(237, 220, 251, 0.28) 100%
+    rgba(2, 132, 199, 0.08) 100%
   );
 
   /* Línea superior luminosa centrada */
@@ -535,8 +554,8 @@ body.dark-mode {
     background: linear-gradient(
       90deg,
       transparent,
-      v.$text-enfasis,
-      #d946ef,
+      #0284C7,
+      #00E5FF,
       transparent
     );
     opacity: 0.85;
@@ -556,8 +575,8 @@ body.dark-mode {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(to right, rgba(154, 84, 224, 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(154, 84, 224, 0.08) 1px, transparent 1px);
+      linear-gradient(to right, rgba(2, 132, 199, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(2, 132, 199, 0.08) 1px, transparent 1px);
     background-size: 42px 42px;
     mask-image: radial-gradient(
       ellipse 80% 90% at 50% 100%,
@@ -602,8 +621,8 @@ body.dark-mode {
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      rgba(154, 84, 224, 0.22) 0%,
-      rgba(217, 70, 239, 0.08) 50%,
+      rgba(2, 132, 199, 0.22) 0%,
+      rgba(0, 229, 255, 0.08) 50%,
       transparent 75%
     );
     filter: blur(28px);
@@ -620,7 +639,7 @@ body.dark-mode {
     white-space: nowrap;
     line-height: 1;
     color: transparent;
-    -webkit-text-stroke: 1px rgba(154, 84, 224, 0.11);
+    -webkit-text-stroke: 1px rgba(2, 132, 199, 0.12);
     user-select: none;
   }
 
@@ -635,13 +654,13 @@ body.dark-mode {
     gap: 2.8rem;
   }
 
-  /* SECCIÓN 1: Identidad (Grande y protagonista) */
+  /* SECCIÓN 1: Identidad */
   &__identity {
     display: flex;
     flex-direction: column;
     gap: 1.35rem;
     padding-bottom: 2.6rem;
-    border-bottom: 1px solid rgba(154, 84, 224, 0.18);
+    border-bottom: 1px solid rgba(2, 132, 199, 0.18);
   }
 
   &__identity-top {
@@ -676,10 +695,10 @@ body.dark-mode {
       justify-content: center;
       flex-shrink: 0;
       border-radius: 1rem;
-      background: rgba(154, 84, 224, 0.12);
-      border: 1px solid rgba(154, 84, 224, 0.28);
+      background: rgba(2, 132, 199, 0.12);
+      border: 1px solid rgba(2, 132, 199, 0.28);
       padding: 0.45rem;
-      box-shadow: 0 8px 24px rgba(154, 84, 224, 0.14);
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.14);
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 
       @media (max-width: 520px) {
@@ -690,7 +709,7 @@ body.dark-mode {
       &:hover {
         transform: translateY(-3px) scale(1.03);
         border-color: v.$text-enfasis;
-        box-shadow: 0 10px 28px rgba(154, 84, 224, 0.26);
+        box-shadow: 0 10px 28px rgba(2, 132, 199, 0.26);
       }
 
       &-link {
@@ -739,7 +758,7 @@ body.dark-mode {
     align-items: center;
   }
 
-  /* SECCIÓN 2: Explorar y Contactos (En sección aparte abajo) */
+  /* SECCIÓN 2: Explorar y Contactos */
   &__middle {
     display: grid;
     grid-template-columns: 1fr 1.15fr;
@@ -752,7 +771,6 @@ body.dark-mode {
     }
   }
 
-  /* Títulos de bloque */
   &__heading {
     font-size: 0.85rem;
     font-weight: 700;
@@ -762,7 +780,6 @@ body.dark-mode {
     margin-bottom: 1.1rem;
   }
 
-  /* Bloque Explorar */
   &__nav-list {
     display: grid;
     grid-template-columns: repeat(3, minmax(110px, auto));
@@ -794,7 +811,6 @@ body.dark-mode {
     }
   }
 
-  /* Bloque Conectemos + Copiar Email + Redes */
   &__connect {
     display: flex;
     flex-direction: column;
@@ -826,8 +842,8 @@ body.dark-mode {
     max-width: 340px;
     padding: 0.58rem 0.65rem 0.58rem 1rem;
     border-radius: 0.75rem;
-    border: 1px solid rgba(154, 84, 224, 0.28);
-    background: rgba(255, 255, 255, 0.68);
+    border: 1px solid rgba(2, 132, 199, 0.28);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(8px);
     color: v.$text-black;
     font-family: inherit;
@@ -837,7 +853,7 @@ body.dark-mode {
 
     &:hover {
       border-color: v.$text-enfasis;
-      box-shadow: 0 4px 16px rgba(154, 84, 224, 0.18);
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.18);
       transform: translateY(-1px);
     }
 
@@ -857,7 +873,7 @@ body.dark-mode {
     flex-shrink: 0;
     padding: 0.3rem 0.7rem;
     border-radius: 0.5rem;
-    background: rgba(154, 84, 224, 0.14);
+    background: rgba(2, 132, 199, 0.14);
     color: v.$text-enfasis;
     font-size: 0.78rem;
     font-weight: 600;
@@ -885,8 +901,8 @@ body.dark-mode {
     width: 2.75rem;
     height: 2.75rem;
     border-radius: 0.75rem;
-    background-color: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(154, 84, 224, 0.22);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(2, 132, 199, 0.22);
     transition: background-color 0.3s ease, color 0.3s ease,
       border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     cursor: pointer;
@@ -896,7 +912,7 @@ body.dark-mode {
     &:hover {
       background-color: v.$text-enfasis;
       border-color: v.$text-enfasis;
-      box-shadow: 0 6px 18px rgba(154, 84, 224, 0.35);
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
       transform: translateY(-3px);
     }
   }
@@ -906,12 +922,12 @@ body.dark-mode {
     transition: color 0.3s ease, transform 0.3s ease;
 
     .section-footer__social-item:hover & {
-      color: v.$text-white;
+      color: #ffffff;
       transform: scale(1.1);
     }
   }
 
-  /* SECCIÓN 3: Barra inferior (Copyright y los demás) */
+  /* SECCIÓN 3: Barra inferior */
   &__bottom {
     display: flex;
     justify-content: space-between;
@@ -919,7 +935,7 @@ body.dark-mode {
     flex-wrap: wrap;
     gap: 1rem;
     padding-top: 1.75rem;
-    border-top: 1px solid rgba(154, 84, 224, 0.18);
+    border-top: 1px solid rgba(2, 132, 199, 0.18);
 
     @include mx.mq-max(640px) {
       flex-direction: column-reverse;
@@ -953,8 +969,8 @@ body.dark-mode {
     gap: 0.35rem;
     padding: 0.35rem 0.85rem;
     border-radius: 2rem;
-    border: 1px solid rgba(154, 84, 224, 0.25);
-    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(2, 132, 199, 0.25);
+    background: rgba(255, 255, 255, 0.65);
     color: inherit;
     font-weight: 600;
     text-decoration: none;
@@ -970,44 +986,44 @@ body.dark-mode {
 
   /* Dark mode */
   body.dark-mode & {
-    border-top-color: rgba(232, 75, 60, 0.22);
+    border-top-color: rgba(0, 229, 255, 0.22);
     background: linear-gradient(
       180deg,
-      rgba(14, 14, 16, 0.12) 0%,
-      rgba(22, 12, 14, 0.38) 100%
+      rgba(11, 18, 32, 0.4) 0%,
+      rgba(7, 12, 23, 0.8) 100%
     );
 
     &::before {
       background: linear-gradient(
         90deg,
         transparent,
-        #cf3f4d,
-        v.$accent-dark,
+        #0284C7,
+        #00E5FF,
         transparent
       );
     }
 
     &__identity {
-      border-bottom-color: rgba(232, 75, 60, 0.18);
+      border-bottom-color: rgba(0, 229, 255, 0.18);
     }
 
     &__grid-bg {
       background-image:
-        linear-gradient(to right, rgba(232, 75, 60, 0.07) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(232, 75, 60, 0.07) 1px, transparent 1px);
+        linear-gradient(to right, rgba(0, 229, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 229, 255, 0.08) 1px, transparent 1px);
     }
 
     &__glow {
       background: radial-gradient(
         circle,
-        rgba(232, 75, 60, 0.16) 0%,
-        rgba(207, 63, 77, 0.06) 50%,
+        rgba(0, 229, 255, 0.18) 0%,
+        rgba(2, 132, 199, 0.06) 50%,
         transparent 75%
       );
     }
 
     &__watermark {
-      -webkit-text-stroke: 1px rgba(232, 75, 60, 0.08);
+      -webkit-text-stroke: 1px rgba(0, 229, 255, 0.08);
     }
 
     &__perfil--title {
@@ -1019,53 +1035,57 @@ body.dark-mode {
     }
 
     &__perfil--logo {
-      background: rgba(232, 75, 60, 0.12);
-      border-color: rgba(232, 75, 60, 0.3);
-      box-shadow: 0 8px 24px rgba(232, 75, 60, 0.12);
+      background: rgba(0, 229, 255, 0.12);
+      border-color: rgba(0, 229, 255, 0.3);
+      box-shadow: 0 8px 24px rgba(0, 229, 255, 0.14);
 
       &:hover {
-        border-color: v.$accent-dark;
-        box-shadow: 0 10px 28px rgba(232, 75, 60, 0.25);
+        border-color: #00E5FF;
+        box-shadow: 0 10px 28px rgba(0, 229, 255, 0.28);
       }
     }
 
     &__heading {
-      color: v.$accent-dark;
+      color: #00E5FF;
     }
 
     &__nav-link:hover {
-      color: v.$accent-dark;
+      color: #00E5FF;
     }
 
     &__copy-btn {
-      background: rgba(28, 28, 32, 0.78);
-      border-color: rgba(232, 75, 60, 0.3);
+      background: rgba(11, 18, 32, 0.85);
+      border-color: rgba(0, 229, 255, 0.3);
       color: v.$text-white;
 
       &:hover {
-        border-color: v.$accent-dark;
-        box-shadow: 0 4px 16px rgba(232, 75, 60, 0.2);
+        border-color: #00E5FF;
+        box-shadow: 0 4px 16px rgba(0, 229, 255, 0.25);
 
         .section-footer__copy-badge {
-          background: v.$accent-dark-gradient;
-          color: #fff;
+          background: #00E5FF;
+          color: #0B1220;
         }
       }
     }
 
     &__copy-badge {
-      background: rgba(232, 75, 60, 0.18);
-      color: v.$accent-dark;
+      background: rgba(0, 229, 255, 0.16);
+      color: #00E5FF;
     }
 
     &__social-item {
-      background-color: rgba(28, 28, 32, 0.78);
-      border-color: rgba(232, 75, 60, 0.3);
+      background-color: rgba(11, 18, 32, 0.85);
+      border-color: rgba(0, 229, 255, 0.3);
 
       &:hover {
-        background: v.$accent-dark-gradient;
-        border-color: transparent;
-        box-shadow: 0 6px 18px rgba(232, 75, 60, 0.4);
+        background: #00E5FF;
+        border-color: #00E5FF;
+        box-shadow: 0 6px 18px rgba(0, 229, 255, 0.45);
+
+        .section-footer__social-icon {
+          color: #0B1220;
+        }
       }
     }
 
@@ -1074,17 +1094,20 @@ body.dark-mode {
     }
 
     &__bottom {
-      border-top-color: rgba(232, 75, 60, 0.18);
+      border-top-color: rgba(0, 229, 255, 0.18);
     }
 
     &__back-top {
-      background: rgba(28, 28, 32, 0.75);
-      border-color: rgba(232, 75, 60, 0.3);
+      background: #FFFFFF;
+      border-color: #00E5FF;
+      color: #0B1220;
+      font-weight: 600;
 
       &:hover {
-        background: v.$accent-dark-gradient;
-        border-color: transparent;
-        color: #fff;
+        background: #00E5FF;
+        border-color: #00E5FF;
+        color: #0B1220;
+        box-shadow: 0 0 14px rgba(0, 229, 255, 0.5);
       }
     }
   }
@@ -1094,7 +1117,7 @@ body.dark-mode {
 .status-badge {
   @include mx.center(flex, center, 0.45rem);
   border-radius: 1.5rem;
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  border: 1px solid rgba(2, 132, 199, 0.35);
   padding: 0.3rem 0.85rem;
   background-color: v.$bg-badge;
   color: v.$text-enfasis;
@@ -1144,17 +1167,28 @@ body.dark-mode {
         }
       }
     }
+
+    &-inner {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: v.$bg-badge-ping;
+    }
   }
 }
 
 body.dark-mode {
   .status-badge {
-    background-color: rgba(232, 75, 60, 0.12);
-    color: v.$accent-dark;
-    border-color: rgba(232, 75, 60, 0.35);
+    background-color: rgba(0, 229, 255, 0.12);
+    color: #00E5FF;
+    border-color: rgba(0, 229, 255, 0.35);
 
     &__dot-ping {
-      background-color: v.$accent-dark;
+      background-color: #10B981;
+    }
+
+    &__dot-inner {
+      background-color: #10B981;
     }
   }
 }

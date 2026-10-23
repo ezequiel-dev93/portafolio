@@ -22,7 +22,7 @@
     font-size: clamp(1rem, 2.5vw, 1.5rem);
     text-wrap: wrap;
     font-weight: 300;
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   &__links {
@@ -32,19 +32,20 @@
     padding-top: 1rem;
 
     &-list {
-      background-color: v.$bg-timeline-cv-link;
+      background-color: rgba(2, 132, 199, 0.12);
       color: v.$text-black;
       border-radius: 50%;
-      border: 1px solid transparent;
+      border: 1px solid rgba(2, 132, 199, 0.25);
       transition: background-color 0.4s ease, color 0.4s ease,
         border-color 0.4s ease, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
       cursor: pointer;
       padding: 0.4rem;
-      box-shadow: 0 0 8px rgba(17, 17, 17, 0.5);
+      box-shadow: 0 2px 8px rgba(11, 18, 32, 0.12);
 
       &:hover {
-        background-color: #845ec2;
-        box-shadow: 0 0 15px rgba(102, 51, 153, 0.7);
+        background-color: #0284C7;
+        border-color: #0284C7;
+        box-shadow: 0 0 15px rgba(2, 132, 199, 0.5);
         transform: scale(1.1);
       }
     }
@@ -54,7 +55,7 @@
       transition: color 0.4s ease, transform 0.3s ease-in-out;
 
       .card__links-list:hover & {
-        color: v.$text-white;
+        color: #ffffff;
         transform: scale(1.2);
       }
     }
@@ -68,21 +69,29 @@ body.dark-mode {
       @include mx.title-style-dark;
     }
 
+    &__descripcion {
+      color: v.$text-white;
+    }
+
     &__links {
       &-list {
-        background-color: rgba(30, 30, 30, 0.75);
-        border-color: rgba(232, 75, 60, 0.35);
+        background-color: rgba(11, 18, 32, 0.75);
+        border-color: rgba(0, 229, 255, 0.35);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 
         &:hover {
-          background: v.$accent-dark-gradient;
-          border-color: transparent;
-          box-shadow: 0 0 16px rgba(232, 75, 60, 0.5);
+          background: #00E5FF;
+          border-color: #00E5FF;
+          box-shadow: 0 0 16px rgba(0, 229, 255, 0.6);
         }
       }
 
       &-items {
         color: v.$text-white;
+
+        .card__links-list:hover & {
+          color: #0B1220;
+        }
       }
     }
   }
