@@ -38,6 +38,12 @@
     display: flex;
     flex-direction: column;
     @include mx.card-interactive;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    will-change: transform, opacity, filter;
+
+    &:hover {
+      transform: none;
+    }
 
     a {
       position: relative;
@@ -45,6 +51,11 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: translateY(-6px);
+      }
 
       &:hover .projects__icon-link {
         opacity: 1;

@@ -470,9 +470,10 @@ body.dark-mode {
     }
 
     &__btn-contact {
-      border: 1px solid #FFFFFF;
-      color: #0B1220;
-      background: #FFFFFF;
+      border: 1px solid rgba(0, 229, 255, 0.45);
+      color: #00E5FF;
+      background: rgba(0, 229, 255, 0.12);
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.2);
       font-weight: 600;
 
       &:hover {
@@ -481,7 +482,7 @@ body.dark-mode {
         color: #0B1220 !important;
         -webkit-text-fill-color: #0B1220 !important;
         background-clip: initial !important;
-        box-shadow: 0 0 16px rgba(0, 229, 255, 0.6);
+        box-shadow: 0 0 24px rgba(0, 229, 255, 0.65);
       }
     }
   }
@@ -492,7 +493,9 @@ body.dark-mode {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
 
   &__content {
     width: 96%;
@@ -500,6 +503,162 @@ body.dark-mode {
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Cyber HUD Widget - Inferior Derecho */
+  &__hud-widget {
+    position: absolute;
+    right: 0;
+    bottom: 2rem;
+    z-index: 20;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.02);
+
+      .hud-widget__frame {
+        background: linear-gradient(135deg, #0284C7 0%, #00E5FF 100%);
+        box-shadow: 0 0 28px rgba(2, 132, 199, 0.4);
+      }
+
+      .hud-widget__inner {
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      .hud-widget__title {
+        color: v.$text-enfasis;
+      }
+
+      .hud-widget__arrow-box {
+        background: v.$text-enfasis;
+        color: #FFFFFF;
+        border-color: v.$text-enfasis;
+        transform: translateY(2px);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid #00E5FF;
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 768px) {
+      display: none !important;
+    }
+  }
+}
+
+.hud-widget {
+  &__frame {
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.6) 0%, rgba(0, 229, 255, 0.3) 100%);
+    clip-path: polygon(14px 0%, 100% 0%, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0% 100%, 0% 14px);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    padding: 0.65rem 1.25rem 0.65rem 1.25rem;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    clip-path: polygon(13px 0%, 100% 0%, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0% 100%, 0% 13px);
+    transition: background 0.3s ease;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 1.15rem;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-family: v.$font-body;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: v.$text-black;
+    transition: color 0.3s ease;
+  }
+
+  &__arrow-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 6px;
+    background: rgba(2, 132, 199, 0.12);
+    color: v.$text-enfasis;
+    border: 1px solid rgba(2, 132, 199, 0.25);
+    transition: all 0.3s ease;
+  }
+
+  &__arrow {
+    animation: cta-bounce-subtle 2.2s ease-in-out infinite;
+  }
+}
+
+body.dark-mode {
+  .hero__hud-widget {
+    &:hover {
+      .hud-widget__frame {
+        background: linear-gradient(135deg, #00E5FF 0%, #38BDF8 100%);
+        box-shadow: 0 0 32px rgba(0, 229, 255, 0.55);
+      }
+
+      .hud-widget__inner {
+        background: rgba(11, 18, 32, 0.95);
+      }
+
+      .hud-widget__title {
+        color: #00E5FF;
+      }
+
+      .hud-widget__arrow-box {
+        background: #00E5FF;
+        color: #0B1220;
+        border-color: #00E5FF;
+      }
+    }
+  }
+
+  .hud-widget {
+    &__frame {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.5) 0%, rgba(2, 132, 199, 0.25) 100%);
+    }
+
+    &__inner {
+      background: rgba(11, 18, 32, 0.88);
+    }
+
+    &__title {
+      color: v.$text-white;
+    }
+
+    &__arrow-box {
+      background: rgba(0, 229, 255, 0.12);
+      border-color: rgba(0, 229, 255, 0.35);
+      color: #00E5FF;
+    }
+  }
+}
+
+@keyframes cta-bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
   }
 }
 

@@ -12,7 +12,9 @@
   "dependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/vercel": "^11.0.12",
+    "@fontsource-variable/cinzel": "^5.3.0",
     "@fontsource-variable/onest": "5.2.11",
+    "@fontsource-variable/space-grotesk": "^5.2.1",
     "gsap": "3.13.0",
     "motion": "12.23.24",
     "simple-parallax-js": "^6.3.3",

@@ -2,6 +2,10 @@
 import "@/styles/app.scss";
 import "@/layouts/Layout.astro";
 import CardProfile from "@/features/profile/card-profile/components/CardProfile.astro";
+import HudWidget from "@/shared/components/HudWidget.astro";
+import profileData from "@/features/profile/data/profile";
+
+const { cta } = profileData;
 ---
 
 <section class="hero" id="top">
@@ -9,6 +13,12 @@ import CardProfile from "@/features/profile/card-profile/components/CardProfile.
 
   <section class="hero__content">
     <CardProfile />
+
+    <HudWidget
+      href={cta.href}
+      label={cta.label}
+      ariaLabel={cta.ariaLabel}
+    />
   </section>
 </section>
 
@@ -18,7 +28,9 @@ import CardProfile from "@/features/profile/card-profile/components/CardProfile.
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initHeroScene, { once: true });
+    document.addEventListener("DOMContentLoaded", initHeroScene, {
+      once: true,
+    });
   } else {
     initHeroScene();
   }

@@ -1,0 +1,39 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  ariaLabel: string;
+  class?: string;
+}
+
+const { href, label, ariaLabel, class: className = "" } = Astro.props;
+---
+
+<a
+  href={href}
+  class={`hero__hud-widget ${className}`.trim()}
+  aria-label={ariaLabel}
+>
+  <div class="hud-widget__frame">
+    <div class="hud-widget__inner">
+      <div class="hud-widget__content">
+        <span class="hud-widget__title">{label}</span>
+        <span class="hud-widget__arrow-box" aria-hidden="true">
+          <svg
+            class="hud-widget__arrow"
+            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 4v13M18 11l-6 6-6-6"></path>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</a>

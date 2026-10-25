@@ -52,88 +52,199 @@ export function initSectionAnimations() {
         );
       }
 
-      // 2. Títulos de sección — Reveal editorial bidireccional (desde arriba y desde el Footer)
+      // 2. Títulos de sección — Escaneo Láser Neón Cian (Laser Scan reveal unificado y reversible)
       const sectionTitles = gsap.utils.toArray(
-        ".experience__title-h2, .projects__title-h2, .about__title-h2, .skill__title-h2"
+        ".experience__title-h2, .projects__title-h2, .about__title-h2, .skill__title-h2, .contactCta__title"
       );
 
       sectionTitles.forEach((title) => {
         const triggerParent = title.parentElement || title;
         gsap.fromTo(
           title,
-          { y: 32, autoAlpha: 0, filter: "blur(5px)" },
           {
-            y: 0,
+            clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
+            filter: "drop-shadow(-6px 0 14px rgba(0, 229, 255, 0.95))",
+            autoAlpha: 0.1,
+            x: -12,
+          },
+          {
+            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+            filter: "drop-shadow(0 0 0px rgba(0, 229, 255, 0))",
             autoAlpha: 1,
-            filter: "blur(0px)",
-            duration: 0.7,
-            ease: "power3.out",
-            clearProps: "filter",
+            x: 0,
+            duration: 0.85,
+            ease: "power2.inOut",
             scrollTrigger: {
               trigger: triggerParent,
               start: titleStart,
-              end: "clamp(bottom 12%)",
+              end: isMobile ? "bottom 14%" : "bottom 18%",
               toggleActions: "play reverse play reverse",
             },
           }
         );
       });
 
-      // 3. Experiencia — Entrada escalonada tipo Timeline (bidireccional)
-      const expContainer = document.querySelector(
-        "#experiencia .experience-card"
-      );
+      const cardStart = isMobile ? "top 90%" : "top 86%";
+      const cardEnd = isMobile ? "bottom 15%" : "bottom 22%";
+
+      // 3. Experiencia — Opción 1: Staggered Module Power-On (Por tarjeta + Reverso al cambiar de sección)
       const visibleExpItems = gsap.utils.toArray(
         "#experiencia .experience-card > .experience-card__item"
       );
 
-      if (expContainer && visibleExpItems.length) {
-        gsap.fromTo(
-          visibleExpItems,
-          { y: 40, autoAlpha: 0 },
+      visibleExpItems.forEach((item) => {
+        const link = item.querySelector(".experience-card__link");
+        const expTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: item,
+            start: cardStart,
+            end: cardEnd,
+            toggleActions: "play reverse play reverse",
+          },
+        });
+
+        // Entrada de DERECHA a IZQUIERDA con recorrido amplio y enfoque progresivo
+        expTl.fromTo(
+          item,
           {
+            x: () => Math.min(window.innerWidth * 0.42, 500),
+            y: 24,
+            scale: 0.92,
+            skewX: -5,
+            autoAlpha: 0,
+            filter: "blur(7px)",
+          },
+          {
+            x: 0,
             y: 0,
+            scale: 1,
+            skewX: 0,
             autoAlpha: 1,
-            duration: 0.7,
-            stagger: 0.14,
+            filter: "blur(0px)",
+            duration: 0.85,
             ease: "power3.out",
-            scrollTrigger: {
-              trigger: expContainer,
-              start: triggerStart,
-              end: triggerEnd,
-              toggleActions: "play reverse play reverse",
-            },
           }
         );
-      }
 
-      // 4. Proyectos — Cascada con profundidad + Efecto Tilt 3D interactivo (bidireccional)
-      const projectsList = document.querySelector(
-        "#proyectos .projects__items:not(.projects__items--hidden)"
-      );
+        // Pulso de encendido y energización perimetral cian (reversible con keyframes)
+        if (link) {
+          expTl.fromTo(
+            link,
+            {
+              borderColor: "rgba(0, 229, 255, 0.15)",
+              boxShadow: "0 0 0px rgba(0, 229, 255, 0)",
+            },
+            {
+              keyframes: [
+                {
+                  borderColor: "#00E5FF",
+                  boxShadow: "0 0 30px rgba(0, 229, 255, 0.5)",
+                  duration: 0.4,
+                  ease: "power2.out",
+                },
+                {
+                  borderColor: "rgba(153, 153, 153, 0.2)",
+                  boxShadow: "0 0 0px rgba(0, 229, 255, 0)",
+                  duration: 0.4,
+                  ease: "power2.inOut",
+                },
+              ],
+            },
+            0.05
+          );
+        }
+      });
+
+      // 4. Proyectos — Opción C: Lateral Warp desde el inicio de pantalla + Border Scanner (Por tarjeta + Reverso)
       const visibleProjectCards = gsap.utils.toArray(
         "#proyectos .projects__items:not(.projects__items--hidden) > .projects__cards"
       );
 
-      if (projectsList && visibleProjectCards.length) {
-        gsap.fromTo(
-          visibleProjectCards,
-          { y: 45, scale: 0.96, autoAlpha: 0 },
+      visibleProjectCards.forEach((card) => {
+        const icon = card.querySelector(".projects__icon-link");
+        const projTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            start: cardStart,
+            end: cardEnd,
+            toggleActions: "play reverse play reverse",
+          },
+        });
+
+        // 1. Entrada lateral amplia desde el inicio de pantalla con desenfoque de velocidad (Lateral Warp)
+        projTl.fromTo(
+          card,
           {
-            y: 0,
+            x: () => -Math.min(window.innerWidth * 0.44, 540),
+            scale: 0.88,
+            skewX: 6,
+            autoAlpha: 0,
+            filter: "blur(8px)",
+          },
+          {
+            x: 0,
             scale: 1,
+            skewX: 0,
             autoAlpha: 1,
-            duration: 0.75,
-            stagger: 0.13,
+            filter: "blur(0px)",
+            duration: 0.85,
             ease: "power3.out",
-            scrollTrigger: {
-              trigger: projectsList,
-              start: triggerStart,
-              end: triggerEnd,
-              toggleActions: "play reverse play reverse",
-            },
           }
         );
+
+        // 2. Haz de luz y resplandor perimetral cian (Border Scanner reversible)
+        projTl.fromTo(
+          card,
+          {
+            borderColor: "rgba(0, 229, 255, 0.15)",
+            boxShadow: "0 0 0px rgba(0, 229, 255, 0)",
+          },
+          {
+            keyframes: [
+              {
+                borderColor: "#00E5FF",
+                boxShadow: "0 0 34px rgba(0, 229, 255, 0.55)",
+                duration: 0.42,
+                ease: "power2.out",
+              },
+              {
+                borderColor: "rgba(153, 153, 153, 0.2)",
+                boxShadow: "0 0 0px rgba(0, 229, 255, 0)",
+                duration: 0.43,
+                ease: "power2.inOut",
+              },
+            ],
+          },
+          0.05
+        );
+
+        // 3. Pop elástico luminoso en el ícono de enlace externo
+        if (icon) {
+          projTl.fromTo(
+            icon,
+            { scale: 0.5, autoAlpha: 0 },
+            {
+              scale: 1,
+              autoAlpha: 0.75,
+              duration: 0.45,
+              ease: "back.out(2.2)",
+            },
+            0.35
+          );
+        }
+      });
+
+      // Smooth scroll asistido para el botón HUD "Ver Experiencia"
+      const hudBtn = document.querySelector(".hero__hud-widget");
+      if (hudBtn && !hudBtn.dataset.listenerSet) {
+        hudBtn.dataset.listenerSet = "true";
+        hudBtn.addEventListener("click", (e) => {
+          const expSec = document.querySelector("#experiencia");
+          if (expSec) {
+            e.preventDefault();
+            expSec.scrollIntoView({ behavior: "smooth" });
+          }
+        });
       }
 
       // Tilt 3D suave en todas las cards de proyectos (solo desktop con puntero)
@@ -238,25 +349,32 @@ export function initSectionAnimations() {
         }
       }
 
-      // 7. CTA de Contacto — Entrada con escala + Botón magnético (bidireccional)
-      const contactSection = document.querySelector("#contactos");
-      const contactInner = document.querySelector(".contactCta__inner");
+      // 7. CTA de Contacto — Tarjeta Cyber-HUD con encendido + Botón magnético (bidireccional)
+      const contactCard =
+        document.querySelector(".contactCta__card") ||
+        document.querySelector(".contactCta__inner");
       const contactBtn = document.querySelector(".contactCta__btn");
 
-      if (contactSection && contactInner) {
+      if (contactCard) {
         gsap.fromTo(
-          contactInner,
-          { y: 36, scale: 0.96, autoAlpha: 0 },
+          contactCard,
+          {
+            y: 36,
+            scale: 0.94,
+            autoAlpha: 0,
+            filter: "blur(6px)",
+          },
           {
             y: 0,
             scale: 1,
             autoAlpha: 1,
-            duration: 0.75,
+            filter: "blur(0px)",
+            duration: 0.8,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: contactSection,
-              start: titleStart,
-              end: "clamp(bottom 12%)",
+              trigger: contactCard,
+              start: cardStart,
+              end: cardEnd,
               toggleActions: "play reverse play reverse",
             },
           }

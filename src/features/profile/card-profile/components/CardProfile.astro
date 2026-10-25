@@ -1,43 +1,49 @@
 ---
-import '@/features/profile/card-profile/card-profile.scss';
+import "@/features/profile/card-profile/card-profile.scss";
+import profileData from "@/features/profile/data/profile";
 import ItemsIcons from "@/shared/components/ItemsIcons.astro";
 import LinkedInIcon from "@/shared/icons/LinkedIn.astro";
 import GithubIcon from "@/shared/icons/Github.astro";
 import EmailIcon from "@/shared/icons/Email.astro";
+
+const { title, description, socialLinks } = profileData;
 ---
 
 <section class="card">
-  <article class="card__article" >
-      <h1 class="card__article-title" id="hero-title">
-        <span class="title-main">Desarrollador</span><br>
-        <span>De </span><span class="title-highlight">Software</span>
-      </h1>
+  <article class="card__article">
+    <h1 class="card__article-title" id="hero-title">
+      <span class="hero-title__row hero-title__row--first">
+        <span class="hero-title__desarrollador">{title.line1}</span>
+      </span>
+      <span class="hero-title__row hero-title__row--second">
+        <span class="hero-title__de">{title.de}</span>
+        <span class="hero-title__group-software">
+          <span class="hero-title__software">{title.software}</span>
+          <span class="hero-title__amp">{title.amp}</span>
+          <span class="hero-title__ai">
+            <span class="ai-letter ai-a">A</span><span class="ai-letter ai-i">I</span>
+          </span>
+        </span>
+      </span>
+    </h1>
   </article>
-  
+
   <article>
     <p class="card__descripcion">
-      Hola, Soy Ezequiel Suárez. Diseño soluciones digitales con arquitecturas limpias, escalables orientadas al negocio.
+      {description}
     </p>
-  </article> 
- 
-  <ul class="card__links">
-    <li class="card__links-list">       
-      <ItemsIcons href="https://www.linkedin.com/in/ezequiel-suarez-dev/" aria-label="Ver perfil de LinkedIn de Ezequiel Suarez">
-        <LinkedInIcon class="card__links-items"/>
-      </ItemsIcons>
-    </li>
+  </article>
 
-    <li class="card__links-list">
-      <ItemsIcons href="https://github.com/ezequiel-dev93" aria-label="Ver perfil de GitHub de Ezequiel Suarez">
-        <GithubIcon class="card__links-items"/>
-      </ItemsIcons>
-    </li>
-
-    <li class="card__links-list">   
-      <ItemsIcons href="mailto:ezequielsuarez.dev@gmail.com" aria-label="Enviar email a Ezequiel Suarez">
-        <EmailIcon class="card__links-items"/>
-      </ItemsIcons>
-    </li>
+  <ul class="card__links" aria-label="Redes sociales y contacto">
+    {socialLinks.map((item) => (
+      <li class="card__links-list">
+        <ItemsIcons href={item.url} aria-label={item.ariaLabel}>
+          {item.icon === "linkedin" && <LinkedInIcon class="card__links-items" />}
+          {item.icon === "github" && <GithubIcon class="card__links-items" />}
+          {item.icon === "email" && <EmailIcon class="card__links-items" />}
+        </ItemsIcons>
+      </li>
+    ))}
   </ul>
 </section>
 
@@ -49,7 +55,9 @@ import EmailIcon from "@/shared/icons/Email.astro";
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initHeroTitle, { once: true });
+    document.addEventListener("DOMContentLoaded", initHeroTitle, {
+      once: true,
+    });
   } else {
     initHeroTitle();
   }

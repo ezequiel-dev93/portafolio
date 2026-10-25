@@ -2,18 +2,95 @@
 @use "styles/abstracts/_mixins" as mx;
 
 .card {
-  padding: 10rem 0;
+  padding: clamp(4.5rem, 9vh, 6.5rem) 0 clamp(2rem, 5vh, 3.5rem);
 
   &__article {
     @include mx.center(flex, center, 0rem);
 
-    span {
-      font-size: clamp(2rem, 12vw, 8rem);
-      font-weight: 700;
+    .card__article-title {
+      font-family: v.$font-title;
+      line-height: 1.08;
+      letter-spacing: 0.035em;
+      word-break: keep-all;
+      overflow-wrap: normal;
+      hyphens: none;
+      display: flex;
+      flex-direction: column;
     }
 
-    .title-highlight {
+    .hero-title__row {
+      display: flex;
+      align-items: baseline;
+      font-size: clamp(2.2rem, 6.5vw, 6.5rem);
+      font-weight: 700;
+      white-space: nowrap;
+
+      &--first {
+        margin-bottom: 0.06em;
+      }
+
+      &--second {
+        gap: 0.22em;
+      }
+    }
+
+    .hero-title__desarrollador {
+      display: inline-block;
+    }
+
+    .hero-title__de {
+      display: inline-block;
+      color: v.$text-black;
+      transition: color 0.4s ease;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .hero-title__group-software {
+      display: inline-flex;
+      align-items: baseline;
+    }
+
+    .hero-title__software {
+      display: inline-block;
       @include mx.title-style;
+
+      span {
+        display: inline-block;
+        background: inherit;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    .hero-title__amp {
+      display: inline-block;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif !important;
+      font-weight: 700;
+      color: v.$text-enfasis;
+      margin: 0 0.18em 0 0.15em;
+      opacity: 0;
+      visibility: hidden;
+      line-height: 1;
+      vertical-align: baseline;
+      transition: color 0.4s ease, text-shadow 0.4s ease;
+    }
+
+    .hero-title__ai {
+      display: inline-flex;
+      align-items: center;
+      @include mx.title-style;
+      filter: drop-shadow(0 0 16px rgba(2, 132, 199, 0.35));
+
+      .ai-letter {
+        display: inline-block;
+        background: inherit;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        will-change: transform, opacity;
+      }
     }
   }
 
@@ -29,7 +106,7 @@
     @include mx.center(flex, center, 1.5rem);
     flex-wrap: wrap;
     align-self: flex-start;
-    padding-top: 1rem;
+    padding-top: 1.25rem;
 
     &-list {
       background-color: rgba(2, 132, 199, 0.12);
@@ -65,8 +142,36 @@
 /* Dark mode */
 body.dark-mode {
   .card {
-    .title-highlight {
+    .hero-title__de {
+      color: v.$text-white;
+    }
+
+    .hero-title__software {
       @include mx.title-style-dark;
+
+      span {
+        background: inherit;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    .hero-title__amp {
+      color: #00E5FF;
+      text-shadow: 0 0 22px rgba(0, 229, 255, 0.75);
+    }
+
+    .hero-title__ai {
+      @include mx.title-style-dark;
+      filter: drop-shadow(0 0 22px rgba(0, 229, 255, 0.6));
+
+      .ai-letter {
+        background: inherit;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
     }
 
     &__descripcion {
@@ -97,14 +202,87 @@ body.dark-mode {
   }
 }
 
-@media (320px <=width <=480px) {
+/* Escalón diagonal / Stepped layout para Mobile */
+@media (max-width: 640px) {
+  .card {
+    &__article {
+      .hero-title__row {
+        font-size: clamp(1.6rem, 7.5vw, 2.4rem);
+        line-height: 1.15;
+
+        &--second {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.2rem;
+          margin-top: 0.15rem;
+
+          .hero-title__de {
+            margin-left: 1.4rem;
+            font-size: 0.9em;
+            opacity: 0.85;
+          }
+
+          .hero-title__group-software {
+            margin-left: 2.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .card {
+    &__article {
+      .hero-title__row {
+        &--second {
+          .hero-title__de {
+            margin-left: 1rem;
+          }
+
+          .hero-title__group-software {
+            margin-left: 1.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (641px <= width <= 1199px) {
+  .card {
+    &__article {
+      .hero-title__row {
+        font-size: clamp(2.6rem, 5.8vw, 4.6rem);
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .card {
+    &__article {
+      .hero-title__row {
+        font-size: clamp(4.4rem, 6.6vw, 7.8rem);
+        line-height: 1.04;
+      }
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .card {
+    &__article {
+      .hero-title__row {
+        font-size: clamp(5.5rem, 7vw, 8.5rem);
+      }
+    }
+  }
+}
+
+@media (320px <= width <= 480px) {
   .card {
     padding-top: 12rem;
-
-    &__article {
-      flex-wrap: wrap;
-      margin: 0.5rem 0;
-    }
 
     &__descripcion {
       line-height: 1.5;
@@ -118,13 +296,13 @@ body.dark-mode {
   }
 }
 
-@media (481px <=width <=767px) {
+@media (481px <= width <= 767px) {
   .card {
     margin-top: 12rem;
   }
 }
 
-@media (768px <=width <=1024px) {
+@media (768px <= width <= 1024px) {
   .card {
     margin-top: 12rem;
 

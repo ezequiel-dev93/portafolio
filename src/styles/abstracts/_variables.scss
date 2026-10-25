@@ -30,7 +30,10 @@ $bg-cardproject: #CFCCE6;
 $bg-cardproject-dark: #0B1220;
 $bg-form: rgba(2, 132, 199, 0.35);
 
-/* Typography & Accent Colors */
+/* Typography Families & Accents */
+$font-title: 'Cinzel Variable', Georgia, serif;
+$font-body: 'Space Grotesk Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
 $text-enfasis: #0284C7;
 $accent-dark: #00E5FF;
 $accent-dark-gradient: linear-gradient(135deg, #00E5FF, #38BDF8);

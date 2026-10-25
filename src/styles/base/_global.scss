@@ -3,6 +3,8 @@
 
 /* ─── CSS Custom Properties / Tokens ───────────────────────────────────────── */
 :root {
+  --font-title: #{v.$font-title};
+  --font-body: #{v.$font-body};
   --color-bg-base: #eae6e6;
   --color-text-main: #0B1220;
   --color-text-body: #1e293b;
@@ -76,7 +78,7 @@ body.dark-mode {
 html {
     scrollbar-color: #00E5FF #0B1220;
     scrollbar-width: thin;
-    font-family: 'Onest Variable', sans-serif;
+    font-family: v.$font-body;
     background-image: v.$bg-white;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -87,8 +89,9 @@ html {
 
 body {
     min-height: 100vh;
+    overflow-x: hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
-    font-family: 'Onest Variable', sans-serif;
+    font-family: v.$font-body;
 }
 
 .main {
@@ -97,9 +100,28 @@ body {
     position: relative;
 }
 
+h1,
+.card__article-title,
+.hero__title {
+    font-family: v.$font-title;
+    letter-spacing: 0.04em;
+}
+
 h2 {
-    font-size: $font-size-xmedium;
+    font-family: v.$font-title;
+    font-size: v.$font-size-xmedium;
     font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+:is(.experience__title h2, .projects__title-h2, .about__title-h2,
+    .skill__title-h2, .sectionContact__title, .services__title h2, .contactCta__title) {
+    font-family: v.$font-title;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    width: fit-content;
+    position: relative;
+    will-change: clip-path, transform, opacity;
 }
 
 /* ─── Modo Oscuro Global ─────────────────────────────────────────────────── */
