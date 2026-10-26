@@ -161,7 +161,7 @@ export function initSectionAnimations() {
       );
 
       visibleProjectCards.forEach((card) => {
-        const icon = card.querySelector(".projects__icon-link");
+        const actionBtns = card.querySelectorAll(".projects__action-btn");
         const projTl = gsap.timeline({
           scrollTrigger: {
             trigger: card,
@@ -218,15 +218,16 @@ export function initSectionAnimations() {
           0.05
         );
 
-        // 3. Pop elástico luminoso en el ícono de enlace externo
-        if (icon) {
+        // 3. Pop elástico luminoso en los botones de acción (GitHub / Web)
+        if (actionBtns.length) {
           projTl.fromTo(
-            icon,
+            actionBtns,
             { scale: 0.5, autoAlpha: 0 },
             {
               scale: 1,
-              autoAlpha: 0.75,
+              autoAlpha: 1,
               duration: 0.45,
+              stagger: 0.1,
               ease: "back.out(2.2)",
             },
             0.35

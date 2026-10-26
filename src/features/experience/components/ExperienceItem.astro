@@ -1,6 +1,6 @@
 ---
 import type { Experience } from "@/features/experience/types/experience";
-import ExternalLink from "@/shared/icons/ExternalLink.astro";
+import ActionIcon from "@/shared/components/ActionIcon.astro";
 
 interface Props {
   exp: Experience;
@@ -16,11 +16,13 @@ const { exp } = Astro.props;
       target="_blank"
       rel="noopener noreferrer"
       class="experience-card__link experience-card__link--interactive"
-      aria-label={`Ver más sobre ${exp.company} (abre en nueva pestaña)`}
+      aria-label={`Visitar sitio web de ${exp.company} (abre en nueva pestaña)`}
     >
-      <div class="experience-card__icon-link" aria-hidden="true">
-        <ExternalLink size={24} />
-      </div>
+      <ActionIcon
+        icon="web"
+        revealOnHover
+        class="experience-card__icon-link"
+      />
       <article class="experience-card__content">
         <div class="experience-card__section experience-card__section--primary">
           <h3 class="experience-card__company">{exp.company}</h3>

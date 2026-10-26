@@ -25,7 +25,7 @@
   padding-top: 10rem;
 
   h2 {
-    @include mx.title-style()
+    @include mx.title-style();
   }
 
   @include mx.mq-max(600px) {
@@ -53,14 +53,6 @@
     &--interactive {
       cursor: pointer;
       text-decoration: none;
-
-      &:hover {
-        .experience-card__icon-link {
-          opacity: 1;
-          transform: translate(0, 0) scale(1);
-          color: v.$text-enfasis;
-        }
-      }
     }
 
     &--static {
@@ -75,20 +67,10 @@
 
   &__icon-link {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    color: inherit;
-    opacity: 0;
-    transform: translate(-6px, 6px) scale(0.85);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-      color 0.3s ease,
-      opacity 0.3s ease;
-    pointer-events: none;
-
-    @media (hover: none) {
-      opacity: 0.65;
-      transform: translate(0, 0) scale(1);
-    }
+    top: 0.65rem;
+    right: 0.85rem;
+    width: 2.2rem;
+    height: 2.2rem;
   }
 
   &__content {
@@ -126,7 +108,6 @@
     word-break: break-word;
   }
 
-
   &__details {
     display: flex;
     flex-direction: column;
@@ -156,7 +137,6 @@
     flex-shrink: 0;
   }
 
-  
   &__description {
     font-size: 1.124rem;
     opacity: 0.7;
@@ -250,7 +230,6 @@
 // Tablet (641px - 1024px)
 @media (641px <= width <= 1024px) {
   .experience-card {
-
     &__link {
       padding: 2rem;
       margin-bottom: 2rem;
@@ -274,7 +253,6 @@
 // Desktop (1025px - 1440px)
 @media (1025px <= width <= 1440px) {
   .experience-card {
-
     &__link {
       padding: 2.5rem;
       margin-bottom: 2rem;
@@ -290,7 +268,6 @@
 // Large Desktop (1441px+)
 @media (width >= 1441px) {
   .experience-card {
-
     &__link {
       padding: 3rem;
       margin-bottom: 2rem;
@@ -300,11 +277,5 @@
       @include mx.grid-column(2, 1);
       gap: 4rem;
     }
-  }
-}
-
-body.dark-mode {
-  .experience-card__link:hover .experience-card__icon-link {
-    color: v.$accent-dark;
   }
 }

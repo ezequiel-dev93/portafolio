@@ -1,0 +1,149 @@
+---
+import Github from "@/shared/icons/Github.astro";
+import Globe from "@/shared/icons/Globe.astro";
+
+interface Props {
+  icon: "web" | "github";
+  href?: string;
+  label?: string;
+  title?: string;
+  revealOnHover?: boolean;
+  class?: string;
+}
+
+const {
+  icon,
+  href,
+  label,
+  title,
+  revealOnHover = false,
+  class: className = "",
+} = Astro.props;
+
+const classes = [
+  "action-icon",
+  revealOnHover ? "action-icon--reveal" : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class={classes}
+      aria-label={label}
+      title={title}
+    >
+      {icon === "github" ? (
+        <Github width="18" height="18" />
+      ) : (
+        <Globe width={18} height={18} />
+      )}
+    </a>
+  ) : (
+    <div class={classes} aria-hidden="true">
+      {icon === "github" ? (
+        <Github width="18" height="18" />
+      ) : (
+        <Globe width={18} height={18} />
+      )}
+    </div>
+  )
+}
+
+<style lang="scss" is:global>
+  @use "styles/abstracts/_variables" as v;
+
+  .action-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
+    background-color: rgba(2, 132, 199, 0.12);
+    border: 1px solid rgba(2, 132, 199, 0.28);
+    color: v.$text-black;
+    box-shadow: 0 2px 8px rgba(11, 18, 32, 0.1);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.3s ease, border-color 0.3s ease,
+      box-shadow 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+
+    &:hover,
+    &:focus-visible {
+      background-color: v.$text-enfasis;
+      border-color: v.$text-enfasis;
+      color: #FFFFFF;
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+    }
+
+    &:focus-visible {
+      outline: 2px solid v.$text-enfasis;
+      outline-offset: 2px;
+    }
+
+    &--reveal {
+      color: v.$text-enfasis;
+      opacity: 0;
+      transform: translateY(6px) scale(0.82);
+      pointer-events: none;
+
+      @media (hover: none) {
+        opacity: 0.85;
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+
+  /* Activación cuando el contenedor padre interactivo recibe hover/focus */
+  .experience-card__link--interactive:hover .action-icon--reveal,
+  .experience-card__link--interactive:focus-visible .action-icon--reveal {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    background-color: v.$text-enfasis;
+    border-color: v.$text-enfasis;
+    color: #FFFFFF;
+    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+  }
+
+  body.dark-mode {
+    .action-icon {
+      background-color: rgba(11, 18, 32, 0.82);
+      border-color: rgba(0, 229, 255, 0.35);
+      color: v.$text-white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+      &:hover,
+      &:focus-visible {
+        background-color: #00E5FF;
+        border-color: #00E5FF;
+        color: #0B1220;
+        box-shadow: 0 0 18px rgba(0, 229, 255, 0.65);
+      }
+
+      &:focus-visible {
+        outline-color: #00E5FF;
+      }
+
+      &--reveal {
+        color: #00E5FF;
+      }
+    }
+
+    .experience-card__link--interactive:hover .action-icon--reveal,
+    .experience-card__link--interactive:focus-visible .action-icon--reveal {
+      background-color: #00E5FF;
+      border-color: #00E5FF;
+      color: #0B1220;
+      box-shadow: 0 0 18px rgba(0, 229, 255, 0.65);
+    }
+  }
+</style>

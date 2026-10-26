@@ -1,12 +1,13 @@
 ---
 import type { Project, TagKey } from '@/features/projects/types/projects';
-import ExternalLink from '@/shared/icons/ExternalLink.astro';
+import ActionIcon from '@/shared/components/ActionIcon.astro';
 import Vite from '@/shared/icons/Vite.astro';
 import AstroIcon from '@/shared/icons/AstroIcon.astro';
 import Tailwind from '@/shared/icons/Tailwind.astro';
 import React from '@/shared/icons/React.astro';
 import TypeScript from '@/shared/icons/TypeScript.astro';
 import Python from '@/shared/icons/Python.astro';
+import Pydantic from '@/shared/icons/Pydantic.astro';
 import Streamlit from '@/shared/icons/Streamlit.astro';
 import Playwright from '@/shared/icons/Playwright.astro';
 import Polars from '@/shared/icons/Polars.astro';
@@ -18,13 +19,17 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, tags, link } = project;
+const { title, description, tags, github, web, link } = project;
+
+const githubUrl = github || link;
+const primaryUrl = web || githubUrl;
 
 const TAGS: Record<TagKey, { icon: any }> = {
   PYTHON:     { icon: Python },
+  PYDANTIC:   { icon: Pydantic },
   STREAMLIT:  { icon: Streamlit },
   PLAYWRIGHT: { icon: Playwright },
-  POLARS:     { icon: Polars},
+  POLARS:     { icon: Polars },
   VITE:       { icon: Vite },
   TAILWIND:   { icon: Tailwind },
   TYPESCRIPT: { icon: TypeScript },
@@ -36,25 +41,55 @@ const TAGS: Record<TagKey, { icon: any }> = {
 ---
 
 <li class="projects__cards">
-  {link ? (
-    <a href={link} target="_blank" rel="noopener noreferrer">
-      <div class="projects__icon-link">
-        <ExternalLink size={24} />
-      </div>
-      <figure class="projects__figure">
-        <figcaption class="projects__figure-caption">
-          <h3 class="projects__figure-title">{title}</h3>
-          
-          <p class="projects__figure-description">{description}</p>
+  <article class="projects__card-body">
+    <div class="projects__links" role="group" aria-label={`Enlaces de ${title}`}>
+      {githubUrl && (
+        <ActionIcon
+          icon="github"
+          href={githubUrl}
+          class="projects__action-btn"
+          label={`Ver código en GitHub de ${title}`}
+          title="Ver código en GitHub"
+        />
+      )}
 
-          <div class="projects__figure-icons" role="group" aria-label="Tecnologías usadas">
-            {tags.map((tag) => {
-              const Icon = TAGS[tag as TagKey].icon;
-              return <Icon class="projects__figure-icon" role="img" aria-label={tag} />;
-            })}
-          </div>
-        </figcaption>
-      </figure>
-    </a>
-  ) : null}
+      {web && (
+        <ActionIcon
+          icon="web"
+          href={web}
+          class="projects__action-btn projects__action-btn--web"
+          label={`Visitar sitio web de ${title}`}
+          title="Visitar sitio web"
+        />
+      )}
+    </div>
+
+    <figure class="projects__figure">
+      <figcaption class="projects__figure-caption">
+        <h3 class="projects__figure-title">
+          {primaryUrl ? (
+            <a
+              href={primaryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="projects__primary-link"
+            >
+              {title}
+            </a>
+          ) : (
+            title
+          )}
+        </h3>
+
+        <p class="projects__figure-description">{description}</p>
+
+        <div class="projects__figure-icons" role="group" aria-label="Tecnologías usadas">
+          {tags.map((tag) => {
+            const Icon = TAGS[tag as TagKey].icon;
+            return <Icon class="projects__figure-icon" role="img" aria-label={tag} />;
+          })}
+        </div>
+      </figcaption>
+    </figure>
+  </article>
 </li>

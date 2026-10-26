@@ -6,8 +6,11 @@
   padding-top: 12rem;
 
   &__title {
-    @include mx.title-style();
     padding: 1rem 0;
+
+    &-h2 {
+      @include mx.title-style();
+    }
   }
 
   &__description {
