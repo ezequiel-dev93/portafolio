@@ -13,7 +13,7 @@ const projects: Project[] = [
     description:
       'Desarrollé un servidor MCP en Python bajo Arquitectura Hexagonal y persistencia SQLite para dotar a asistentes de IA de memoria continua y auditar repositorios según sus patrones de software.',
     github: 'https://github.com/ezequiel-dev93/dev-assistent-server-mcp',
-    tags: ['PYTHON', 'PYDANTIC'],
+    tags: ['PYTHON', 'PYDANTIC', 'SQLITE'],
   },
   {
     title: 'Star Wars Holocron',

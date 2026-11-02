@@ -11,7 +11,8 @@ export type TagKey =
   | 'VITE'
   | 'SUPABASE'
   | 'AWS'
-  | 'POSTGRESQL';
+  | 'POSTGRESQL'
+  | 'SQLITE';
 
 export interface Project {
   title: string;

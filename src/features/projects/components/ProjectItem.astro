@@ -14,6 +14,7 @@ import Polars from '@/shared/icons/Polars.astro';
 import Supabase from '@/shared/icons/Supabase.astro';
 import AWS from '@/shared/icons/AmazonWebServices.astro';
 import PostgreSQL from '@/shared/icons/PostgreSQL.astro';
+import SQLite from '@/shared/icons/SQLite.astro';
 
 interface Props {
   project: Project;
@@ -39,6 +40,7 @@ const TAGS: Record<TagKey, { icon: any; label: string }> = {
   SUPABASE:   { icon: Supabase, label: 'Supabase' },
   AWS:        { icon: AWS, label: 'AWS' },
   POSTGRESQL: { icon: PostgreSQL, label: 'PostgreSQL' },
+  SQLITE:     { icon: SQLite, label: 'SQLite' },
 };
 ---
 
