@@ -154,14 +154,36 @@
     width: 100%;
     flex-wrap: wrap;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     pointer-events: none;
+  }
+
+  &__tag-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    cursor: default;
+
+    &:hover,
+    &:focus-within {
+      .projects__figure-icon {
+        transform: translateY(-2px) scale(1.15);
+      }
+
+      .projects__tag-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
   }
 
   &__figure-icon {
     width: 1.5rem;
     height: 1.5rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
     @include mx.mq-max(768px) {
       width: 1.3rem;
@@ -171,6 +193,41 @@
     @include mx.mq-max(480px) {
       width: 1.2rem;
       height: 1.2rem;
+    }
+  }
+
+  &__tag-tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    padding: 0.25rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #ffffff;
+    background-color: #0b1220;
+    border: 1px solid rgba(2, 132, 199, 0.35);
+    border-radius: 0.35rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0.2s ease;
+    z-index: 20;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 4px;
+      border-style: solid;
+      border-color: #0b1220 transparent transparent transparent;
     }
   }
 
@@ -219,6 +276,17 @@ body.dark-mode {
 
     &__primary-link:hover {
       color: #00E5FF;
+    }
+
+    &__tag-tooltip {
+      background-color: #070d18;
+      border-color: rgba(0, 229, 255, 0.45);
+      color: #00E5FF;
+      box-shadow: 0 4px 14px rgba(0, 229, 255, 0.22);
+
+      &::after {
+        border-color: #070d18 transparent transparent transparent;
+      }
     }
   }
 }

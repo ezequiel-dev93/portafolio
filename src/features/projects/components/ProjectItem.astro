@@ -13,6 +13,7 @@ import Playwright from '@/shared/icons/Playwright.astro';
 import Polars from '@/shared/icons/Polars.astro';
 import Supabase from '@/shared/icons/Supabase.astro';
 import AWS from '@/shared/icons/AmazonWebServices.astro';
+import PostgreSQL from '@/shared/icons/PostgreSQL.astro';
 
 interface Props {
   project: Project;
@@ -24,19 +25,20 @@ const { title, description, tags, github, web, link } = project;
 const githubUrl = github || link;
 const primaryUrl = web || githubUrl;
 
-const TAGS: Record<TagKey, { icon: any }> = {
-  PYTHON:     { icon: Python },
-  PYDANTIC:   { icon: Pydantic },
-  STREAMLIT:  { icon: Streamlit },
-  PLAYWRIGHT: { icon: Playwright },
-  POLARS:     { icon: Polars },
-  VITE:       { icon: Vite },
-  TAILWIND:   { icon: Tailwind },
-  TYPESCRIPT: { icon: TypeScript },
-  REACT:      { icon: React },
-  NAVE:       { icon: AstroIcon },
-  SUPABASE:   { icon: Supabase },
-  AWS:        { icon: AWS },
+const TAGS: Record<TagKey, { icon: any; label: string }> = {
+  PYTHON:     { icon: Python, label: 'Python' },
+  PYDANTIC:   { icon: Pydantic, label: 'Pydantic' },
+  STREAMLIT:  { icon: Streamlit, label: 'Streamlit' },
+  PLAYWRIGHT: { icon: Playwright, label: 'Playwright' },
+  POLARS:     { icon: Polars, label: 'Polars' },
+  VITE:       { icon: Vite, label: 'Vite' },
+  TAILWIND:   { icon: Tailwind, label: 'Tailwind CSS' },
+  TYPESCRIPT: { icon: TypeScript, label: 'TypeScript' },
+  REACT:      { icon: React, label: 'React' },
+  NAVE:       { icon: AstroIcon, label: 'Astro' },
+  SUPABASE:   { icon: Supabase, label: 'Supabase' },
+  AWS:        { icon: AWS, label: 'AWS' },
+  POSTGRESQL: { icon: PostgreSQL, label: 'PostgreSQL' },
 };
 ---
 
@@ -85,8 +87,21 @@ const TAGS: Record<TagKey, { icon: any }> = {
 
         <div class="projects__figure-icons" role="group" aria-label="Tecnologías usadas">
           {tags.map((tag) => {
-            const Icon = TAGS[tag as TagKey].icon;
-            return <Icon class="projects__figure-icon" role="img" aria-label={tag} />;
+            const tagItem = TAGS[tag as TagKey];
+            if (!tagItem) return null;
+            const Icon = tagItem.icon;
+            return (
+              <span class="projects__tag-wrapper" title={tagItem.label}>
+                <Icon
+                  class="projects__figure-icon"
+                  role="img"
+                  aria-label={tagItem.label}
+                />
+                <span class="projects__tag-tooltip" aria-hidden="true">
+                  {tagItem.label}
+                </span>
+              </span>
+            );
           })}
         </div>
       </figcaption>

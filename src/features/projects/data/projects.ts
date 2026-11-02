@@ -2,6 +2,13 @@ import type { Project } from '@/features/projects/types/projects';
 
 const projects: Project[] = [
   {
+    title: 'RAG Enterprise',
+    description:
+      'Desarrollé un sistema RAG empresarial en Python y Streamlit con PostgreSQL (pgvector) bajo Arquitectura Hexagonal para consultar documentos privados con citaciones verificables, cero alucinaciones y modo demo a costo cero.',
+    github: 'https://github.com/ezequiel-dev93/rag-enterprise-pgvector',
+    tags: ['PYTHON', 'STREAMLIT', 'POSTGRESQL'],
+  },
+  {
     title: 'DevAssistant MCP Server',
     description:
       'Desarrollé un servidor MCP en Python bajo Arquitectura Hexagonal y persistencia SQLite para dotar a asistentes de IA de memoria continua y auditar repositorios según sus patrones de software.',

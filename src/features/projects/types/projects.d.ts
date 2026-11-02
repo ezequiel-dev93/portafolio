@@ -10,7 +10,8 @@ export type TagKey =
   | 'PLAYWRIGHT'
   | 'VITE'
   | 'SUPABASE'
-  | 'AWS';
+  | 'AWS'
+  | 'POSTGRESQL';
 
 export interface Project {
   title: string;
