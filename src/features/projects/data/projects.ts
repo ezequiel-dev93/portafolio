@@ -25,8 +25,9 @@ const projects: Project[] = [
   {
     title: 'DevAssistant MCP Server',
     description:
-      'Desarrollé un servidor bajo el estándar abierto MCP para dotar a los LLMs de memoria continua y auditoría de repositorios. Implementé Arquitectura Hexagonal mediante Ports & Adapters para generar blueprints de código respetando la arquitectura del proyecto.',
+      'Desarrollé un servidor bajo el estándar abierto MCP para dotar a los LLMs de memoria continua y auditoría de repositorios. Implementé Arquitectura Hexagonal para generar blueprints y auditar límites en tiempo real. Listado comercialmente en Agensi.',
     github: 'https://github.com/ezequiel-dev93/dev-assistent-server-mcp',
+    web: 'https://www.agensi.io/r/EZEQUIELSUAREZ',
     tags: ['PYTHON', 'PYDANTIC', 'SQLITE'],
   },
   {
