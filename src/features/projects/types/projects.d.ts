@@ -21,4 +21,5 @@ export interface Project {
   github?: string;
   web?: string;
   link?: string;
+  isPrivate?: boolean;
 }

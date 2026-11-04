@@ -1,6 +1,7 @@
 ---
 import type { Project, TagKey } from '@/features/projects/types/projects';
 import ActionIcon from '@/shared/components/ActionIcon.astro';
+import Github from '@/shared/icons/Github.astro';
 import Vite from '@/shared/icons/Vite.astro';
 import AstroIcon from '@/shared/icons/AstroIcon.astro';
 import Tailwind from '@/shared/icons/Tailwind.astro';
@@ -21,7 +22,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, description, tags, github, web, link } = project;
+const { title, description, tags, github, web, link, isPrivate } = project;
 
 const githubUrl = github || link;
 const primaryUrl = web || githubUrl;
@@ -47,14 +48,46 @@ const TAGS: Record<TagKey, { icon: any; label: string }> = {
 <li class="projects__cards">
   <article class="projects__card-body">
     <div class="projects__links" role="group" aria-label={`Enlaces de ${title}`}>
-      {githubUrl && (
-        <ActionIcon
-          icon="github"
-          href={githubUrl}
-          class="projects__action-btn"
-          label={`Ver código en GitHub de ${title}`}
-          title="Ver código en GitHub"
-        />
+      {isPrivate ? (
+        <div class="projects__private-wrapper">
+          <div
+            class="action-icon projects__action-btn projects__action-btn--private"
+            role="status"
+            aria-label={`Repositorio privado de ${title}`}
+            tabindex="0"
+          >
+            <Github width="18" height="18" />
+            <span class="projects__private-lock-badge" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </span>
+          </div>
+          <span class="projects__private-tooltip" aria-hidden="true">
+            🔒 Repositorio privado
+          </span>
+        </div>
+      ) : (
+        githubUrl && (
+          <ActionIcon
+            icon="github"
+            href={githubUrl}
+            class="projects__action-btn"
+            label={`Ver código en GitHub de ${title}`}
+            title="Ver código en GitHub"
+          />
+        )
       )}
 
       {web && (
