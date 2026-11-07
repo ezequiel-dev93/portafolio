@@ -1,0 +1,244 @@
+---
+import "@/styles/app.scss";
+import "@/features/ai-engineering/finch-page.scss";
+import Layout from "@/layouts/Layout.astro";
+import DarkMode from "@/shared/components/DarkMode.astro";
+import SectionFooter from "@/shared/components/SectionFooter.astro";
+import {
+  finchShowcaseData,
+  finchPageData,
+} from "@/features/ai-engineering/data/finchData";
+
+const { hero, origin, pillars, changelog, roadmap } = finchPageData;
+const { metrics } = finchShowcaseData;
+---
+
+<Layout
+  title="FINCH — Ingeniería de IA & Sistemas Cognitivos | Ezequiel Suarez"
+  description="Caso de Estudio y Changelog de Ingeniería de Finch: Motor Cognitivo Personal, Grafo Sináptico con Spreading Activation, Curva de Ebbinghaus y Arquitectura Hexagonal vía MCP."
+>
+  <!-- Topbar Fija con Volver al Portfolio + Anclas + Toggle Dark/Light Mode -->
+  <header class="finch-page__topbar" aria-label="Navegación de caso de estudio Finch">
+    <div class="finch-page__topbar-inner">
+      <a
+        href="/#ingenieria-ia"
+        class="finch-page__back-btn"
+        aria-label="Volver a la sección de Ingeniería de IA en el inicio"
+      >
+        <span aria-hidden="true">←</span>
+        <span>Volver al Portfolio</span>
+      </a>
+
+      <ul class="finch-page__subnav" role="list">
+        <li><a href="#top-finch">Esfera 3D</a></li>
+        <li><a href="#origen">01. El Origen</a></li>
+        <li><a href="#arquitectura">02. Arquitectura</a></li>
+        <li><a href="#changelog">03. Changelog</a></li>
+        <li><a href="#roadmap">04. Roadmap Tauri & AWS</a></li>
+      </ul>
+
+      <div class="finch-page__topbar-actions">
+        <DarkMode />
+      </div>
+    </div>
+  </header>
+
+  <main class="finch-page" id="main-content">
+    <!-- HERO 3D WEBGL (Esfera Sináptica estilo DecorativeBackgrounds Demo 1) -->
+    <section class="finch-page__hero" id="top-finch" aria-labelledby="finch-hero-title">
+      <div class="finch-page__canvas-wrap" aria-hidden="true">
+        <canvas id="finch-sphere-canvas"></canvas>
+      </div>
+
+      <div class="finch-page__hero-center">
+        <h1 id="finch-hero-title" class="finch-page__hero-title">{hero.title}</h1>
+        <div class="finch-page__hero-badge">{hero.badge}</div>
+        <p class="finch-page__hero-sub">{hero.subtitle}</p>
+      </div>
+
+      <ul class="finch-page__telemetry" role="list" aria-label="Telemetría de Finch v2.2">
+        {
+          metrics.map((m) => (
+            <li class="finch-page__telemetry-item">
+              <span class="finch-page__telemetry-val">{m.value}</span>
+              <strong class="finch-page__telemetry-label">{m.label}</strong>
+              <span class="finch-page__telemetry-detail">{m.detail}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <div class="finch-page__body">
+      <!-- 01 · EL ORIGEN & PROBLEMA CIENTÍFICO -->
+      <section class="finch-page__section" id="origen" aria-labelledby="sec-origen-title">
+        <header class="finch-page__sec-header">
+          <span class="finch-page__sec-tag">{origin.sectionTag}</span>
+          <h2 id="sec-origen-title" class="finch-page__sec-title">{origin.title}</h2>
+          <p class="finch-page__sec-lead">{origin.lead}</p>
+        </header>
+
+        <div class="finch-page__compare-grid">
+          <article class="finch-page__compare-card">
+            <h3 class="finch-page__compare-title">
+              <span>{origin.comparison[0].type}</span>
+            </h3>
+            <ul class="finch-page__compare-list" role="list">
+              {
+                origin.comparison[0].flaws?.map((flaw) => (
+                  <li>
+                    <span class="finch-page__compare-icon finch-page__compare-icon--flaw" aria-hidden="true">
+                      ✕
+                    </span>
+                    <span>{flaw}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </article>
+
+          <article class="finch-page__compare-card finch-page__compare-card--finch">
+            <h3 class="finch-page__compare-title">
+              <span>{origin.comparison[1].type}</span>
+            </h3>
+            <ul class="finch-page__compare-list" role="list">
+              {
+                origin.comparison[1].strengths?.map((item) => (
+                  <li>
+                    <span class="finch-page__compare-icon finch-page__compare-icon--ok" aria-hidden="true">
+                      ✓
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- 02 · EL CORAZÓN TÉCNICO (ARQUITECTURA HEXAGONAL & NEURO-SIMBÓLICA) -->
+      <section
+        class="finch-page__section"
+        id="arquitectura"
+        aria-labelledby="sec-arq-title"
+      >
+        <header class="finch-page__sec-header">
+          <span class="finch-page__sec-tag">{pillars.sectionTag}</span>
+          <h2 id="sec-arq-title" class="finch-page__sec-title">{pillars.title}</h2>
+          <p class="finch-page__sec-lead">{pillars.subtitle}</p>
+        </header>
+
+        <div class="finch-page__pillars-grid">
+          {
+            pillars.items.map((p) => (
+              <article class="finch-page__pillar-card">
+                <span class="finch-page__pillar-tag">{p.tag}</span>
+                <h3 class="finch-page__pillar-title">{p.title}</h3>
+                <p class="finch-page__pillar-desc">{p.description}</p>
+                <div class="finch-page__pillar-metric">{p.metrics}</div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- 03 · LÍNEA DE TIEMPO EVOLUTIVA (CHANGELOG v1.0 -> v2.0 -> v2.2) -->
+      <section
+        class="finch-page__section"
+        id="changelog"
+        aria-labelledby="sec-changelog-title"
+      >
+        <header class="finch-page__sec-header">
+          <span class="finch-page__sec-tag">{changelog.sectionTag}</span>
+          <h2 id="sec-changelog-title" class="finch-page__sec-title">
+            {changelog.title}
+          </h2>
+          <p class="finch-page__sec-lead">{changelog.subtitle}</p>
+        </header>
+
+        <div class="finch-page__timeline">
+          {
+            changelog.releases.map((rel) => (
+              <article class="finch-page__release-card">
+                <div class="finch-page__release-top">
+                  <div class="finch-page__release-badges">
+                    <span class="finch-page__release-ver">{rel.version}</span>
+                    <span class="finch-page__release-status">{rel.status}</span>
+                  </div>
+                  <span class="finch-page__release-date">{rel.date}</span>
+                </div>
+
+                <h3 class="finch-page__release-codename">{rel.codename}</h3>
+                <p class="finch-page__release-summary">{rel.summary}</p>
+
+                <div class="finch-page__release-highlights">
+                  {rel.highlights.map((h) => (
+                    <div class="finch-page__highlight-box">
+                      <strong>{h.title}</strong>
+                      <p>{h.detail}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <ul class="finch-page__release-tags" role="list">
+                  {rel.techStack.map((tech) => (
+                    <li>{tech}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- 04 · PRÓXIMA FRONTERA (TAURI 2.0 + POLARS + AWS) -->
+      <section
+        class="finch-page__section"
+        id="roadmap"
+        aria-labelledby="sec-roadmap-title"
+      >
+        <header class="finch-page__sec-header">
+          <span class="finch-page__sec-tag">{roadmap.sectionTag}</span>
+          <h2 id="sec-roadmap-title" class="finch-page__sec-title">{roadmap.title}</h2>
+          <p class="finch-page__sec-lead">{roadmap.subtitle}</p>
+        </header>
+
+        <div class="finch-page__roadmap-grid">
+          {
+            roadmap.items.map((item) => (
+              <article class="finch-page__roadmap-card">
+                <span class="finch-page__roadmap-phase">{item.phase}</span>
+                <h3 class="finch-page__roadmap-title">{item.title}</h3>
+                <span class="finch-page__roadmap-sub">{item.subtitle}</span>
+                <p class="finch-page__roadmap-desc">{item.description}</p>
+                <ul class="finch-page__roadmap-specs" role="list">
+                  {item.specs.map((spec) => (
+                    <li>{spec}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <SectionFooter />
+  </footer>
+</Layout>
+
+<script>
+  import { initFinchSphere } from "@/lib/finch-sphere.js";
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFinchSphere, {
+      once: true,
+    });
+  } else {
+    initFinchSphere();
+  }
+  document.addEventListener("astro:page-load", initFinchSphere);
+</script>

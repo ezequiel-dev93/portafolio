@@ -54,7 +54,7 @@ export function initSectionAnimations() {
 
       // 2. Títulos de sección — Escaneo Láser Neón Cian (Laser Scan reveal unificado y reversible)
       const sectionTitles = gsap.utils.toArray(
-        ".experience__title-h2, .projects__title-h2, .about__title-h2, .skill__title-h2, .contactCta__title"
+        ".experience__title-h2, .projects__title-h2, .ai-eng__title-h2, .about__title-h2, .skill__title-h2, .contactCta__title"
       );
 
       sectionTitles.forEach((title) => {
@@ -280,7 +280,55 @@ export function initSectionAnimations() {
         });
       }
 
-      // 5. Sobre Mí — Lectura editorial secuencial por párrafo (bidireccional)
+      // 5. Ingeniería de IA (Finch Flagship Card) — Encendido Cyber-HUD + Stagger de Métricas
+      const aiEngCard = document.querySelector("#ingenieria-ia .ai-eng__card");
+      const aiEngMetrics = gsap.utils.toArray("#ingenieria-ia .ai-eng__metric-card");
+
+      if (aiEngCard) {
+        const aiTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: aiEngCard,
+            start: cardStart,
+            end: cardEnd,
+            toggleActions: "play reverse play reverse",
+          },
+        });
+
+        aiTl.fromTo(
+          aiEngCard,
+          {
+            y: 36,
+            scale: 0.94,
+            autoAlpha: 0,
+            filter: "blur(6px)",
+          },
+          {
+            y: 0,
+            scale: 1,
+            autoAlpha: 1,
+            filter: "blur(0px)",
+            duration: 0.82,
+            ease: "power3.out",
+          }
+        );
+
+        if (aiEngMetrics.length) {
+          aiTl.fromTo(
+            aiEngMetrics,
+            { y: 20, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.48,
+              stagger: 0.08,
+              ease: "power2.out",
+            },
+            "-=0.4"
+          );
+        }
+      }
+
+      // 6. Sobre Mí — Lectura editorial secuencial por párrafo (bidireccional)
       const aboutDesc = document.querySelector("#sobre-mi .about__description");
       const aboutParagraphs = gsap.utils.toArray("#sobre-mi .about__text");
 

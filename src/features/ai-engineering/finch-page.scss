@@ -1,0 +1,889 @@
+@use "styles/abstracts/_variables" as v;
+@use "styles/abstracts/_mixins" as mx;
+
+$hud-cut: 16px;
+
+.finch-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+
+  /* Barra Superior Fija (Volver + Navegación Interna + Toggle Dark/Light) */
+  &__topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(234, 230, 230, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(2, 132, 199, 0.18);
+    transition: background-color 0.35s ease, border-color 0.35s ease;
+  }
+
+  &__topbar-inner {
+    width: 96%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0.75rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(2, 132, 199, 0.35);
+    background: rgba(255, 255, 255, 0.75);
+    color: #0B1220;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.28s ease;
+
+    &:hover {
+      background: #0284C7;
+      border-color: #0284C7;
+      color: #FFFFFF;
+      transform: translateX(-3px);
+    }
+  }
+
+  &__subnav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: rgba(11, 18, 32, 0.78);
+      text-decoration: none;
+      transition: color 0.25s ease;
+
+      &:hover {
+        color: #0284C7;
+      }
+    }
+
+    @media (max-width: 860px) {
+      display: none;
+    }
+  }
+
+  &__topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* ─── HERO 3D WEBGL (Inspirado en DecorativeBackgrounds Demo 1) ─────────── */
+  &__hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1rem 3rem;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  &__canvas-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Halo radial sutil detrás de la esfera para potenciar contraste en ambos modos */
+    &::before {
+      content: "";
+      position: absolute;
+      width: min(680px, 88vw);
+      height: min(680px, 88vw);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(2, 132, 199, 0.12) 0%,
+        rgba(234, 230, 223, 0.25) 45%,
+        transparent 72%
+      );
+      pointer-events: none;
+    }
+  }
+
+  #finch-sphere-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &__hero-center {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 960px;
+    margin: auto 0;
+    pointer-events: none;
+  }
+
+  &__hero-title {
+    font-family: v.$font-title;
+    font-size: clamp(4.2rem, 13vw, 9.6rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 0.96;
+    color: #0B1220;
+    margin: 0;
+    text-shadow: 0 4px 28px rgba(234, 230, 230, 0.92);
+  }
+
+  /* Píldora / Barra Central estilo "DATA SCIENCE" de Demo 1 pero con marca Ezequiel */
+  &__hero-badge {
+    margin-top: 0.85rem;
+    padding: 0.52rem 1.45rem;
+    background: #0284C7;
+    color: #FFFFFF;
+    border: 1px solid #00E5FF;
+    font-family: v.$font-body;
+    font-size: clamp(0.76rem, 1.4vw, 0.95rem);
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    box-shadow: 0 6px 24px rgba(2, 132, 199, 0.42);
+  }
+
+  &__hero-sub {
+    margin: 1.5rem 0 0;
+    max-width: 680px;
+    font-size: clamp(0.98rem, 1.35vw, 1.15rem);
+    font-weight: 500;
+    line-height: 1.6;
+    color: #0B1220;
+    background: rgba(234, 230, 230, 0.72);
+    backdrop-filter: blur(8px);
+    padding: 0.65rem 1.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(2, 132, 199, 0.2);
+  }
+
+  /* Barra de Telemetría en la base del Hero */
+  &__telemetry {
+    position: relative;
+    z-index: 2;
+    width: 96%;
+    max-width: 1180px;
+    margin-top: auto;
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  &__telemetry-item {
+    padding: 0.95rem 1.15rem;
+    border-radius: 0.65rem;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(2, 132, 199, 0.24);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  &__telemetry-val {
+    font-family: v.$font-title;
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+    font-weight: 700;
+    color: #0284C7;
+  }
+
+  &__telemetry-label {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #0B1220;
+  }
+
+  &__telemetry-detail {
+    font-size: 0.75rem;
+    color: rgba(11, 18, 32, 0.7);
+  }
+
+  /* ─── CONTENEDOR DE SECCIONES DE INGENIERÍA ────────────────────────────── */
+  &__body {
+    position: relative;
+    z-index: 2;
+    width: 96%;
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+    padding: 4rem 0 6rem;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  &__sec-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    max-width: 840px;
+  }
+
+  &__sec-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #0284C7;
+  }
+
+  &__sec-title {
+    font-family: v.$font-title;
+    font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.15;
+    @include mx.title-style();
+    margin: 0;
+  }
+
+  &__sec-lead {
+    font-size: clamp(1rem, 1.3vw, 1.14rem);
+    line-height: 1.65;
+    color: rgba(11, 18, 32, 0.8);
+    margin: 0;
+  }
+
+  /* ─── SECCIÓN 01: COMPARATIVA PROBLEMA VS FINCH ────────────────────────── */
+  &__compare-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+
+  &__compare-card {
+    padding: 2rem;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(153, 153, 153, 0.28);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    &--finch {
+      border-color: #0284C7;
+      box-shadow: 0 12px 32px rgba(2, 132, 199, 0.12);
+    }
+  }
+
+  &__compare-title {
+    font-family: v.$font-title;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0B1220;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  &__compare-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: rgba(11, 18, 32, 0.85);
+    }
+  }
+
+  &__compare-icon {
+    flex-shrink: 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 0.15rem;
+
+    &--flaw {
+      background: rgba(239, 68, 68, 0.14);
+      color: #dc2626;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    &--ok {
+      background: rgba(2, 132, 199, 0.16);
+      color: #0284C7;
+      border: 1px solid rgba(2, 132, 199, 0.4);
+    }
+  }
+
+  /* ─── SECCIÓN 02: 6 PILARES DE ARQUITECTURA ────────────────────────────── */
+  &__pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  &__pillar-card {
+    padding: 1.75rem;
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.84);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(2, 132, 199, 0.22);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      border-color: #0284C7;
+      box-shadow: 0 12px 28px rgba(2, 132, 199, 0.15);
+    }
+  }
+
+  &__pillar-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #0284C7;
+    text-transform: uppercase;
+  }
+
+  &__pillar-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #0B1220;
+    margin: 0;
+  }
+
+  &__pillar-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: rgba(11, 18, 32, 0.76);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  &__pillar-metric {
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(2, 132, 199, 0.16);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #0284C7;
+  }
+
+  /* ─── SECCIÓN 03: CHANGELOG DE INGENIERÍA (v1.0 -> v2.0 -> v2.2) ──────── */
+  &__timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    padding-left: 2rem;
+    border-left: 2px solid rgba(2, 132, 199, 0.35);
+  }
+
+  &__release-card {
+    position: relative;
+    padding: 2rem;
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(2, 132, 199, 0.26);
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+
+    /* Nodo circular en la línea de tiempo */
+    &::before {
+      content: "";
+      position: absolute;
+      left: -2.55rem;
+      top: 2.15rem;
+      width: 0.95rem;
+      height: 0.95rem;
+      border-radius: 50%;
+      background: #00E5FF;
+      border: 3px solid #0B1220;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.8);
+    }
+  }
+
+  &__release-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  &__release-badges {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  &__release-ver {
+    font-family: v.$font-title;
+    font-size: 1.35rem;
+    font-weight: 700;
+    padding: 0.2rem 0.75rem;
+    border-radius: 0.4rem;
+    background: #0B1220;
+    color: #00E5FF;
+    border: 1px solid rgba(0, 229, 255, 0.45);
+  }
+
+  &__release-status {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.22rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(2, 132, 199, 0.12);
+    color: #0284C7;
+    border: 1px solid rgba(2, 132, 199, 0.3);
+  }
+
+  &__release-date {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(11, 18, 32, 0.65);
+  }
+
+  &__release-codename {
+    font-family: v.$font-title;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 700;
+    color: #0B1220;
+    margin: 0;
+  }
+
+  &__release-summary {
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: rgba(11, 18, 32, 0.8);
+    margin: 0;
+  }
+
+  &__release-highlights {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  &__highlight-box {
+    padding: 1rem 1.15rem;
+    border-radius: 0.6rem;
+    background: rgba(2, 132, 199, 0.05);
+    border: 1px solid rgba(2, 132, 199, 0.16);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    strong {
+      font-size: 0.92rem;
+      color: #0B1220;
+    }
+
+    p {
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: rgba(11, 18, 32, 0.74);
+      margin: 0;
+    }
+  }
+
+  &__release-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 0.35rem;
+      background: rgba(11, 18, 32, 0.07);
+      color: #0B1220;
+    }
+  }
+
+  /* ─── SECCIÓN 04: ROADMAP (TAURI 2.0 + POLARS + AWS) ──────────────────── */
+  &__roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  &__roadmap-card {
+    padding: 1.85rem;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.84);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(2, 132, 199, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  &__roadmap-phase {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #0284C7;
+    text-transform: uppercase;
+  }
+
+  &__roadmap-title {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #0B1220;
+    margin: 0;
+  }
+
+  &__roadmap-sub {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #0284C7;
+  }
+
+  &__roadmap-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(11, 18, 32, 0.78);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  &__roadmap-specs {
+    list-style: none;
+    padding: 0.85rem 0 0;
+    margin: 0;
+    border-top: 1px solid rgba(2, 132, 199, 0.16);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    li {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #0B1220;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+
+      &::before {
+        content: "▹";
+        color: #00E5FF;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+/* ─── MODO OSCURO ────────────────────────────────────────────────────────── */
+body.dark-mode {
+  .finch-page {
+    &__topbar {
+      background: rgba(7, 12, 23, 0.82);
+      border-bottom-color: rgba(0, 229, 255, 0.22);
+    }
+
+    &__back-btn {
+      background: rgba(11, 18, 32, 0.9);
+      border-color: rgba(0, 229, 255, 0.45);
+      color: #FFFFFF;
+
+      &:hover {
+        background: #00E5FF;
+        border-color: #00E5FF;
+        color: #0B1220;
+      }
+    }
+
+    &__subnav a {
+      color: rgba(229, 231, 235, 0.8);
+
+      &:hover {
+        color: #00E5FF;
+      }
+    }
+
+    &__canvas-wrap::before {
+      background: radial-gradient(
+        circle,
+        rgba(0, 229, 255, 0.11) 0%,
+        rgba(11, 18, 32, 0.4) 48%,
+        transparent 72%
+      );
+    }
+
+    &__hero-title {
+      color: #FFFFFF;
+      text-shadow: 0 4px 36px rgba(0, 0, 0, 0.92);
+    }
+
+    &__hero-badge {
+      background: #0B1220;
+      color: #00E5FF;
+      border-color: #00E5FF;
+      box-shadow: 0 0 28px rgba(0, 229, 255, 0.35);
+    }
+
+    &__hero-sub {
+      color: #E5E7EB;
+      background: rgba(7, 12, 23, 0.72);
+      border-color: rgba(0, 229, 255, 0.24);
+    }
+
+    &__telemetry-item {
+      background: rgba(11, 18, 32, 0.82);
+      border-color: rgba(0, 229, 255, 0.25);
+    }
+
+    &__telemetry-val {
+      color: #00E5FF;
+    }
+
+    &__telemetry-label {
+      color: #FFFFFF;
+    }
+
+    &__telemetry-detail {
+      color: rgba(203, 213, 225, 0.75);
+    }
+
+    &__sec-tag {
+      color: #00E5FF;
+    }
+
+    &__sec-title {
+      @include mx.title-style-dark();
+    }
+
+    &__sec-lead {
+      color: rgba(203, 213, 225, 0.85);
+    }
+
+    &__compare-card {
+      background: rgba(11, 18, 32, 0.82);
+      border-color: rgba(255, 255, 255, 0.12);
+
+      &--finch {
+        border-color: rgba(0, 229, 255, 0.5);
+        box-shadow: 0 12px 36px rgba(0, 229, 255, 0.12);
+      }
+    }
+
+    &__compare-title {
+      color: #FFFFFF;
+    }
+
+    &__compare-list li {
+      color: rgba(229, 231, 235, 0.85);
+    }
+
+    &__compare-icon--ok {
+      background: rgba(0, 229, 255, 0.16);
+      color: #00E5FF;
+      border-color: rgba(0, 229, 255, 0.45);
+    }
+
+    &__pillar-card {
+      background: rgba(11, 18, 32, 0.84);
+      border-color: rgba(0, 229, 255, 0.22);
+
+      &:hover {
+        border-color: #00E5FF;
+        box-shadow: 0 12px 32px rgba(0, 229, 255, 0.16);
+      }
+    }
+
+    &__pillar-tag {
+      color: #00E5FF;
+    }
+
+    &__pillar-title {
+      color: #FFFFFF;
+    }
+
+    &__pillar-desc {
+      color: rgba(203, 213, 225, 0.78);
+    }
+
+    &__pillar-metric {
+      border-top-color: rgba(0, 229, 255, 0.18);
+      color: #67E8F9;
+    }
+
+    &__timeline {
+      border-left-color: rgba(0, 229, 255, 0.38);
+    }
+
+    &__release-card {
+      background: rgba(11, 18, 32, 0.86);
+      border-color: rgba(0, 229, 255, 0.26);
+    }
+
+    &__release-status {
+      background: rgba(0, 229, 255, 0.14);
+      color: #00E5FF;
+      border-color: rgba(0, 229, 255, 0.35);
+    }
+
+    &__release-date {
+      color: rgba(203, 213, 225, 0.68);
+    }
+
+    &__release-codename {
+      color: #FFFFFF;
+    }
+
+    &__release-summary {
+      color: rgba(203, 213, 225, 0.84);
+    }
+
+    &__highlight-box {
+      background: rgba(0, 229, 255, 0.05);
+      border-color: rgba(0, 229, 255, 0.18);
+
+      strong {
+        color: #FFFFFF;
+      }
+
+      p {
+        color: rgba(203, 213, 225, 0.76);
+      }
+    }
+
+    &__release-tags li {
+      background: rgba(0, 229, 255, 0.1);
+      color: #EAE6DF;
+      border: 1px solid rgba(234, 230, 223, 0.2);
+    }
+
+    &__roadmap-card {
+      background: rgba(11, 18, 32, 0.84);
+      border-color: rgba(0, 229, 255, 0.25);
+    }
+
+    &__roadmap-phase {
+      color: #00E5FF;
+    }
+
+    &__roadmap-title {
+      color: #FFFFFF;
+    }
+
+    &__roadmap-sub {
+      color: #67E8F9;
+    }
+
+    &__roadmap-desc {
+      color: rgba(203, 213, 225, 0.8);
+    }
+
+    &__roadmap-specs {
+      border-top-color: rgba(0, 229, 255, 0.18);
+
+      li {
+        color: #E5E7EB;
+      }
+    }
+  }
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .finch-page {
+    &__telemetry {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__pillars-grid,
+    &__roadmap-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .finch-page {
+    &__compare-grid,
+    &__pillars-grid,
+    &__release-highlights,
+    &__roadmap-grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__timeline {
+      padding-left: 1.25rem;
+    }
+
+    &__release-card::before {
+      left: -1.8rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .finch-page {
+    &__telemetry {
+      grid-template-columns: 1fr;
+    }
+
+    &__hero-badge {
+      letter-spacing: 0.14em;
+      padding: 0.45rem 1rem;
+    }
+  }
+}

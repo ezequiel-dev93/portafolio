@@ -5,6 +5,7 @@ import SectionContenedor from "@/shared/components/SectionContenedor.astro";
 import Hero from '@/shared/components/Hero.astro';
 import Experiencia from '@/features/experience/components/Experience.astro';
 import CardProject from '@/features/projects/components/CardProject.astro';
+import FinchShowcase from '@/features/ai-engineering/components/FinchShowcase.astro';
 import About from '@/features/about/components/About.astro';
 import Skills from '@/features/skills/components/Skills.astro';
 import Contact from '@/features/contact/components/Contact.astro';
@@ -32,6 +33,10 @@ description='Diseño soluciones digitales con arquitecturas limpias, escalables 
 			</article>
 				
 			<CardProject />
+		</SectionContenedor>
+
+		<SectionContenedor class="ai-engineering" id="ingenieria-ia">
+			<FinchShowcase />
 		</SectionContenedor>
 				
 		<SectionContenedor class="about" id="sobre-mi">

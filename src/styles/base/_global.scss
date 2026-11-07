@@ -114,7 +114,7 @@ h2 {
     letter-spacing: 0.05em;
 }
 
-:is(.experience__title h2, .projects__title-h2, .about__title-h2,
+:is(.experience__title h2, .projects__title-h2, .ai-eng__title-h2, .about__title-h2,
     .skill__title-h2, .sectionContact__title, .services__title h2, .contactCta__title) {
     font-family: v.$font-title;
     letter-spacing: 0.05em;
@@ -131,7 +131,7 @@ body.dark-mode {
     color: v.$text-white;
     transition: background-color 0.5s ease, color 0.5s ease;
 
-    :is(.experience__title h2, .projects__title-h2, .about__title-h2,
+    :is(.experience__title h2, .projects__title-h2, .ai-eng__title-h2, .about__title-h2,
         .skill__title-h2, .sectionContact__title, .services__title h2, .contactCta__title) {
         @include mx.title-style-dark;
     }
