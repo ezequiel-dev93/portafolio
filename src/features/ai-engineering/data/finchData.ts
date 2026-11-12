@@ -122,7 +122,7 @@ export const finchPageData = {
     sectionTag: "02 · EL CORAZÓN TÉCNICO",
     title: "Arquitectura Hexagonal & Neuro-Simbólica",
     subtitle:
-      "Diseñado bajo principios de Clean / Hexagonal Architecture (Puertos y Adaptadores en Python 3.12+), desacoplando el dominio neuro-cognitivo de la infraestructura de persistencia e inferencia.",
+      "Construido con Arquitectura Hexagonal y principios de Clean Architecture (Puertos y Adaptadores en Python 3.12+), desacoplando el dominio neuro-cognitivo de la infraestructura de persistencia e inferencia.",
     items: [
       {
         id: "hippocampus",
