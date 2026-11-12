@@ -36,7 +36,7 @@ export interface FinchRoadmapItem {
 export const finchShowcaseData = {
   badge: "Caso de Estudio & Changelog de Ingeniería",
   title: "Ingeniería de IA & Sistemas Cognitivos",
-  projectTitle: "FINCH — Personal Cognitive & Neural Brain Engine",
+  projectTitle: "FINCH | Personal Cognitive & Neural Brain Engine",
   lead: "Cómo diseñé mi propio motor de memoria neuro-simbólica, grafo asociativo y razonamiento ReAct para eliminar la amnesia arquitectónica de los agentes de IA.",
   description:
     "Los LLMs convencionales olvidan decisiones de arquitectura al cerrar la sesión. Finch actúa como un hipocampo artificial conectado vía protocolo MCP a mi entorno de desarrollo: indexa mis 23+ repositorios locales, ingiere libros técnicos en PDF/Word/Markdown con citación de fuente, modela el olvido biológico (Ebbinghaus) y refuerza sinapsis por uso (LTP Hebbiano).",
