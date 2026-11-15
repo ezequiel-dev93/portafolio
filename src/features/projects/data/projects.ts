@@ -16,10 +16,19 @@ const projects: Project[] = [
     isPrivate: true,
   },
   {
+    title: 'Agent Harness & Eval Suite',
+    description:
+      'Diseñé un entorno de ejecución autónoma para agentes con bucle ReAct y sandbox de herramientas deterministas. Implementé Arquitectura Hexagonal integrando un juez evaluador en tiempo real (LLM-as-a-Judge) y guardrails de seguridad para auditar y bloquear alucinaciones numéricas antes de llegar al usuario final.',
+    github: 'https://github.com/ezequiel-dev93/autonomous-agent-eval-suite',
+    web: 'https://agent-harness-evals-ezequiel.streamlit.app/',
+    tags: ['PYTHON', 'STREAMLIT', 'PYDANTIC'],
+  },
+  {
     title: 'RAG Enterprise',
     description:
       'Desarrollé un sistema RAG empresarial para consultar documentos privados con citaciones exactas por página y prevención estricta de alucinaciones. Implementé Arquitectura Hexagonal con almacenamiento vectorial HNSW y telemetría de latencia en tiempo real.',
     github: 'https://github.com/ezequiel-dev93/rag-enterprise-pgvector',
+    web: 'https://rag-enterprise-ezequiel.streamlit.app/',
     tags: ['PYTHON', 'STREAMLIT', 'POSTGRESQL'],
   },
   {

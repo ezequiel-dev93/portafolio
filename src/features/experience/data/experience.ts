@@ -6,13 +6,13 @@ export const experience: Experience[] = [
     role: "Creative Frontend & Web Engineer",
     company: "Plataforma Web Inmersiva - Artista & Músico",
     primaryInfo: [
-      "Concebida con un enfoque editorial y narrativo de alto impacto visual y sensorial para un destacado músico y compositor folklórico argentino. Combina renderizado híbrido SSR/estático de alta velocidad con un motor 3D interactivo, construida con Astro, Three.js, GSAP, Lenis, Web Audio API y Tailwind CSS v4.",
-      "Implementa un canvas WebGL reactivo con simulación de partículas y niebla nocturna, paisaje sonoro procedimental sintetizado en tiempo real (crepitar de fogón sin consumo de ancho de banda por audio pregrabado), sistema dual de color (Modo Noche / Fogón Diurno) con persistencia en localStorage, mapa interactivo geolocalizado con countdown regresivo en vivo y arquitectura desacoplada basada en la metáfora escénica (Screaming Architecture)."
+      "Diseñé y desarrollé una plataforma web editorial e inmersiva para un reconocido artista y músico argentino, combinando generación estática de alta velocidad con un motor gráfico 3D interactivo mediante Astro, TypeScript, Three.js, shaders GLSL, GSAP ScrollTrigger, Lenis y Tailwind CSS v4.",
+      "Construí un ecosistema visual compuesto por un lienzo WebGL reactivo al puntero y al avance del scroll, preloader en video con liberación explícita de memoria, sistema dual de temas (Noche / Claro) persistido en localStorage sin FOUC, mapa interactivo geolocalizado con Leaflet, reproductor embebido de Spotify y grilla audiovisual optimizada."
     ],
     secundaryInfo: [
-      "Implementé Screaming Architecture mediante una metáfora teatral (capa 'Cinematográfico' para el escenario/WebGL/sonido y 'Protagonista' para el contenido), garantizando separación estricta entre guión de datos tipados (.data.ts), vistas declarativas (.astro) y coreografía de animación (.motion.ts).",
-      "Diseñé e integré una escena WebGL en segundo plano con Three.js libre de memory leaks ni warnings de renderizado, orquestando un sistema de partículas dinámicas e iluminación ambiental reactivas a las coordenadas del puntero y al avance del scroll.",
-      "Configuré el despliegue serverless optimizado en Vercel con pre-aprobación de binarios nativos (Sharp y esbuild), inyección de metadatos Schema.org JSON-LD (MusicGroup y MusicEvent), accesibilidad semántica con skip-links y carga diferida que maximiza las métricas de Core Web Vitals y Lighthouse."
+      "Implementé Screaming Architecture mediante una metáfora escénica, desacoplando el motor visual en la capa 'Cinematográfico' (WebGL, shaders y cursor) del relato en la capa 'Protagonista', con separación estricta entre datos tipados (.data.ts), vistas declarativas (.astro) y coreografía de animación (.motion.ts).",
+      "Desarrollé una escena 3D en Three.js (raycasting al puntero y ciclo de vida limpio ante cambios de visibilidad) junto a shaders GLSL personalizados (fBm), integrando un perfilador adaptativo de rendimiento que ajusta dinámicamente densidad de partículas, DPR, FPS objetivo y precisión de shaders según hardware, red (saveData) y preferencias del usuario.",
+      "Orquesté navegación inercial a 60 fps (Lenis + GSAP ScrollTrigger), un sistema de puntero dual adaptativo (cursor magnético con partículas en desktop y ondas táctiles en móviles), accesibilidad WCAG 2.2 AA (skip-links, scroll-margin-top, prefers-reduced-motion) y despliegue en Vercel con optimización WebP mediante Sharp, tipografías .woff2 auto-alojadas y datos estructurados Schema.org JSON-LD."
     ]
   },
   {
