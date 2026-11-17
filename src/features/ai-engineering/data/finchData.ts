@@ -2,14 +2,24 @@ export interface FinchMetric {
   value: string;
   label: string;
   detail: string;
+  methodology?: string;
 }
 
 export interface FinchPillar {
   id: string;
   tag: string;
   title: string;
+  techSubtitle: string;
   description: string;
   metrics: string;
+}
+
+export interface FinchTradeoff {
+  tag: string;
+  title: string;
+  decision: string;
+  tradeoff: string;
+  mitigation: string;
 }
 
 export interface FinchRelease {
@@ -34,243 +44,349 @@ export interface FinchRoadmapItem {
 }
 
 export const finchShowcaseData = {
-  badge: "Caso de Estudio & Changelog de Ingeniería",
+  badge: "Caso de Estudio & Arquitectura de IA",
   title: "Ingeniería de IA & Sistemas Cognitivos",
-  projectTitle: "FINCH | Personal Cognitive & Neural Brain Engine",
-  lead: "Cómo diseñé mi propio motor de memoria neuro-simbólica, grafo asociativo y razonamiento ReAct para eliminar la amnesia arquitectónica de los agentes de IA.",
+  projectTitle: "FINCH | Núcleo Cognitivo Personal",
+  lead: "Un motor local y privado de memoria a largo plazo que asimila tanto conocimiento de ciencias exactas e ingenierías como reglas de arquitectura de software.",
   description:
-    "Los LLMs convencionales olvidan decisiones de arquitectura al cerrar la sesión. Finch actúa como un hipocampo artificial conectado vía protocolo MCP a mi entorno de desarrollo: indexa mis 23+ repositorios locales, ingiere libros técnicos en PDF/Word/Markdown con citación de fuente, modela el olvido biológico (Ebbinghaus) y refuerza sinapsis por uso (LTP Hebbiano).",
+    "Conectado mediante mi propio servidor MCP (compatible con Claude Desktop, Cursor, VS Code y Antigravity), Finch indexa bibliografía técnica (PDF, DOCX, Markdown) y 23+ repositorios locales, rastrea qué decisión reemplazó a cuál (v1 ➔ v2) y propaga contexto relevante.",
   cta: {
     href: "/finch",
-    label: "Explorar Caso de Estudio & Changelog",
-    ariaLabel: "Abrir el caso de estudio completo y changelog de ingeniería de Finch",
+    label: "Explorar Caso de Estudio & Arquitectura",
+    ariaLabel: "Abrir el caso de estudio completo y arquitectura de ingeniería de Finch",
   },
   metrics: [
     {
       value: "< 1 ms",
-      label: "Latencia Sináptica",
-      detail: "Búsqueda en Hiperesfera L2 de 64-D + Spreading Activation",
+      label: "Latencia en Grafo Local",
+      detail: "Producto punto L2 en 64-D (243 nodos / 626 aristas) · Escala a HNSW",
     },
     {
       value: "626+",
-      label: "Sinapsis Activas",
-      detail: "Aristas ponderadas con propagación de 2 saltos (α = 0.65)",
+      label: "Conexiones Asociativas",
+      detail: "Aristas ponderadas con propagación BFS a 2 saltos (α = 0.65)",
     },
     {
       value: "243+",
-      label: "Nodos Cognitivos",
-      detail: "Reglas de arquitectura, 23 repositorios y literatura técnica",
+      label: "Nodos de Conocimiento",
+      detail: "Ciencias exactas, ingeniería y 23 repositorios con linaje v1 ➔ v2",
     },
     {
-      value: "100%",
-      label: "Fidelidad Verificada",
-      detail: "Juez Interno Anti-Alucinación + 14 suites de test deterministas",
+      value: "14 Suites",
+      label: "Validación Determinista",
+      detail: "Tests E2E sobre resolución de conflictos y bloqueo de alucinaciones",
     },
   ] satisfies FinchMetric[],
   quickTimeline: [
     {
       version: "v1.0",
-      name: "Hipocampo Dual",
-      desc: "Memoria Semántica (v1 ➔ v2) + Episódica inmutable en SQLite ACID.",
+      name: "Persistencia Dual & MCP",
+      desc: "Separación SQLite ACID (Semántico vs. Episódico), linaje v1 ➔ v2 y servidor MCP.",
     },
     {
       version: "v2.0",
-      name: "Sinapsis 64-D & ReAct",
-      desc: "Hiperesfera L2, Córtex ReAct autónomo, Sueño REM y Juez Interno.",
+      name: "Espacio 64-D & Batch REM",
+      desc: "Vectores L2 de 64 dimensiones, bucle ReAct, consolidación batch y validador.",
     },
     {
       version: "v2.2",
-      name: "Grafo, LTP & Ingestor",
-      desc: "Spreading Activation, Curva de Ebbinghaus, PDF/DOCX/Repos y CLI nativa.",
+      name: "Grafo, Decaimiento & Libros",
+      desc: "Spreading Activation, decaimiento exponencial, ingesta PDF/DOCX y CLI nativa.",
     },
   ],
 };
 
 export const finchPageData = {
   hero: {
+    badge: "INGENIERÍA DE IA · MCP ENGINE v2.2",
     title: "FINCH",
-    badge: "INGENIERÍA DE IA · CHANGELOG v2.2",
-    subtitle:
-      "Motor Cognitivo Personal, Grafo Sináptico Asociativo & Segundo Cerebro Neuro-Simbólico conectado vía Model Context Protocol (MCP).",
+    subtitle: "Núcleo Cognitivo Personal",
+    leadBefore: "Creé a ",
+    leadHighlight: "Finch",
+    leadAfter:
+      " como una herramienta real para mi día a día. Quería un motor local y privado que funcionara como memoria a largo plazo: capaz de asimilar tanto conocimiento puro de ciencias exactas e ingeniería (libros, papers y apuntes) como mis reglas de arquitectura de software, sabiendo qué decisión reemplazó a cuál (v1 → v2) y conectándose mediante mi propio servidor MCP a cualquier entorno que use hoy o mañana.",
+  },
+  telemetry: {
+    sectionTag: "00 · TELEMETRÍA, METODOLOGÍA & INTEROPERABILIDAD",
+    title: "Métricas Respaldadas por Pruebas y Escalabilidad",
+    methodologyNote:
+      "Metodología de medición: Latencias registradas en memoria sobre el grafo activo de producción personal (243 nodos y 626 aristas extraídos de 23 repositorios y bibliografía técnica). En búsqueda lineal O(N) con vectores normalizados L2 de 64-D, el tiempo de respuesta se mantiene < 0.8 ms (y < 5 ms hasta ~15.000 nodos en RAM). Para corpus de 100k+ fragmentos documentales, el puerto IVectorRepository conmuta al adaptador PostgreSQL 16 (pgvector con índice HNSW, m = 16, ef_construction = 64) manteniendo consultas logarítmicas en < 10 ms. Validado mediante 14 suites de pruebas deterministas.",
+    mcpClientsLabel: "Estándar Abierto MCP (JSON-RPC 2.0 stdio) — Compatible con:",
+    mcpClients: [
+      "Claude Desktop",
+      "Cursor IDE",
+      "VS Code (Copilot / Cline)",
+      "Antigravity IDE",
+      "Windsurf",
+      "Terminal CLI Nativa",
+    ],
   },
   origin: {
-    sectionTag: "01 · EL ORIGEN & PROBLEMA CIENTÍFICO",
-    title: "Por qué los LLMs sufren de Amnesia Arquitectónica",
-    lead: "Cuando escalás un ecosistema de más de 20 proyectos de software, los asistentes de IA tradicionales fallan en tres frentes críticos: olvidan el contexto entre sesiones, contradicen decisiones pasadas y alucinan dependencias.",
+    sectionTag: "01 · EL PROBLEMA & EJECUCIÓN EN VIVO",
+    title: "Superando la Amnesia de Contexto en Ciencia e Ingeniería",
+    lead: "Los modelos de lenguaje tradicionales operan con ventanas efímeras: al cerrar la sesión olvidan tus invariantes de diseño, mezclan apuntes o fórmulas con versiones obsoletas y carecen de trazabilidad sobre qué fuente respalda cada afirmación.",
     comparison: [
       {
-        type: "LLM Convencional / RAG Básico",
+        type: "LLM Convencional / RAG Estándar",
         flaws: [
-          "Ventana de contexto efímera: al cerrar el chat, tu arquitectura desaparece.",
-          "Chunking ciego: mezcla reglas obsoletas (v1) con decisiones vigentes (v2).",
-          "Aislamiento entre proyectos: no sabe qué patrones aplicaste en tus otros 22 repositorios.",
-          "Sin validación epistémica: responde con alta confianza incluso cuando inventa datos.",
+          "Ventana efímera: cada sesión nueva desconoce la evolución histórica de tus proyectos.",
+          "Chunking sin versionado: mezcla reglas deprecadas (v1) con decisiones vigentes (v2).",
+          "Falta de conexiones transversales: no vincula un principio matemático o físico con el módulo de código que lo implementa.",
+          "Sin validación determinista: puede inventar citas de página o cifras con apariencia plausible.",
         ],
       },
       {
-        type: "Arquitectura Cognitiva FINCH v2.2",
+        type: "Núcleo Cognitivo FINCH v2.2",
         strengths: [
-          "Hipocampo Dual Persistente: separa Hechos Semánticos mutables (v1 ➔ v2) de Eventos Episódicos.",
-          "Grafo Sináptico con Spreading Activation: conecta 243+ conceptos y 626+ aristas en < 1 ms.",
-          "Plasticidad Biológica: Curva de Olvido de Ebbinghaus + Potenciación a Largo Plazo (LTP Hebbiano).",
-          "Juez Interno Anti-Alucinación: audita la fidelidad de cada respuesta antes de emitirla.",
+          "Persistencia Dual ACID (Hipocampo): separa Estado Semántico mutable (v1 ➔ v2) de Eventos Episódicos inmutables.",
+          "Grafo Asociativo (Spreading Activation): propaga contexto a 2 saltos sobre 626+ aristas en < 1 ms.",
+          "Gestión Temporal (Ebbinghaus & LTP): decaimiento exponencial de nodos inactivos y refuerzo de pesos por frecuencia de uso.",
+          "Validador Determinista Anti-Alucinación: verifica cifras y fuentes antes de devolver contexto al cliente MCP.",
         ],
       },
     ],
+    terminalDemo: {
+      title: "Demostración de Flujo en Terminal & Servidor MCP",
+      commands: [
+        {
+          cmd: "$ finch learn-file ./docs/algebra-lineal-espacios-l2.pdf --category exact-sciences",
+          output: [
+            "✓ [Ingestor] PDF procesado: 18 páginas extraídas con atribución exacta.",
+            "✓ [64-D Engine] 12 nodos conceptuales proyectados en hiperesfera unitaria L2.",
+            "✓ [Synaptic Graph] 28 aristas creadas (vinculado con: 'pgvector-hnsw', 'cosine-similarity').",
+          ],
+        },
+        {
+          cmd: '$ finch ask "¿Cuál es la regla vigente para manejo de estado y cómo se relaciona con el cálculo vectorial?"',
+          output: [
+            "⚡ [Spreading Activation] 0.62 ms · 2 saltos (α = 0.65) · 4 nodos activados:",
+            "  • [VIGENTE v2] ADR-014: Arquitectura Hexagonal con estado desacoplado (reemplazó a v1 Redux en oct-2026).",
+            "  • [CIENCIAS EXACTAS] algebra-lineal-espacios-l2.pdf (Pág. 7): Normalización L2 para equivalencia entre producto punto y similitud coseno.",
+            "✓ [Eval Guardrail] PASS · 0 contradicciones activas · Fuerza sináptica actualizada (+0.15 LTP).",
+          ],
+        },
+      ],
+    },
   },
   pillars: {
-    sectionTag: "02 · EL CORAZÓN TÉCNICO",
-    title: "Arquitectura Hexagonal & Neuro-Simbólica",
+    sectionTag: "02 · ARQUITECTURA HEXAGONAL & MOTOR INTERNO",
+    title: "Puertos, Adaptadores e Ingeniería Neuro-Simbólica",
     subtitle:
-      "Construido con Arquitectura Hexagonal y principios de Clean Architecture (Puertos y Adaptadores en Python 3.12+), desacoplando el dominio neuro-cognitivo de la infraestructura de persistencia e inferencia.",
+      "Construido con Arquitectura Hexagonal y principios de Clean Architecture (Puertos y Adaptadores en Python 3.12+), desacoplando el núcleo matemático y de grafos de los adaptadores de almacenamiento e interfaz.",
+    diagram: {
+      clients: ["Claude Desktop", "Cursor / VS Code", "Antigravity IDE", "CLI (`finch`)"],
+      transport: "Servidor MCP Propio (JSON-RPC 2.0 Stdio) & CLI Controller",
+      useCases: [
+        "IngestKnowledgeUseCase",
+        "SpreadingActivationQuery",
+        "ConflictResolution (v1➔v2)",
+        "BatchConsolidation (REM)",
+      ],
+      ports: [
+        "IMemoryRepository",
+        "ISynapseVectorEngine",
+        "IGraphTraversalPort",
+        "IDocumentParserPort",
+      ],
+      adapters: [
+        "SQLite ACID (Local Dual DB)",
+        "PostgreSQL + pgvector (HNSW)",
+        "64-D L2 Hashing Engine",
+        "PDF / DOCX / AST Parsers",
+      ],
+    },
     items: [
       {
         id: "hippocampus",
-        tag: "MEMORIA DUAL & ACID",
-        title: "Hipocampo Semántico / Episódico con Resolución v1 ➔ v2",
+        tag: "PERSISTENCIA DUAL ACID",
+        title: "Hipocampo Semántico / Episódico",
+        techSubtitle: "Término técnico: Almacenamiento Transaccional Separado con Linaje v1 ➔ v2",
         description:
-          "Cuando una preferencia técnica evoluciona (ej. migrar de REST a FastAPI Async o de CSS plano a Sass modular), Finch detecta la colisión semántica, depreca el nodo v1 preservando su trazabilidad histórica y promueve la versión v2 como única fuente de verdad.",
-        metrics: "0 contradicciones · Trazabilidad completa en Audit Log",
+          "Divide la base de datos SQLite en dos estructuras: una tabla de Hechos Semánticos (estado actual mutable) y un Log Episódico (eventos históricos inmutables). Cuando una decisión evoluciona, depreca el nodo v1 mediante un puntero `superseded_by` y promueve v2 como única verdad activa.",
+        metrics: "Transacciones ACID · Trazabilidad completa en Audit Log",
       },
       {
         id: "hypersphere",
         tag: "ÁLGEBRA VECTORIAL 64-D",
-        title: "Sinapsis Neuronal en Hiperesfera L2-Normalizada",
+        title: "Sinapsis en Hiperesfera L2",
+        techSubtitle: "Término técnico: Feature Hashing Firmado de N-Gramas + Clústeres de Dominio",
         description:
-          "Proyección de recuerdos sobre una hiperesfera continua de 64 dimensiones combinando activación de 16 clústeres de ingeniería de software y 48 canales de hashing neuronal firmado con n-gramas de caracteres, logrando similitud coseno en microsegundos.",
-        metrics: "64 Dimensiones L2 · < 0.8 ms por consulta",
+          "Proyecta conceptos sobre una hiperesfera unitaria de 64 dimensiones combinando 16 dimensiones de anclaje semántico (ingeniería, ciencias exactas, arquitectura) y 48 canales de hashing neuronal firmado con n-gramas de caracteres, calculando similitud coseno mediante producto punto directo.",
+        metrics: "64 Dimensiones L2 · < 0.8 ms en CPU local · $0 API Cost",
       },
       {
         id: "spreading-activation",
-        tag: "TEORÍA DE GRAFOS COGNITIVOS",
-        title: "Grafo Sináptico & Spreading Activation (2-Hops)",
+        tag: "TEORÍA DE GRAFOS",
+        title: "Grafo Sináptico & Spreading Activation",
+        techSubtitle: "Término técnico: Búsqueda en Anchura Ponderada (Weighted BFS) a 2 Saltos",
         description:
-          "Inspirado en el modelo de Collins & Loftus: al consultar sobre un proyecto, la energía neuronal se propaga hasta 2 saltos a través de aristas tipadas (USES_TECH, FOLLOWS_PATTERN, EVOLVED_FROM) con factor de decaimiento α = 0.65.",
-        metrics: "626+ Sinapsis · 23 Repositorios Mapeados",
+          "Modela el conocimiento como un grafo dirigido con aristas tipadas (`USES_TECH`, `FOLLOWS_PATTERN`, `PROVES_THEOREM`, `EVOLVED_FROM`). Al consultar un nodo, la activación se propaga hasta 2 saltos con factor de atenuación α = 0.65 para recuperar contexto relacionado implícitamente.",
+        metrics: "626+ Aristas Ponderadas · Decaimiento espacial α = 0.65",
       },
       {
         id: "ebbinghaus-ltp",
-        tag: "NEUROCIENCIA COMPUTACIONAL",
-        title: "Curva de Ebbinghaus & Potenciación Hebbiana (LTP)",
+        tag: "GESTIÓN DE CACHÉ Y PESOS",
+        title: "Curva de Ebbinghaus & LTP Hebbiano",
+        techSubtitle: "Término técnico: TTL con Decaimiento Exponencial y Re-ponderación por Frecuencia",
         description:
-          "Modelado matemático de retención biológica R = exp(-λ · Δt / S). Cada vez que un recuerdo es evocado en el IDE, se dispara Potenciación a Largo Plazo (LTP): incrementa su fuerza sináptica (+0.15) y reduce su tasa de olvido en un 15%.",
-        metrics: "Fórmula R = e^(-λΔt) · Refuerzo Hebbiano automático",
+          "Calcula la relevancia temporal de cada nodo con la función exponencial R = exp(-λ · Δt / S). Cada vez que un concepto es utilizado útilmente en una sesión, incrementa su estabilidad S (+0.15), reduciendo su tasa de decaimiento frente a datos transitorios.",
+        metrics: "Fórmula R = e^(-λΔt/S) · Priorización dinámica de contexto",
       },
       {
         id: "ingestor",
-        tag: "INGESTIÓN MULTIFORMATO",
-        title: "Ingestor de Libros PDF, Word (.docx), Markdown & GitHub",
+        tag: "PIPELINE ETL DOCUMENTAL",
+        title: "Ingestor de Bibliografía & Código",
+        techSubtitle: "Término técnico: Extracción Estructurada PDF, DOCX (XML), Markdown y AST",
         description:
-          "Pipeline de extracción que transforma apuntes de ingeniería en PDF (con número de página), documentos Word (.docx vía parseo XML/ZIP), guías Markdown y repositorios de GitHub en nodos semánticos con atribución exacta de fuente.",
-        metrics: "Soporte PDF / DOCX / MD / Web · Citación de fuente",
+          "Pipeline determinista que procesa libros de ciencias exactas e ingeniería en PDF (preservando número de página), documentos Word (.docx vía árbol XML), apuntes Markdown y estructuras de repositorios para transformarlos en nodos verificables.",
+        metrics: "Soporte PDF / DOCX / MD / Repos · Citación exacta de página",
       },
       {
         id: "react-judge",
-        tag: " SEGURIDAD & PROTOCOLO MCP",
-        title: "Córtex ReAct, Sueño REM & Juez Anti-Alucinación",
+        tag: "CONSOLIDACIÓN & GUARDRAILS",
+        title: "Córtex ReAct, Sueño REM & Juez",
+        techSubtitle: "Término técnico: Orquestador Paso a Paso, Compresión Batch Offline y Validador",
         description:
-          "Expuesto como servidor MCP nativo (9 herramientas cognitivas). Incluye consolidación nocturna (Sueño REM que sintetiza episodios en reglas) y un Juez Interno determinista que bloquea cualquier inferencia con Groundedness menor al umbral.",
-        metrics: "9 Tools MCP · 100% Faithfulness Score",
+          "Expone 9 herramientas vía protocolo MCP. El proceso de 'Sueño REM' es un worker batch offline que agrupa episodios recientes, elimina redundancias y consolida reglas, mientras un validador determinista audita que ninguna cifra contradiga los nodos fuente.",
+        metrics: "9 Herramientas MCP · Validación determinista pre-respuesta",
       },
     ] satisfies FinchPillar[],
   },
+  tradeoffs: {
+    sectionTag: "03 · INGENIERÍA REAL: DECISIONES, LÍMITES & TRADE-OFFS",
+    title: "Por Qué Diseñé Finch Así (y Qué No Resuelve Todavía)",
+    subtitle:
+      "Toda arquitectura de software implica compromisos. Estas son las decisiones técnicas deliberadas detrás de Finch v2.2 y sus límites actuales.",
+    items: [
+      {
+        tag: "TRADE-OFF 01 · VECTORES LOCALES VS. TRANSFORMERS",
+        title: "¿Por qué Hashing de 64-D en vez de Embeddings de 1536-D (OpenAI / Gemini)?",
+        decision:
+          "Elegí proyección local de 64-D (16 clústeres + 48 canales de hashing firmado de n-gramas) para lograr 0 ms de latencia de red, costo $0 perpetuo, < 5 MB de RAM y privacidad absoluta offline.",
+        tradeoff:
+          "Pierde sensibilidad ante sinónimos amplios en lenguaje coloquial o paráfrasis abstractas que un modelo denso de 1536 dimensiones capturaría fácilmente.",
+        mitigation:
+          "En dominios técnicos (matemática, física, código y arquitectura), la terminología es precisa y el grafo de Spreading Activation compensa la brecha semántica conectando conceptos por topología.",
+      },
+      {
+        tag: "TRADE-OFF 02 · ESCALABILIDAD EN RAM VS. DISCO",
+        title: "Búsqueda Lineal O(N) en SQLite frente a Índices HNSW",
+        decision:
+          "Para un segundo cerebro personal (de cientos a ~15.000 nodos), cargar la matriz normalizada en memoria y calcular el producto punto tarda menos de 1 ms sin requerir infraestructura de contenedores activa.",
+        tradeoff:
+          "A partir de ~50.000–100.000 fragmentos (por ejemplo, al indexar decenas de libros completos), el escaneo lineal O(N) degrada la latencia por encima de los 15-20 ms.",
+        mitigation:
+          "Gracias a la Arquitectura Hexagonal, el puerto `IVectorRepository` permite conmutar al adaptador PostgreSQL + `pgvector` con índice HNSW (`O(log N)`) sin tocar una sola línea del dominio.",
+      },
+      {
+        tag: "LÍMITES ACTUALES · ROADMAP DE MEJORA",
+        title: "Qué NO resuelve todavía la versión v2.2",
+        decision:
+          "Prioricé la estabilidad transaccional del grafo, la resolución de contradicciones v1 ➔ v2 y el estándar MCP sobre la automatización en segundo plano.",
+        tradeoff:
+          "1) La actualización ante nuevos commits requiere ejecutar `finch scan` o invocar la herramienta MCP (aún no hay daemon de filesystem watcher continuo). 2) El parser de PDF extrae texto digital pero no incluye OCR pesado para libros escaneados como imagen ni parseo LaTeX complejo en tablas anidadas.",
+        mitigation:
+          "Planificado para la Fase 2.5/3.0 mediante watchers livianos en Rust y extracción incremental.",
+      },
+    ] satisfies FinchTradeoff[],
+  },
   changelog: {
-    sectionTag: "03 · LÍNEA DE TIEMPO EVOLUTIVA",
+    sectionTag: "04 · LÍNEA DE TIEMPO EVOLUTIVA",
     title: "Changelog de Ingeniería (v1.0 ➔ v2.2)",
     subtitle:
-      "Registro cronológico de cómo evolucionó Finch desde un almacén determinista hasta un motor cognitivo con plasticidad sináptica.",
+      "Registro cronológico de cómo evolucionó Finch desde un almacén transaccional hasta un núcleo cognitivo multidisciplinario.",
     releases: [
       {
         version: "v2.2.0",
         date: "Fase Actual · Producción Local",
-        codename: "Synaptic Graph, Ebbinghaus LTP & Multi-Format Ingestor",
+        codename: "Synaptic Graph, Exponential Decay & Multi-Format Science Ingestor",
         status: "LATEST RELEASE",
         summary:
-          "Salto hacia la neurociencia computacional aplicada: implementación del Grafo Sináptico con Spreading Activation, plasticidad de Ebbinghaus + LTP Hebbiano, ingestión de documentos PDF/DOCX/Repos y Memoria de Trabajo con CLI nativa.",
+          "Implementación del Grafo Asociativo con Spreading Activation (BFS ponderado), modelo matemático de retención exponencial (Ebbinghaus + LTP), ingesta de bibliografía en PDF/DOCX/Markdown y CLI nativa.",
         highlights: [
           {
-            title: "Grafo Sináptico & Escáner Automático de Repositorios",
+            title: "Grafo Sináptico & Escáner de Repositorios y Apuntes",
             detail:
-              "Escaneo autónomo de 23 repositorios locales en software-projects, generando 243 nodos y 626 aristas sinápticas con propagación de activación en 2 saltos (α = 0.65).",
+              "Indexación de 23 repositorios locales y documentos de ingeniería, generando 243 nodos y 626 aristas con propagación en 2 saltos (α = 0.65).",
           },
           {
-            title: "Curva de Olvido de Ebbinghaus & LTP Hebbiano",
+            title: "Decaimiento Exponencial (Ebbinghaus) & Refuerzo por Uso (LTP)",
             detail:
-              "Cálculo dinámico de retención R = e^(-λΔt) y refuerzo sináptico automático cada vez que un nodo es consultado o actualizado, auditado durante el ciclo de Sueño REM.",
+              "Cálculo dinámico de retención R = e^(-λΔt/S) y aumento de estabilidad (+0.15) cada vez que un nodo demuestra utilidad en una consulta.",
           },
           {
-            title: "Ingestor Multiformato con Atribución de Fuente",
+            title: "Ingestor Multiformato con Atribución de Página",
             detail:
-              "Soporte nativo para libros y apuntes en PDF (.pdf con citación de páginas), Microsoft Word (.docx), Markdown (.md) y repositorios de GitHub (Bulletproof React, entrevistas técnicas).",
+              "Soporte nativo para libros de ciencias exactas e ingeniería en PDF (.pdf con número de página), Word (.docx), Markdown (.md) y repositorios.",
           },
           {
-            title: "Working Memory (Modo Sprint) & CLI Local `finch`",
+            title: "Working Memory (Modo Sprint) & CLI `finch`",
             detail:
-              "Memoria de corto plazo para sprints activos y CLI rápida en terminal (`finch status`, `finch ask`, `finch learn-file`, `finch sprint`) con respuesta en milisegundos.",
+              "Memoria de corto plazo para sesiones intensivas y CLI rápida en terminal (`finch status`, `finch ask`, `finch learn-file`, `finch sprint`).",
           },
         ],
         techStack: [
           "Python 3.12",
-          "Spreading Activation Graph",
-          "Ebbinghaus & LTP Math",
+          "Weighted BFS Graph",
+          "Exponential Decay Math",
           "pypdf & DOCX XML Parser",
           "Native CLI",
         ],
       },
       {
         version: "v2.0.0",
-        date: "Fase 2 · Expansión Neuronal",
-        codename: "64-D Neural Synapse, ReAct Cortex & REM Consolidation",
+        date: "Fase 2 · Expansión Vectorial",
+        codename: "64-D L2 Vector Engine, ReAct Loop & Batch Consolidation",
         status: "CORE ENGINE",
         summary:
-          "Transición del motor léxico hacia un espacio vectorial continuo de 64 dimensiones sobre hiperesfera unitaria L2, incorporando razonamiento autónomo ReAct y consolidación nocturna.",
+          "Transición del motor léxico hacia un espacio vectorial continuo de 64 dimensiones sobre hiperesfera unitaria L2, incorporando razonamiento ReAct y consolidación batch offline (Sueño REM).",
         highlights: [
           {
-            title: "Motor Sináptico de 64 Dimensiones (NeuralVectorSynapseEngine)",
+            title: "Motor Vectorial de 64 Dimensiones (NeuralVectorSynapseEngine)",
             detail:
-              "Combinación de 16 clústeres de arquitectura de software con 48 dimensiones de hashing neuronal firmado para recuperar recuerdos aún sin coincidencia exacta de palabras.",
+              "Combinación de 16 clústeres de dominio técnico con 48 canales de feature hashing firmado para recuperar conceptos en < 0.8 ms.",
           },
           {
-            title: "Córtex de Razonamiento ReAct (Thought ➔ Action ➔ Observation)",
+            title: "Orquestador ReAct (Thought ➔ Action ➔ Observation)",
             detail:
-              "Agente que descompone consultas complejas de ingeniería, inspecciona múltiples capas de memoria y traza cada paso lógico.",
+              "Descomposición de consultas complejas, inspección multi-capa de memoria y trazabilidad de cada paso.",
           },
           {
-            title: "Consolidación Nocturna (Sueño REM) & Juez Anti-Alucinación",
+            title: "Job de Consolidación Offline (Sueño REM) & Guardrail",
             detail:
-              "Algoritmo que agrupa memorias episódicas por afinidad temática para sintetizar nuevas reglas semánticas, validado al 100% por el Juez Interno.",
+              "Proceso batch que agrupa eventos episódicos por afinidad para sintetizar reglas semánticas permanentes y auditar fidelidad.",
           },
         ],
         techStack: [
           "64-D L2 Hypersphere",
           "ReAct Loop",
-          "REM Sleep Worker",
-          "Anti-Hallucination Judge",
+          "Offline Batch Consolidation",
+          "Deterministic Guardrail",
           "Streamlit Lab UI",
         ],
       },
       {
         version: "v1.0.0",
-        date: "Fase 1 · Fundación Cognitiva",
-        codename: "Dual Hippocampus, Conflict Resolution & MCP Server",
+        date: "Fase 1 · Fundación Hexagonal",
+        codename: "Dual ACID Storage, Conflict Lineage (v1➔v2) & Open MCP Server",
         status: "FOUNDATION",
         summary:
-          "Creación del núcleo de Arquitectura Hexagonal con separación estricta entre Memoria Semántica y Episódica, resolución de conflictos (v1 ➔ v2) y exposición vía Model Context Protocol.",
+          "Creación del núcleo en Arquitectura Hexagonal con separación estricta entre Memoria Semántica y Episódica, resolución de contradicciones (v1 ➔ v2) y servidor Model Context Protocol.",
         highlights: [
           {
-            title: "Separación Biológica Semántica vs. Episódica",
+            title: "Almacenamiento Dual: Estado Semántico vs. Log Episódico",
             detail:
-              "Modelado de hechos arquitectónicos vivos frente a eventos históricos inmutables sobre SQLite transaccional.",
+              "Separación de conceptos y reglas vigentes frente al historial cronológico inmutable sobre SQLite transaccional.",
           },
           {
-            title: "Motor de Resolución de Conflictos (v1 ➔ v2)",
+            title: "Motor de Resolución de Contradicciones (v1 ➔ v2)",
             detail:
-              "Reemplazo automático de reglas obsoletas manteniendo el linaje completo (`superseded_by`) en el registro de auditoría.",
+              "Deprecación automática de decisiones obsoletas manteniendo el linaje completo (`superseded_by`) en el registro de auditoría.",
           },
           {
-            title: "Servidor Model Context Protocol (`finch-brain`)",
+            title: "Servidor MCP Multi-Cliente (`finch-brain`)",
             detail:
-              "Integración directa con Antigravity IDE para dotar al asistente de programación de memoria persistente a largo plazo.",
+              "Interfaz estándar JSON-RPC 2.0 compatible con Claude Desktop, Cursor, VS Code y Antigravity IDE.",
           },
         ],
         techStack: [
@@ -278,53 +394,83 @@ export const finchPageData = {
           "SQLite ACID",
           "MCP JSON-RPC 2.0",
           "Python Type Hints",
-          "Unit Test Suite",
+          "14 Automated Test Suites",
         ],
       },
     ] satisfies FinchRelease[],
   },
   roadmap: {
-    sectionTag: "04 · PRÓXIMA FRONTERA",
+    sectionTag: "05 · PRÓXIMA FRONTERA",
     title: "Roadmap: Tauri 2.0 Desktop, Polars & Nube Híbrida AWS",
     subtitle:
-      "La siguiente evolución lleva a Finch desde el entorno local hacia una aplicación nativa ultrarrápida en Rust y un cerebro neuronal híbrido Local + Cloud.",
+      "Evolución planificada hacia una interfaz de escritorio nativa en Rust y un motor vectorial híbrido para escalar a millones de fragmentos.",
     items: [
       {
         phase: "FASE 2.5 · DESKTOP NATIVO",
         title: "Finch Desktop en Tauri 2.0 (Rust + React 19 + WebGL)",
-        subtitle: "Inspiración visual: Esfera Sináptica 3D Interactiva",
+        subtitle: "Visualización Interactiva del Grafo en Tiempo Real",
         description:
-          "Migración de la interfaz de laboratorio hacia un ejecutable nativo compilado en Rust con Tauri 2.0 (< 25 MB de RAM, arranque en < 50 ms). Incorpora exactamente esta Esfera Sináptica 3D en WebGL (Three.js + GSAP) como núcleo visual interactivo que se ilumina en tiempo real durante cada Spreading Activation, invocable globalmente con Alt + F (estilo Raycast).",
+          "Empaquetado nativo en Rust con Tauri 2.0 (< 25 MB de RAM, arranque instantáneo). Incorpora el grafo 3D en WebGL para visualizar qué nodos de ciencia, ingeniería y código se activan en cada consulta, invocable mediante atajo global.",
         specs: [
           "Tauri 2.0 + Rust Core (< 25 MB RAM)",
-          "Esfera Sináptica 3D WebGL (Nodos Cian + Líneas Hueso)",
-          "HotKey Global Alt + F & Split-Panes técnicos",
+          "Visualizador de Spreading Activation en vivo",
+          "Atajo global & explorador de linaje v1 ➔ v2",
         ],
       },
       {
-        phase: "FASE 3.0 · DATA & TELEMETRÍA EN RUST",
-        title: "Motor de Analítica de Código con Polars",
-        subtitle: "PolarsCodebaseAnalyticsEngine",
+        phase: "FASE 3.0 · ANALÍTICA EN RUST",
+        title: "Ingesta Masiva & Analítica con Polars",
+        subtitle: "PolarsKnowledgeAnalyticsEngine",
         description:
-          "Integración de Polars (motor DataFrame en Rust multihilo con SIMD) para auditar el historial de más de 20.000 commits en mis repositorios, detectar hotspots de deuda técnica (Git Churn) y procesar millones de trazas durante el Sueño REM en milisegundos.",
+          "Integración de Polars (motor DataFrame en Rust multihilo con SIMD) para auditar el historial de miles de commits, detectar acoplamiento estructural entre módulos y ejecutar la consolidación batch sobre grandes volúmenes documentales en milisegundos.",
         specs: [
           "Polars Rust DataFrames (Apache Arrow)",
-          "Detección de Git Churn & Hotspots de Arquitectura",
-          "Batching ultrarrápido en Sueño REM",
+          "Detección de acoplamiento y deuda técnica",
+          "Procesamiento batch vectorizado por SIMD",
         ],
       },
       {
-        phase: "FASE 3.5 · RED NEURONAL HÍBRIDA",
-        title: "Inferencia Transformer Local (AVX2 / CUDA) + AWS pgvector",
-        subtitle: "LocalTransformerSynapseEngine & Cloud Sync",
+        phase: "FASE 3.5 · ESCALA HÍBRIDA",
+        title: "Inferencia Cuantizada Local (ONNX) + PostgreSQL pgvector",
+        subtitle: "HybridVectorSynapseEngine & Cloud Sync",
         description:
-          "Ejecución híbrida optimizada para estación de trabajo local (AMD Ryzen 5 5600 + 24 GB RAM + RTX 3060) mediante ONNX Runtime / FastEmbed en 8-12 ms offline, sincronizada con PostgreSQL + pgvector (índice HNSW) en AWS para acceso 24/7.",
+          "Adaptador opcional con modelos de embeddings cuantizados (INT8 vía ONNX Runtime) ejecutados localmente en CPU/GPU estándar sin depender de APIs externas, sincronizado con PostgreSQL + pgvector (índice HNSW) en AWS para colecciones de +100k fragmentos.",
         specs: [
-          "Inferencia ONNX en 8-12 ms (Ryzen 5 5600 / RTX 3060)",
-          "Amazon RDS / Supabase PostgreSQL + pgvector HNSW",
-          "Consolidación nocturna vía AWS EventBridge",
+          "Inferencia local INT8 vía ONNX Runtime (Offline)",
+          "Adaptador PostgreSQL + pgvector con índice HNSW",
+          "Sincronización cifrada y jobs de consolidación",
         ],
       },
     ] satisfies FinchRoadmapItem[],
+  },
+  commercialBridge: {
+    sectionTag: "06 · APLICACIÓN EN PRODUCTOS REALES",
+    title: "¿Qué Significa Esta Ingeniería para Tu Producto o Equipo?",
+    lead: "Finch nació como mi núcleo cognitivo personal, pero los patrones de arquitectura que lo impulsan resuelven los problemas más críticos que enfrentan hoy las empresas al llevar IA a producción:",
+    cards: [
+      {
+        title: "Asistentes y Agentes sin Amnesia",
+        description:
+          "Diseño sistemas de memoria persistente con resolución de contradicciones (v1 ➔ v2) para que tus agentes corporativos recuerden el contexto de cada cliente y reduzcan hasta un 90% el gasto en tokens.",
+      },
+      {
+        title: "RAG Técnico con Cero Alucinaciones",
+        description:
+          "Implemento pipelines de recuperación sobre documentación legal, clínica o de ingeniería (PDF/DOCX/SQL) con atribución exacta de página, índices HNSW en pgvector y guardrails deterministas.",
+      },
+      {
+        title: "Integración MCP & Arquitectura Limpia",
+        description:
+          "Desarrollo servidores Model Context Protocol a medida y backends en Python (FastAPI / Hexagonal Architecture) desacoplados, testeables y listos para escalar sin atarte a un único proveedor de LLM.",
+      },
+    ],
+    primaryCta: {
+      label: "Hablemos de tu Proyecto",
+      href: "/#contactos",
+    },
+    secondaryCta: {
+      label: "Conectar en LinkedIn",
+      href: "https://www.linkedin.com/in/ezequiel-suarez-dev/",
+    },
   },
 };

@@ -6,7 +6,7 @@
  */
 ---
 
-<div id="loader" aria-live="polite" aria-label="Cargando portfolio" role="status">
+<div id="loader" aria-hidden="true">
   <div class="loader__pill">
     <canvas id="loader-orb" width="40" height="40" aria-hidden="true"></canvas>
     <span class="loader__text">Iniciando<span class="loader__dots"></span></span>
@@ -109,17 +109,7 @@
 </style>
 
 <script>
-// ─── Body lock & Focus Trap (prevent interaction while loader is visible) ──
-  document.body.style.overflow = 'hidden';
-  
-  function trapFocus(e: KeyboardEvent) {
-    if (e.key === 'Tab') {
-      e.preventDefault();
-    }
-  }
-  document.addEventListener('keydown', trapFocus);
-
-  // ─── Canvas Orb ──────────────────────────────────────────
+  // ─── Canvas Orb (non-blocking visual indicator) ──────────
   const canvas  = document.getElementById('loader-orb') as HTMLCanvasElement;
   const ctx     = canvas.getContext('2d')!;
 
@@ -239,10 +229,6 @@
 
     running = false;
     cancelAnimationFrame(rafId);
-
-    // Unlock body scroll & focus
-    document.body.style.overflow = '';
-    document.removeEventListener('keydown', trapFocus);
 
     if (noMotion) {
       loader.remove();

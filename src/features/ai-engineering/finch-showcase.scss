@@ -207,7 +207,7 @@ $hud-cut: 18px;
   &__evo-desc {
     font-size: 0.8rem;
     line-height: 1.45;
-    color: rgba(11, 18, 32, 0.72);
+    color: rgba(11, 18, 32, 0.86);
     margin: 0;
   }
 
@@ -377,7 +377,7 @@ $hud-cut: 18px;
   &__metric-detail {
     font-size: 0.78rem;
     line-height: 1.4;
-    color: rgba(11, 18, 32, 0.68);
+    color: rgba(11, 18, 32, 0.85);
   }
 }
 
@@ -399,7 +399,7 @@ body.dark-mode {
     &__badge-wrap {
       background: rgba(0, 229, 255, 0.12);
       border-color: rgba(0, 229, 255, 0.38);
-      color: #00E5FF;
+      color: #67E8F9;
     }
 
     &__title-h2 {
@@ -425,7 +425,7 @@ body.dark-mode {
     }
 
     &__kicker-code {
-      color: #00E5FF;
+      color: #67E8F9;
     }
 
     &__project-title {
@@ -433,11 +433,11 @@ body.dark-mode {
     }
 
     &__lead {
-      color: #E5E7EB;
+      color: #EAE6DF;
     }
 
     &__desc {
-      color: rgba(203, 213, 225, 0.82);
+      color: #EAE6DF;
     }
 
     &__evo-item {
@@ -451,7 +451,7 @@ body.dark-mode {
 
     &__evo-ver {
       background: rgba(0, 229, 255, 0.16);
-      color: #00E5FF;
+      color: #67E8F9;
     }
 
     &__evo-name {
@@ -459,7 +459,7 @@ body.dark-mode {
     }
 
     &__evo-desc {
-      color: rgba(203, 213, 225, 0.75);
+      color: #EAE6DF;
     }
 
     &__cta-btn {
@@ -480,8 +480,8 @@ body.dark-mode {
     }
 
     &__metric-card {
-      background: rgba(7, 12, 23, 0.72);
-      border-color: rgba(0, 229, 255, 0.22);
+      background: rgba(7, 12, 23, 0.78);
+      border-color: rgba(0, 229, 255, 0.26);
     }
 
     &__metric-val {
@@ -493,7 +493,7 @@ body.dark-mode {
     }
 
     &__metric-detail {
-      color: rgba(203, 213, 225, 0.74);
+      color: #EAE6DF;
     }
   }
 }

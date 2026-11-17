@@ -9,14 +9,58 @@ import {
   finchPageData,
 } from "@/features/ai-engineering/data/finchData";
 
-const { hero, origin, pillars, changelog, roadmap } = finchPageData;
+const {
+  hero,
+  telemetry,
+  origin,
+  pillars,
+  tradeoffs,
+  changelog,
+  roadmap,
+} = finchPageData;
 const { metrics } = finchShowcaseData;
 ---
 
 <Layout
-  title="FINCH — Ingeniería de IA & Sistemas Cognitivos | Ezequiel Suarez"
-  description="Caso de Estudio y Changelog de Ingeniería de Finch: Motor Cognitivo Personal, Grafo Sináptico con Spreading Activation, Curva de Ebbinghaus y Arquitectura Hexagonal vía MCP."
+  title="FINCH — Núcleo Cognitivo Personal & Servidor MCP | Ezequiel Suarez"
+  description="Caso de estudio de Finch: núcleo cognitivo personal, grafo sináptico y servidor MCP en Python con Arquitectura Hexagonal, SQLite y pgvector."
+  keywords="Model Context Protocol, MCP Server, Python, Arquitectura Hexagonal, Grafo Sináptico, RAG, pgvector, SQLite, Ciencias Exactas, Ingeniería de IA, Ezequiel Suarez"
+  ogType="article"
+  ogImage="https://www.ezequielsuarez-dev.com/img/og-image.png"
+  ogImageAlt="FINCH — Núcleo Cognitivo Personal y Arquitectura Hexagonal por Ezequiel Suarez"
 >
+  <script slot="head" is:inline type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "TechArticle",
+          "headline": "FINCH — Núcleo Cognitivo Personal, Grafo Sináptico y Servidor MCP",
+          "description": "Caso de estudio de ingeniería de Finch: motor de memoria persistente para ciencias exactas, ingeniería y arquitectura de software con resolución v1 a v2.",
+          "author": {
+            "@type": "Person",
+            "name": "Ezequiel Suarez",
+            "url": "https://www.ezequielsuarez-dev.com/"
+          },
+          "inLanguage": "es-AR",
+          "proficiencyLevel": "Expert",
+          "dependencies": "Python 3.12, SQLite, PostgreSQL pgvector, Model Context Protocol (MCP)"
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "Finch Cognitive Engine & MCP Server",
+          "programmingLanguage": "Python",
+          "runtimePlatform": "Python 3.12+",
+          "applicationCategory": "DeveloperApplication",
+          "author": {
+            "@type": "Person",
+            "name": "Ezequiel Suarez"
+          }
+        }
+      ]
+    }
+  </script>
+
   <!-- Topbar Fija con Volver al Portfolio + Anclas + Toggle Dark/Light Mode -->
   <header class="finch-page__topbar" aria-label="Navegación de caso de estudio Finch">
     <div class="finch-page__topbar-inner">
@@ -30,11 +74,12 @@ const { metrics } = finchShowcaseData;
       </a>
 
       <ul class="finch-page__subnav" role="list">
-        <li><a href="#top-finch">Esfera 3D</a></li>
-        <li><a href="#origen">01. El Origen</a></li>
+        <li><a href="#telemetria">Telemetría</a></li>
+        <li><a href="#origen">01. Problema & CLI</a></li>
         <li><a href="#arquitectura">02. Arquitectura</a></li>
-        <li><a href="#changelog">03. Changelog</a></li>
-        <li><a href="#roadmap">04. Roadmap Tauri & AWS</a></li>
+        <li><a href="#tradeoffs">03. Trade-offs</a></li>
+        <li><a href="#changelog">04. Changelog</a></li>
+        <li><a href="#roadmap">05. Roadmap</a></li>
       </ul>
 
       <div class="finch-page__topbar-actions">
@@ -44,33 +89,105 @@ const { metrics } = finchShowcaseData;
   </header>
 
   <main class="finch-page" id="main-content">
-    <!-- HERO 3D WEBGL (Esfera Sináptica estilo DecorativeBackgrounds Demo 1) -->
+    <!-- HERO LIMPIO EN 2 COLUMNAS: Nodo 3D a la Izquierda + Resumen a la Derecha -->
     <section class="finch-page__hero" id="top-finch" aria-labelledby="finch-hero-title">
-      <div class="finch-page__canvas-wrap" aria-hidden="true">
-        <canvas id="finch-sphere-canvas"></canvas>
-      </div>
+      <div class="finch-page__hero-grid">
+        <!-- Columna Izquierda: Nodo Sináptico 3D en WebGL (+ Fallback estático) -->
+        <div class="finch-page__hero-visual" aria-hidden="true">
+          <div class="finch-page__canvas-wrap">
+            <canvas id="finch-sphere-canvas"></canvas>
+            <!-- Fallback SVG si el dispositivo no soporta WebGL -->
+            <svg
+              class="finch-page__canvas-fallback"
+              viewBox="0 0 260 260"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="130"
+                cy="130"
+                r="98"
+                stroke="currentColor"
+                stroke-opacity="0.28"
+                stroke-dasharray="4 6"
+              />
+              <ellipse
+                cx="130"
+                cy="130"
+                rx="98"
+                ry="44"
+                transform="rotate(-28 130 130)"
+                stroke="currentColor"
+                stroke-opacity="0.35"
+              />
+              <ellipse
+                cx="130"
+                cy="130"
+                rx="98"
+                ry="44"
+                transform="rotate(32 130 130)"
+                stroke="currentColor"
+                stroke-opacity="0.35"
+              />
+              <circle cx="130" cy="62" r="5" fill="#00E5FF" />
+              <circle cx="72" cy="96" r="4.5" fill="#67E8F9" />
+              <circle cx="188" cy="96" r="4.5" fill="#00E5FF" />
+              <circle cx="130" cy="130" r="6" fill="#00E5FF" />
+              <circle cx="84" cy="174" r="4.5" fill="#0284C7" />
+              <circle cx="176" cy="174" r="4.5" fill="#67E8F9" />
+            </svg>
+          </div>
+        </div>
 
-      <div class="finch-page__hero-center">
-        <h1 id="finch-hero-title" class="finch-page__hero-title">{hero.title}</h1>
-        <div class="finch-page__hero-badge">{hero.badge}</div>
-        <p class="finch-page__hero-sub">{hero.subtitle}</p>
+        <!-- Columna Derecha: Título, Subtítulo y Resumen Limpio con Énfasis en Finch -->
+        <div class="finch-page__hero-copy">
+          <h1 id="finch-hero-title" class="finch-page__hero-title">{hero.title}</h1>
+          <p class="finch-page__hero-subtitle">{hero.subtitle}</p>
+          <p class="finch-page__hero-lead">
+            {hero.leadBefore}<span class="finch-page__highlight">{hero.leadHighlight}</span>{hero.leadAfter}
+          </p>
+        </div>
       </div>
-
-      <ul class="finch-page__telemetry" role="list" aria-label="Telemetría de Finch v2.2">
-        {
-          metrics.map((m) => (
-            <li class="finch-page__telemetry-item">
-              <span class="finch-page__telemetry-val">{m.value}</span>
-              <strong class="finch-page__telemetry-label">{m.label}</strong>
-              <span class="finch-page__telemetry-detail">{m.detail}</span>
-            </li>
-          ))
-        }
-      </ul>
     </section>
 
     <div class="finch-page__body">
-      <!-- 01 · EL ORIGEN & PROBLEMA CIENTÍFICO -->
+      <!-- 00 · TELEMETRÍA, METODOLOGÍA DE MEDICIÓN & CLIENTES MCP (Fuera del Hero) -->
+      <section
+        class="finch-page__section"
+        id="telemetria"
+        aria-labelledby="sec-telemetry-title"
+      >
+        <header class="finch-page__sec-header">
+          <span class="finch-page__sec-tag">{telemetry.sectionTag}</span>
+          <h2 id="sec-telemetry-title" class="finch-page__sec-title">
+            {telemetry.title}
+          </h2>
+        </header>
+
+        <ul class="finch-page__telemetry" role="list" aria-label="Métricas medidas de Finch v2.2">
+          {
+            metrics.map((m) => (
+              <li class="finch-page__telemetry-item">
+                <span class="finch-page__telemetry-val">{m.value}</span>
+                <strong class="finch-page__telemetry-label">{m.label}</strong>
+                <span class="finch-page__telemetry-detail">{m.detail}</span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="finch-page__methodology-box">
+          <p class="finch-page__methodology-text">{telemetry.methodologyNote}</p>
+          <div class="finch-page__mcp-bar">
+            <span class="finch-page__mcp-label">{telemetry.mcpClientsLabel}</span>
+            <ul class="finch-page__mcp-list" role="list">
+              {telemetry.mcpClients.map((client) => <li>{client}</li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 01 · EL PROBLEMA, COMPARATIVA & DEMO DE TERMINAL -->
       <section class="finch-page__section" id="origen" aria-labelledby="sec-origen-title">
         <header class="finch-page__sec-header">
           <span class="finch-page__sec-tag">{origin.sectionTag}</span>
@@ -87,7 +204,10 @@ const { metrics } = finchShowcaseData;
               {
                 origin.comparison[0].flaws?.map((flaw) => (
                   <li>
-                    <span class="finch-page__compare-icon finch-page__compare-icon--flaw" aria-hidden="true">
+                    <span
+                      class="finch-page__compare-icon finch-page__compare-icon--flaw"
+                      aria-hidden="true"
+                    >
                       ✕
                     </span>
                     <span>{flaw}</span>
@@ -105,7 +225,10 @@ const { metrics } = finchShowcaseData;
               {
                 origin.comparison[1].strengths?.map((item) => (
                   <li>
-                    <span class="finch-page__compare-icon finch-page__compare-icon--ok" aria-hidden="true">
+                    <span
+                      class="finch-page__compare-icon finch-page__compare-icon--ok"
+                      aria-hidden="true"
+                    >
                       ✓
                     </span>
                     <span>{item}</span>
@@ -115,9 +238,33 @@ const { metrics } = finchShowcaseData;
             </ul>
           </article>
         </div>
+
+        <!-- Demo Visual de Terminal (finch learn-file & finch ask) -->
+        <div class="finch-page__terminal" aria-label={origin.terminalDemo.title}>
+          <div class="finch-page__terminal-header">
+            <div class="finch-page__terminal-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="finch-page__terminal-title">{origin.terminalDemo.title}</span>
+          </div>
+          <div class="finch-page__terminal-body">
+            {
+              origin.terminalDemo.commands.map((block) => (
+                <div class="finch-page__terminal-block">
+                  <code class="finch-page__terminal-cmd">{block.cmd}</code>
+                  <div class="finch-page__terminal-out">
+                    {block.output.map((line) => (
+                      <p>{line}</p>
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </section>
 
-      <!-- 02 · EL CORAZÓN TÉCNICO (ARQUITECTURA HEXAGONAL & NEURO-SIMBÓLICA) -->
+      <!-- 02 · ARQUITECTURA HEXAGONAL (DIAGRAMA + 6 PILARES CON TÉRMINO TÉCNICO) -->
       <section
         class="finch-page__section"
         id="arquitectura"
@@ -129,12 +276,55 @@ const { metrics } = finchShowcaseData;
           <p class="finch-page__sec-lead">{pillars.subtitle}</p>
         </header>
 
+        <!-- Diagrama Visual de Arquitectura Hexagonal (Ports & Adapters) -->
+        <div
+          class="finch-page__arch-diagram"
+          role="region"
+          aria-label="Diagrama de Arquitectura Hexagonal de Finch"
+        >
+          <div class="finch-page__arch-col">
+            <span class="finch-page__arch-label">1. Clientes Primarios</span>
+            <ul class="finch-page__arch-nodes" role="list">
+              {pillars.diagram.clients.map((c) => <li>{c}</li>)}
+            </ul>
+            <div class="finch-page__arch-transport">{pillars.diagram.transport}</div>
+          </div>
+
+          <div class="finch-page__arch-arrow" aria-hidden="true">⇄</div>
+
+          <div class="finch-page__arch-col finch-page__arch-col--core">
+            <span class="finch-page__arch-label">2. Núcleo de Dominio & Puertos</span>
+            <div class="finch-page__arch-subbox">
+              <strong>Casos de Uso</strong>
+              <ul role="list">
+                {pillars.diagram.useCases.map((u) => <li>{u}</li>)}
+              </ul>
+            </div>
+            <div class="finch-page__arch-subbox finch-page__arch-subbox--ports">
+              <strong>Puertos (Interfaces Puras)</strong>
+              <ul role="list">
+                {pillars.diagram.ports.map((p) => <li>{p}</li>)}
+              </ul>
+            </div>
+          </div>
+
+          <div class="finch-page__arch-arrow" aria-hidden="true">⇄</div>
+
+          <div class="finch-page__arch-col">
+            <span class="finch-page__arch-label">3. Adaptadores de Infraestructura</span>
+            <ul class="finch-page__arch-nodes finch-page__arch-nodes--adapters" role="list">
+              {pillars.diagram.adapters.map((a) => <li>{a}</li>)}
+            </ul>
+          </div>
+        </div>
+
         <div class="finch-page__pillars-grid">
           {
             pillars.items.map((p) => (
               <article class="finch-page__pillar-card">
                 <span class="finch-page__pillar-tag">{p.tag}</span>
                 <h3 class="finch-page__pillar-title">{p.title}</h3>
+                <span class="finch-page__pillar-tech">{p.techSubtitle}</span>
                 <p class="finch-page__pillar-desc">{p.description}</p>
                 <div class="finch-page__pillar-metric">{p.metrics}</div>
               </article>
@@ -143,7 +333,45 @@ const { metrics } = finchShowcaseData;
         </div>
       </section>
 
-      <!-- 03 · LÍNEA DE TIEMPO EVOLUTIVA (CHANGELOG v1.0 -> v2.0 -> v2.2) -->
+      <!-- 03 · DECISIONES DE DISEÑO, LÍMITES & TRADE-OFFS -->
+      <section
+        class="finch-page__section"
+        id="tradeoffs"
+        aria-labelledby="sec-tradeoffs-title"
+      >
+        <header class="finch-page__sec-header">
+          <span class="finch-page__sec-tag">{tradeoffs.sectionTag}</span>
+          <h2 id="sec-tradeoffs-title" class="finch-page__sec-title">
+            {tradeoffs.title}
+          </h2>
+          <p class="finch-page__sec-lead">{tradeoffs.subtitle}</p>
+        </header>
+
+        <div class="finch-page__tradeoffs-grid">
+          {
+            tradeoffs.items.map((item) => (
+              <article class="finch-page__tradeoff-card">
+                <span class="finch-page__pillar-tag">{item.tag}</span>
+                <h3 class="finch-page__pillar-title">{item.title}</h3>
+                <div class="finch-page__tradeoff-block">
+                  <strong>Decisión técnica:</strong>
+                  <p>{item.decision}</p>
+                </div>
+                <div class="finch-page__tradeoff-block finch-page__tradeoff-block--limit">
+                  <strong>Límite / Trade-off asumido:</strong>
+                  <p>{item.tradeoff}</p>
+                </div>
+                <div class="finch-page__tradeoff-block finch-page__tradeoff-block--mit">
+                  <strong>Mitigación arquitectónica:</strong>
+                  <p>{item.mitigation}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- 04 · LÍNEA DE TIEMPO EVOLUTIVA (CHANGELOG v1.0 -> v2.0 -> v2.2) -->
       <section
         class="finch-page__section"
         id="changelog"
@@ -192,7 +420,7 @@ const { metrics } = finchShowcaseData;
         </div>
       </section>
 
-      <!-- 04 · PRÓXIMA FRONTERA (TAURI 2.0 + POLARS + AWS) -->
+      <!-- 05 · PRÓXIMA FRONTERA (TAURI 2.0 + POLARS + AWS) -->
       <section
         class="finch-page__section"
         id="roadmap"

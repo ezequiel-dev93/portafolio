@@ -2,20 +2,19 @@ import * as THREE from "three";
 import { gsap } from "gsap";
 
 /**
- * Esfera Sináptica 3D en WebGL — Adaptación exacta de `js/demo1.js` (Mamboleoo / Codrops)
- * - 3000 nodos distribuidos con la fórmula esférica original de Demo 1 (radio 120)
- * - Movimiento radial individual por nodo (`moveDot` con GSAP `yoyo: true, repeat: -1`)
- * - Activación Sináptica con `THREE.Raycaster` (`threshold = 6.5`): al pasar el cursor de lado
- *   a lado, los nodos bajo el cursor se disparan con rebote elástico (`elastic.out(2, 0.2)`,
- *   `scaleX: 5 -> 11`) y se encienden en el Cian Eléctrico intenso de la letra "S" del logo (#00E5FF).
- * - Líneas sinápticas en Color Hueso (#EAE6DF en Dark Mode / Hueso-Piedra en Light Mode).
+ * Esfera Sináptica 3D en WebGL — Optimizada para Desktop & Mobile
+ * - Adaptación de densidad según dispositivo (3000 nodos en Desktop / 1200 en Mobile)
+ * - Soporte completo para `prefers-reduced-motion: reduce` (renderizado estático sin loops)
+ * - Fallback elegante si el navegador o hardware no soporta WebGL
+ * - Pausa automática de GPU/CPU vía IntersectionObserver cuando el Hero sale del viewport
  */
 export function initFinchSphere() {
   const canvas = document.querySelector("#finch-sphere-canvas");
   if (!canvas || canvas.dataset.finchSphereInit === "true") return;
 
-  let width = canvas.offsetWidth || window.innerWidth;
-  let height = canvas.offsetHeight || window.innerHeight;
+  const wrapEl = canvas.parentElement;
+  let width = canvas.offsetWidth || (wrapEl ? wrapEl.offsetWidth : window.innerWidth);
+  let height = canvas.offsetHeight || (wrapEl ? wrapEl.offsetHeight : window.innerHeight);
 
   if (width === 0 || height === 0) {
     setTimeout(initFinchSphere, 80);
@@ -24,18 +23,31 @@ export function initFinchSphere() {
 
   canvas.dataset.finchSphereInit = "true";
 
-  // 1. Renderer WebGL
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-    alpha: true,
-    powerPreference: "high-performance",
-  });
-  renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  const isReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  // 1. Renderer WebGL con Fallback seguro si no hay soporte WebGL
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: !isMobile,
+      alpha: true,
+      powerPreference: "high-performance",
+    });
+  } catch (err) {
+    if (wrapEl) wrapEl.classList.add("finch-page__canvas-wrap--fallback");
+    return;
+  }
+
+  const maxDpr = isMobile ? 1.5 : 2;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000, 0);
 
-  // 2. Escena, Raycaster y Cámara (Parámetros exactos de demo1.js)
+  // 2. Escena, Raycaster y Cámara
   const scene = new THREE.Scene();
 
   const raycaster = new THREE.Raycaster();
@@ -43,16 +55,16 @@ export function initFinchSphere() {
 
   const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 2000);
   function getCameraZ(w) {
-    if (w < 480) return 430;
-    if (w < 768) return 390;
-    return 350; // Valor original exacto de demo1.js
+    if (w < 480) return 340;
+    if (w < 768) return 330;
+    return 320;
   }
   camera.position.set(0, 0, getCameraZ(width));
 
   const galaxy = new THREE.Group();
   scene.add(galaxy);
 
-  // 3. Textura circular equivalente a img/dotTexture.png de demo1.js
+  // 3. Textura circular generada en memoria
   const dotTexture = (() => {
     const size = 64;
     const c = document.createElement("canvas");
@@ -78,29 +90,25 @@ export function initFinchSphere() {
   })();
 
   // 4. Paletas de Color (Dark Mode & Light Mode)
-  // En demo1.js hay 3 colores base:
-  // [0]: Color protagonista (Cian de la letra "S" del logo: #00E5FF)
-  // [1]: Color intermedio (Cian hielo / Hueso-Cian: #67E8F9 / #0284C7)
-  // [2]: Color de soporte profundo (Hueso tenue / Acero: #5c6b73) para que al activar con el cursor resalten con fuerza
   const THEME_PALETTES = {
     dark: {
       dots: [
-        new THREE.Color(0x00e5ff), // Cian Eléctrico (Letra "S" del logo)
-        new THREE.Color(0x0284c7), // Cian Profundo (Letra "S" del logo)
-        new THREE.Color(0x6e6a63), // Hueso oscuro subcortical en reposo (equivalente a 0x535353 de demo1.js)
+        new THREE.Color(0x00e5ff),
+        new THREE.Color(0x0284c7),
+        new THREE.Color(0x6e6a63),
       ],
-      activeDot: new THREE.Color(0x00e5ff), // Encendido Cian Eléctrico puro al pasar el cursor
-      segmentBone: new THREE.Color(0xeae6df), // Líneas en Color Hueso cálido
+      activeDot: new THREE.Color(0x00e5ff),
+      segmentBone: new THREE.Color(0xeae6df),
       segmentOpacity: 0.26,
     },
     light: {
       dots: [
-        new THREE.Color(0x0284c7), // Cian Profundo (Letra "S")
-        new THREE.Color(0x0369a1), // Cian Marino (Letra "S")
-        new THREE.Color(0x8c8273), // Hueso-Piedra en reposo
+        new THREE.Color(0x0284c7),
+        new THREE.Color(0x0369a1),
+        new THREE.Color(0x8c8273),
       ],
-      activeDot: new THREE.Color(0x00e5ff), // Encendido Cian Eléctrico puro al pasar el cursor
-      segmentBone: new THREE.Color(0x6e6455), // Líneas en Color Hueso tostado para contraste en fondo claro
+      activeDot: new THREE.Color(0x00e5ff),
+      segmentBone: new THREE.Color(0x6e6455),
       segmentOpacity: 0.29,
     },
   };
@@ -114,16 +122,15 @@ export function initFinchSphere() {
 
   let currentPalette = getCurrentPalette();
 
-  // 5. Creación de los 3000 Nodos (Algoritmo exacto de demo1.js)
-  const dotsAmount = 3000;
+  // 5. Creación de Nodos (Adaptativo para rendimiento móvil)
+  const dotsAmount = isMobile ? 1200 : 3000;
+  const maxDist = isMobile ? 17.5 : 12;
+  const maxDistSq = maxDist * maxDist;
+
   const vertices = new Array(dotsAmount);
   const positions = new Float32Array(dotsAmount * 3);
   const sizes = new Float32Array(dotsAmount);
   const colorsAttribute = new Float32Array(dotsAmount * 3);
-
-  const isReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
 
   for (let i = 0; i < dotsAmount; i++) {
     const vector = new THREE.Vector3();
@@ -139,7 +146,7 @@ export function initFinchSphere() {
     vector.z = Math.sin(vector.theta) * Math.cos(vector.phi);
     vector.multiplyScalar(120 + (Math.random() - 0.5) * 5);
     vector.scaleX = 5;
-    vector.glowMix = 0; // 0 = reposo, 1 = activado por el cursor
+    vector.glowMix = 0;
 
     vertices[i] = vector;
     vector.toArray(positions, i * 3);
@@ -157,11 +164,11 @@ export function initFinchSphere() {
   const attributeColors = new THREE.BufferAttribute(colorsAttribute, 3);
   bufferWrapGeom.setAttribute("color", attributeColors);
 
-  // Función moveDot exacta de demo1.js
+  const dotTweens = [];
   function moveDot(vector, index) {
     const tempVector = vector.clone();
     tempVector.multiplyScalar((Math.random() - 0.5) * 0.2 + 1);
-    gsap.to(vector, {
+    const tw = gsap.to(vector, {
       duration: Math.random() * 3 + 3,
       x: tempVector.x,
       y: tempVector.y,
@@ -176,17 +183,18 @@ export function initFinchSphere() {
         attributePositions.array[index * 3 + 2] = vector.z;
       },
     });
+    dotTweens.push(tw);
   }
 
   if (!isReducedMotion) {
+    const moveProb = isMobile ? 0.35 : 0.5;
     for (let i = 0; i < dotsAmount; i++) {
-      if (Math.random() > 0.5) {
+      if (Math.random() < moveProb) {
         moveDot(vertices[i], i);
       }
     }
   }
 
-  // Shaders exactos de index.html (wrapVertexShader & wrapFragmentShader)
   const vertexShader = /* glsl */ `
     attribute float size;
     attribute vec3 color;
@@ -222,9 +230,8 @@ export function initFinchSphere() {
   const wrap = new THREE.Points(bufferWrapGeom, shaderMaterial);
   scene.add(wrap);
 
-  // 6. Creación de los Segmentos Sinápticos (distancia < 12, igual que en demo1.js)
+  // 6. Creación de los Segmentos Sinápticos
   const segmentIndices = [];
-  const maxDistSq = 12 * 12;
 
   for (let i = dotsAmount - 1; i >= 0; i--) {
     const vA = vertices[i];
@@ -261,7 +268,6 @@ export function initFinchSphere() {
   const segmentPosAttr = new THREE.BufferAttribute(segmentPositions, 3);
   segmentsGeom.setAttribute("position", segmentPosAttr);
 
-  // Líneas de Color Hueso (Warm Bone en Dark Mode / Hueso-Piedra en Light Mode)
   const segmentsMat = new THREE.LineBasicMaterial({
     color: currentPalette.segmentBone,
     transparent: true,
@@ -271,7 +277,7 @@ export function initFinchSphere() {
   const segments = new THREE.LineSegments(segmentsGeom, segmentsMat);
   galaxy.add(segments);
 
-  // 7. Actualización de color individual de un nodo (mezcla reposo <-> activación cian)
+  // 7. Actualización de color individual de un nodo
   const tempColor = new THREE.Color();
   function updateDotColor(index) {
     const v = vertices[index];
@@ -292,6 +298,9 @@ export function initFinchSphere() {
       updateDotColor(i);
     }
     attributeColors.needsUpdate = true;
+    if (isReducedMotion) {
+      renderer.render(scene, camera);
+    }
   }
 
   const themeObserver = new MutationObserver(applyTheme);
@@ -300,11 +309,12 @@ export function initFinchSphere() {
     attributeFilter: ["class"],
   });
 
-  // 9. Interacción Raycaster al pasar el cursor (Exacto a onDotHover / mouseOut de demo1.js + encendido de color Cian)
+  // 9. Interacción Raycaster al pasar el cursor
   let hovered = [];
   let prevHovered = [];
 
   function onDotHover(index) {
+    if (isReducedMotion) return;
     const v = vertices[index];
     if (v.tl) v.tl.kill();
     v.tl = gsap.timeline();
@@ -322,6 +332,7 @@ export function initFinchSphere() {
   }
 
   function mouseOut(index) {
+    if (isReducedMotion) return;
     const v = vertices[index];
     if (v.tl) v.tl.kill();
     v.tl = gsap.timeline();
@@ -338,9 +349,9 @@ export function initFinchSphere() {
     });
   }
 
-  // Coordenadas normalizadas del cursor respecto al canvas (exacto a demo1.js)
   const mouse = new THREE.Vector2(-100, -100);
   function onMouseMove(e) {
+    if (isReducedMotion) return;
     const canvasBounding = canvas.getBoundingClientRect();
     if (
       e.clientY < canvasBounding.top ||
@@ -354,53 +365,99 @@ export function initFinchSphere() {
     mouse.x = ((e.clientX - canvasBounding.left) / width) * 2 - 1;
     mouse.y = -((e.clientY - canvasBounding.top) / height) * 2 + 1;
   }
-  window.addEventListener("mousemove", onMouseMove, { passive: true });
+  if (!isReducedMotion && !isMobile) {
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+  }
 
-  // 10. Render Loop (Exacto a demo1.js)
+  // 10. Render Loop y Control de Visibilidad (0% GPU fuera de pantalla)
+  let isTickerActive = false;
+
   function render() {
     updateSegmentPositions();
     segmentPosAttr.needsUpdate = true;
 
-    raycaster.setFromCamera(mouse, camera);
-    const intersections = raycaster.intersectObjects([wrap]);
-    hovered = [];
+    if (!isMobile) {
+      raycaster.setFromCamera(mouse, camera);
+      const intersections = raycaster.intersectObjects([wrap]);
+      hovered = [];
 
-    if (intersections.length) {
-      for (let i = 0; i < intersections.length; i++) {
-        const index = intersections[i].index;
-        hovered.push(index);
-        if (prevHovered.indexOf(index) === -1) {
-          onDotHover(index);
+      if (intersections.length) {
+        for (let i = 0; i < intersections.length; i++) {
+          const index = intersections[i].index;
+          hovered.push(index);
+          if (prevHovered.indexOf(index) === -1) {
+            onDotHover(index);
+          }
         }
       }
-    }
 
-    for (let i = 0; i < prevHovered.length; i++) {
-      if (hovered.indexOf(prevHovered[i]) === -1) {
-        mouseOut(prevHovered[i]);
+      for (let i = 0; i < prevHovered.length; i++) {
+        if (hovered.indexOf(prevHovered[i]) === -1) {
+          mouseOut(prevHovered[i]);
+        }
       }
+
+      prevHovered = hovered.slice(0);
     }
 
-    prevHovered = hovered.slice(0);
     attributeSizes.needsUpdate = true;
     attributePositions.needsUpdate = true;
     renderer.render(scene, camera);
   }
 
-  gsap.ticker.add(render);
+  function startLoop() {
+    if (isReducedMotion || isTickerActive) return;
+    isTickerActive = true;
+    dotTweens.forEach((tw) => tw.resume());
+    gsap.ticker.add(render);
+  }
 
-  // 11. Resize Handler (Exacto a demo1.js)
+  function stopLoop() {
+    if (!isTickerActive) return;
+    isTickerActive = false;
+    gsap.ticker.remove(render);
+    dotTweens.forEach((tw) => tw.pause());
+  }
+
+  // Primer frame inmediato (sirve también como vista fija para prefers-reduced-motion)
+  renderer.render(scene, camera);
+  if (!isReducedMotion) {
+    startLoop();
+  }
+
+  // Pausar cuando el Hero no está visible en el viewport
+  const heroSection = document.querySelector("#top-finch") || wrapEl;
+  let io;
+  if (heroSection && "IntersectionObserver" in window && !isReducedMotion) {
+    io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startLoop();
+          } else {
+            stopLoop();
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    io.observe(heroSection);
+  }
+
+  // 11. Resize Handler
   let resizeTm;
   function onResize() {
     if (!canvas) return;
     canvas.style.width = "";
     canvas.style.height = "";
-    width = canvas.offsetWidth || window.innerWidth;
-    height = canvas.offsetHeight || window.innerHeight;
+    width = canvas.offsetWidth || (wrapEl ? wrapEl.offsetWidth : window.innerWidth);
+    height = canvas.offsetHeight || (wrapEl ? wrapEl.offsetHeight : window.innerHeight);
+    if (width === 0 || height === 0) return;
     camera.aspect = width / height;
     camera.position.z = getCameraZ(width);
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
+    renderer.render(scene, camera);
   }
 
   function onWindowResize() {
@@ -413,7 +470,8 @@ export function initFinchSphere() {
   document.addEventListener(
     "astro:before-swap",
     () => {
-      gsap.ticker.remove(render);
+      stopLoop();
+      if (io) io.disconnect();
       vertices.forEach((v) => {
         gsap.killTweensOf(v);
         if (v.tl) v.tl.kill();

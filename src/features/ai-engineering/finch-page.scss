@@ -16,10 +16,10 @@ $hud-cut: 16px;
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(234, 230, 230, 0.78);
+    background: rgba(234, 230, 230, 0.85);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(2, 132, 199, 0.18);
+    border-bottom: 1px solid rgba(2, 132, 199, 0.22);
     transition: background-color 0.35s ease, border-color 0.35s ease;
   }
 
@@ -40,8 +40,8 @@ $hud-cut: 16px;
     gap: 0.5rem;
     padding: 0.45rem 1rem;
     border-radius: 999px;
-    border: 1px solid rgba(2, 132, 199, 0.35);
-    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(2, 132, 199, 0.4);
+    background: rgba(255, 255, 255, 0.88);
     color: #0B1220;
     font-size: 0.88rem;
     font-weight: 600;
@@ -59,15 +59,15 @@ $hud-cut: 16px;
   &__subnav {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.35rem;
     list-style: none;
     margin: 0;
     padding: 0;
 
     a {
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 600;
-      color: rgba(11, 18, 32, 0.78);
+      color: #0B1220;
       text-decoration: none;
       transition: color 0.25s ease;
 
@@ -76,7 +76,7 @@ $hud-cut: 16px;
       }
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 960px) {
       display: none;
     }
   }
@@ -87,153 +87,134 @@ $hud-cut: 16px;
     gap: 0.75rem;
   }
 
-  /* ─── HERO 3D WEBGL (Inspirado en DecorativeBackgrounds Demo 1) ─────────── */
+  /* ─── HERO LIMPIO EN 2 COLUMNAS (Nodo 3D Izquierda + Copy Derecha) ──────── */
   &__hero {
     position: relative;
     width: 100%;
     min-height: 100vh;
     min-height: 100dvh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 6rem 1rem 3rem;
+    padding: 5.5rem 0 4rem;
     box-sizing: border-box;
-    overflow: hidden;
+  }
+
+  &__hero-grid {
+    width: 96%;
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: clamp(2rem, 4.5vw, 4.5rem);
+  }
+
+  &__hero-visual {
+    position: relative;
+    width: 100%;
+    height: clamp(340px, 56vh, 540px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__canvas-wrap {
-    position: absolute;
-    inset: 0;
+    position: relative;
     width: 100%;
     height: 100%;
-    z-index: 0;
-    pointer-events: none;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    /* Halo radial sutil detrás de la esfera para potenciar contraste en ambos modos */
     &::before {
       content: "";
       position: absolute;
-      width: min(680px, 88vw);
-      height: min(680px, 88vw);
+      width: min(500px, 82%);
+      height: min(500px, 82%);
       border-radius: 50%;
       background: radial-gradient(
         circle,
-        rgba(2, 132, 199, 0.12) 0%,
-        rgba(234, 230, 223, 0.25) 45%,
+        rgba(2, 132, 199, 0.14) 0%,
+        rgba(234, 230, 223, 0.22) 48%,
         transparent 72%
       );
       pointer-events: none;
+      z-index: 0;
+    }
+
+    &--fallback {
+      #finch-sphere-canvas {
+        display: none;
+      }
+      .finch-page__canvas-fallback {
+        display: block;
+      }
     }
   }
 
   #finch-sphere-canvas {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     display: block;
   }
 
-  &__hero-center {
+  &__canvas-fallback {
+    display: none;
+    width: 75%;
+    max-width: 340px;
+    height: auto;
+    color: #0284C7;
+  }
+
+  &__hero-copy {
     position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    max-width: 960px;
-    margin: auto 0;
-    pointer-events: none;
+    align-items: flex-start;
+    gap: 1.1rem;
   }
 
   &__hero-title {
     font-family: v.$font-title;
-    font-size: clamp(4.2rem, 13vw, 9.6rem);
+    font-size: clamp(3.6rem, 7.5vw, 6.4rem);
     font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 0.96;
+    letter-spacing: 0.06em;
+    line-height: 0.98;
     color: #0B1220;
     margin: 0;
-    text-shadow: 0 4px 28px rgba(234, 230, 230, 0.92);
   }
 
-  /* Píldora / Barra Central estilo "DATA SCIENCE" de Demo 1 pero con marca Ezequiel */
-  &__hero-badge {
-    margin-top: 0.85rem;
-    padding: 0.52rem 1.45rem;
-    background: #0284C7;
-    color: #FFFFFF;
-    border: 1px solid #00E5FF;
-    font-family: v.$font-body;
-    font-size: clamp(0.76rem, 1.4vw, 0.95rem);
-    font-weight: 700;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    box-shadow: 0 6px 24px rgba(2, 132, 199, 0.42);
-  }
-
-  &__hero-sub {
-    margin: 1.5rem 0 0;
-    max-width: 680px;
-    font-size: clamp(0.98rem, 1.35vw, 1.15rem);
-    font-weight: 500;
-    line-height: 1.6;
-    color: #0B1220;
-    background: rgba(234, 230, 230, 0.72);
-    backdrop-filter: blur(8px);
-    padding: 0.65rem 1.25rem;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(2, 132, 199, 0.2);
-  }
-
-  /* Barra de Telemetría en la base del Hero */
-  &__telemetry {
-    position: relative;
-    z-index: 2;
-    width: 96%;
-    max-width: 1180px;
-    margin-top: auto;
-    padding-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    list-style: none;
-    padding-left: 0;
-  }
-
-  &__telemetry-item {
-    padding: 0.95rem 1.15rem;
-    border-radius: 0.65rem;
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(2, 132, 199, 0.24);
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  &__telemetry-val {
+  &__hero-subtitle {
+    margin: 0;
     font-family: v.$font-title;
-    font-size: clamp(1.35rem, 2vw, 1.75rem);
+    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
     font-weight: 700;
-    color: #0284C7;
+    letter-spacing: 0.04em;
+    color: #0369A1;
   }
 
-  &__telemetry-label {
-    font-size: 0.86rem;
-    font-weight: 700;
+  &__hero-lead {
+    margin: 0.35rem 0 0;
+    font-size: clamp(1.02rem, 1.25vw, 1.16rem);
+    font-weight: 400;
+    line-height: 1.7;
     color: #0B1220;
   }
 
-  &__telemetry-detail {
-    font-size: 0.75rem;
-    color: rgba(11, 18, 32, 0.7);
+  &__highlight {
+    font-weight: 700;
+    color: #0369A1;
+    padding: 0.05rem 0.4rem;
+    border-radius: 0.3rem;
+    background: rgba(2, 132, 199, 0.12);
+    border: 1px solid rgba(2, 132, 199, 0.3);
   }
 
-  /* ─── CONTENEDOR DE SECCIONES DE INGENIERÍA ────────────────────────────── */
+  /* ─── CONTENEDOR DE SECCIONES DE INGENIERÍA (Fuera del Hero) ────────────── */
   &__body {
     position: relative;
     z-index: 2;
@@ -242,21 +223,22 @@ $hud-cut: 16px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 7rem;
-    padding: 4rem 0 6rem;
+    gap: 6.5rem;
+    padding: 6rem 0 6rem;
   }
 
   &__section {
     display: flex;
     flex-direction: column;
-    gap: 2.25rem;
+    gap: 2rem;
+    scroll-margin-top: 5.5rem;
   }
 
   &__sec-header {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
-    max-width: 840px;
+    gap: 0.6rem;
+    max-width: 860px;
   }
 
   &__sec-tag {
@@ -264,12 +246,12 @@ $hud-cut: 16px;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #0284C7;
+    color: #0369A1;
   }
 
   &__sec-title {
     font-family: v.$font-title;
-    font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+    font-size: clamp(1.8rem, 3.4vw, 2.65rem);
     font-weight: 700;
     line-height: 1.15;
     @include mx.title-style();
@@ -277,13 +259,105 @@ $hud-cut: 16px;
   }
 
   &__sec-lead {
-    font-size: clamp(1rem, 1.3vw, 1.14rem);
+    font-size: clamp(1rem, 1.25vw, 1.12rem);
     line-height: 1.65;
-    color: rgba(11, 18, 32, 0.8);
+    color: rgba(11, 18, 32, 0.88);
     margin: 0;
   }
 
-  /* ─── SECCIÓN 01: COMPARATIVA PROBLEMA VS FINCH ────────────────────────── */
+  /* ─── SECCIÓN 00: TELEMETRÍA, METODOLOGÍA & CLIENTES MCP ────────────────── */
+  &__telemetry {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.15rem;
+    list-style: none;
+  }
+
+  &__telemetry-item {
+    padding: 1.15rem 1.25rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(2, 132, 199, 0.28);
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+  }
+
+  &__telemetry-val {
+    font-family: v.$font-title;
+    font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+    font-weight: 700;
+    color: #0369A1;
+  }
+
+  &__telemetry-label {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #0B1220;
+  }
+
+  &__telemetry-detail {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: rgba(11, 18, 32, 0.84);
+  }
+
+  &__methodology-box {
+    padding: 1.35rem 1.5rem;
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(2, 132, 199, 0.26);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__methodology-text {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(11, 18, 32, 0.88);
+  }
+
+  &__mcp-bar {
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(2, 132, 199, 0.18);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  &__mcp-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #0B1220;
+  }
+
+  &__mcp-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(2, 132, 199, 0.12);
+      border: 1px solid rgba(2, 132, 199, 0.32);
+      color: #0369A1;
+    }
+  }
+
+  /* ─── SECCIÓN 01: COMPARATIVA & TERMINAL DEMO ───────────────────────────── */
   &__compare-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -293,9 +367,9 @@ $hud-cut: 16px;
   &__compare-card {
     padding: 2rem;
     border-radius: 0.85rem;
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(153, 153, 153, 0.28);
+    border: 1px solid rgba(153, 153, 153, 0.32);
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -331,7 +405,7 @@ $hud-cut: 16px;
       gap: 0.75rem;
       font-size: 0.95rem;
       line-height: 1.55;
-      color: rgba(11, 18, 32, 0.85);
+      color: rgba(11, 18, 32, 0.9);
     }
   }
 
@@ -349,18 +423,201 @@ $hud-cut: 16px;
 
     &--flaw {
       background: rgba(239, 68, 68, 0.14);
-      color: #dc2626;
+      color: #b91c1c;
       border: 1px solid rgba(239, 68, 68, 0.35);
     }
 
     &--ok {
       background: rgba(2, 132, 199, 0.16);
-      color: #0284C7;
+      color: #0369A1;
       border: 1px solid rgba(2, 132, 199, 0.4);
     }
   }
 
-  /* ─── SECCIÓN 02: 6 PILARES DE ARQUITECTURA ────────────────────────────── */
+  /* Ventana de Terminal Interactiva */
+  &__terminal {
+    border-radius: 0.85rem;
+    overflow: hidden;
+    background: #070C17;
+    border: 1px solid rgba(0, 229, 255, 0.32);
+    box-shadow: 0 14px 36px rgba(7, 12, 23, 0.24);
+  }
+
+  &__terminal-header {
+    padding: 0.7rem 1.15rem;
+    background: #0B1220;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  &__terminal-dots {
+    display: flex;
+    gap: 0.4rem;
+
+    span {
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      background: rgba(226, 232, 240, 0.3);
+
+      &:nth-child(1) {
+        background: #ef4444;
+      }
+      &:nth-child(2) {
+        background: #f59e0b;
+      }
+      &:nth-child(3) {
+        background: #10b981;
+      }
+    }
+  }
+
+  &__terminal-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #E2E8F0;
+    letter-spacing: 0.04em;
+  }
+
+  &__terminal-body {
+    padding: 1.35rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  &__terminal-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  &__terminal-cmd {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #00E5FF;
+    word-break: break-word;
+  }
+
+  &__terminal-out {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid rgba(0, 229, 255, 0.35);
+
+    p {
+      margin: 0;
+      font-size: 0.83rem;
+      line-height: 1.5;
+      color: #EAE6DF;
+    }
+  }
+
+  /* ─── SECCIÓN 02: DIAGRAMA HEXAGONAL + 6 PILARES ────────────────────────── */
+  &__arch-diagram {
+    padding: 1.75rem;
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(2, 132, 199, 0.3);
+    display: grid;
+    grid-template-columns: 1fr auto 1.35fr auto 1fr;
+    align-items: center;
+    gap: 1.15rem;
+  }
+
+  &__arch-col {
+    padding: 1.2rem;
+    border-radius: 0.7rem;
+    background: rgba(2, 132, 199, 0.06);
+    border: 1px solid rgba(2, 132, 199, 0.24);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    &--core {
+      background: rgba(2, 132, 199, 0.1);
+      border: 1.5px solid #0284C7;
+    }
+  }
+
+  &__arch-label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #0369A1;
+  }
+
+  &__arch-nodes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+
+    li {
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 0.4rem 0.65rem;
+      border-radius: 0.4rem;
+      background: #FFFFFF;
+      border: 1px solid rgba(2, 132, 199, 0.22);
+      color: #0B1220;
+    }
+  }
+
+  &__arch-transport {
+    font-size: 0.76rem;
+    font-weight: 700;
+    padding: 0.4rem 0.65rem;
+    border-radius: 0.4rem;
+    background: #0B1220;
+    color: #00E5FF;
+    text-align: center;
+  }
+
+  &__arch-subbox {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(2, 132, 199, 0.24);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    strong {
+      font-size: 0.8rem;
+      color: #0B1220;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.35rem;
+
+      li {
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: #0369A1;
+      }
+    }
+  }
+
+  &__arch-arrow {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0284C7;
+    text-align: center;
+  }
+
   &__pillars-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -370,26 +627,26 @@ $hud-cut: 16px;
   &__pillar-card {
     padding: 1.75rem;
     border-radius: 0.8rem;
-    background: rgba(255, 255, 255, 0.84);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(2, 132, 199, 0.22);
+    border: 1px solid rgba(2, 132, 199, 0.25);
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 0.7rem;
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
       border-color: #0284C7;
       box-shadow: 0 12px 28px rgba(2, 132, 199, 0.15);
     }
   }
 
   &__pillar-tag {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #0284C7;
+    letter-spacing: 0.08em;
+    color: #0369A1;
     text-transform: uppercase;
   }
 
@@ -401,23 +658,82 @@ $hud-cut: 16px;
     margin: 0;
   }
 
+  &__pillar-tech {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #0369A1;
+    background: rgba(2, 132, 199, 0.09);
+    padding: 0.3rem 0.55rem;
+    border-radius: 0.35rem;
+    border-left: 3px solid #0284C7;
+  }
+
   &__pillar-desc {
     font-size: 0.92rem;
     line-height: 1.6;
-    color: rgba(11, 18, 32, 0.76);
+    color: rgba(11, 18, 32, 0.88);
     margin: 0;
     flex-grow: 1;
   }
 
   &__pillar-metric {
     padding-top: 0.75rem;
-    border-top: 1px solid rgba(2, 132, 199, 0.16);
-    font-size: 0.8rem;
+    border-top: 1px solid rgba(2, 132, 199, 0.18);
+    font-size: 0.82rem;
     font-weight: 700;
-    color: #0284C7;
+    color: #0369A1;
   }
 
-  /* ─── SECCIÓN 03: CHANGELOG DE INGENIERÍA (v1.0 -> v2.0 -> v2.2) ──────── */
+  /* ─── SECCIÓN 03: DECISIONES, LÍMITES & TRADE-OFFS ──────────────────────── */
+  &__tradeoffs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  &__tradeoff-card {
+    padding: 1.75rem;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(2, 132, 199, 0.26);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  &__tradeoff-block {
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.5rem;
+    background: rgba(2, 132, 199, 0.06);
+    border-left: 3px solid #0284C7;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    strong {
+      font-size: 0.8rem;
+      color: #0B1220;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: rgba(11, 18, 32, 0.88);
+    }
+
+    &--limit {
+      background: rgba(245, 158, 11, 0.08);
+      border-left-color: #d97706;
+    }
+
+    &--mit {
+      background: rgba(16, 185, 129, 0.08);
+      border-left-color: #059669;
+    }
+  }
+
+  /* ─── SECCIÓN 04: CHANGELOG DE INGENIERÍA (v1.0 -> v2.0 -> v2.2) ──────── */
   &__timeline {
     position: relative;
     display: flex;
@@ -431,14 +747,13 @@ $hud-cut: 16px;
     position: relative;
     padding: 2rem;
     border-radius: 0.9rem;
-    background: rgba(255, 255, 255, 0.86);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(2, 132, 199, 0.26);
     display: flex;
     flex-direction: column;
     gap: 1.35rem;
 
-    /* Nodo circular en la línea de tiempo */
     &::before {
       content: "";
       position: absolute;
@@ -480,20 +795,20 @@ $hud-cut: 16px;
   }
 
   &__release-status {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     padding: 0.22rem 0.65rem;
     border-radius: 999px;
     background: rgba(2, 132, 199, 0.12);
-    color: #0284C7;
+    color: #0369A1;
     border: 1px solid rgba(2, 132, 199, 0.3);
   }
 
   &__release-date {
     font-size: 0.85rem;
     font-weight: 600;
-    color: rgba(11, 18, 32, 0.65);
+    color: rgba(11, 18, 32, 0.8);
   }
 
   &__release-codename {
@@ -507,7 +822,7 @@ $hud-cut: 16px;
   &__release-summary {
     font-size: 0.96rem;
     line-height: 1.6;
-    color: rgba(11, 18, 32, 0.8);
+    color: rgba(11, 18, 32, 0.88);
     margin: 0;
   }
 
@@ -520,8 +835,8 @@ $hud-cut: 16px;
   &__highlight-box {
     padding: 1rem 1.15rem;
     border-radius: 0.6rem;
-    background: rgba(2, 132, 199, 0.05);
-    border: 1px solid rgba(2, 132, 199, 0.16);
+    background: rgba(2, 132, 199, 0.06);
+    border: 1px solid rgba(2, 132, 199, 0.18);
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
@@ -532,9 +847,9 @@ $hud-cut: 16px;
     }
 
     p {
-      font-size: 0.84rem;
+      font-size: 0.86rem;
       line-height: 1.5;
-      color: rgba(11, 18, 32, 0.74);
+      color: rgba(11, 18, 32, 0.85);
       margin: 0;
     }
   }
@@ -548,16 +863,16 @@ $hud-cut: 16px;
     margin: 0;
 
     li {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       font-weight: 600;
       padding: 0.25rem 0.65rem;
       border-radius: 0.35rem;
-      background: rgba(11, 18, 32, 0.07);
+      background: rgba(11, 18, 32, 0.08);
       color: #0B1220;
     }
   }
 
-  /* ─── SECCIÓN 04: ROADMAP (TAURI 2.0 + POLARS + AWS) ──────────────────── */
+  /* ─── SECCIÓN 05: ROADMAP (TAURI 2.0 + POLARS + AWS) ──────────────────── */
   &__roadmap-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -567,7 +882,7 @@ $hud-cut: 16px;
   &__roadmap-card {
     padding: 1.85rem;
     border-radius: 0.85rem;
-    background: rgba(255, 255, 255, 0.84);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(2, 132, 199, 0.25);
     display: flex;
@@ -576,10 +891,10 @@ $hud-cut: 16px;
   }
 
   &__roadmap-phase {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.12em;
-    color: #0284C7;
+    color: #0369A1;
     text-transform: uppercase;
   }
 
@@ -591,15 +906,15 @@ $hud-cut: 16px;
   }
 
   &__roadmap-sub {
-    font-size: 0.84rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: #0284C7;
+    color: #0369A1;
   }
 
   &__roadmap-desc {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     line-height: 1.6;
-    color: rgba(11, 18, 32, 0.78);
+    color: rgba(11, 18, 32, 0.88);
     margin: 0;
     flex-grow: 1;
   }
@@ -608,13 +923,13 @@ $hud-cut: 16px;
     list-style: none;
     padding: 0.85rem 0 0;
     margin: 0;
-    border-top: 1px solid rgba(2, 132, 199, 0.16);
+    border-top: 1px solid rgba(2, 132, 199, 0.18);
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.45rem;
 
     li {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: #0B1220;
       display: flex;
@@ -623,23 +938,96 @@ $hud-cut: 16px;
 
       &::before {
         content: "▹";
-        color: #00E5FF;
+        color: #0284C7;
         font-weight: 700;
       }
     }
   }
+
+  /* ─── SECCIÓN 06: PUENTE COMERCIAL & CONTACTO ──────────────────────────── */
+  &__cta-section {
+    padding: 2.5rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(2, 132, 199, 0.32);
+    box-shadow: 0 12px 36px rgba(2, 132, 199, 0.1);
+  }
+
+  &__bridge-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  &__bridge-card {
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    background: rgba(2, 132, 199, 0.05);
+    border: 1px solid rgba(2, 132, 199, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  &__bridge-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 0.5rem;
+  }
+
+  &__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    border-radius: 0.5rem;
+    background: #0284C7;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.28s ease;
+
+    &:hover {
+      background: #0369A1;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+    }
+  }
+
+  &__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.65rem;
+    border-radius: 0.5rem;
+    background: transparent;
+    border: 1.5px solid #0284C7;
+    color: #0369A1;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.28s ease;
+
+    &:hover {
+      background: rgba(2, 132, 199, 0.1);
+      transform: translateY(-2px);
+    }
+  }
 }
 
-/* ─── MODO OSCURO ────────────────────────────────────────────────────────── */
+/* ─── MODO OSCURO (Contraste WCAG AA reforzado) ──────────────────────────── */
 body.dark-mode {
   .finch-page {
     &__topbar {
-      background: rgba(7, 12, 23, 0.82);
-      border-bottom-color: rgba(0, 229, 255, 0.22);
+      background: rgba(7, 12, 23, 0.86);
+      border-bottom-color: rgba(0, 229, 255, 0.24);
     }
 
     &__back-btn {
-      background: rgba(11, 18, 32, 0.9);
+      background: rgba(11, 18, 32, 0.92);
       border-color: rgba(0, 229, 255, 0.45);
       color: #FFFFFF;
 
@@ -651,7 +1039,7 @@ body.dark-mode {
     }
 
     &__subnav a {
-      color: rgba(229, 231, 235, 0.8);
+      color: #EAE6DF;
 
       &:hover {
         color: #00E5FF;
@@ -661,33 +1049,50 @@ body.dark-mode {
     &__canvas-wrap::before {
       background: radial-gradient(
         circle,
-        rgba(0, 229, 255, 0.11) 0%,
-        rgba(11, 18, 32, 0.4) 48%,
+        rgba(0, 229, 255, 0.12) 0%,
+        rgba(11, 18, 32, 0.42) 48%,
         transparent 72%
       );
     }
 
+    &__canvas-fallback {
+      color: #00E5FF;
+    }
+
     &__hero-title {
       color: #FFFFFF;
-      text-shadow: 0 4px 36px rgba(0, 0, 0, 0.92);
     }
 
-    &__hero-badge {
-      background: #0B1220;
+    &__hero-subtitle {
+      color: #67E8F9;
+    }
+
+    &__hero-lead {
+      color: #EAE6DF;
+    }
+
+    &__highlight {
       color: #00E5FF;
-      border-color: #00E5FF;
-      box-shadow: 0 0 28px rgba(0, 229, 255, 0.35);
+      background: rgba(0, 229, 255, 0.14);
+      border-color: rgba(0, 229, 255, 0.48);
+      box-shadow: 0 0 18px rgba(0, 229, 255, 0.22);
     }
 
-    &__hero-sub {
-      color: #E5E7EB;
-      background: rgba(7, 12, 23, 0.72);
-      border-color: rgba(0, 229, 255, 0.24);
+    &__sec-tag {
+      color: #67E8F9;
+    }
+
+    &__sec-title {
+      @include mx.title-style-dark();
+    }
+
+    &__sec-lead {
+      color: #EAE6DF;
     }
 
     &__telemetry-item {
-      background: rgba(11, 18, 32, 0.82);
-      border-color: rgba(0, 229, 255, 0.25);
+      background: rgba(11, 18, 32, 0.88);
+      border-color: rgba(0, 229, 255, 0.28);
     }
 
     &__telemetry-val {
@@ -699,27 +1104,38 @@ body.dark-mode {
     }
 
     &__telemetry-detail {
-      color: rgba(203, 213, 225, 0.75);
+      color: #E2E8F0;
     }
 
-    &__sec-tag {
-      color: #00E5FF;
+    &__methodology-box {
+      background: rgba(11, 18, 32, 0.88);
+      border-color: rgba(0, 229, 255, 0.28);
     }
 
-    &__sec-title {
-      @include mx.title-style-dark();
+    &__methodology-text {
+      color: #EAE6DF;
     }
 
-    &__sec-lead {
-      color: rgba(203, 213, 225, 0.85);
+    &__mcp-bar {
+      border-top-color: rgba(0, 229, 255, 0.2);
+    }
+
+    &__mcp-label {
+      color: #FFFFFF;
+    }
+
+    &__mcp-list li {
+      background: rgba(0, 229, 255, 0.12);
+      border-color: rgba(0, 229, 255, 0.38);
+      color: #67E8F9;
     }
 
     &__compare-card {
-      background: rgba(11, 18, 32, 0.82);
-      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(11, 18, 32, 0.88);
+      border-color: rgba(255, 255, 255, 0.16);
 
       &--finch {
-        border-color: rgba(0, 229, 255, 0.5);
+        border-color: rgba(0, 229, 255, 0.52);
         box-shadow: 0 12px 36px rgba(0, 229, 255, 0.12);
       }
     }
@@ -729,7 +1145,11 @@ body.dark-mode {
     }
 
     &__compare-list li {
-      color: rgba(229, 231, 235, 0.85);
+      color: #EAE6DF;
+    }
+
+    &__compare-icon--flaw {
+      color: #f87171;
     }
 
     &__compare-icon--ok {
@@ -738,9 +1158,51 @@ body.dark-mode {
       border-color: rgba(0, 229, 255, 0.45);
     }
 
-    &__pillar-card {
-      background: rgba(11, 18, 32, 0.84);
+    &__arch-diagram {
+      background: rgba(11, 18, 32, 0.88);
+      border-color: rgba(0, 229, 255, 0.28);
+    }
+
+    &__arch-col {
+      background: rgba(0, 229, 255, 0.05);
       border-color: rgba(0, 229, 255, 0.22);
+
+      &--core {
+        background: rgba(0, 229, 255, 0.09);
+        border-color: #00E5FF;
+      }
+    }
+
+    &__arch-label {
+      color: #67E8F9;
+    }
+
+    &__arch-nodes li {
+      background: #070C17;
+      border-color: rgba(0, 229, 255, 0.24);
+      color: #EAE6DF;
+    }
+
+    &__arch-subbox {
+      background: #070C17;
+      border-color: rgba(0, 229, 255, 0.25);
+
+      strong {
+        color: #FFFFFF;
+      }
+
+      ul li {
+        color: #67E8F9;
+      }
+    }
+
+    &__arch-arrow {
+      color: #00E5FF;
+    }
+
+    &__pillar-card {
+      background: rgba(11, 18, 32, 0.88);
+      border-color: rgba(0, 229, 255, 0.25);
 
       &:hover {
         border-color: #00E5FF;
@@ -749,20 +1211,54 @@ body.dark-mode {
     }
 
     &__pillar-tag {
-      color: #00E5FF;
+      color: #67E8F9;
     }
 
     &__pillar-title {
       color: #FFFFFF;
     }
 
+    &__pillar-tech {
+      color: #67E8F9;
+      background: rgba(0, 229, 255, 0.1);
+      border-left-color: #00E5FF;
+    }
+
     &__pillar-desc {
-      color: rgba(203, 213, 225, 0.78);
+      color: #EAE6DF;
     }
 
     &__pillar-metric {
-      border-top-color: rgba(0, 229, 255, 0.18);
+      border-top-color: rgba(0, 229, 255, 0.2);
       color: #67E8F9;
+    }
+
+    &__tradeoff-card {
+      background: rgba(11, 18, 32, 0.88);
+      border-color: rgba(0, 229, 255, 0.26);
+    }
+
+    &__tradeoff-block {
+      background: rgba(0, 229, 255, 0.06);
+      border-left-color: #00E5FF;
+
+      strong {
+        color: #FFFFFF;
+      }
+
+      p {
+        color: #EAE6DF;
+      }
+
+      &--limit {
+        background: rgba(245, 158, 11, 0.1);
+        border-left-color: #fbbf24;
+      }
+
+      &--mit {
+        background: rgba(16, 185, 129, 0.1);
+        border-left-color: #34d399;
+      }
     }
 
     &__timeline {
@@ -770,18 +1266,18 @@ body.dark-mode {
     }
 
     &__release-card {
-      background: rgba(11, 18, 32, 0.86);
+      background: rgba(11, 18, 32, 0.88);
       border-color: rgba(0, 229, 255, 0.26);
     }
 
     &__release-status {
       background: rgba(0, 229, 255, 0.14);
-      color: #00E5FF;
+      color: #67E8F9;
       border-color: rgba(0, 229, 255, 0.35);
     }
 
     &__release-date {
-      color: rgba(203, 213, 225, 0.68);
+      color: #E2E8F0;
     }
 
     &__release-codename {
@@ -789,35 +1285,35 @@ body.dark-mode {
     }
 
     &__release-summary {
-      color: rgba(203, 213, 225, 0.84);
+      color: #EAE6DF;
     }
 
     &__highlight-box {
-      background: rgba(0, 229, 255, 0.05);
-      border-color: rgba(0, 229, 255, 0.18);
+      background: rgba(0, 229, 255, 0.06);
+      border-color: rgba(0, 229, 255, 0.2);
 
       strong {
         color: #FFFFFF;
       }
 
       p {
-        color: rgba(203, 213, 225, 0.76);
+        color: #EAE6DF;
       }
     }
 
     &__release-tags li {
-      background: rgba(0, 229, 255, 0.1);
+      background: rgba(0, 229, 255, 0.12);
       color: #EAE6DF;
-      border: 1px solid rgba(234, 230, 223, 0.2);
+      border: 1px solid rgba(234, 230, 223, 0.26);
     }
 
     &__roadmap-card {
-      background: rgba(11, 18, 32, 0.84);
-      border-color: rgba(0, 229, 255, 0.25);
+      background: rgba(11, 18, 32, 0.88);
+      border-color: rgba(0, 229, 255, 0.26);
     }
 
     &__roadmap-phase {
-      color: #00E5FF;
+      color: #67E8F9;
     }
 
     &__roadmap-title {
@@ -829,14 +1325,48 @@ body.dark-mode {
     }
 
     &__roadmap-desc {
-      color: rgba(203, 213, 225, 0.8);
+      color: #EAE6DF;
     }
 
     &__roadmap-specs {
-      border-top-color: rgba(0, 229, 255, 0.18);
+      border-top-color: rgba(0, 229, 255, 0.2);
 
       li {
-        color: #E5E7EB;
+        color: #EAE6DF;
+
+        &::before {
+          color: #00E5FF;
+        }
+      }
+    }
+
+    &__cta-section {
+      background: rgba(11, 18, 32, 0.9);
+      border-color: rgba(0, 229, 255, 0.35);
+      box-shadow: 0 14px 40px rgba(0, 229, 255, 0.12);
+    }
+
+    &__bridge-card {
+      background: rgba(7, 12, 23, 0.78);
+      border-color: rgba(0, 229, 255, 0.22);
+    }
+
+    &__btn-primary {
+      background: #00E5FF;
+      color: #0B1220;
+
+      &:hover {
+        background: #67E8F9;
+        box-shadow: 0 0 24px rgba(0, 229, 255, 0.5);
+      }
+    }
+
+    &__btn-secondary {
+      border-color: #00E5FF;
+      color: #00E5FF;
+
+      &:hover {
+        background: rgba(0, 229, 255, 0.12);
       }
     }
   }
@@ -845,12 +1375,36 @@ body.dark-mode {
 /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .finch-page {
+    &__hero-grid {
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+
+    &__hero-visual {
+      order: 2;
+      height: clamp(280px, 42vh, 380px);
+    }
+
+    &__hero-copy {
+      order: 1;
+    }
+
     &__telemetry {
       grid-template-columns: repeat(2, 1fr);
     }
 
+    &__arch-diagram {
+      grid-template-columns: 1fr;
+    }
+
+    &__arch-arrow {
+      transform: rotate(90deg);
+    }
+
     &__pillars-grid,
-    &__roadmap-grid {
+    &__tradeoffs-grid,
+    &__roadmap-grid,
+    &__bridge-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -860,8 +1414,14 @@ body.dark-mode {
   .finch-page {
     &__compare-grid,
     &__pillars-grid,
+    &__tradeoffs-grid,
     &__release-highlights,
-    &__roadmap-grid {
+    &__roadmap-grid,
+    &__bridge-grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__arch-subbox ul {
       grid-template-columns: 1fr;
     }
 
@@ -872,6 +1432,10 @@ body.dark-mode {
     &__release-card::before {
       left: -1.8rem;
     }
+
+    &__cta-section {
+      padding: 1.75rem 1.25rem;
+    }
   }
 }
 
@@ -879,11 +1443,6 @@ body.dark-mode {
   .finch-page {
     &__telemetry {
       grid-template-columns: 1fr;
-    }
-
-    &__hero-badge {
-      letter-spacing: 0.14em;
-      padding: 0.45rem 1rem;
     }
   }
 }
