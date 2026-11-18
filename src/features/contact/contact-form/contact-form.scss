@@ -2,14 +2,13 @@
 @use "styles/abstracts/_mixins" as mx;
 
 .contact {
-
   &__form {
     border-radius: 0.5rem;
     max-width: 600px;
   }
 
   &__form-group {
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
   }
 
   &__honeypot {
@@ -21,50 +20,72 @@
     caret-color: #0284C7;
     width: 100%;
     box-sizing: border-box;
-    padding: 0.76rem;
-    font-size: 0.875rem;
-    border-radius: 0.35rem;
+    padding: 0.78rem 0.9rem;
+    font-size: 0.9rem;
+    border-radius: 0.45rem;
     border: 1px solid rgba(2, 132, 199, 0.45);
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: border-color 0.22s ease-in-out, box-shadow 0.22s ease-in-out,
+      background-color 0.22s ease-in-out;
     background-color: #fff;
     color: v.$text-black;
 
     &:focus {
       outline: none;
       border-color: #0284C7;
-      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.3);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.22);
     }
 
     &--error {
-      border-color: #ef4444;
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.18);
+
+      &:focus {
+        border-color: #ef4444 !important;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.28);
+      }
     }
 
     &--success {
-      border-color: #10b981;
+      border-color: #10b981 !important;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.16);
+
+      &:focus {
+        border-color: #10b981 !important;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.26);
+      }
     }
   }
 
   &__textarea {
-    min-height: 6rem;
+    min-height: 6.5rem;
     resize: vertical;
   }
 
   &__message {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
+    min-height: 1.25rem;
+    margin-top: 0.42rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.35;
+    transition: color 0.2s ease;
+
+    &:empty {
+      min-height: 0;
+      margin-top: 0;
+    }
 
     &--error {
-      color: #ef4444;
+      color: #dc2626;
     }
 
     &--success {
-      color: #10b981;
+      color: #059669;
     }
   }
 
   /* Modo Claro: Botón Azul Marino con texto Blanco Plata y acento Cian */
   &__button {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     width: 100%;
     border: 2px solid #0284C7;
     padding: 1rem;
@@ -79,45 +100,215 @@
     transition: all 0.3s ease;
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(:disabled) {
       color: #ffffff;
       background-color: #0284C7;
       border-color: #0284C7;
       box-shadow: 0 0 1.5rem rgba(2, 132, 199, 0.5);
     }
 
-    &:active {
+    &:active:not(:disabled) {
       transform: scale(0.99);
       box-shadow: 0 0 0.6rem rgba(2, 132, 199, 0.4);
+    }
+
+    &:disabled {
+      opacity: 0.68;
+      cursor: wait;
     }
   }
 }
 
-.floating-notification {
+/* ─── Sistema de Notificaciones Estilo Sonner (Cyber-HUD Light & Dark) ────── */
+.sonner-toaster {
   position: fixed;
-  top: 50px;
-  right: 20px;
-  padding: 15px 25px;
-  border-radius: 4px;
-  color: v.$text-white;
-  font-weight: 500;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  transform: translateX(120%);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: min(380px, calc(100vw - 2rem));
+  pointer-events: none;
+}
+
+.sonner-toast {
+  position: relative;
+  overflow: hidden;
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.95rem 1.05rem 1.1rem;
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(2, 132, 199, 0.28);
+  color: #0B1220;
+  box-shadow:
+    0 12px 32px rgba(11, 18, 32, 0.14),
+    0 2px 8px rgba(11, 18, 32, 0.08);
+  transform: translateY(22px) scale(0.95);
   opacity: 0;
+  transition:
+    transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.28s ease,
+    border-color 0.25s ease;
 
-  &.success {
-    background-color: #10b981;
-  }
-
-  &.error {
-    background-color: #ef4444;
-  }
-
-  &.show {
-    transform: translateX(0);
+  &.is-visible {
+    transform: translateY(0) scale(1);
     opacity: 1;
+  }
+
+  &.is-leaving {
+    transform: translateY(14px) scale(0.94);
+    opacity: 0;
+  }
+
+  &.is-pulsing {
+    animation: sonner-pulse 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.05rem;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  &__title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: inherit;
+    word-break: break-word;
+  }
+
+  &__desc {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    opacity: 0.82;
+    color: inherit;
+    word-break: break-word;
+  }
+
+  &__close {
+    flex-shrink: 0;
+    width: 1.55rem;
+    height: 1.55rem;
+    border-radius: 0.4rem;
+    border: none;
+    background: transparent;
+    color: inherit;
+    opacity: 0.52;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+      background: rgba(11, 18, 32, 0.08);
+    }
+  }
+
+  &__progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    transform-origin: left center;
+    animation: sonner-progress linear forwards;
+  }
+
+  /* Variantes por tipo */
+  &--success {
+    border-color: rgba(16, 185, 129, 0.45);
+
+    .sonner-toast__icon {
+      background: rgba(16, 185, 129, 0.14);
+      color: #059669;
+    }
+
+    .sonner-toast__progress {
+      background: linear-gradient(90deg, #10b981, #34d399);
+    }
+  }
+
+  &--warning {
+    border-color: rgba(245, 158, 11, 0.5);
+
+    .sonner-toast__icon {
+      background: rgba(245, 158, 11, 0.15);
+      color: #d97706;
+    }
+
+    .sonner-toast__progress {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    }
+  }
+
+  &--error {
+    border-color: rgba(239, 68, 68, 0.5);
+
+    .sonner-toast__icon {
+      background: rgba(239, 68, 68, 0.14);
+      color: #dc2626;
+    }
+
+    .sonner-toast__progress {
+      background: linear-gradient(90deg, #ef4444, #f87171);
+    }
+  }
+
+  &--info {
+    border-color: rgba(2, 132, 199, 0.45);
+
+    .sonner-toast__icon {
+      background: rgba(2, 132, 199, 0.14);
+      color: #0284c7;
+    }
+
+    .sonner-toast__progress {
+      background: linear-gradient(90deg, #0284c7, #00e5ff);
+    }
+  }
+}
+
+@keyframes sonner-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes sonner-pulse {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -140,7 +331,7 @@
     }
 
     &__form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.35rem;
     }
 
     &__input,
@@ -152,22 +343,21 @@
     }
 
     &__button {
-      margin-top: 2rem;
+      margin-top: 1.25rem;
       padding: 0.9rem;
       font-size: 0.95rem;
     }
   }
 
-  .floating-notification {
-    right: 10px;
-    left: 10px;
-    text-align: center;
-    padding: 12px 20px;
-    font-size: 0.9rem;
+  .sonner-toaster {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    width: auto;
   }
 }
 
-/* Dark Mode: Botón Blanco con texto Azul Marino */
+/* Dark Mode: Inputs, Mensajes y Toasts estilo Sonner */
 body.dark-mode {
   .contact {
     &__input,
@@ -183,6 +373,16 @@ body.dark-mode {
       }
     }
 
+    &__message {
+      &--error {
+        color: #f87171;
+      }
+
+      &--success {
+        color: #34d399;
+      }
+    }
+
     &__button {
       background: #FFFFFF;
       color: #0B1220;
@@ -190,15 +390,63 @@ body.dark-mode {
       font-weight: 600;
       box-shadow: 0 0 1.2rem rgba(0, 229, 255, 0.35);
 
-      &:hover {
+      &:hover:not(:disabled) {
         background: #00E5FF;
         color: #0B1220;
         border-color: #00E5FF;
         box-shadow: 0 0 1.8rem rgba(0, 229, 255, 0.6);
       }
 
-      &:active {
+      &:active:not(:disabled) {
         box-shadow: 0 0 0.8rem rgba(0, 229, 255, 0.4);
+      }
+    }
+  }
+
+  .sonner-toast {
+    background: rgba(11, 18, 32, 0.94);
+    color: #F8FAFC;
+    box-shadow:
+      0 14px 36px rgba(0, 0, 0, 0.55),
+      0 0 22px rgba(0, 229, 255, 0.12);
+
+    &__close:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &--success {
+      border-color: rgba(52, 211, 153, 0.45);
+
+      .sonner-toast__icon {
+        background: rgba(16, 185, 129, 0.18);
+        color: #34d399;
+      }
+    }
+
+    &--warning {
+      border-color: rgba(251, 191, 36, 0.48);
+
+      .sonner-toast__icon {
+        background: rgba(245, 158, 11, 0.18);
+        color: #fbbf24;
+      }
+    }
+
+    &--error {
+      border-color: rgba(248, 113, 113, 0.5);
+
+      .sonner-toast__icon {
+        background: rgba(239, 68, 68, 0.2);
+        color: #f87171;
+      }
+    }
+
+    &--info {
+      border-color: rgba(0, 229, 255, 0.45);
+
+      .sonner-toast__icon {
+        background: rgba(0, 229, 255, 0.16);
+        color: #00e5ff;
       }
     }
   }

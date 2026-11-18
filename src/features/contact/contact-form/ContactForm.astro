@@ -19,8 +19,8 @@ import "@/features/contact/contact-form/contact-form.scss";
       />
       <p
         id="name-error"
-        class="contact__message contact__message--error"
-        role="alert"
+        class="contact__message"
+        aria-live="polite"
       >
       </p>
     </div>
@@ -40,8 +40,8 @@ import "@/features/contact/contact-form/contact-form.scss";
       />
       <p
         id="email-error"
-        class="contact__message contact__message--error"
-        role="alert"
+        class="contact__message"
+        aria-live="polite"
       >
       </p>
     </div>
@@ -51,34 +51,26 @@ import "@/features/contact/contact-form/contact-form.scss";
       <textarea
         name="message"
         id="message"
-        placeholder="Cúentame Sobre Tu Proyecto"
+        placeholder="Cuéntame Sobre Tu Proyecto"
         class="contact__textarea"
         required
         aria-describedby="message-error"
         aria-invalid="false"></textarea>
       <p
         id="message-error"
-        class="contact__message contact__message--error"
-        role="alert"
+        class="contact__message"
+        aria-live="polite"
       >
       </p>
     </div>
 
     <div class="contact__honeypot" aria-hidden="true" tabindex="-1">
       <label for="honeypot">No llenar este campo</label>
-      <input type="text" id="honeypot" name="honeypot" />
+      <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off" />
     </div>
 
     <div class="contact__form-group">
       <button type="submit" id="button" class="contact__button">Enviar</button>
-    </div>
-
-    <div
-      id="floating-notification"
-      class="floating-notification"
-      role="status"
-      aria-live="polite"
-    >
     </div>
   </form>
 
@@ -88,78 +80,22 @@ import "@/features/contact/contact-form/contact-form.scss";
     src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
   ></script>
   <script is:inline type="text/javascript">
-    emailjs.init("miYrSPp0_92YF1RLW");
+    if (window.emailjs) {
+      window.emailjs.init("miYrSPp0_92YF1RLW");
+    }
   </script>
 </section>
 
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("form");
-    const btn = document.getElementById("button");
-    const notification = document.getElementById("floating-notification");
+<script>
+  import { initContactFormValidation } from "@/utils/validation";
 
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const honeypot = document.getElementById("honeypot").value;
-      if (honeypot) return;
-
-      btn.textContent = "Enviando...";
-      btn.setAttribute("aria-busy", "true");
-      btn.disabled = true;
-
-      try {
-        const serviceID = "default_service";
-        const templateID = "template_mzf465a";
-
-        const response = await emailjs.sendForm(serviceID, templateID, this);
-
-        if (response.status === 200) {
-          showNotification("¡Mensaje enviado correctamente!", "success");
-
-          form.reset();
-          clearValidationMessages();
-        } else {
-          throw new Error("Error en el servidor");
-        }
-      } catch (err) {
-        console.error("Error en el envío:", err);
-        showNotification("Error al enviar el mensaje", "error");
-      } finally {
-        btn.textContent = "Enviar";
-        btn.removeAttribute("aria-busy");
-        btn.disabled = false;
-      }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initContactFormValidation, {
+      once: true,
     });
+  } else {
+    initContactFormValidation();
+  }
 
-    function showNotification(message, type) {
-      notification.textContent = message;
-      notification.className = `floating-notification ${type} show`;
-
-      setTimeout(() => {
-        notification.classList.remove("show");
-      }, 3000);
-    }
-
-    function clearValidationMessages() {
-      document
-        .querySelectorAll(".contact__message")
-        .forEach((messageElement) => {
-          messageElement.textContent = "";
-          messageElement.classList.remove(
-            "contact__message--success",
-            "contact__message--error",
-          );
-        });
-
-      document
-        .querySelectorAll(".contact__input, .contact__textarea")
-        .forEach((field) => {
-          field.classList.remove(
-            "contact__input--success",
-            "contact__input--error",
-          );
-        });
-    }
-  });
+  document.addEventListener("astro:page-load", initContactFormValidation);
 </script>

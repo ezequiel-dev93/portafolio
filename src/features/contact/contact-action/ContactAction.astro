@@ -14,10 +14,7 @@ import CopyIcon from "@/shared/icons/Copy.astro";
           href="mailto:ezequielsuarez.dev@gmail.com"
           class="contact__actions-buttom contact__button--email"
           aria-label="Abrir correo electrónico"
-          onmouseover="updateSecondaryMessage('Abre tu aplicación de correo')"
-          onmouseout="resetSecondaryMessage()"
-          onfocus="updateSecondaryMessage('Abre tu aplicación de correo')"
-          onblur="resetSecondaryMessage()"
+          data-contact-hover="Abre tu aplicación de correo"
         >
           <EmailIcon class="contact__icon" aria-hidden="true"/>
         </a>    
@@ -25,13 +22,11 @@ import CopyIcon from "@/shared/icons/Copy.astro";
 
       <div>
         <button
+          type="button"
           class="contact__actions-buttom contact__button--copy"
           aria-label="Copiar dirección de correo"
-          onmouseover="updateSecondaryMessage('Copia mi dirección de correo')"
-          onmouseout="resetSecondaryMessage()"
-          onfocus="updateSecondaryMessage('Copia mi dirección de correo')"
-          onblur="resetSecondaryMessage()"
-          onclick="copyToClipboard('ezequielsuarez.dev@gmail.com')"
+          data-contact-hover="Copia mi dirección de correo"
+          data-contact-copy="ezequielsuarez.dev@gmail.com"
         >
           <CopyIcon class="contact__icon" aria-hidden="true"/>
         </button>
@@ -45,35 +40,60 @@ import CopyIcon from "@/shared/icons/Copy.astro";
   </section>  
 </section>
 
-<div id="copy-alert" class="contact__alert" role="status" aria-live="polite">¡Correo copiado!</div>
+<script>
+  import { toast } from "@/utils/toast";
 
-<script is:inline>
-    
-window.updateSecondaryMessage = function (message) {
-  const subTextElement = document.getElementById("contact__message-main");
-  if (subTextElement) {
-    subTextElement.textContent = message; 
+  function initContactAction() {
+    const mainMsg = document.getElementById("contact__message-main");
+    const defaultMainText = "Estoy listo para escuchar tus ideas.";
+
+    const hoverButtons = document.querySelectorAll<HTMLElement>("[data-contact-hover]");
+    hoverButtons.forEach((btn) => {
+      if (btn.dataset.hoverBound === "true") return;
+      btn.dataset.hoverBound = "true";
+
+      const hoverText = btn.getAttribute("data-contact-hover") || defaultMainText;
+      const setMsg = () => {
+        if (mainMsg) mainMsg.textContent = hoverText;
+      };
+      const resetMsg = () => {
+        if (mainMsg) mainMsg.textContent = defaultMainText;
+      };
+
+      btn.addEventListener("mouseenter", setMsg);
+      btn.addEventListener("mouseleave", resetMsg);
+      btn.addEventListener("focus", setMsg);
+      btn.addEventListener("blur", resetMsg);
+    });
+
+    const copyBtn = document.querySelector<HTMLButtonElement>("[data-contact-copy]");
+    if (copyBtn && copyBtn.dataset.copyActionBound !== "true") {
+      copyBtn.dataset.copyActionBound = "true";
+      copyBtn.addEventListener("click", async () => {
+        const email = copyBtn.getAttribute("data-contact-copy") || "ezequielsuarez.dev@gmail.com";
+        try {
+          await navigator.clipboard.writeText(email);
+          if (mainMsg) mainMsg.textContent = "Correo copiado al portapapeles";
+          toast.success(
+            "¡Correo copiado!",
+            `La dirección ${email} ya está en tu portapapeles.`,
+            "contact-copy-email",
+            3200
+          );
+          setTimeout(() => {
+            if (mainMsg) mainMsg.textContent = defaultMainText;
+          }, 2200);
+        } catch {
+          window.location.href = `mailto:${email}`;
+        }
+      });
+    }
   }
-};
 
-window.resetSecondaryMessage = function () {
-  const subTextElement = document.getElementById("contact__message-sub");
-  if (subTextElement) {
-    subTextElement.textContent = "Envíame un correo";
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initContactAction, { once: true });
+  } else {
+    initContactAction();
   }
-};
-
-window.copyToClipboard = function (text) {
-  navigator.clipboard.writeText(text).then(() => {
-    updateSecondaryMessage("Correo copiado al portapapeles");
-    
-    const copyMessage = document.getElementById("copy-alert");
-    copyMessage.classList.add("show");
-
-    setTimeout(() => {
-      copyMessage.classList.remove("show");
-      resetSecondaryMessage();
-    }, 2000);
-  });
-};
-</script> 
+  document.addEventListener("astro:page-load", initContactAction);
+</script>
