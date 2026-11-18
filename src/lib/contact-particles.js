@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 
 export function initContactParticles() {
   const canvas = document.querySelector("#contact-particles");
-  if (!canvas) return;
+  if (!canvas || canvas.dataset.particlesInitialized === "true") return;
 
   let width = canvas.offsetWidth;
   let height = canvas.offsetHeight;
@@ -13,9 +13,11 @@ export function initContactParticles() {
     return;
   }
 
+  canvas.dataset.particlesInitialized = "true";
+
   // Renderer 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000, 0);
 
@@ -23,8 +25,8 @@ export function initContactParticles() {
   const scene = new THREE.Scene();
 
   // Cámara ortográfica: mapea 1 unidad = 1px virtualmente
-  const frustumH = height;
-  const frustumW = width;
+  let frustumH = height;
+  let frustumW = width;
   const camera = new THREE.OrthographicCamera(
     -frustumW / 2, frustumW / 2,
     frustumH / 2, -frustumH / 2,
@@ -113,13 +115,19 @@ export function initContactParticles() {
   };
 
   function applyColorFromMode() {
-    const isDark = document.body.classList.contains("dark-mode");
+    const isDark =
+      document.body.classList.contains("dark-mode") ||
+      document.documentElement.classList.contains("dark-mode");
     material.uniforms.color.value.set(isDark ? COLORS.dark : COLORS.light);
+    if (paused) {
+      renderer.render(scene, camera);
+    }
   }
   applyColorFromMode();
 
   const modeObserver = new MutationObserver(applyColorFromMode);
   modeObserver.observe(document.body, { attributeFilter: ["class"] });
+  modeObserver.observe(document.documentElement, { attributeFilter: ["class"] });
 
   // Loop de animación 
   // prefers-reduced-motion: pausamos el movimiento
@@ -128,6 +136,7 @@ export function initContactParticles() {
 
   mm.add("(prefers-reduced-motion: reduce)", () => {
     paused = true;
+    renderer.render(scene, camera);
     return () => { paused = false; };
   });
 
@@ -144,12 +153,21 @@ export function initContactParticles() {
         }
       }
       posAttr.needsUpdate = true;
+      renderer.render(scene, camera);
     }
-
-    renderer.render(scene, camera);
   }
 
+  renderer.render(scene, camera);
   gsap.ticker.add(render);
+
+  function onVisibilityChange() {
+    if (document.hidden) {
+      gsap.ticker.remove(render);
+    } else if (!paused) {
+      gsap.ticker.add(render);
+    }
+  }
+  document.addEventListener("visibilitychange", onVisibilityChange);
 
   // Fade-in suave al entrar
   gsap.fromTo(material.uniforms.globalAlpha, { value: 0 }, { value: 1, duration: 2, ease: "power2.out" });
@@ -159,8 +177,10 @@ export function initContactParticles() {
   function onResize() {
     canvas.style.width = "";
     canvas.style.height = "";
-    width = canvas.offsetWidth;
-    height = canvas.offsetHeight;
+    width = canvas.offsetWidth || window.innerWidth;
+    height = canvas.offsetHeight || window.innerHeight;
+    frustumW = width;
+    frustumH = height;
 
     camera.left = -width / 2;
     camera.right = width / 2;
@@ -168,17 +188,26 @@ export function initContactParticles() {
     camera.bottom = -height / 2;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
+    renderer.render(scene, camera);
   }
-  window.addEventListener("resize", () => {
+  function onWindowResize() {
     clearTimeout(resizeTm);
     resizeTm = setTimeout(onResize, 200);
-  });
+  }
+  window.addEventListener("resize", onWindowResize);
 
   // Cleanup (Astro View Transitions)
   document.addEventListener("astro:before-swap", () => {
     modeObserver.disconnect();
     gsap.ticker.remove(render);
+    document.removeEventListener("visibilitychange", onVisibilityChange);
+    window.removeEventListener("resize", onWindowResize);
+    clearTimeout(resizeTm);
     mm.revert();
+    canvas.dataset.particlesInitialized = "false";
     renderer.dispose();
+    geometry.dispose();
+    material.dispose();
+    dotTexture.dispose();
   }, { once: true });
 }

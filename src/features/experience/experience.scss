@@ -38,6 +38,15 @@
   width: 100%;
   padding-top: 2rem;
 
+  &--hidden {
+    padding-top: 0 !important;
+  }
+
+  &__hidden-wrap {
+    width: 100%;
+    list-style: none;
+  }
+
   &__item {
     width: 100%;
   }

@@ -92,6 +92,11 @@ const canonical =
 	</head>
 
 	<body>
+		<script is:inline>
+			if (document.documentElement.classList.contains("dark-mode")) {
+				document.body.classList.add("dark-mode");
+			}
+		</script>
 		<a href="#main-content" class="skip-link"
 			>Saltar al contenido principal</a
 		>

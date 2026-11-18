@@ -18,9 +18,19 @@ export function initHero() {
 
   canvas.dataset.heroInitialized = "true";
 
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  const isReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
   // Renderer
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: !isMobile,
+    alpha: true,
+    powerPreference: "high-performance",
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2));
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000, 0); // transparente — el fondo lo pone .hero en CSS
 
@@ -52,47 +62,61 @@ export function initHero() {
     return tex;
   })();
 
-  // Geometría
+  // Geometría con deduplicación de vértices compartidos (~83% menos tweens sin perder ni un punto visual)
   const radius = 64;
-  const sphereGeom = new THREE.IcosahedronGeometry(radius, 13);
+  const detail = isMobile ? 9 : 13;
+  const sphereGeom = new THREE.IcosahedronGeometry(radius, detail);
 
   const posAttr = sphereGeom.getAttribute("position");
-  const count = posAttr.count;
-  const positions = new Float32Array(count * 3);
+  const rawCount = posAttr.count;
+  const uniqueVectors = [];
+  const seenKeys = new Set();
 
-  // Copiamos posiciones originales y animamos cada vértice
-  const vectors = [];
+  for (let i = 0; i < rawCount; i++) {
+    const vx = posAttr.getX(i);
+    const vy = posAttr.getY(i);
+    const vz = posAttr.getZ(i);
+    const key = `${Math.round(vx * 100)},${Math.round(vy * 100)},${Math.round(vz * 100)}`;
+    if (!seenKeys.has(key)) {
+      seenKeys.add(key);
+      uniqueVectors.push(new THREE.Vector3(vx, vy, vz));
+    }
+  }
+  sphereGeom.dispose();
+
+  const count = uniqueVectors.length;
+  const positions = new Float32Array(count * 3);
+  const vectors = uniqueVectors;
+
   for (let i = 0; i < count; i++) {
-    const v = new THREE.Vector3(
-      posAttr.getX(i),
-      posAttr.getY(i),
-      posAttr.getZ(i)
-    );
-    vectors.push(v);
-    v.toArray(positions, i * 3);
+    vectors[i].toArray(positions, i * 3);
   }
 
   const customGeom = new THREE.BufferGeometry();
   const positionBuf = new THREE.BufferAttribute(positions, 3);
   customGeom.setAttribute("position", positionBuf);
 
-  // Animamos cada punto con GSAP (equivalente a TweenMax.to)
-  vectors.forEach((v, i) => {
-    gsap.to(v, {
-      x: 0,
-      z: 0,
-      duration: 4,
-      ease: "back.out(1.7)",
-      delay: Math.abs(v.y / radius) * 2,
-      repeat: -1,
-      yoyo: true,
-      yoyoEase: "back.out(1.7)",
-      onUpdate() {
-        positions[i * 3] = v.x;
-        positions[i * 3 + 2] = v.z;
-      },
+  // Animamos cada punto único con GSAP (solo si el usuario no pidió movimiento reducido)
+  const vertexTweens = [];
+  if (!isReducedMotion) {
+    vectors.forEach((v, i) => {
+      const tw = gsap.to(v, {
+        x: 0,
+        z: 0,
+        duration: 4,
+        ease: "back.out(1.7)",
+        delay: Math.abs(v.y / radius) * 2,
+        repeat: -1,
+        yoyo: true,
+        yoyoEase: "back.out(1.7)",
+        onUpdate() {
+          positions[i * 3] = v.x;
+          positions[i * 3 + 2] = v.z;
+        },
+      });
+      vertexTweens.push(tw);
     });
-  });
+  }
 
   // Shaders 
   const vertexShader = /* glsl */`
@@ -137,33 +161,54 @@ export function initHero() {
   };
 
   function applyColorFromMode() {
-    const isDark = document.body.classList.contains("dark-mode");
+    const isDark =
+      document.body.classList.contains("dark-mode") ||
+      document.documentElement.classList.contains("dark-mode");
     material.uniforms.color.value.set(isDark ? COLORS.dark : COLORS.light);
+    if (isReducedMotion) {
+      renderer.render(scene, camera);
+    }
   }
 
   // Aplicar el color inicial
   applyColorFromMode();
 
-  // Observar cambios en el class del body
+  // Observar cambios en el class del body y html
   const modeObserver = new MutationObserver(applyColorFromMode);
   modeObserver.observe(document.body, {
     attributeFilter: ["class"],
   });
-
-  // Limpiar el observer en navegación (Astro View Transitions)
-  document.addEventListener("astro:before-swap", () => {
-    modeObserver.disconnect();
-  }, { once: true });
+  modeObserver.observe(document.documentElement, {
+    attributeFilter: ["class"],
+  });
 
   // Render loop continuo (GSAP ticker) — mantiene la esfera viva y orgánica en toda la página
   function render() {
     positionBuf.needsUpdate = true;
     renderer.render(scene, camera);
   }
-  gsap.ticker.add(render);
+
+  renderer.render(scene, camera);
+  if (!isReducedMotion) {
+    gsap.ticker.add(render);
+  }
+
+  // Pausar cuando la pestaña está oculta para ahorrar batería/CPU
+  function onVisibilityChange() {
+    if (isReducedMotion) return;
+    if (document.hidden) {
+      gsap.ticker.remove(render);
+      vertexTweens.forEach((tw) => tw.pause());
+    } else {
+      vertexTweens.forEach((tw) => tw.resume());
+      gsap.ticker.add(render);
+    }
+  }
+  document.addEventListener("visibilitychange", onVisibilityChange);
 
   // Mouse
   function onMouseMove(e) {
+    if (isReducedMotion) return;
     const mx = (e.clientX / window.innerWidth) - 0.5;
     const my = (e.clientY / window.innerHeight) - 0.5;
     gsap.to(dots.rotation, {
@@ -173,7 +218,9 @@ export function initHero() {
       ease: "power1.out",
     });
   }
-  window.addEventListener("mousemove", onMouseMove);
+  if (!isReducedMotion && !isMobile) {
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+  }
 
   // Resize
   let resizeTm;
@@ -185,6 +232,9 @@ export function initHero() {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
+    if (isReducedMotion) {
+      renderer.render(scene, camera);
+    }
   }
   function onWindowResize() {
     clearTimeout(resizeTm);
@@ -194,7 +244,7 @@ export function initHero() {
 
   // ScrollTrigger: recorrido de la esfera desde el Hero, pasando por las secciones y recuperando protagonismo al llegar al Footer
   let pageScrollTl = null;
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (!isReducedMotion) {
     pageScrollTl = gsap.timeline({
       scrollTrigger: {
         trigger: document.body,
@@ -241,17 +291,18 @@ export function initHero() {
   // Cleanup (Astro View Transitions) 
   document.addEventListener("astro:before-swap", () => {
     if (pageScrollTl) pageScrollTl.kill();
+    vertexTweens.forEach((tw) => tw.kill());
     gsap.killTweensOf(vectors);
     gsap.killTweensOf(dots.rotation);
     gsap.ticker.remove(render);
     modeObserver.disconnect();
+    document.removeEventListener("visibilitychange", onVisibilityChange);
     window.removeEventListener("mousemove", onMouseMove);
     window.removeEventListener("resize", onWindowResize);
     clearTimeout(resizeTm);
     canvas.dataset.heroInitialized = "false";
     renderer.dispose();
     customGeom.dispose();
-    sphereGeom.dispose();
     material.dispose();
     dotTexture.dispose();
   }, { once: true });

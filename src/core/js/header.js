@@ -8,13 +8,19 @@ function initHeaderMenu() {
 
   function syncState(isOpen) {
     checkbox.checked = isOpen;
-    menu.setAttribute("aria-hidden", String(!isOpen));
+    const isMobileViewport = window.innerWidth <= 1024;
+    if (isMobileViewport) {
+      menu.setAttribute("aria-hidden", String(!isOpen));
+    } else {
+      menu.removeAttribute("aria-hidden");
+    }
+    checkbox.setAttribute("aria-expanded", String(isOpen));
     label.setAttribute("aria-expanded", String(isOpen));
     menu.classList.toggle("active", isOpen);
     if (backdrop) {
       backdrop.classList.toggle("active", isOpen);
     }
-    document.body.style.overflow = isOpen ? "hidden" : "";
+    document.body.style.overflow = isOpen && isMobileViewport ? "hidden" : "";
   }
 
   // Escuchar cambio del checkbox controlado por el label
@@ -62,8 +68,12 @@ function initHeaderMenu() {
 
   // Si se redimensiona a desktop, restaurar estado y scroll
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 1024 && checkbox.checked) {
-      syncState(false);
+    if (window.innerWidth > 1024) {
+      if (checkbox.checked) {
+        syncState(false);
+      } else {
+        menu.removeAttribute("aria-hidden");
+      }
     }
   });
 }

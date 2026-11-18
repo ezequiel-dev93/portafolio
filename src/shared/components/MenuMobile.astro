@@ -1,16 +1,17 @@
 <input 
-  hidden 
-  class="check-icon" 
+  class="check-icon visually-hidden" 
   id="check-icon"
   name="check-icon" 
   type="checkbox"
   aria-label="Abrir o cerrar menú de navegación"
+  aria-controls="main-menu"
+  aria-expanded="false"
 >
 
 <label 
   class="icon-menu" 
   for="check-icon"
-  aria-label="Menú de navegación"
+  aria-hidden="true"
 >
   <div class="bar bar--1"></div>
   <div class="bar bar--2"></div>

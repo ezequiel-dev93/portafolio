@@ -1,7 +1,14 @@
 /* Cambia el titulo de la pestaña cuando el usuario cambia de pestaña */
-const docTitle = document.title;
+let docTitle = document.title;
 
-window.addEventListener("blur", ()=> {
+document.addEventListener("astro:page-load", () => {
+    docTitle = document.title;
+});
+
+window.addEventListener("blur", () => {
+    if (document.title !== "Regresas? ;(") {
+        docTitle = document.title;
+    }
     document.title = "Regresas? ;(";
 });
 

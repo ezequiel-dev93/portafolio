@@ -15,11 +15,13 @@ const hiddenItems = experience.slice(VISIBLE_COUNT);
 
     {
       hiddenItems.length > 0 && (
-        <div class="show-more__hidden" id="show-more-experience">
-          {hiddenItems.map((exp) => (
-            <ExperienceItem exp={exp} />
-          ))}
-        </div>
+        <li class="show-more__hidden experience-card__hidden-wrap" id="show-more-experience">
+          <ul class="experience-card experience-card--hidden">
+            {hiddenItems.map((exp) => (
+              <ExperienceItem exp={exp} />
+            ))}
+          </ul>
+        </li>
       )
     }
   </ul>

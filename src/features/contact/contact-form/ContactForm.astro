@@ -2,13 +2,15 @@
 import "@/features/contact/contact-form/contact-form.scss";
 ---
 
-<section class="contact" aria-labelledby="contact-title">
+<section class="contact" aria-label="Formulario de contacto">
   <form class="contact__form" id="form" novalidate>
     <div class="contact__form-group">
+      <label for="name" class="visually-hidden">Nombre completo o nombre de la empresa</label>
       <input
         type="text"
         name="name"
         id="name"
+        autocomplete="name"
         placeholder="Nombre Completo o Nombre De La Empresa"
         class="contact__input"
         required
@@ -24,10 +26,12 @@ import "@/features/contact/contact-form/contact-form.scss";
     </div>
 
     <div class="contact__form-group">
+      <label for="email" class="visually-hidden">Tu correo electrónico</label>
       <input
         type="email"
         name="email"
         id="email"
+        autocomplete="email"
         placeholder="Tu Correo Electrónico"
         class="contact__input"
         required
@@ -43,6 +47,7 @@ import "@/features/contact/contact-form/contact-form.scss";
     </div>
 
     <div class="contact__form-group">
+      <label for="message" class="visually-hidden">Cuéntame sobre tu proyecto</label>
       <textarea
         name="message"
         id="message"
@@ -99,7 +104,8 @@ import "@/features/contact/contact-form/contact-form.scss";
       const honeypot = document.getElementById("honeypot").value;
       if (honeypot) return;
 
-      btn.value = "Enviando...";
+      btn.textContent = "Enviando...";
+      btn.setAttribute("aria-busy", "true");
       btn.disabled = true;
 
       try {
@@ -120,7 +126,8 @@ import "@/features/contact/contact-form/contact-form.scss";
         console.error("Error en el envío:", err);
         showNotification("Error al enviar el mensaje", "error");
       } finally {
-        btn.value = "Enviar";
+        btn.textContent = "Enviar";
+        btn.removeAttribute("aria-busy");
         btn.disabled = false;
       }
     });
