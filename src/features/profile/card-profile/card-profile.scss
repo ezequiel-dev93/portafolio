@@ -202,12 +202,14 @@ body.dark-mode {
   }
 }
 
-/* Escalón diagonal / Stepped layout para Mobile */
-@media (max-width: 640px) {
+/* Escalón diagonal / Stepped layout para Mobile & Tablet Portrait */
+@media (max-width: 768px) {
   .card {
+    padding: clamp(2rem, 5vh, 4rem) 0 clamp(1.5rem, 4vh, 2.5rem);
+
     &__article {
       .hero-title__row {
-        font-size: clamp(1.6rem, 7.5vw, 2.4rem);
+        font-size: clamp(1.5rem, 7vw, 2.8rem);
         line-height: 1.15;
 
         &--second {
@@ -217,16 +219,21 @@ body.dark-mode {
           margin-top: 0.15rem;
 
           .hero-title__de {
-            margin-left: 1.4rem;
+            margin-left: clamp(0.6rem, 3.5vw, 1.4rem);
             font-size: 0.9em;
             opacity: 0.85;
           }
 
           .hero-title__group-software {
-            margin-left: 2.5rem;
+            margin-left: clamp(1rem, 5.5vw, 2.4rem);
           }
         }
       }
+    }
+
+    &__descripcion {
+      margin-top: 0.75rem;
+      line-height: 1.55;
     }
   }
 }
@@ -235,13 +242,15 @@ body.dark-mode {
   .card {
     &__article {
       .hero-title__row {
+        font-size: clamp(1.35rem, 6.8vw, 1.75rem);
+
         &--second {
           .hero-title__de {
-            margin-left: 1rem;
+            margin-left: 0.5rem;
           }
 
           .hero-title__group-software {
-            margin-left: 1.8rem;
+            margin-left: 0.9rem;
           }
         }
       }
@@ -249,11 +258,11 @@ body.dark-mode {
   }
 }
 
-@media (641px <= width <= 1199px) {
+@media (769px <= width <= 1199px) {
   .card {
     &__article {
       .hero-title__row {
-        font-size: clamp(2.6rem, 5.8vw, 4.6rem);
+        font-size: clamp(2.25rem, 4.7vw, 4.4rem);
       }
     }
   }
@@ -263,7 +272,7 @@ body.dark-mode {
   .card {
     &__article {
       .hero-title__row {
-        font-size: clamp(4.4rem, 6.6vw, 7.8rem);
+        font-size: clamp(4.1rem, 5.8vw, 7.2rem);
         line-height: 1.04;
       }
     }
@@ -274,44 +283,16 @@ body.dark-mode {
   .card {
     &__article {
       .hero-title__row {
-        font-size: clamp(5.5rem, 7vw, 8.5rem);
+        font-size: clamp(5.2rem, 6.5vw, 8rem);
       }
     }
   }
 }
 
-@media (320px <= width <= 480px) {
+@media (769px <= width <= 1024px) {
   .card {
-    padding-top: 12rem;
-
-    &__descripcion {
-      line-height: 1.5;
-    }
-
-    &__social {
-      a {
-        font-size: 0.8rem;
-      }
-    }
-  }
-}
-
-@media (481px <= width <= 767px) {
-  .card {
-    margin-top: 12rem;
-  }
-}
-
-@media (768px <= width <= 1024px) {
-  .card {
-    margin-top: 12rem;
-
     &__links {
       gap: 1rem;
-
-      &-list-items {
-        font-size: 2rem;
-      }
     }
   }
 }

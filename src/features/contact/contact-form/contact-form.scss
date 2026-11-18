@@ -121,7 +121,7 @@
   }
 }
 
-@media (320px <=width <=768px) {
+@media (max-width: 768px) {
   .contact {
     &__form {
       padding: 0rem;

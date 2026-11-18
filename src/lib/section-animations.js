@@ -107,10 +107,13 @@ export function initSectionAnimations() {
         expTl.fromTo(
           item,
           {
-            x: () => Math.min(window.innerWidth * 0.42, 500),
+            x: () =>
+              isMobile
+                ? Math.min(window.innerWidth * 0.16, 64)
+                : Math.min(window.innerWidth * 0.42, 500),
             y: 24,
             scale: 0.92,
-            skewX: -5,
+            skewX: isMobile ? -2 : -5,
             autoAlpha: 0,
             filter: "blur(7px)",
           },
@@ -175,9 +178,12 @@ export function initSectionAnimations() {
         projTl.fromTo(
           card,
           {
-            x: () => -Math.min(window.innerWidth * 0.44, 540),
+            x: () =>
+              isMobile
+                ? -Math.min(window.innerWidth * 0.16, 64)
+                : -Math.min(window.innerWidth * 0.44, 540),
             scale: 0.88,
-            skewX: 6,
+            skewX: isMobile ? 2 : 6,
             autoAlpha: 0,
             filter: "blur(8px)",
           },

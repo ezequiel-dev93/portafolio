@@ -27,7 +27,13 @@ export function initHero() {
   // Escena & cámara
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 2000);
-  camera.position.set(0, 0, 80);
+  function getHeroCameraZ(w, h) {
+    const aspect = w / Math.max(h, 1);
+    if (aspect < 0.65) return 112;
+    if (aspect < 1) return 94;
+    return 80;
+  }
+  camera.position.set(0, 0, getHeroCameraZ(width, height));
 
   // Textura del punto (canvas 2D, sin archivos externos) 
   const dotTexture = (() => {
@@ -174,8 +180,8 @@ export function initHero() {
   function onResize() {
     canvas.style.width = "";
     canvas.style.height = "";
-    width = window.innerWidth;
-    height = window.innerHeight;
+    width = canvas.clientWidth || window.innerWidth;
+    height = canvas.clientHeight || window.innerHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
@@ -205,7 +211,15 @@ export function initHero() {
         { y: Math.PI * 0.75, duration: 0.7, ease: "none" },
         0
       )
-      .to(camera.position, { z: 58, duration: 0.7, ease: "none" }, 0)
+      .to(
+        camera.position,
+        {
+          z: () => getHeroCameraZ(window.innerWidth, window.innerHeight) * 0.74,
+          duration: 0.7,
+          ease: "none",
+        },
+        0
+      )
       .to(
         material.uniforms.alpha,
         { value: 0.42, duration: 0.45, ease: "none" },

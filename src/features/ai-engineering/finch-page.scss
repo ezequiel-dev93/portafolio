@@ -180,7 +180,7 @@ $hud-cut: 16px;
 
   &__hero-title {
     font-family: v.$font-title;
-    font-size: clamp(3.6rem, 7.5vw, 6.4rem);
+    font-size: clamp(2.5rem, 7.5vw, 6.4rem);
     font-weight: 700;
     letter-spacing: 0.06em;
     line-height: 0.98;
@@ -1375,14 +1375,26 @@ body.dark-mode {
 /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .finch-page {
+    &__hero {
+      min-height: auto;
+      padding: 6rem 0 3rem;
+    }
+
     &__hero-grid {
+      width: 92%;
       grid-template-columns: 1fr;
       text-align: left;
     }
 
+    &__body {
+      width: 92%;
+      gap: 4.5rem;
+      padding: 3.5rem 0 4.5rem;
+    }
+
     &__hero-visual {
       order: 2;
-      height: clamp(280px, 42vh, 380px);
+      height: clamp(260px, 40vh, 360px);
     }
 
     &__hero-copy {
@@ -1429,12 +1441,21 @@ body.dark-mode {
       padding-left: 1.25rem;
     }
 
-    &__release-card::before {
-      left: -1.8rem;
+    &__release-card {
+      padding: 1.4rem;
+
+      &::before {
+        left: -1.8rem;
+      }
     }
 
     &__cta-section {
       padding: 1.75rem 1.25rem;
+    }
+
+    &__btn-primary,
+    &__btn-secondary {
+      width: 100%;
     }
   }
 }
@@ -1443,6 +1464,13 @@ body.dark-mode {
   .finch-page {
     &__telemetry {
       grid-template-columns: 1fr;
+    }
+
+    &__compare-card,
+    &__pillar-card,
+    &__tradeoff-card,
+    &__roadmap-card {
+      padding: 1.35rem;
     }
   }
 }

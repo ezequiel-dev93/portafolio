@@ -121,11 +121,15 @@ import Copyright from "@/shared/components/Copyright.astro";
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    width: 96%;
+    width: 92%;
     max-width: 1450px;
     margin: 0 auto;
     padding: 3rem 0 2rem;
     box-sizing: border-box;
+
+    @media (min-width: 769px) {
+      width: 96%;
+    }
 
     &__top-nav {
       margin-bottom: 2.5rem;
@@ -360,7 +364,7 @@ import Copyright from "@/shared/components/Copyright.astro";
 
   @media (max-width: 480px) {
     .contact-page {
-      padding: 1.5rem 1rem 1.5rem;
+      padding: 1.75rem 0 1.5rem;
 
       &__top-nav {
         margin-bottom: 1.8rem;

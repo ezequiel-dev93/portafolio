@@ -41,8 +41,8 @@ $text-white: #E5E7EB;
 $text-black: #0B1220;
 
 /* Responsive Typographic Scale */
-$font-size-small: 1.1rem;
+$font-size-small: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);
 $font-size-medium: clamp(0.89rem, 1.2vw + 0.4rem, 1.5rem);
-$font-size-ml: clamp(1.5rem, 5vw, 3.5rem);
-$font-size-xmedium: clamp(2.5rem, 8vw, 5rem);
-$font-size-xlarge: clamp(3rem, 12vw, 8rem);
+$font-size-ml: clamp(1.35rem, 4vw, 3rem);
+$font-size-xmedium: clamp(1.95rem, 6.5vw, 4.5rem);
+$font-size-xlarge: clamp(2.4rem, 10vw, 7.5rem);

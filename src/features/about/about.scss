@@ -29,7 +29,7 @@
   }
 }
 
-@media (320px <=width <=768px) {
+@media (max-width: 768px) {
   .about {
     padding-top: 5rem;
   }

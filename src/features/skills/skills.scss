@@ -20,7 +20,7 @@
   
     &__categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
       gap: 1.5rem;
     }
   
@@ -99,7 +99,7 @@ body.dark-mode {
   }
 }
 
-@media (320px <= width <= 768px) {
+@media (max-width: 768px) {
   .skill {
     padding-top: 4rem;
 
